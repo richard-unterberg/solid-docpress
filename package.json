@@ -8,6 +8,7 @@
     "format": "biome format --write ."
   },
   "dependencies": {
+    "@batijs/elements": "^0.0.56",
     "@classmatejs/react": "^0.2.1",
     "lucide-react": "0.443.0",
     "react": "^19.1.1",

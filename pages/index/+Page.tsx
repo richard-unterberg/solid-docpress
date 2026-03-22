@@ -1,11 +1,7 @@
-import { memo } from 'react'
 import { usePageContext } from 'vike-react/usePageContext'
 import LayoutComponent from '@/components/LayoutComponent'
-import { createDocPage } from '@/docs/(components)/DocPage'
 import { t } from '@/lib/i18n/messages'
 import { localizeHref } from '@/lib/i18n/routing'
-
-const DocPage = memo(createDocPage('index'))
 
 const Page = () => {
   const { locale } = usePageContext()
@@ -21,7 +17,7 @@ const Page = () => {
           <p className="font-medium text-vike-grey-300 text-lg lg:text-xl">{t(locale, 'home', 'subtitle')}</p>
           <a
             href={localizeHref('/get-started', locale)}
-            className="btn btn-outline btn-lg border-vike-grey-300 text-vike-grey-100 mx-auto"
+            className="btn btn-outline btn-lg border-vike-grey-300 text-vike-grey-300 mx-auto"
           >
             {t(locale, 'home', 'cta')} ✨
           </a>

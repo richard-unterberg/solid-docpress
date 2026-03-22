@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@batijs/elements':
+        specifier: ^0.0.56
+        version: 0.0.56
       '@classmatejs/react':
         specifier: ^0.2.1
         version: 0.2.1(react@19.2.4)
@@ -148,6 +151,9 @@ packages:
   '@babel/types@7.29.0':
     resolution: {integrity: sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A==}
     engines: {node: '>=6.9.0'}
+
+  '@batijs/elements@0.0.56':
+    resolution: {integrity: sha512-SKSozBIvHjqOhg25xeLfkpEl78G7ssGNbDcgJH/7njv+mbMpmezE8UuvJtBhY+hWvPcKbUaIaOBoE10J+Frzbg==}
 
   '@biomejs/biome@2.4.7':
     resolution: {integrity: sha512-vXrgcmNGZ4lpdwZSpMf1hWw1aWS6B+SyeSYKTLrNsiUsAdSRN0J4d/7mF3ogJFbIwFFSOL3wT92Zzxia/d5/ng==}
@@ -1485,6 +1491,8 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
+
+  '@batijs/elements@0.0.56': {}
 
   '@biomejs/biome@2.4.7':
     optionalDependencies:

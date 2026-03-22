@@ -48,7 +48,7 @@ const DocsLayout = (props: { children: ReactNode }) => {
           </ProseContainer>
           <DocsFooter />
         </div>
-        <TableOfContents headings={doc?.headings ?? []} />
+        {doc?.headings && <TableOfContents headings={doc?.headings ?? []} />}
       </LayoutComponent>
     </>
   )

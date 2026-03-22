@@ -1,6 +1,6 @@
 import { usePageContext } from 'vike-react/usePageContext'
-import { getMenuNavigation } from '@/docs/(components)/Sidebar/menuNavigation'
-import SidebarNavigation from '@/docs/(components)/Sidebar/SidebarNavigation'
+import { getMenuNavigation } from '@/lib/navigation/menuNavigation'
+import SidebarNavigation from '@/pages/(docs)/(components)/Sidebar/SidebarNavigation'
 
 const MenuTab = () => {
   const pageContext = usePageContext()

@@ -1,6 +1,6 @@
 import { usePageContext } from 'vike-react/usePageContext'
-import { getApiNavigation } from '@/docs/(components)/Sidebar/apiNavigation'
-import SidebarNavigation from '@/docs/(components)/Sidebar/SidebarNavigation'
+import { getApiNavigation } from '@/lib/navigation/apiNavigation'
+import SidebarNavigation from '@/pages/(docs)/(components)/Sidebar/SidebarNavigation'
 
 const ApiTab = () => {
   const pageContext = usePageContext()
