@@ -1,6 +1,5 @@
 import Languages from 'lucide-solid/icons/languages'
 import { createMemo, For } from 'solid-js'
-import { navigate } from 'vike/client/router'
 import { usePageContext } from 'vike-solid/usePageContext'
 import { localeLabels, locales } from '@/lib/i18n/config'
 import { getLogicalPathname, localizeHref, stripLocaleFromPathname } from '@/lib/i18n/routing'

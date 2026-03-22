@@ -42,6 +42,10 @@ export const messages = {
       en: 'Routing',
       zh: '路由',
     },
+    hooks: {
+      en: 'Hooks',
+      zh: '钩子',
+    },
     more: {
       en: 'More',
       zh: '更多',
@@ -56,7 +60,7 @@ export const messages = {
     },
     serverless: {
       en: 'Full-stack (serverless)',
-      zh: '全栈（Serverless）',
+      zh: '全栈 (Serverless)',
     },
     selfHosted: {
       en: 'Full-stack (self-hosted)',
@@ -65,6 +69,56 @@ export const messages = {
     integration: {
       en: 'Integration',
       zh: '集成',
+    },
+    utilsShared: {
+      en: 'Utils (server- & client-side)',
+      zh: '工具函数（服务端与客户端）',
+    },
+    utilsClient: {
+      en: 'Utils (client-side)',
+      zh: '工具函数（仅客户端）',
+    },
+    utilsServer: {
+      en: 'Utils (server-side)',
+      zh: '工具函数（仅服务端）',
+    },
+    settings: {
+      en: 'Settings',
+      zh: '配置',
+    },
+    htmlShell: {
+      en: 'HTML shell',
+      zh: 'HTML 外壳',
+    },
+    advanced: {
+      en: 'Advanced',
+      zh: '高级',
+    },
+    seeAlso: {
+      en: 'See also',
+      zh: '另请参阅',
+    },
+  },
+  docs: {
+    onThisPage: {
+      en: 'On this page',
+      zh: '本页导航',
+    },
+    edit: {
+      en: 'Edit this page',
+      zh: '编辑此页',
+    },
+    reportIssue: {
+      en: 'Report an issue',
+      zh: '报告问题',
+    },
+    documentation: {
+      en: 'Documentation',
+      zh: '文档',
+    },
+    apiReference: {
+      en: 'API Reference',
+      zh: 'API 参考',
     },
   },
   error: {

@@ -17,7 +17,7 @@ const ThemeSwitch = () => {
   })
 
   return (
-    <label class="cursor-pointer swap swap-rotate rounded-full bg-base-100 p-2">
+    <label class="cursor-pointer swap swap-rotate rounded-full bg-base-100 p-1.5 border border-base-100">
       <input
         type="checkbox"
         checked={isLight()}

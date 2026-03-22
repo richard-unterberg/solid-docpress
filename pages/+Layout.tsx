@@ -27,9 +27,7 @@ const PageLayout = (props: { children: JSXElement }) => {
           </header>
         </LayoutComponent>
       </header>
-      <div class='pt-12'>
-        {props.children}
-      </div>
+      <div class="pt-0">{props.children}</div>
     </>
   )
 }

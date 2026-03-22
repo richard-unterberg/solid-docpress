@@ -4,16 +4,8 @@
     "target": "ES2022",
     "module": "ES2022",
     "moduleResolution": "Bundler",
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ESNext"
-    ],
-    "types": [
-      "node",
-      "vite/client",
-      "vike-solid/client"
-    ],
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "types": ["node", "vite/client", "vike-solid/client"],
     "noEmit": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -30,7 +22,5 @@
       "@/root/*": ["./*"]
     }
   },
-  "exclude": [
-    "dist"
-  ]
+  "exclude": ["dist"]
 }

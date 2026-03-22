@@ -1,63 +1,15 @@
-import { cmMerge } from '@classmatejs/solid'
-import { LucideIcon } from 'lucide-solid'
 import Compass from 'lucide-solid/icons/compass'
 import Map from 'lucide-solid/icons/map'
 import Plug from 'lucide-solid/icons/plug'
 import Rocket from 'lucide-solid/icons/rocket'
 import Sprout from 'lucide-solid/icons/sprout'
-import { createMemo, For, JSXElement } from 'solid-js'
+import { createMemo } from 'solid-js'
 import { usePageContext } from 'vike-solid/usePageContext'
 import { getHeadingData } from '@/lib/headings-flat'
 import { t } from '@/lib/i18n/messages'
-import { getLogicalPathname } from '@/lib/i18n/routing'
+import SidebarNavigation, { type SidebarGroup } from '@/pages/(docs)/Sidebar/SidebarNavigation'
 
-type Heading = {
-  title: JSXElement
-  href: string
-}
-
-type Category = {
-  title?: JSXElement
-  children?: Heading[]
-}
-
-type MenuGroup = {
-  icon?: LucideIcon
-  title: JSXElement
-  links?: (Heading | Category)[]
-}
-
-const isCategory = (item: Heading | Category): item is Category => 'children' in item
-
-const isActiveHref = (currentPathname: string, href: string) => {
-  const currentLogicalPathname = getLogicalPathname(currentPathname)
-  const hrefLogicalPathname = getLogicalPathname(href)
-  return hrefLogicalPathname === '/'
-    ? currentLogicalPathname === hrefLogicalPathname
-    : currentLogicalPathname.startsWith(hrefLogicalPathname)
-}
-
-const hasActiveChild = (items: (Heading | Category)[], currentPathname: string): boolean => {
-  return items.some((item) =>
-    isCategory(item)
-      ? Boolean(item.children) && hasActiveChild(item.children as Heading[], currentPathname)
-      : isActiveHref(currentPathname, item.href),
-  )
-}
-
-const renderInlineMarkdown = (title: JSXElement): JSXElement => {
-  if (typeof title !== 'string') return title
-
-  return title.split(/(`[^`]+`)/g).map((part) => {
-    if (part.startsWith('`') && part.endsWith('`')) {
-      return <code>{part.slice(1, -1)}</code>
-    }
-
-    return part
-  })
-}
-
-const getMenu = (locale: 'en' | 'zh'): MenuGroup[] => [
+const getMenu = (locale: 'en' | 'zh'): SidebarGroup[] => [
   {
     icon: Sprout,
     title: t(locale, 'sidebar', 'getStarted'),
@@ -169,78 +121,13 @@ const getMenu = (locale: 'en' | 'zh'): MenuGroup[] => [
   },
 ]
 
-const MenuLink = (props: Heading & { currentPathname: string }) => {
-  return (
-    <li>
-      <a
-        href={props.href}
-        class={cmMerge('justify-start', isActiveHref(props.currentPathname, props.href) && 'menu-active')}
-      >
-        {renderInlineMarkdown(props.title)}
-      </a>
-    </li>
-  )
-}
-
-const MenuCategory = (props: Category & { currentPathname: string }) => {
-  const _isOpen = createMemo(() => (props.children ? hasActiveChild(props.children, props.currentPathname) : false))
-
-  return (
-    <li>
-      <details open={_isOpen()}>
-        <summary class="text-vike-grey-200">{renderInlineMarkdown(props.title)}</summary>
-        <ul>
-          <For each={props.children}>{(item) => <MenuItem item={item} currentPathname={props.currentPathname} />}</For>
-        </ul>
-      </details>
-    </li>
-  )
-}
-
-const MenuItem = (props: { item: Heading | Category; currentPathname: string }) => {
-  return isCategory(props.item) ? (
-    <MenuCategory {...props.item} currentPathname={props.currentPathname} />
-  ) : (
-    <MenuLink {...props.item} currentPathname={props.currentPathname} />
-  )
-}
-
-const MenuGroupComponent = (props: MenuGroup & { currentPathname: string }) => {
-  const Icon = props.icon
-
-  return (
-    <li>
-      <details open class="">
-        <summary class="text-vike-grey-100">
-          {Icon && <Icon class="inline w-3 h-3" />}
-          <span class="text-base-content font-semibold ">{renderInlineMarkdown(props.title)}</span>
-        </summary>
-        <ul>
-          <For each={props.links}>{(item) => <MenuItem item={item} currentPathname={props.currentPathname} />}</For>
-        </ul>
-      </details>
-    </li>
-  )
-}
-
-const Sidebar = () => {
+const MenuTab = () => {
   const pageContext = usePageContext()
   const menu = createMemo(() => getMenu(pageContext.locale))
 
   return (
-    <div class="-translate-x-4 pr-4 h-[calc(100svh-20*var(--spacing))] overflow-y-scroll overflow-x-hidden sticky top-20 border-r border-vike-grey">
-      <ul class="menu w-full px-0">
-        <For each={menu()}>
-          {(group) => (
-            <MenuGroupComponent
-              {...group}
-              currentPathname={pageContext.urlPathnameLocalized ?? pageContext.urlPathname}
-            />
-          )}
-        </For>
-      </ul>
-    </div>
+    <SidebarNavigation groups={menu()} currentPathname={pageContext.urlPathnameLocalized ?? pageContext.urlPathname} />
   )
 }
 
-export default Sidebar
+export default MenuTab

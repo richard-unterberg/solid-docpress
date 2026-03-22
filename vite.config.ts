@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 import vike from 'vike/plugin'
 import vikeSolid from 'vike-solid/vite'
 import { defineConfig, type PluginOption } from 'vite'
+import { rehypeDocHeadings } from './lib/docs/rehypeDocHeadings'
 import tsConf from './lib/tsconf'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -23,6 +24,7 @@ const plugins: PluginOption[] = [
   {
     ...mdx({
       jsxImportSource: '@/lib/mdx',
+      rehypePlugins: [rehypeDocHeadings],
     }),
     enforce: 'pre',
   },

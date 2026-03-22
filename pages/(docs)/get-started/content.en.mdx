@@ -35,7 +35,11 @@ pages/
 
 If `content.zh.mdx` is missing, the page still works and renders the English file.
 
-## Why Not Duplicate `+Page.mdx` Per Locale
+### Deeper Dive: How It Works
+
+The route component imports a helper that picks the best MDX file based on the current locale. The helper looks for `content.<locale>.mdx` and falls back to `content.en.mdx` if the specific locale file is missing.
+
+#### Why Not Duplicate `+Page.mdx` Per Locale
 
 Duplicating routed files for every language makes fallback harder and grows the route tree quickly.
 
@@ -44,3 +48,5 @@ Using colocated content modules instead keeps routing and localization separate:
 - Vike handles locale-prefixed URLs.
 - The page component picks the best MDX file.
 - Fallback logic stays in one place.
+
+
