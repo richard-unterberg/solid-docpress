@@ -18,7 +18,7 @@ const DocsMenu = () => {
   return (
     <ul className="flex items-center font-semibold gap-2">
       <li tabIndex={0}>
-        <MenuItem>
+        <MenuItem $active>
           <BookText className="w-4 h-4" />
           Docs
         </MenuItem>

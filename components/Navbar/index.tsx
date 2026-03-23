@@ -10,7 +10,7 @@ import { Locale } from '@/lib/i18n/config'
 import { t } from '@/lib/i18n/messages'
 import { localizeHref } from '@/lib/i18n/routing'
 
-const VikeLogo = ({ locale, isLanding = false }: { locale: Locale, isLanding?: boolean }) => (
+const VikeLogo = ({ locale, isLanding = false }: { locale: Locale; isLanding?: boolean }) => (
   <a href={localizeHref('/', locale)} className="flex gap-2 items-center">
     <img src={`${appConfig.publicAssets}vike.svg`} alt="Vike Logo" className="w-6 h-6 dark:hidden" />
     <img src={`${appConfig.publicAssets}vike-dark.svg`} alt="Vike Logo" className="w-6 h-6 hidden dark:block" />
@@ -30,13 +30,15 @@ const Navbar = () => {
           <div className="py-4 flex justify-between items-center h-full relative z-3">
             <div className="flex-1 flex items-center gap-4">
               <VikeLogo locale={locale} isLanding />
-              <Search />
             </div>
             <div className="flex flex-1 items-center justify-center gap-4 top-0 left-0 w-full">
               <DocsMenu />
+              <Search />
             </div>
             <div className="flex-1 flex items-center justify-end gap-2">
-              <SocialIcons />
+              <div className="hidden xl:block">
+                <SocialIcons />
+              </div>
               <LanguageSwitch />
               <ThemeSwitch />
             </div>
@@ -48,12 +50,12 @@ const Navbar = () => {
               <Search />
             </div>
             <div className="flex flex-1 items-center justify-center lg:justify-start lg:pl-10 xl:pl-14 gap-4 top-0 left-0 w-full">
-              <div className="flex items-center gap-2">
-                <DocsMenu />
-              </div>
+              <DocsMenu />
             </div>
             <div className="flex-1 lg:flex-none flex items-center justify-end gap-2">
-              <SocialIcons />
+              <div className="hidden xl:block">
+                <SocialIcons />
+              </div>
               <LanguageSwitch />
               <ThemeSwitch />
             </div>

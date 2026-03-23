@@ -42,7 +42,11 @@ export const renderInlineMarkdown = (title: ReactNode): ReactNode => {
 
   return title.split(/(`[^`]+`)/g).map((part, index) => {
     if (part.startsWith('`') && part.endsWith('`')) {
-      return <code className='text-sm!' key={index}>{part.slice(1, -1)}</code>
+      return (
+        <code className="text-sm!" key={index}>
+          {part.slice(1, -1)}
+        </code>
+      )
     }
 
     return <Fragment key={index}>{part}</Fragment>
@@ -59,8 +63,9 @@ const SidebarLink = (props: SidebarHeading & { currentPathname: string }) => {
       <a
         href={props.href}
         className={cmMerge(
-          'text-vike-grey-300 justify-start hover:text-primary/80',
-          isActiveHref(props.currentPathname, props.href) && 'menu-active text-primary font-semibold',
+          'text-vike-grey-300 justify-start hover:text-accent/80 dark:hover:text-secondary/80 hover:bg-base-200',
+          isActiveHref(props.currentPathname, props.href) &&
+            'menu-active text-accent dark:text-secondary font-semibold',
         )}
       >
         {renderInlineMarkdown(props.title)}
@@ -75,7 +80,9 @@ const SidebarCategoryComponent = (props: SidebarCategory & { currentPathname: st
   return (
     <li>
       <details open={isOpen}>
-        <summary className="text-vike-grey-200">{renderInlineMarkdown(props.title)}</summary>
+        <summary className="text-vike-grey-300 hover:text-accent/80 dark:hover:text-secondary/80  hover:bg-base-200">
+          {renderInlineMarkdown(props.title)}
+        </summary>
         <ul>
           {props.children?.map((item, index) => (
             <SidebarItem key={getSidebarItemKey(item, index)} item={item} currentPathname={props.currentPathname} />
@@ -99,17 +106,15 @@ const SidebarGroupComponent = (props: SidebarGroup & { currentPathname: string; 
 
   return (
     <li className="pb-4">
-      <details open>
-        <summary className="text-vike-grey-100">
-          {Icon && <Icon className="inline w-3 h-3" />}
-          <span className="text-base-content font-semibold">{renderInlineMarkdown(props.title)}</span>
-        </summary>
-        <ul>
-          {props.links?.map((item, index) => (
-            <SidebarItem key={getSidebarItemKey(item, index)} item={item} currentPathname={props.currentPathname} />
-          ))}
-        </ul>
-      </details>
+      <span className="text-vike-grey-100 pointer-events-none">
+        {Icon && <Icon className="inline w-3 h-3" />}
+        <span className="text-base-content font-semibold">{renderInlineMarkdown(props.title)}</span>
+      </span>
+      <ul>
+        {props.links?.map((item, index) => (
+          <SidebarItem key={getSidebarItemKey(item, index)} item={item} currentPathname={props.currentPathname} />
+        ))}
+      </ul>
       {props.showSeparator && (
         <span className="pointer-events-none absolute -bottom-1 border-b border-base-200 block rounded-none w-full mx-auto mb-3"></span>
       )}
