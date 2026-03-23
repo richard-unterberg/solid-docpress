@@ -6,6 +6,10 @@ export const messages = {
       en: 'Docs',
       zh: '文档',
     },
+    searchPlaceholder: {
+      en: 'Search the docs...',
+      zh: '搜索文档...',
+    },
   },
   home: {
     title: {

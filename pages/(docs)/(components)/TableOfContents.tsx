@@ -89,8 +89,8 @@ const updateActiveHeadingFromScroll = (setActiveHeadingId: (value: string) => vo
 }
 
 const TableOfContents = (props: { headings: DocHeading[] }) => {
-  const pageContext = usePageContext()
-  const currentPathname = pageContext.urlPathnameLocalized ?? pageContext.urlPathname
+  const { locale, urlPathnameLocalized, urlPathname } = usePageContext()
+  const currentPathname = urlPathnameLocalized ?? urlPathname
   const [activeHeadingId, setActiveHeadingId] = useState('')
   const [domHeadings, setDomHeadings] = useState<DocHeading[]>(props.headings)
   const headings = domHeadings.length > 0 ? domHeadings : props.headings
@@ -151,9 +151,9 @@ const TableOfContents = (props: { headings: DocHeading[] }) => {
         <div className="sticky top-24 max-h-[calc(100svh-7rem)] overflow-y-auto pb-8">
           <p className="mb-4 text-xs font-semibold tracking-widest text-vike-grey-300 uppercase flex gap-2 items-center">
             <ListTree className="w-3 h-3" />
-            {t(pageContext.locale, 'docs', 'onThisPage')}
+            {t(locale, 'docs', 'onThisPage')}
           </p>
-          <nav aria-label={t(pageContext.locale, 'docs', 'onThisPage')}>
+          <nav aria-label={t(locale, 'docs', 'onThisPage')}>
             <ul>
               {headings.map((heading, index) => (
                 <li key={heading.id}>

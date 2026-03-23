@@ -4,11 +4,10 @@ import { getDocHeaderMeta } from '@/lib/navigation/docHeader'
 import { renderInlineMarkdown } from '@/pages/(docs)/(components)/Sidebar/SidebarNavigation'
 
 const DocPage = ({ slug }: { slug: string }) => {
-  const pageContext = usePageContext()
-  const { locale } = pageContext
+  const { locale, urlPathnameLocalized, urlPathname } = usePageContext()
+  const pathname = urlPathnameLocalized ?? urlPathname
   const entry = getDocPage(slug, locale)
   const Page = entry?.Page
-  const pathname = pageContext.urlPathnameLocalized ?? pageContext.urlPathname
   const headerMeta = getDocHeaderMeta(pathname, locale)
 
   if (!Page) return <p>Missing document: {slug}</p>

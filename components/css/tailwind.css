@@ -13,13 +13,14 @@
     @apply font-sans bg-base-300 text-base-content;
     @apply antialiased md:subpixel-antialiased;
     @apply select-none;
+    @apply ring-primary;
   }
 
   code {
     @apply bg-base-200;
   }
 
-  .prose {
+  .prose, a, li, p {
     @apply select-text;
   }
 }

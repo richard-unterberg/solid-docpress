@@ -97,6 +97,7 @@ function NoteGeneric({
     className = `${className} ${classColor}`
   }
   return (
+    <div className='bg-base-300'>
     <blockquote className={className} style={style}>
       {icon && (
         <>
@@ -107,5 +108,6 @@ function NoteGeneric({
       )}
       <div className="flex-1">{children}</div>
     </blockquote>
+    </div>
   )
 }

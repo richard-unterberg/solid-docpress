@@ -6,7 +6,7 @@ const ThemeSwitch = () => {
   const { themePreference, setThemePreference } = useThemePreference()
 
   return (
-    <label className="cursor-pointer rounded-full bg-base-100 p-1.5 border border-base-100 relative inline-flex">
+    <label className="cursor-pointer rounded-full bg-base-200 w-8 h-8 border border-base-content/10 relative flex justify-center items-center">
       <button
         type="button"
         aria-label="Toggle theme"

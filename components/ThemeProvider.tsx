@@ -1,12 +1,12 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
+import { createContext, type ReactNode, useContext, useEffect, useState } from 'react'
 import { usePageContext } from 'vike-react/usePageContext'
 import {
   applyThemePreference,
   DEFAULT_THEME_PREFERENCE,
   getThemePreferenceFromDataTheme,
   readStoredThemePreference,
-  type ThemePreference,
   THEME_STORAGE_KEY,
+  type ThemePreference,
 } from '@/lib/theme'
 
 type ThemeContextValue = {

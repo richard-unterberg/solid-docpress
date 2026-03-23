@@ -10,6 +10,7 @@ import { getDocPage } from '@/lib/docs/content'
 import { getLogicalPathname } from '@/lib/i18n/routing'
 
 const ProseContainer = cm.section`
+  min-h-[calc(100svh-92*var(--spacing))]
   prose 
   prose-neutral
   max-w-none
@@ -34,11 +35,11 @@ const ProseContainer = cm.section`
 `
 
 const DocsLayout = (props: { children: ReactNode }) => {
-  const pageContext = usePageContext()
-  const pathname = pageContext.urlPathnameLocalized ?? pageContext.urlPathname
+  const { urlPathnameLocalized, urlPathname, locale } = usePageContext()
+  const pathname = urlPathnameLocalized ?? urlPathname
   const docSlug = getLogicalPathname(pathname).replace(/^\/+/, '')
-  const doc = getDocPage(docSlug, pageContext.locale)
-  const showTableOfContents = (doc?.config.tableOfContents ?? true)
+  const doc = getDocPage(docSlug, locale)
+  const showTableOfContents = doc?.config.tableOfContents ?? true
 
   return (
     <>
@@ -53,17 +54,19 @@ const DocsLayout = (props: { children: ReactNode }) => {
           />
         </div>
       </div>
-      <LayoutComponent className="lg:flex mx-auto gap-10 xl:gap-14">
-        <div className="w-90 shrink-0 relative hidden lg:block">
-          <Sidebar />
+      <LayoutComponent>
+        <div className="lg:flex mx-auto gap-10 xl:gap-14">
+          <div className="basis-90 shrink-0 relative hidden lg:block">
+            <Sidebar />
+          </div>
+          <div className="mt-10 flex-1 relative basis-auto shrink">
+            <ProseContainer className="min-w-0 flex-1 z-1 relative" data-doc-content>
+              {props.children}
+            </ProseContainer>
+            <DocsFooter />
+          </div>
+          {showTableOfContents && <TableOfContents headings={doc?.headings ?? []} />}
         </div>
-        <div className="mt-10 relative">
-          <ProseContainer className="min-w-0 flex-1 z-1 relative" data-doc-content>
-            {props.children}
-          </ProseContainer>
-          <DocsFooter />
-        </div>
-        {showTableOfContents && <TableOfContents headings={doc?.headings ?? []} />}
       </LayoutComponent>
     </>
   )

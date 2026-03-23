@@ -1,18 +1,12 @@
 import { Frown } from 'lucide-react'
 import { usePageContext } from 'vike-react/usePageContext'
-import LayoutComponent from '@/components/LayoutComponent'
 import { t } from '@/lib/i18n/messages'
 
 const Page = () => {
-  const pageContext = usePageContext()
+  const { locale, is404 } = usePageContext()
 
-  const headline = pageContext.is404
-    ? t(pageContext.locale, 'error', 'notFoundTitle')
-    : t(pageContext.locale, 'error', 'internalTitle')
-
-  const message = pageContext.is404
-    ? t(pageContext.locale, 'error', 'notFoundBody')
-    : t(pageContext.locale, 'error', 'internalBody')
+  const headline = t(locale, 'error', is404 ? 'notFoundTitle' : 'internalTitle')
+  const message = t(locale, 'error', is404 ? 'notFoundBody' : 'internalBody')
 
   return (
     <div className="prose prose-neutral max-w-none dark:prose-invert">

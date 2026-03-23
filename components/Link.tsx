@@ -4,9 +4,9 @@ import { getHeadingTitleFromHref } from '@/lib/headings'
 import { getLogicalPathname, localizeHref } from '@/lib/i18n/routing'
 
 export const Link = (props: { href: string; children?: ReactNode; doNotInferSectionTitle?: boolean }) => {
-  const pageContext = usePageContext()
-  const href = localizeHref(props.href, pageContext.locale)
-  const currentPathname = getLogicalPathname(pageContext.urlPathname)
+  const { locale, urlPathname } = usePageContext()
+  const href = localizeHref(props.href, locale)
+  const currentPathname = getLogicalPathname(urlPathname)
   const targetPathname = getLogicalPathname(href)
   const isActive =
     currentPathname === '/' ? currentPathname === targetPathname : currentPathname.startsWith(targetPathname)
@@ -14,7 +14,7 @@ export const Link = (props: { href: string; children?: ReactNode; doNotInferSect
     props.children ??
     (props.doNotInferSectionTitle
       ? props.href
-      : (getHeadingTitleFromHref(props.href, pageContext.locale) ?? props.href))
+      : (getHeadingTitleFromHref(props.href, locale) ?? props.href))
 
   return (
     <a href={href} className={isActive ? 'is-active' : undefined}>

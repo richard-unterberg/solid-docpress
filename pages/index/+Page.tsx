@@ -17,7 +17,7 @@ const Page = () => {
           <p className="font-semibold text-vike-grey-300 text-lg lg:text-xl">{t(locale, 'home', 'subtitle')}</p>
           <a
             href={localizeHref('/get-started', locale)}
-            className="btn btn-outline btn-lg border-vike-grey-300 text-vike-grey-300 mx-auto"
+            className="btn btn-soft btn-lg btn-accent dark:btn-secondary mx-auto"
           >
             {t(locale, 'home', 'cta')} ✨
           </a>

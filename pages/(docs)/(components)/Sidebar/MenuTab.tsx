@@ -3,11 +3,11 @@ import { getMenuNavigation } from '@/lib/navigation/menuNavigation'
 import SidebarNavigation from '@/pages/(docs)/(components)/Sidebar/SidebarNavigation'
 
 const MenuTab = () => {
-  const pageContext = usePageContext()
-  const menu = getMenuNavigation(pageContext.locale)
+  const { locale, urlPathnameLocalized, urlPathname } = usePageContext()
+  const menu = getMenuNavigation(locale)
 
   return (
-    <SidebarNavigation groups={menu} currentPathname={pageContext.urlPathnameLocalized ?? pageContext.urlPathname} />
+    <SidebarNavigation groups={menu} currentPathname={urlPathnameLocalized ?? urlPathname} />
   )
 }
 

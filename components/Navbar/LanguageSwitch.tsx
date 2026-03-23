@@ -5,8 +5,8 @@ import { localeLabels, locales } from '@/lib/i18n/config'
 import { getLogicalPathname, localizeHref, stripLocaleFromPathname } from '@/lib/i18n/routing'
 
 const LanguageSwitch = () => {
-  const pageContext = usePageContext()
-  const currentLocalizedPathname = pageContext.urlPathnameLocalized ?? pageContext.urlPathname
+  const { urlPathnameLocalized, urlPathname } = usePageContext()
+  const currentLocalizedPathname = urlPathnameLocalized ?? urlPathname
   const logicalPathname = getLogicalPathname(currentLocalizedPathname)
   const currentLocale = stripLocaleFromPathname(currentLocalizedPathname).locale
 
@@ -23,9 +23,9 @@ const LanguageSwitch = () => {
   }
 
   return (
-    <label className="select select-sm">
-      <span className="label">
-        <Languages className="w-3 h-3" />
+    <label className="select select-sm w-24">
+      <span className="floating-label">
+        <Languages className="w-4 h-4" />
       </span>
       <select value={currentLocale} onChange={(event) => void onChange(event)} aria-label="Switch language">
         {locales.map((locale) => (

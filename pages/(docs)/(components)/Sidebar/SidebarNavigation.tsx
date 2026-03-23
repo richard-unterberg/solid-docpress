@@ -60,7 +60,7 @@ const SidebarLink = (props: SidebarHeading & { currentPathname: string }) => {
         href={props.href}
         className={cmMerge(
           'text-vike-grey-300 justify-start hover:text-primary/80',
-          isActiveHref(props.currentPathname, props.href) && 'menu-active text-primary',
+          isActiveHref(props.currentPathname, props.href) && 'menu-active text-primary font-semibold',
         )}
       >
         {renderInlineMarkdown(props.title)}
