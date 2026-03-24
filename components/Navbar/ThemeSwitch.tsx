@@ -1,9 +1,10 @@
 import { cmMerge } from '@classmatejs/react'
 import { Moon, Sun } from 'lucide-react'
-import { useThemePreference } from '@/components/ThemeProvider'
+import { useUserSettingsStore } from '@/lib/settings-store'
 
 const ThemeSwitch = () => {
-  const { themePreference, setThemePreference } = useThemePreference()
+  const themePreference = useUserSettingsStore((state) => state.themePreference)
+  const setThemePreference = useUserSettingsStore((state) => state.setThemePreference)
 
   return (
     <label className="cursor-pointer rounded-full bg-base-200 w-8 h-8 border border-base-content/10 relative flex justify-center items-center">

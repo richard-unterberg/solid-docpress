@@ -39,9 +39,6 @@ const headingLinks: Record<HeadingKey, string> = {
 export type HeadingKey = keyof typeof headingTitles
 
 
-
-
-
 export const getHeadingTitle = (headingKey: HeadingKey, locale: Locale = DEFAULT_LOCALE) => {
   return headingTitles[headingKey][locale]
 }

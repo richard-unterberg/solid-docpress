@@ -43,12 +43,14 @@ export const renderInlineMarkdown = (title: ReactNode): ReactNode => {
   return title.split(/(`[^`]+`)/g).map((part, index) => {
     if (part.startsWith('`') && part.endsWith('`')) {
       return (
+        // biome-ignore lint/suspicious/noArrayIndexKey: not worth the effort
         <code className="text-sm!" key={index}>
           {part.slice(1, -1)}
         </code>
       )
     }
 
+    // biome-ignore lint/suspicious/noArrayIndexKey: not worth the effort
     return <Fragment key={index}>{part}</Fragment>
   })
 }
@@ -124,7 +126,7 @@ const SidebarNavigation = (props: { groups: SidebarGroup[]; currentPathname: str
     <ul className="menu w-full px-0 py-5 li:last-child:border-0">
       {props.groups.map((group, index) => (
         <SidebarGroupComponent
-          key={`sidebar-group-${index}`}
+          key={`sidebar-group-${group.title}`}
           {...group}
           currentPathname={props.currentPathname}
           showSeparator={index !== props.groups.length - 1}

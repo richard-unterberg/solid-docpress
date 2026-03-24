@@ -33,7 +33,7 @@ const ProseContainer = cm.section`
   [&_blockquote_blockquote]:pb-1
 `
 
-const DocsLayout = (props: { children: ReactNode }) => {
+const DocsLayout = ({ children }: { children: ReactNode }) => {
   const { urlPathnameLocalized, urlPathname, locale } = usePageContext()
   const pathname = urlPathnameLocalized ?? urlPathname
   const docSlug = getLogicalPathname(pathname).replace(/^\/+/, '')
@@ -60,7 +60,7 @@ const DocsLayout = (props: { children: ReactNode }) => {
           </div>
           <div className="mt-10 flex-1 relative basis-auto shrink">
             <ProseContainer className="min-w-0 flex-1 z-1 relative" data-doc-content>
-              {props.children}
+              {children}
             </ProseContainer>
             <DocsFooter />
           </div>

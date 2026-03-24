@@ -32,36 +32,13 @@
     @apply select-text;
   }
 
-  .prose pre.shiki {
-    /* background-color: var(--shiki-light-bg) !important; */
-    color: var(--shiki-light);
-    @apply rounded-lg border border-vike-grey;
+  .prose pre {
+    @apply rounded-lg border border-vike-grey leading-5!;
   }
 
-  .prose pre.shiki {
-    @apply leading-5!;
-  }
-
-  [data-theme='vike-dark'] .prose pre.shiki {
-    /* background-color: var(--shiki-dark-bg) !important; */
-    color: var(--shiki-dark);
-  }
-
-  .prose pre.shiki code {
+  .prose pre code {
     background-color: transparent;
-    color: inherit;
     padding: 0;
-  }
-
-  .prose pre.shiki span {
-    color: var(--shiki-light);
-  }
-
-  [data-theme='vike-dark'] .prose pre.shiki span {
-    color: var(--shiki-dark);
-  }
-
-  .prose pre.shiki .line {
     @apply text-xs!;
   }
 }

@@ -88,13 +88,12 @@ const updateActiveHeadingFromScroll = (setActiveHeadingId: (value: string) => vo
   setActiveHeadingId(nextActiveHeadingId)
 }
 
-const TableOfContents = (props: { headings: DocHeading[] }) => {
-  const { locale, urlPathnameLocalized, urlPathname } = usePageContext()
-  const currentPathname = urlPathnameLocalized ?? urlPathname
+const TableOfContents = ({ headings } : { headings: DocHeading[] }) => {
+  const { locale } = usePageContext()
   const [activeHeadingId, setActiveHeadingId] = useState('')
-  const [domHeadings, setDomHeadings] = useState<DocHeading[]>(props.headings)
-  const headings = domHeadings.length > 0 ? domHeadings : props.headings
-  const hasHeadings = headings.length > 0
+  const [domHeadings, setDomHeadings] = useState<DocHeading[]>(headings)
+  const usesHeadings = domHeadings.length > 0 ? domHeadings : headings
+  const hasHeadings = usesHeadings.length > 0
 
   useEffect(() => {
     let scrollFrame = 0
@@ -136,14 +135,14 @@ const TableOfContents = (props: { headings: DocHeading[] }) => {
 
   useEffect(() => {
     if (typeof window === 'undefined') return
-    setDomHeadings(props.headings)
+    setDomHeadings(headings)
     setActiveHeadingId('')
 
     queueMicrotask(() => {
       syncHeadingsFromDom(setDomHeadings)
       updateActiveHeadingFromScroll(setActiveHeadingId)
     })
-  }, [currentPathname, props.headings])
+  }, [headings])
 
   return (
     <aside className="hidden xl:block w-64 shrink-0">
@@ -155,7 +154,7 @@ const TableOfContents = (props: { headings: DocHeading[] }) => {
           </p>
           <nav aria-label={t(locale, 'docs', 'onThisPage')}>
             <ul>
-              {headings.map((heading, index) => (
+              {usesHeadings.map((heading, index) => (
                 <li key={heading.id}>
                   <TocLink
                     href={`#${heading.id}`}

@@ -58,17 +58,9 @@ export const messages = {
       en: 'Routing',
       zh: '路由',
     },
-    hooks: {
-      en: 'Hooks',
-      zh: '钩子',
-    },
     more: {
       en: 'More',
       zh: '更多',
-    },
-    other: {
-      en: 'Other',
-      zh: '其他',
     },
     deploy: {
       en: 'Deploy',
@@ -89,34 +81,6 @@ export const messages = {
     integration: {
       en: 'Integration',
       zh: '集成',
-    },
-    utilsShared: {
-      en: 'Utils (server- & client-side)',
-      zh: '工具函数（服务端与客户端）',
-    },
-    utilsClient: {
-      en: 'Utils (client-side)',
-      zh: '工具函数（仅客户端）',
-    },
-    utilsServer: {
-      en: 'Utils (server-side)',
-      zh: '工具函数（仅服务端）',
-    },
-    settings: {
-      en: 'Settings',
-      zh: '配置',
-    },
-    htmlShell: {
-      en: 'HTML shell',
-      zh: 'HTML 外壳',
-    },
-    advanced: {
-      en: 'Advanced',
-      zh: '高级',
-    },
-    seeAlso: {
-      en: 'See also',
-      zh: '另请参阅',
     },
   },
   docs: {
@@ -139,10 +103,6 @@ export const messages = {
     apiReference: {
       en: 'API Reference',
       zh: 'API 参考',
-    },
-    devDocsReference: {
-      en: 'Docs for Devs',
-      zh: '开发文档参考',
     },
   },
   error: {

@@ -1,13 +1,14 @@
 import type { ReactNode } from 'react'
 import Navbar from '@/components/Navbar'
-import { ThemeProvider } from '@/components/ThemeProvider'
+import UserSettingsSync from '@/components/UserSettingsSync'
 
-const PageLayout = (props: { children: ReactNode }) => {
+const PageLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <ThemeProvider>
+    <>
+      <UserSettingsSync />
       <Navbar />
-      <div className="pt-16">{props.children}</div>
-    </ThemeProvider>
+      <div className="pt-16">{children}</div>
+    </>
   )
 }
 

@@ -19,6 +19,12 @@ const normalizePathname = (pathname: string) => {
   return pathnameNormalized === '' ? '/' : pathnameNormalized
 }
 
+export const hasLocalePrefix = (pathname: string) => {
+  const pathnameNormalized = normalizePathname(pathname)
+  const [maybeLocale] = pathnameNormalized.split('/').filter(Boolean)
+  return Boolean(maybeLocale && isLocale(maybeLocale))
+}
+
 export const stripLocaleFromPathname = (pathname: string): LocalePath => {
   const pathnameNormalized = normalizePathname(pathname)
   const segments = pathnameNormalized.split('/').filter(Boolean)

@@ -1,11 +1,14 @@
 import { Languages } from 'lucide-react'
 import type { ChangeEvent } from 'react'
+import { navigate } from 'vike/client/router'
 import { usePageContext } from 'vike-react/usePageContext'
 import { localeLabels, locales } from '@/lib/i18n/config'
 import { getLogicalPathname, localizeHref, stripLocaleFromPathname } from '@/lib/i18n/routing'
+import { useUserSettingsStore } from '@/lib/settings-store'
 
 const LanguageSwitch = () => {
   const { urlPathnameLocalized, urlPathname } = usePageContext()
+  const setLocalePreference = useUserSettingsStore((state) => state.setLocalePreference)
   const currentLocalizedPathname = urlPathnameLocalized ?? urlPathname
   const logicalPathname = getLogicalPathname(currentLocalizedPathname)
   const currentLocale = stripLocaleFromPathname(currentLocalizedPathname).locale
@@ -15,11 +18,10 @@ const LanguageSwitch = () => {
     const selectedLocale = select.value as (typeof locales)[number]
     const newHref = localizeHref(logicalPathname, selectedLocale)
 
-    if (newHref === currentLocalizedPathname) return
-    // await navigate(newHref, { pageContext: { clientRouting: false } })
+    setLocalePreference(selectedLocale)
 
-    // do full reload to ensure the new locale is properly loaded, including all translations and locale-specific data
-    window.location.href = newHref
+    if (newHref === currentLocalizedPathname) return
+    navigate(newHref)
   }
 
   return (

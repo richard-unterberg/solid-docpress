@@ -1,7 +1,8 @@
+import { USER_SETTINGS_STORAGE_KEY } from '@/lib/settings-storage'
+
 export type ThemePreference = 'light' | 'dark'
 
 export const DEFAULT_THEME_PREFERENCE: ThemePreference = 'dark'
-export const THEME_STORAGE_KEY = 'vike-theme-preference'
 
 const dataThemeByPreference = {
   light: 'vike-light',
@@ -16,28 +17,6 @@ export const getDataTheme = (themePreference: ThemePreference) => {
   return dataThemeByPreference[themePreference]
 }
 
-export const getThemePreferenceFromDataTheme = (dataTheme: string | null) => {
-  if (dataTheme === dataThemeByPreference.light) {
-    return 'light'
-  }
-
-  if (dataTheme === dataThemeByPreference.dark) {
-    return 'dark'
-  }
-
-  return null
-}
-
-export const readStoredThemePreference = () => {
-  if (typeof window === 'undefined') {
-    return null
-  }
-
-  const storedThemePreference = window.localStorage.getItem(THEME_STORAGE_KEY)
-
-  return isThemePreference(storedThemePreference) ? storedThemePreference : null
-}
-
 export const applyThemePreference = (themePreference: ThemePreference) => {
   if (typeof document === 'undefined') {
     return
@@ -47,14 +26,16 @@ export const applyThemePreference = (themePreference: ThemePreference) => {
 }
 
 export const themeBootstrapScript = `(() => {
-  const storageKey = ${JSON.stringify(THEME_STORAGE_KEY)};
+  const storageKey = ${JSON.stringify(USER_SETTINGS_STORAGE_KEY)};
   const themes = {
     light: ${JSON.stringify(getDataTheme('light'))},
     dark: ${JSON.stringify(getDataTheme('dark'))}
   };
 
   try {
-    const storedThemePreference = window.localStorage.getItem(storageKey);
+    const persistedValue = window.localStorage.getItem(storageKey);
+    const parsedValue = persistedValue ? JSON.parse(persistedValue) : null;
+    const storedThemePreference = parsedValue?.state?.themePreference;
     const themePreference =
       storedThemePreference === 'light' || storedThemePreference === 'dark'
         ? storedThemePreference

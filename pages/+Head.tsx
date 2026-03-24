@@ -2,7 +2,6 @@ import { usePageContext } from 'vike-react/usePageContext'
 import appConfig from '@/lib/config'
 import { themeBootstrapScript } from '@/lib/theme'
 
-
 export const Head = () => {
   const context = usePageContext()
   const locale = context.locale || 'en'
