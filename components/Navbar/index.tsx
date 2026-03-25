@@ -30,8 +30,8 @@ const Navbar = () => {
   return (
     <header
       className={cmMerge(
-        isLandingPage ? '' : 'bg-base-300 fixed border-vike-grey border-b dark:shadow',
-        'z-10 w-full h-16 ',
+        isLandingPage ? '' : 'bg-base-300  border-vike-grey border-b dark:shadow',
+        'z-10 w-full h-16 fixed top-0 left-0',
       )}
     >
       <LayoutComponent className="h-full">

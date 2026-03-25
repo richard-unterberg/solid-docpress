@@ -1,3 +1,4 @@
+import cm from '@classmatejs/react'
 import { Hammer, SwatchBook, Zap } from 'lucide-react'
 import { usePageContext } from 'vike-react/usePageContext'
 import { t } from '@/lib/messages'
@@ -24,21 +25,18 @@ const UspSection = () => {
   const { locale } = usePageContext()
 
   return (
-    <div className="grid md:grid-cols-3 gap-4 mt-16">
+    <div className="grid md:grid-cols-3 gap-6">
       {usps.map((usp) => {
         const Icon = usp.icon
 
         return (
-          <div
-            key={usp.title}
-            className="prose max-w-none prose-h2:mt-0 prose-h2:mb-0 flex flex-col p-4 rounded-box border border-vike-grey bg-base-200"
-          >
-            <div className="flex gap-2 items-start">
+          <StyledLink key={usp.title} href="#features">
+            <span className="flex gap-2 items-start mb-3">
               <h2 className="text-lg font-semibold flex-1">{t(locale, 'landing', usp.title)}</h2>
               <Icon className="w-4 h-4 translate-y-1 mb-4 text-accent" />
-            </div>
-            <p className="text-sm">{t(locale, 'landing', usp.description)}</p>
-          </div>
+            </span>
+            <span className="text-sm">{t(locale, 'landing', usp.description)}</span>
+          </StyledLink>
         )
       })}
     </div>
@@ -46,3 +44,17 @@ const UspSection = () => {
 }
 
 export default UspSection
+
+const StyledLink = cm.a`
+  block
+  prose max-w-none prose-h2:mt-0 prose-h2:mb-0 
+  flex flex-col p-4 
+  rounded-box 
+  border border-vike-grey 
+  bg-base-200
+  transition-colors duration-200
+  shadow-lg
+  shadow-base-300
+  hover:shadow-primary/30
+  hover:border-accent/50
+`

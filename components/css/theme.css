@@ -1,10 +1,10 @@
 @custom-variant dark (&:where(
-    [data-theme='vike-dark'],
-    [data-theme='vike-dark'] *
+    [data-theme='mdex-dark'],
+    [data-theme='mdex-dark'] *
   ));
 
 @plugin 'daisyui/theme' {
-  name: 'vike-light';
+  name: 'mdex-light';
   --color-grey-100: oklch(70% 0 0);
   --color-grey-200: oklch(60% 0 0);
   --color-grey-300: oklch(50% 0 0);
@@ -12,7 +12,7 @@
 }
 
 @plugin 'daisyui/theme' {
-  name: 'vike-dark';
+  name: 'mdex-dark';
   --color-grey-100: oklch(80% 0 0);
   --color-grey-200: oklch(70% 0 0);
   --color-grey-300: oklch(60% 0 0);
@@ -21,7 +21,7 @@
 
 @plugin 'daisyui/theme' {
   /* biome-ignore lint/correctness/noUnknownProperty: <explanation> */
-  name: 'vike-light';
+  name: 'mdex-light';
   /* biome-ignore lint/correctness/noUnknownProperty: <explanation> */
   default: true;
   /* biome-ignore lint/correctness/noUnknownProperty: <explanation> */
@@ -59,7 +59,7 @@
 
 @plugin 'daisyui/theme' {
   /* biome-ignore lint/correctness/noUnknownProperty: <explanation> */
-  name: 'vike-dark';
+  name: 'mdex-dark';
   /* biome-ignore lint/correctness/noUnknownProperty: <explanation> */
   default: false;
   /* biome-ignore lint/correctness/noUnknownProperty: <explanation> */

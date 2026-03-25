@@ -59,8 +59,8 @@ const messages = {
       zh: 'mdex 是一个以开发者为中心的文档入门套件，构建在 Vike 之上，并针对性能与开发体验进行了优化。',
     },
     cta: {
-      en: 'Get started',
-      zh: '开始阅读',
+      en: 'See it in action',
+      zh: '查看演示',
     },
   },
   sidebar: {

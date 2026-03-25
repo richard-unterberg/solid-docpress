@@ -5,8 +5,8 @@ export type ThemePreference = 'light' | 'dark'
 export const DEFAULT_THEME_PREFERENCE: ThemePreference = 'dark'
 
 const dataThemeByPreference = {
-  light: 'vike-light',
-  dark: 'vike-dark',
+  light: 'mdex-light',
+  dark: 'mdex-dark',
 } satisfies Record<ThemePreference, string>
 
 const getDataTheme = (themePreference: ThemePreference) => {

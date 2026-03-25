@@ -10,15 +10,15 @@
 ## Current Implementation Spec
 
 - Stack: Vike + `vike-react`, React 19, Vite 7, MDX via `@mdx-js/rollup`, Tailwind CSS 4, DaisyUI 5, Zustand, and `@classmatejs/react`.
-- Global app config lives in `pages/+config.ts`. It enables global `mdex` config, prerendering, `vike-react`, `htmlAttributes.data-theme = 'vike-dark'`, and passes `locale` plus `urlPathnameLocalized` to the client.
+- Global app config lives in `pages/+config.ts`. It enables global `mdex` config, prerendering, `vike-react`, `htmlAttributes.data-theme = 'mdex-dark'`, and passes `locale` plus `urlPathnameLocalized` to the client.
 - App-wide docs system config lives in `pages/+mdex.ts`. Current values are `basePath: ''`, `defaultSlug: 'get-started'`, and `defaultDocConfig.tableOfContents: true`.
 - Current URL model: `/` is the landing page from `pages/index/+Page.tsx`. Docs pages are served from the single dynamic Vike subtree at `pages/(docs)/(config)`. Because `basePath` is currently `''`, docs resolve at root-level slugs like `/get-started` and `/intro` instead of under `/docs`.
 - Locales are defined in `lib/i18n/config.ts` as `en` and `zh`, with `en` as the default locale. Non-default locale URLs use a pathname prefix like `/zh/...`; default locale URLs stay unprefixed.
 - Routing locale behavior is handled in `pages/+onBeforeRoute.ts`. For non-prefixed URLs, the app may redirect on the client to a stored non-default locale preference. The URL remains the source of truth for the render-time locale.
 - Theme and locale preferences are persisted in local storage under `vike-user-settings` using Zustand persistence. `UserSettingsSync` reapplies theme and keeps the stored locale in sync with explicit locale-prefixed URLs.
-- Theme bootstrapping happens in `pages/+Head.tsx` via `themeBootstrapScript` from `lib/theme.ts`, so `data-theme` is set before hydration. Current theme names are `vike-light` and `vike-dark`, with `dark` as the default preference.
+- Theme bootstrapping happens in `pages/+Head.tsx` via `themeBootstrapScript` from `lib/theme.ts`, so `data-theme` is set before hydration. Current theme names are `mdex-light` and `mdex-dark`, with `dark` as the default preference.
 - Global CSS entry is `components/css/tailwind.css`, imported from `pages/+Wrapper.tsx`. It imports `components/css/theme.css`, registers Tailwind Typography and DaisyUI, and defines base-level styling for `html`, `body`, prose code blocks, and links.
-- DaisyUI theme tokens are defined in `components/css/theme.css`. The repo currently uses custom `vike-light` and `vike-dark` themes, custom grey tokens exposed through `@theme inline`, `Inter` as the default sans font, and `Noto Sans SC` for `zh-CN`.
+- DaisyUI theme tokens are defined in `components/css/theme.css`. The repo currently uses custom `mdex-light` and `mdex-dark` themes, custom grey tokens exposed through `@theme inline`, `Inter` as the default sans font, and `Noto Sans SC` for `zh-CN`.
 - Docs content is discovered through `import.meta.glob` in `lib/docs/content.tsx`. The system eagerly loads `pages/**/content.*.mdx`, raw MDX source for heading extraction, and `pages/**/content.config.{ts,js}` for shared content-level config.
 - The docs runtime is content-module based, not page-subtree based. MDX files under `pages/(docs)/(content)/**` are parsed and registered as content entries, while the rendered page remains the single dynamic Vike page under `pages/(docs)/(config)`.
 - Logical doc slugs are derived from folder segments after `(content)`. Route matching is implemented in `pages/(docs)/(config)/+route.ts` using helpers from `lib/docs/systemConfig.ts`.
