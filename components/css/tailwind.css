@@ -11,7 +11,7 @@
 @layer base {
   html,
   body {
-    @apply font-sans bg-base-300 text-base-content;
+    @apply font-sans bg-base-100 text-base-content;
     @apply antialiased md:subpixel-antialiased;
     @apply select-none;
     @apply ring-primary;
@@ -21,7 +21,7 @@
   }
 
   a {
-    @apply text-accent;
+    @apply text-primary;
   }
 
   h1,
@@ -49,26 +49,6 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-  }
-
-  /* .doc-code-pre code {
-    @apply grid min-w-full;
-  }
-
-  .doc-code-pre .line {
-    @apply block;
-  }
-
-  .doc-code-pre .line:empty:not(:last-child)::before {
-    content: ' ';
-  } */
-
-  [data-theme='mdex-dark'] .shiki {
-    color: var(--shiki-dark) !important;
-  }
-
-  [data-theme='mdex-dark'] .shiki span {
-    color: var(--shiki-dark) !important;
   }
 
   .doc-code-pre {

@@ -110,8 +110,8 @@ const Search = ({ inputSize }: SearchProps) => {
       <label
         className={cmMerge(
           'input pounter-events-none ',
-          inputSize === 'md' ? 'input-md w-70' : 'input-sm w-45 ',
-          isSearchHovered ? 'border-accent/70 shadow-lg shadow-primary/30' : 'shadow-transparent',
+          inputSize === 'md' ? 'input-md w-80' : 'input-sm w-45 ',
+          isSearchHovered ? 'border-primary/70 shadow-lg shadow-primary/30' : 'shadow-transparent',
         )}
       >
         <span className="label">
@@ -121,8 +121,8 @@ const Search = ({ inputSize }: SearchProps) => {
           type="text"
           placeholder={t(locale, 'search', 'placeholder')}
           className={cmMerge(
-            'w-full placeholder:text-mdex-grey-300/50 transition-colors',
-            isSearchHovered && 'placeholder:text-mdex-grey-300',
+            'w-full placeholder:text-base-content/40 transition-colors',
+            isSearchHovered && 'placeholder:text-base-content/65',
           )}
           value={query}
           onFocus={() => {

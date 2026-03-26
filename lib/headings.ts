@@ -49,6 +49,21 @@ export const headingDefinitions = {
       zh: '了解使用 mdex 满足你的文档需求的主要功能和优势。',
     },
   },
+  componentsOverview: {
+    docPath: 'components',
+    title: {
+      en: 'Overview',
+      zh: '概览',
+    },
+    navTitle: {
+      en: 'Components',
+      zh: '组件',
+    },
+    excerpt: {
+      en: 'Get an overview of all the components available in mdex and how they can enhance your docs.',
+      zh: '概览 mdex 中的所有组件以及它们如何增强你的文档。',
+    },
+  },
   alert: {
     docPath: 'components/alert',
     title: {

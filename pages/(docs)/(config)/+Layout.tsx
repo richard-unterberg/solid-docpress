@@ -9,33 +9,27 @@ import baseAssets from '@/lib/baseAssets'
 import { getDocPage } from '@/lib/docs/content'
 import { getMdexSystemConfig } from '@/lib/docs/systemConfig'
 
-// .prose pre {
-//   @apply rounded-lg border border-mdex-grey leading-5!;
-// }
-
 const ProseContainer = cm.section`
   min-h-[calc(100svh-92*var(--spacing))]
   prose 
   prose-neutral
   max-w-none
   dark:prose-invert
-  prose-a:text-accent
-
-  prose-code:text-mdex-grey-100
+  prose-a:text-primary
 
   prose-code:rounded!
   prose-code:inset-shadow-2xs
 
   prose-code:bg-primary/5!
-  prose-code:border-accent/20!
+  prose-code:border-primary/20!
 
   prose-code:dark:bg-primary/10!
-  prose-code:dark:border-accent/20!
+  prose-code:dark:border-primary/20!
 
   prose-pre:bg-base-200!
   prose-pre:rounded-box
   prose-pre:border
-  prose-pre:border-mdex-grey
+  prose-pre:border-base-content/15
   prose-pre:leading-5!
   prose-pre:overflow-x-auto
 
@@ -81,7 +75,7 @@ const DocsLayout = ({ children }: { children: ReactNode }) => {
       </div>
       <LayoutComponent>
         <div className="lg:flex mx-auto gap-10 xl:gap-14">
-          <div className="basis-70 shrink-0 relative hidden lg:block">
+          <div className="basis-80 shrink-0 relative hidden lg:block">
             <Sidebar />
           </div>
           <div className="mt-10 flex-1 min-w-0 relative basis-auto shrink">

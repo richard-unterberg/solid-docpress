@@ -78,8 +78,8 @@ const SidebarLink = (props: SidebarHeading & { activeHref: string | null }) => {
       <a
         href={props.href}
         className={cmMerge(
-          'text-mdex-grey-200 justify-start hover:bg-base-200',
-          props.activeHref === props.href && 'menu-active text-accent font-semibold bg-base-200',
+          'text-base-content/65 hover:text-base-content justify-start hover:bg-base-200',
+          props.activeHref === props.href && 'menu-active text-primary! font-semibold bg-base-200',
         )}
       >
         {renderInlineMarkdown(props.title)}
@@ -93,7 +93,7 @@ const SidebarGroupComponent = (props: SidebarGroup & { activeHref: string | null
 
   return (
     <li className="pb-4">
-      <span className="text-mdex-grey-100 pointer-events-none">
+      <span className="pointer-events-none">
         {Icon && <Icon className="inline w-3 h-3" />}
         <span className="text-base-content font-semibold">{renderInlineMarkdown(props.title)}</span>
       </span>
@@ -103,7 +103,7 @@ const SidebarGroupComponent = (props: SidebarGroup & { activeHref: string | null
         ))}
       </ul>
       {props.showSeparator && (
-        <span className="pointer-events-none absolute -bottom-1 border-b border-base-200 block rounded-none w-full mx-auto mb-3"></span>
+        <span className="pointer-events-none absolute -bottom-1 border-b border-base-content/15 block rounded-none w-full mx-auto mb-3"></span>
       )}
     </li>
   )

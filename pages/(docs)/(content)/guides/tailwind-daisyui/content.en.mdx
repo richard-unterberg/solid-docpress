@@ -1,1 +1,29 @@
+import { CodeGroup, DaisyThemeOverride } from '@/components/docs'
+
 # Styling with Tailwind CSS and DaisyUI
+
+This page now includes a temporary global theme override so you can test the real app shell against the built-in DaisyUI themes.
+
+## Theme Sandbox
+
+Use this to change the root `data-theme` attribute from this page. It affects the navbar, docs layout, content styles, and other DaisyUI-driven surfaces until you disable the override or leave the page.
+
+<DaisyThemeOverride />
+
+## Usage
+
+<CodeGroup>
+```mdx
+import { DaisyThemeOverride } from '@/components/docs'
+
+<DaisyThemeOverride />
+```
+
+```tsx
+import { DaisyThemeOverride } from '@/components/docs'
+
+export const GuidePage = () => {
+  return <DaisyThemeOverride />
+}
+```
+</CodeGroup>

@@ -33,7 +33,7 @@ const UspSection = () => {
           <StyledLink key={usp.title} href="#features">
             <span className="flex gap-2 items-start mb-3">
               <h2 className="text-lg font-semibold flex-1">{t(locale, 'landing', usp.title)}</h2>
-              <Icon className="w-4 h-4 translate-y-1 mb-4 text-accent" />
+              <Icon className="w-4 h-4 translate-y-1 mb-4 text-primary" />
             </span>
             <span className="text-sm">{t(locale, 'landing', usp.description)}</span>
           </StyledLink>
@@ -50,11 +50,11 @@ const StyledLink = cm.a`
   prose max-w-none prose-h2:mt-0 prose-h2:mb-0 
   flex flex-col p-4 
   rounded-box 
-  border border-mdex-grey 
+  border border-base-content/15
   bg-base-200/40 dark:bg-base-200/60
   transition-colors duration-200
   shadow-lg
-  shadow-base-300
+  shadow-base-100
   hover:shadow-primary/30
-  hover:border-accent/50
+  hover:border-primary/50
 `

@@ -16,7 +16,7 @@ const BrandLogo = ({ locale, isLanding = false }: { locale: Locale; isLanding?: 
     <Sticker className="w-6 h-6" />
     <span className="font-bold uppercase">
       mdex{' '}
-      <span className="font-normal text-mdex-grey-300 text-xs lowercase">
+      <span className="font-normal text-base-content/65 text-xs lowercase">
         {!isLanding ? t(locale, 'header', 'docsHome') : null}
       </span>
     </span>
@@ -30,7 +30,7 @@ const Navbar = () => {
   return (
     <header
       className={cmMerge(
-        isLandingPage ? '' : 'bg-base-300  border-mdex-grey border-b dark:shadow',
+        isLandingPage ? '' : 'bg-base-100  border-base-content/15 border-b dark:shadow',
         'z-10 w-full h-16 fixed top-0 left-0',
       )}
     >
@@ -53,7 +53,7 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="py-4 flex justify-between items-center h-full relative z-3">
-            <div className="flex-1 lg:flex-none flex items-center justify-between gap-2 w-70">
+            <div className="flex-1 lg:flex-none flex items-center justify-between gap-2 w-80">
               <BrandLogo locale={locale} />
             </div>
             <div className="flex flex-1 items-center justify-center lg:justify-start lg:pl-10 xl:pl-14 gap-4 top-0 left-0 w-full">

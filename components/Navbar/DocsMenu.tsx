@@ -8,11 +8,11 @@ import { getLogicalPathname } from '@/lib/i18n/routing'
 type DocsMenuSection = 'docsHome' | 'components' | 'guides'
 
 const MenuItem = cm.a.variants<{ $active?: boolean }>({
-  base: 'btn btn-sm btn-neutral px-2 uppercase whitespace-nowrap',
+  base: 'btn btn-sm btn-primary px-2 uppercase whitespace-nowrap',
   variants: {
     $active: {
-      true: 'btn-soft ',
-      false: 'btn-ghost',
+      true: '',
+      false: 'btn-soft',
     },
   },
   defaultVariants: {
@@ -52,7 +52,7 @@ const DocsMenu = () => {
     },
     {
       key: 'components',
-      ...getHeadingData('components', locale, config.mdex),
+      ...getHeadingData('componentsOverview', locale, config.mdex),
       icon: Cpu,
     },
     {

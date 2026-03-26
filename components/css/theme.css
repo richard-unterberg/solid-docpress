@@ -1,37 +1,47 @@
 @custom-variant dark (&:where(
     [data-theme='mdex-dark'],
-    [data-theme='mdex-dark'] *
+    [data-theme='mdex-dark'] *,
+    /* remove below this if not needed */
+      [data-theme='dark'],
+    [data-theme='synthwave'],
+    [data-theme='halloween'],
+    [data-theme='forest'],
+    [data-theme='aqua'],
+    [data-theme='black'],
+    [data-theme='luxury'],
+    [data-theme='dracula'],
+    [data-theme='business'],
+    [data-theme='night'],
+    [data-theme='coffee'],
+    [data-theme='dim'],
+    [data-theme='sunset'],
+    [data-theme='abyss'],
+    [data-theme='dark'] *,
+    [data-theme='synthwave'] *,
+    [data-theme='halloween'] *,
+    [data-theme='forest'] *,
+    [data-theme='aqua'] *,
+    [data-theme='black'] *,
+    [data-theme='luxury'] *,
+    [data-theme='dracula'] *,
+    [data-theme='business'] *,
+    [data-theme='night'] *,
+    [data-theme='coffee'] *,
+    [data-theme='dim'] *,
+    [data-theme='sunset'] *,
+    [data-theme='abyss'] *
   ));
 
 @plugin 'daisyui/theme' {
   name: 'mdex-light';
-  --color-grey-100: oklch(30% 0 0);
-  --color-grey-200: oklch(50% 0 0);
-  --color-grey-300: oklch(70% 0 0);
-  --color-grey: oklch(90% 0 0);
-}
-
-@plugin 'daisyui/theme' {
-  name: 'mdex-dark';
-  --color-grey-100: oklch(80% 0 0);
-  --color-grey-200: oklch(65% 0 0);
-  --color-grey-300: oklch(50% 0 0);
-  --color-grey: oklch(24% 0 0);
-}
-
-@plugin 'daisyui/theme' {
-  /* biome-ignore lint/correctness/noUnknownProperty: <explanation> */
-  name: 'mdex-light';
-  /* biome-ignore lint/correctness/noUnknownProperty: <explanation> */
   default: true;
-  /* biome-ignore lint/correctness/noUnknownProperty: <explanation> */
   prefersdark: false;
   color-scheme: 'light';
   --color-base-100: oklch(100% 0 0);
   --color-base-200: oklch(95% 0 0);
   --color-base-300: oklch(98% 0 0); /* bg */
   --color-base-content: oklch(20% 0 0);
-  --color-primary: #5654e8;
+  --color-primary: #3d3da5;
   --color-primary-content: oklch(95% 0 0);
   --color-secondary: #fff000;
   --color-secondary-content: oklch(95% 0 0);
@@ -58,24 +68,21 @@
 }
 
 @plugin 'daisyui/theme' {
-  /* biome-ignore lint/correctness/noUnknownProperty: <explanation> */
   name: 'mdex-dark';
-  /* biome-ignore lint/correctness/noUnknownProperty: <explanation> */
   default: false;
-  /* biome-ignore lint/correctness/noUnknownProperty: <explanation> */
   prefersdark: false;
   color-scheme: 'dark';
-  --color-base-100: oklch(13% 0 0);
+  --color-base-100: oklch(15% 0 0);
   --color-base-200: oklch(20% 0 0);
-  --color-base-300: oklch(15% 0 0); /* darkest */
-  --color-base-content: oklch(85% 0 0);
-  --color-primary: #5654e8;
-  --color-primary-content: oklch(85% 0 0);
+  --color-base-300: oklch(30% 0 0);
+  --color-base-content: oklch(80% 0 0);
+  --color-primary: #7373f4;
+  --color-primary-content: oklch(15% 0 0);
   --color-secondary: #fff000;
-  --color-secondary-content: oklch(85% 0 0);
+  --color-secondary-content: oklch(80% 0 0);
   --color-accent: #7373f4;
-  --color-accent-content: oklch(85% 0 0);
-  --color-neutral: oklch(85% 0 0);
+  --color-accent-content: oklch(80% 0 0);
+  --color-neutral: oklch(80% 0 0);
   --color-neutral-content: oklch(13% 0 0);
   --color-info: oklch(62.616% 0.143 240.033);
   --color-info-content: oklch(12.523% 0.028 240.033);
@@ -84,7 +91,7 @@
   --color-warning: oklch(77.482% 0.115 81.519);
   --color-warning-content: oklch(15.496% 0.023 81.519);
   --color-error: oklch(57% 0.245 27.325);
-  --color-error-content: oklch(85% 0 0);
+  --color-error-content: oklch(80% 0 0);
   --radius-selector: 0.25rem;
   --radius-field: 0.5rem;
   --radius-box: 1rem;
@@ -96,19 +103,11 @@
 }
 
 @theme inline {
-  --color-mdex-grey: var(--color-grey);
-  --color-mdex-grey-100: var(--color-grey-100);
-  --color-mdex-grey-200: var(--color-grey-200);
-  --color-mdex-grey-300: var(--color-grey-300);
   --font-sans: 'Inter', 'Helvetica Neue', sans-serif;
   --font-mono:
     'Monaco', 'SF Mono', SF Mono, SF Mono Regular, Consolas, 'Liberation Mono',
     Menlo, Courier, monospace;
   --shadow-thick: 0 0 24px;
-}
-
-@theme {
-  --animate-pulse-slow: pulse 12s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 html:lang(zh-CN) {

@@ -139,14 +139,14 @@ const CodeblockHeader = cm.div`
   items-center
   justify-between 
   border-b-1
-  border-mdex-grey
+  border-base-content/15
 `
 
 const CodeBlockTitle = cm.div`
   text-xs 
   font-semibold 
   font-mono
-  text-mdex-grey-300
+  text-base-content/65
 `
 
 const CodeSegment = cm.pre`flex-1 w-full max-w-full min-w-0 overflow-auto rounded-box p-4 pt-14 text-sm`

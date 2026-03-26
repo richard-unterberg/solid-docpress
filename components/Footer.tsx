@@ -8,12 +8,12 @@ const DocsFooter = () => {
   const { locale } = usePageContext()
 
   return (
-    <footer className="mb-8 mt-12 text-sm text-base-content/60 border-t border-mdex-grey pt-10">
+    <footer className="mb-8 mt-12 text-sm border-t border-base-content/15 pt-10">
       <div className="mb-16 flex items-center gap-2">
-        <a href="edit" className="btn btn-sm btn-accent btn-outline ">
+        <a href="edit" className="btn btn-sm btn-primary btn-soft">
           <Pencil className="w-3 h-3" /> {t(locale, 'docs', 'edit')}
         </a>
-        <a href="edit" className="btn btn-sm btn-accent btn-outline ">
+        <a href="edit" className="btn btn-sm btn-primary btn-soft">
           <Bug className="w-3 h-3" /> {t(locale, 'docs', 'reportIssue')}
         </a>
       </div>
