@@ -19,10 +19,6 @@ The goal of this template is to give you a fully fledged SSR React app with a do
 
 If your main goal is "spin up a conventional docs portal with the biggest plugin ecosystem", there are more mature options. If your goal is "build a real SSR app that happens to have a strong docs runtime", this template is aimed at that use case.
 
-# Preview
-
-![screenshot 1](https://github.com/richard-unterberg/vike-docpress/blob/master/public/preview/preview-1.jpg?raw=true)
-
 ![screenshot 2](https://github.com/richard-unterberg/vike-docpress/blob/master/public/preview/preview-2.jpg?raw=true)
 
 ## Current Features
