@@ -39,6 +39,7 @@ const StyledTable = cm.table.variants<{ $size: TableProps['size'] }>({
     table
     w-full
     table-zebra
+    mb-6
   `,
   variants: {
     $size: {

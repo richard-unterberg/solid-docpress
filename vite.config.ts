@@ -6,6 +6,7 @@ import react from '@vitejs/plugin-react'
 import vike from 'vike/plugin'
 import { defineConfig, type PluginOption } from 'vite'
 import { rehypeDocHeadings } from './lib/docs/rehypeDocHeadings'
+import { rehypeShikiCodeBlocks } from './lib/docs/rehypeShikiCodeBlocks'
 import { searchIndexPlugin } from './lib/search/vitePlugin'
 import tsConf from './lib/tsconf'
 
@@ -25,7 +26,7 @@ const plugins: PluginOption[] = [
   {
     ...mdx({
       jsxImportSource: '@/lib/mdx',
-      rehypePlugins: [rehypeDocHeadings],
+      rehypePlugins: [rehypeDocHeadings, rehypeShikiCodeBlocks],
     }),
     enforce: 'pre',
   },

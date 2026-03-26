@@ -53,11 +53,11 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="py-4 flex justify-between items-center h-full relative z-3">
-            <div className="flex-1 lg:flex-none flex items-center justify-between gap-2 w-90">
+            <div className="flex-1 lg:flex-none flex items-center justify-between gap-2 w-70">
               <BrandLogo locale={locale} />
-              <Search />
             </div>
             <div className="flex flex-1 items-center justify-center lg:justify-start lg:pl-10 xl:pl-14 gap-4 top-0 left-0 w-full">
+              <Search />
               <DocsMenu />
             </div>
             <div className="flex-1 lg:flex-none flex items-center justify-end gap-2">

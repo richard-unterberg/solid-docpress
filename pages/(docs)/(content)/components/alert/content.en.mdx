@@ -1,49 +1,159 @@
-import { Alert, Table } from '@/components/docs'
+import { Alert, Table, CodeGroup, Presenter } from '@/components/docs'
 
 # Alert Component
 
 The Alert component is used to display important messages or warnings to the user. It can be used to highlight critical information, errors, or any other type of message that requires the user's attention.
 
-## Preview
+## Basic Usage
+
+<Presenter>
+  <Alert>
+    Hello I'm the default alert, which is of type `info`. More info to type, see [below](#alert-types).
+  </Alert>
+</Presenter>
+
+<CodeGroup>
+```mdx
+import { Alert } from '@/components/docs'
 
 <Alert>
-  I'm an alert of type `info` (the default type). You can change my type to `success`, `error`, or `warning` to display different styles and icons.
+  Hello I'm the default alert, which is of type `info`. More info to type, see [below](#alert-types).
 </Alert>
+```
 
-<Alert type='success'>
-  I'm a success alert, indicating a positive action or outcome.
-</Alert>
+```tsx
+import { Alert } from '@/components/docs'
+
+export const MyComponent = () => {
+  return (
+    <div>
+      <Alert>
+        Hello I'm the default alert, which is of type `info`. More info to type, see <a href="#alert-types">below</a>.
+      </Alert>
+    </div>
+  )
+}
+```
+</CodeGroup>
+
+## Alert Types
+
+The following types of alerts are available: `success`, `error`, `warning`, and `info`. Each type has its own styling and icon to visually differentiate the importance or nature of the message.
+
+<Presenter>
+  <Alert type='error'>
+    I'm an error alert, indicating a problem or issue that needs attention.
+  </Alert>
+  <Alert type='warning'>
+    `I'm a warning alert`, indicating a potential issue or cautionary message.
+  </Alert>
+  <Alert type='success'>
+    I'm a success alert, indicating a positive action or outcome.
+  </Alert>
+  <Alert type='info'>
+    I'm an info alert, indicating general information or a neutral message.
+  </Alert>
+</Presenter>
+
+
+<CodeGroup>
+
+```mdx
+import { Alert } from '@/components/docs'
 
 <Alert type='error'>
   I'm an error alert, indicating a problem or issue that needs attention.
 </Alert>
 
 <Alert type='warning'>
-  I'm a warning alert, indicating a potential issue or cautionary message.
+  `I'm a warning alert`, indicating a potential issue or cautionary message.
 </Alert>
+```
 
-## Usage
+```tsx
+import { Alert } from '@/components/docs'
 
+export const MyComponent = () => {
+  return (
+    <div>
+      <Alert type='error'>
+        I'm an error alert, indicating a problem or issue that needs attention.
+      </Alert>
+      <Alert type='warning'>
+        `I'm a warning alert`, indicating a potential issue or cautionary message.
+      </Alert>
+    </div>
+  )
+}
+```
+
+</CodeGroup>
+
+## Custom Content
+
+The Alert component can contain any custom content, including headings, paragraphs, lists, and more. This allows you to create rich and informative alerts that can effectively communicate your message to the user.
+
+<Presenter>
+<Alert type='success'>
+  ### Custom Alert Content
+  **I'm a success alert,** <br /> 
+  indicating a positive action or outcome.
+  - hey
+  - I'm an error alert, indicating a problem or issue that needs attention.
+</Alert>
+</Presenter>
+
+<CodeGroup>
 ```mdx
 import { Alert } from '@/components/docs'
 
-# My Mdx Page
-
-<Alert>
-  I am an important alert message that needs your attention!
+<Alert type='success'>
+  ### Hey
+  **I'm a success alert,** <br /> 
+  indicating a positive action or outcome.
+  - hey
+  - I'm an error alert, indicating a problem or issue that needs attention.
 </Alert>
-
-My regular content goes here.
 ```
+
+```tsx
+import { Alert } from '@/components/docs'
+
+export const MyComponent = () => {
+  return (
+    <div>
+      <Alert type='success'>
+        <h3>Hey</h3>
+        <p><strong>I'm a success alert,</strong> <br /> indicating a positive action or outcome.</p>
+        <ul>
+          <li>hey</li>
+          <li>I'm an error alert, indicating a problem or issue that needs attention.</li>
+        </ul>
+      </Alert>
+    </div>
+  )
+}
+```
+</CodeGroup>
 
 ## Properties
 
-export const alertTableData = {
-  headers: ['Prop', 'Type', 'Description', 'Default'],
-  rows: [
-    ['type', '`success` | `error` | `warning` | `info`', 'The type of alert to display, which determines the styling and icon used.', '`info`'],
-  ],
-}
-
-<Table data={alertTableData} size='sm' />
-
+<Table 
+  size='md'
+  data={{
+    headers: [
+      'Prop', 
+      'Type', 
+      'Description', 
+      'Default'
+    ],
+    rows: [
+      [
+        'type', 
+        '`success` | `error` | `warning` | `info`', 
+        'The type of alert to display, which determines the styling and icon used.', 
+        '`info`'
+      ],
+    ],
+  }}  
+/>

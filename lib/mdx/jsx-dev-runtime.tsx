@@ -1,11 +1,14 @@
 import { Fragment, jsxDEV as reactJsxDEV } from 'react/jsx-dev-runtime'
 import { jsx as reactJsx, jsxs as reactJsxs } from 'react/jsx-runtime'
+import { MdxCodeBlock } from '@/components/docs/CodeBlock'
 import { MdxLink } from './MdxLink'
 
 type MdxElementType = Parameters<typeof reactJsx>[0]
 
 const resolveMdxType = (type: MdxElementType): MdxElementType => {
-  return type === 'a' ? MdxLink : type
+  if (type === 'a') return MdxLink
+  if (type === 'pre') return MdxCodeBlock
+  return type
 }
 
 export { Fragment }

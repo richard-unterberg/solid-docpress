@@ -42,6 +42,9 @@
       },
       "suspicious": {
         "noArrayIndexKey": "warn"
+      },
+      "complexity": {
+        "noImportantStyles": "off"
       }
     }
   },

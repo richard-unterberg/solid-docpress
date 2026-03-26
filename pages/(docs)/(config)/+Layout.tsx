@@ -81,11 +81,11 @@ const DocsLayout = ({ children }: { children: ReactNode }) => {
       </div>
       <LayoutComponent>
         <div className="lg:flex mx-auto gap-10 xl:gap-14">
-          <div className="basis-90 shrink-0 relative hidden lg:block">
+          <div className="basis-70 shrink-0 relative hidden lg:block">
             <Sidebar />
           </div>
-          <div className="mt-10 flex-1 relative basis-auto shrink">
-            <ProseContainer className="min-w-0 flex-1 z-1 relative" data-doc-content>
+          <div className="mt-10 flex-1 min-w-0 relative basis-auto shrink">
+            <ProseContainer className="flex-1 z-1 relative" data-doc-content>
               {children}
             </ProseContainer>
             <DocsFooter />

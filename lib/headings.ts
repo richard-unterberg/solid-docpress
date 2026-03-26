@@ -49,6 +49,17 @@ export const headingDefinitions = {
       zh: '了解使用 mdex 满足你的文档需求的主要功能和优势。',
     },
   },
+  alert: {
+    docPath: 'components/alert',
+    title: {
+      en: 'Alert',
+      zh: '警告提示',
+    },
+    excerpt: {
+      en: 'Learn how to use the Alert component to display important messages and notifications.',
+      zh: '学习如何使用 Alert 组件来显示重要消息和通知。',
+    },
+  },
   guides: {
     docPath: 'guides',
     title: {
@@ -60,15 +71,15 @@ export const headingDefinitions = {
       zh: '按照分步指南充分利用 mdex 并定制你的文档站点。',
     },
   },
-  alert: {
-    docPath: 'components/alert',
+  tailwindDaisyUI: {
+    docPath: 'guides/tailwind-daisyui',
     title: {
-      en: 'Alert',
-      zh: '警告提示',
+      en: 'Master the Design System',
+      zh: '使用 Tailwind CSS 和 DaisyUI 进行样式设计',
     },
     excerpt: {
-      en: 'Learn how to use the Alert component to display important messages and notifications.',
-      zh: '学习如何使用 Alert 组件来显示重要消息和通知。',
+      en: 'Learn how to style your mdex documentation site using Tailwind CSS and DaisyUI.',
+      zh: '学习如何使用 Tailwind CSS 和 DaisyUI 来设计你的 mdex 文档站点。',
     },
   },
 } as const satisfies Record<string, HeadingDefinition>
@@ -87,10 +98,6 @@ const getHeadingByDocPath = (docPath: string) => {
   return Object.values(headingDefinitions).find((heading) => normalizeDocPath(heading.docPath) === normalizedDocPath) as
     | HeadingDefinition
     | undefined
-}
-
-const getHeadingTitle = (headingKey: HeadingKey, locale: Locale | string | undefined = DEFAULT_LOCALE) => {
-  return getHeadingDefinition(headingKey).title[resolveLocale(locale)]
 }
 
 const getHeadingNavTitle = (headingKey: HeadingKey, locale: Locale | string | undefined = DEFAULT_LOCALE) => {

@@ -21,12 +21,19 @@ export const Alert = ({
 
 const AlertOuter = cm.section.variants<{ $variant: AlertVariant }>({
   base: `
-    p-3
-    mb-3
+    p-4
+    mb-5
     border
     rounded-lg
-    prose-p:my-0
-    alert
+    prose-p:leading-7
+    prose-p:last:mb-0
+    prose-p:first:mt-0
+    prose-headings:first:mt-0
+    prose-headings:last:mb-0
+    prose-ul:first:mt-0
+    prose-ul:last:mb-0
+    prose-div:my-0!
+    text-sm
   `,
   variants: {
     $variant: {

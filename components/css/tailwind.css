@@ -50,4 +50,28 @@
     inset: 0;
     z-index: 1;
   }
+
+  /* .doc-code-pre code {
+    @apply grid min-w-full;
+  }
+
+  .doc-code-pre .line {
+    @apply block;
+  }
+
+  .doc-code-pre .line:empty:not(:last-child)::before {
+    content: ' ';
+  } */
+
+  [data-theme='mdex-dark'] .shiki {
+    color: var(--shiki-dark) !important;
+  }
+
+  [data-theme='mdex-dark'] .shiki span {
+    color: var(--shiki-dark) !important;
+  }
+
+  .doc-code-pre {
+    @apply bg-base-200!;
+  }
 }
