@@ -19,16 +19,11 @@ The goal of this template is to give you a fully fledged SSR React app with a do
 
 If your main goal is "spin up a conventional docs portal with the biggest plugin ecosystem", there are more mature options. If your goal is "build a real SSR app that happens to have a strong docs runtime", this template is aimed at that use case.
 
-## Stack
+# Preview
 
-- [Vike](https://vike.dev/) + [`vike-react`](https://vike.dev/react) for routing, SSR, prerendering, and app architecture
-- [React 19](https://react.dev/)
-- [Vite 7](https://vite.dev/)
-- [MDX](https://mdxjs.com/) via `@mdx-js/rollup`
-- [Tailwind CSS 4](https://tailwindcss.com/)
-- [DaisyUI 5](https://daisyui.com/)
-- [Zustand](https://zustand.docs.pmnd.rs/) for persisted user settings
-- [`@classmatejs/react`](https://www.npmjs.com/package/@classmatejs/react) for component class composition
+![screenshot 1](https://github.com/richard-unterberg/vike-docpress/blob/master/public/preview/preview-1.jpg?raw=true)
+
+![screenshot 2](https://github.com/richard-unterberg/vike-docpress/blob/master/public/preview/preview-2.jpg?raw=true)
 
 ## Current Features
 
@@ -41,6 +36,17 @@ If your main goal is "spin up a conventional docs portal with the biggest plugin
 - Built-in localized search with build-time index generation and lazy client loading
 - Landing page plus docs layout in one app
 - Sidebar navigation, docs footer, and right-side table of contents
+
+## Stack
+
+- [Vike](https://vike.dev/) + [`vike-react`](https://vike.dev/react) for routing, SSR, prerendering, and app architecture
+- [React 19](https://react.dev/)
+- [Vite 7](https://vite.dev/)
+- [MDX](https://mdxjs.com/) via `@mdx-js/rollup`
+- [Tailwind CSS 4](https://tailwindcss.com/)
+- [DaisyUI 5](https://daisyui.com/)
+- [Zustand](https://zustand.docs.pmnd.rs/) for persisted user settings
+- [`@classmatejs/react`](https://www.npmjs.com/package/@classmatejs/react) for component class composition
 
 ## Current Non-Goals / Missing Pieces
 
