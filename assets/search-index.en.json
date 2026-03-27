@@ -1,0 +1,180 @@
+[
+  {
+    "headings": [],
+    "href": "/vike-docpress/components",
+    "locale": "en",
+    "resolvedLocale": "en",
+    "slug": "components",
+    "text": "Components",
+    "title": "Components"
+  },
+  {
+    "headings": [
+      {
+        "depth": 2,
+        "id": "basic-usage",
+        "title": "Basic Usage"
+      },
+      {
+        "depth": 2,
+        "id": "alert-types",
+        "title": "Alert Types"
+      },
+      {
+        "depth": 2,
+        "id": "custom-content",
+        "title": "Custom Content"
+      },
+      {
+        "depth": 3,
+        "id": "custom-alert-content",
+        "title": "Custom Alert Content"
+      },
+      {
+        "depth": 2,
+        "id": "properties",
+        "title": "Properties"
+      }
+    ],
+    "href": "/vike-docpress/components/alert",
+    "locale": "en",
+    "resolvedLocale": "en",
+    "slug": "components/alert",
+    "text": "Alert Component The Alert component is used to display important messages or warnings to the user. It can be used to highlight critical information, errors, or any other type of message that requires the user's attention. Basic Usage Hello I'm the default alert, which is of type info. More info to type, see below. Alert Types The following types of alerts are available: success, error, warning, and info. Each type has its own styling and icon to visually differentiate the importance or nature of the message. I'm an error alert, indicating a problem or issue that needs attention. I'm a warning alert, indicating a potential issue or cautionary message. I'm a success alert, indicating a positive action or outcome. I'm an info alert, indicating general information or a neutral message. Custom Content The Alert component can contain any custom content, including headings, paragraphs, lists, and more. This allows you to create rich and informative alerts that can effectively communicate your message to the user. Custom Alert Content I'm a success alert, indicating a positive action or outcome. hey I'm an error alert, indicating a problem or issue that needs attention. Properties <Table size='md' data={{ headers: [ 'Prop', 'Type', 'Description', 'Default' ], rows: [ [ 'type', 'success error warning info', 'The type of alert to display, which determines the styling and icon used.', 'info' ], ], }} />",
+    "title": "Alert Component"
+  },
+  {
+    "headings": [
+      {
+        "depth": 2,
+        "id": "why-a-design-system",
+        "title": "Why a design system?"
+      }
+    ],
+    "href": "/vike-docpress/design-theming",
+    "locale": "en",
+    "resolvedLocale": "en",
+    "slug": "design-theming",
+    "text": "Design & Theming The mdex template is rather opinionated in its design, it's using tailwind and a strict daisyUI setup, which allows you to easily customize the look and feel of your documentation site, without touching any CSS. Why a design system? Using a design system like daisyUI allows us to have a consistent look and feel across the entire documentation site. It also makes it easier to create new components and pages, as we can reuse existing styles and components.",
+    "title": "Design & Theming"
+  },
+  {
+    "headings": [
+      {
+        "depth": 2,
+        "id": "current-features",
+        "title": "Current Features"
+      },
+      {
+        "depth": 2,
+        "id": "what-this-template-is",
+        "title": "What This Template Is"
+      },
+      {
+        "depth": 2,
+        "id": "what-this-template-is-not",
+        "title": "What This Template Is Not"
+      },
+      {
+        "depth": 2,
+        "id": "stack",
+        "title": "Stack"
+      },
+      {
+        "depth": 2,
+        "id": "docs-runtime-model",
+        "title": "Docs Runtime Model"
+      },
+      {
+        "depth": 2,
+        "id": "configuration",
+        "title": "Configuration"
+      },
+      {
+        "depth": 3,
+        "id": "global-docs-settings",
+        "title": "Global docs settings"
+      },
+      {
+        "depth": 3,
+        "id": "per-document-shared-settings",
+        "title": "Per-document shared settings"
+      },
+      {
+        "depth": 2,
+        "id": "search",
+        "title": "Search"
+      }
+    ],
+    "href": "/vike-docpress/get-started",
+    "locale": "en",
+    "resolvedLocale": "en",
+    "slug": "get-started",
+    "text": "Welcome to mdex mdex is a docs starter built as a real Vike application, not as a standalone docs theme. The goal of this template is to give you a fully fledged SSR React app with a documentation runtime already integrated. You can ship docs, landing pages, custom product pages, and app-specific UI in the same codebase without fighting a docs-first framework that expects the whole project to behave like a docs site. Current Features SSR and prerendering through Vike MDX docs pages discovered from pages//content..mdx Global docs system config in pages/+mdex.ts Per-document inherited config through content.config.ts / content.config.js Locale-aware routing with en and zh Light/dark theme support with pre-hydration theme bootstrapping Built-in localized search with build-time index generation and lazy client loading Landing page plus docs layout in one app Sidebar navigation, docs footer, and right-side table of contents What This Template Is A Vike + React SSR app with an MDX-powered docs runtime. A starter for teams that want docs inside a real application shell. A base for custom docs experiences, product sites, or hybrid marketing/docs apps. A repo with built-in theming, localization, sidebar navigation, and table of contents support. What This Template Is Not Not a generic static docs theme trying to replace Docusaurus, Starlight, or VitePress feature-for-feature. Not a batteries-included docs platform with versioning, search, analytics, and GitHub integrations already",
+    "title": "Welcome to mdex"
+  },
+  {
+    "headings": [
+      {
+        "depth": 2,
+        "id": "daisy-generator-components",
+        "title": "Daisy generator components"
+      }
+    ],
+    "href": "/vike-docpress/guides/daisy-ui-test-range",
+    "locale": "en",
+    "resolvedLocale": "en",
+    "slug": "guides/daisy-ui-test-range",
+    "text": "DaisyUI Test Range This test range mainly serves the purpose of testing your current theme against the built-in components of DaisyUI. It includes a variety of components such as buttons, alerts, badges, and more. If it works well with the components in this test range, it should work well with this template. Daisy generator components As seen on the DaisyUI documentation, you can use any of the built-in components or create your own custom components.",
+    "title": "DaisyUI Test Range"
+  },
+  {
+    "headings": [],
+    "href": "/vike-docpress/guides/tailwind",
+    "locale": "en",
+    "resolvedLocale": "en",
+    "slug": "guides/tailwind",
+    "text": "Styling with Tailwind CSS and DaisyUI",
+    "title": "Styling with Tailwind CSS and DaisyUI"
+  },
+  {
+    "headings": [
+      {
+        "depth": 2,
+        "id": "heading-2",
+        "title": "Heading 2"
+      },
+      {
+        "depth": 3,
+        "id": "heading-3",
+        "title": "Heading 3"
+      },
+      {
+        "depth": 2,
+        "id": "typography",
+        "title": "Typography"
+      },
+      {
+        "depth": 3,
+        "id": "basic-list",
+        "title": "Basic List"
+      },
+      {
+        "depth": 3,
+        "id": "ordered-list",
+        "title": "Ordered List"
+      },
+      {
+        "depth": 3,
+        "id": "blockquote",
+        "title": "Blockquote"
+      }
+    ],
+    "href": "/vike-docpress/intro",
+    "locale": "en",
+    "resolvedLocale": "en",
+    "slug": "intro",
+    "text": "Introooooo Back to overview This page should provide an overview about all used elements and how they fit together. It should be a high-level introduction to the documentation, and should link to more detailed pages about each element. Heading 1 The H1 Heading is the most important heading and should be used for the main title of a page. It should only be used once per page to maintain a clear hierarchy. Heading 2 Heading 3 Heading 4 Heading 5 Heading 6 Typography Basic List Item 1 Item 2 Item 3 Ordered List First item Second item Third item Blockquote This is a blockquote. It is used to highlight important information or to quote someone else's words.",
+    "title": "Introooooo"
+  }
+]

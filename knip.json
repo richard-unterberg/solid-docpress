@@ -1,5 +1,0 @@
-{
-  "$schema": "./node_modules/knip/schema.json",
-  "ignoreFiles": ["lib/mdx/**/*", "public/**/*"],
-  "tags": ["-lintignore"]
-}
