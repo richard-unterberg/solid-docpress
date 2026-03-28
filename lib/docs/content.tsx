@@ -218,6 +218,11 @@ export const hasDocSlug = (slug: string) => {
   return getAllDocSlugs().includes(slug.replace(/^\/+|\/+$/g, ''))
 }
 
+export const hasDocPageForLocale = (slug: string, locale: Locale) => {
+  const normalizedSlug = slug.replace(/^\/+|\/+$/g, '')
+  return Boolean(docs[normalizedSlug]?.[locale]?.Page)
+}
+
 const getAllDocSlugs = () => {
   return Object.keys(docs).sort((left, right) => left.localeCompare(right))
 }
