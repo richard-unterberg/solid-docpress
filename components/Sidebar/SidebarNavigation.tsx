@@ -1,18 +1,11 @@
 import { cmMerge } from '@classmatejs/react'
-import type { LucideIcon } from 'lucide-react'
-import { Fragment, type ReactNode } from 'react'
+import { Fragment, type ReactNode, useEffect, useRef } from 'react'
 import { getLogicalPathname } from '@/lib/i18n/routing'
+import type { MenuRendererGroup } from '@/lib/types'
 
-export type SidebarHeading = {
+type SidebarHeading = {
   title: ReactNode
   href: string
-}
-
-export type SidebarGroup = {
-  id: string
-  icon?: LucideIcon
-  title: ReactNode
-  links?: SidebarHeading[]
 }
 
 const isActiveHref = (currentPathname: string, href: string) => {
@@ -30,7 +23,7 @@ const isActiveHref = (currentPathname: string, href: string) => {
   return currentLogicalPathname === hrefLogicalPathname || currentLogicalPathname.startsWith(`${hrefLogicalPathname}/`)
 }
 
-const getActiveHref = (groups: SidebarGroup[], currentPathname: string) => {
+const getActiveHref = (groups: MenuRendererGroup[], currentPathname: string) => {
   let activeHref: string | null = null
   let activeHrefLength = -1
 
@@ -88,20 +81,73 @@ const SidebarLink = (props: SidebarHeading & { activeHref: string | null }) => {
   )
 }
 
-const SidebarGroupComponent = (props: SidebarGroup & { activeHref: string | null; showSeparator: boolean }) => {
+const SidebarGroupLabel = (props: Pick<MenuRendererGroup, 'icon' | 'title'>) => {
   const Icon = props.icon
 
   return (
+    <>
+      {Icon && <Icon className="inline w-3 h-3" />}
+      <span className="text-base-content font-semibold">{renderInlineMarkdown(props.title)}</span>
+    </>
+  )
+}
+
+const SidebarGroupComponent = (props: MenuRendererGroup & { activeHref: string | null; showSeparator: boolean }) => {
+  const isCollapsible = props.collapsible !== false && props.collapsible !== undefined
+  const isOpenByDefault = typeof props.collapsible === 'object' ? (props.collapsible.isDefaultOpen ?? true) : false
+  const hasActiveLink = (props.links ?? []).some((link) => link.href === props.activeHref)
+  const detailsRef = useRef<HTMLDetailsElement>(null)
+  const hasMountedRef = useRef(false)
+  const wasActiveRef = useRef(hasActiveLink)
+
+  useEffect(() => {
+    if (!isCollapsible || !detailsRef.current) {
+      return
+    }
+
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true
+
+      if (isOpenByDefault || hasActiveLink) {
+        detailsRef.current.open = true
+      }
+
+      wasActiveRef.current = hasActiveLink
+      return
+    }
+
+    if (hasActiveLink && !wasActiveRef.current) {
+      detailsRef.current.open = true
+    }
+
+    wasActiveRef.current = hasActiveLink
+  }, [hasActiveLink, isCollapsible, isOpenByDefault])
+
+  return (
     <li className="pb-4">
-      <span className="pointer-events-none">
-        {Icon && <Icon className="inline w-3 h-3" />}
-        <span className="text-base-content font-semibold">{renderInlineMarkdown(props.title)}</span>
-      </span>
-      <ul>
-        {props.links?.map((item, index) => (
-          <SidebarLink key={getSidebarItemKey(item, index)} {...item} activeHref={props.activeHref} />
-        ))}
-      </ul>
+      {isCollapsible ? (
+        <details ref={detailsRef}>
+          <summary>
+            <SidebarGroupLabel icon={props.icon} title={props.title} />
+          </summary>
+          <ul>
+            {props.links?.map((item, index) => (
+              <SidebarLink key={getSidebarItemKey(item, index)} {...item} activeHref={props.activeHref} />
+            ))}
+          </ul>
+        </details>
+      ) : (
+        <>
+          <span className="pointer-events-none">
+            <SidebarGroupLabel icon={props.icon} title={props.title} />
+          </span>
+          <ul>
+            {props.links?.map((item, index) => (
+              <SidebarLink key={getSidebarItemKey(item, index)} {...item} activeHref={props.activeHref} />
+            ))}
+          </ul>
+        </>
+      )}
       {props.showSeparator && (
         <span className="pointer-events-none absolute -bottom-1 border-b border-base-muted-light block rounded-none w-full mx-auto mb-3"></span>
       )}
@@ -109,7 +155,7 @@ const SidebarGroupComponent = (props: SidebarGroup & { activeHref: string | null
   )
 }
 
-const SidebarNavigation = (props: { groups: SidebarGroup[]; currentPathname: string }) => {
+const SidebarNavigation = (props: { groups: MenuRendererGroup[]; currentPathname: string }) => {
   const activeHref = getActiveHref(props.groups, props.currentPathname)
 
   return (

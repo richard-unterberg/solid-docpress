@@ -157,7 +157,7 @@ const getHeadingByDocPath = (docPath: string) => {
     | undefined
 }
 
-export const getHeadingNavTitle = (headingKey: HeadingKey, locale: Locale | string | undefined = DEFAULT_LOCALE) => {
+const getHeadingNavTitle = (headingKey: HeadingKey, locale: Locale | string | undefined = DEFAULT_LOCALE) => {
   const resolvedLocale = resolveLocale(locale)
   const heading = getHeadingDefinition(headingKey)
 

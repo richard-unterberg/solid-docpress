@@ -13,7 +13,7 @@ export const t = <TGroup extends MessageGroup, TKey extends MessageKey<TGroup>>(
   return entry[resolveLocale(locale)]
 }
 
-export const messages = {
+const messages = {
   landing: {
     uspDesignSytemTitle: {
       en: 'Built on a design system',

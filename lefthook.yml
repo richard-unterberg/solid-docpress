@@ -1,5 +1,5 @@
 pre-commit:
-  parallel: true
+  parallel: false
   commands:
     format:
       glob: '*.{ts,tsx,cts,mts,js,jsx,cjs,mjs,json,jsonc,css}'
@@ -7,6 +7,6 @@ pre-commit:
       run: pnpm exec biome format --write --no-errors-on-unmatched {staged_files}
     knip:
       glob: '*.{ts,tsx,cts,mts,js,jsx,cjs,mjs,mdx,json,jsonc}'
-      run: pnpm knip:staged -- {staged_files}
+      run: pnpm knip
     typecheck:
       run: pnpm typecheck
