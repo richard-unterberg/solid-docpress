@@ -8,6 +8,7 @@ import type { MenuGroupShared, MenuRendererGroup } from '@/lib/navigation/naviga
 const GroupKeys = {
   getStarted: 'getStarted',
   api: 'api',
+  maintainers: 'maintainers',
 } as const
 type GroupKeys = (typeof GroupKeys)[keyof typeof GroupKeys]
 
@@ -21,7 +22,6 @@ const menuGroups: MenuGroupDefinition[] = [
     icon: Sprout,
     groupKey: 'getStarted',
     links: [
-      'getStarted',
       'quickStart',
       'concepts',
       'bestPractices',
@@ -63,6 +63,12 @@ const menuGroups: MenuGroupDefinition[] = [
       'configShield',
       'log',
     ],
+  },
+  {
+    id: 'maintainers',
+    icon: Sprout,
+    groupKey: 'maintainers',
+    links: ['getStarted'],
   },
 ]
 

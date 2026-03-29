@@ -83,6 +83,10 @@ const messages = {
       en: 'API',
       zh: 'API',
     },
+    maintainers: {
+      en: 'Maintainers',
+      zh: 'Maintainers',
+    },
   },
   docs: {
     onThisPage: {

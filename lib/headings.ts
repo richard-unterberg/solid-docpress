@@ -1,17 +1,6 @@
 import type { HeadingConfig } from './docs/headings'
 
 export const headingDefinitions = {
-  getStarted: {
-    docPath: 'get-started',
-    title: {
-      en: 'Doc maintainer guide',
-      zh: '快速开始',
-    },
-    excerpt: {
-      en: 'Get started with telefunc and learn how to create your own documentation site.',
-      zh: '开始使用 telefunc, 学习如何创建你自己的文档站点。',
-    },
-  },
   quickStart: {
     docPath: 'quick-start',
     title: {
@@ -285,6 +274,17 @@ export const headingDefinitions = {
     excerpt: {
       en: 'Learn about the log API and how to use it to log information in your documentation site.',
       zh: '了解 log API 以及如何使用它来在你的文档站点中记录信息。',
+    },
+  },
+  getStarted: {
+    docPath: 'get-started',
+    title: {
+      en: 'Doc maintainer guide',
+      zh: '快速开始',
+    },
+    excerpt: {
+      en: 'Get started with telefunc and learn how to create your own documentation site.',
+      zh: '开始使用 telefunc, 学习如何创建你自己的文档站点。',
     },
   },
 } satisfies HeadingConfig
