@@ -1,4 +1,4 @@
-import{c as w,i as A,d as D,g as j,r as E,u as b,j as t,k as v,e as h,f as I,l as O,m as R,n as k,s as F,o as U,p as W,q as B,t as _}from"./chunk-BSzpdwz7.js";import{g as T,a as K,b as G,i as Y,n as J,c as Q,d as V}from"./chunk-CfFTs6jo.js";import{c as g,M as X,t as m,S as Z,B as ee,e as te,L as se}from"./chunk-DKIIFLsG.js";function ne(e,s){const n=`URL ${e} passed to ${s}() is invalid`;return w(A(e),n),e.startsWith(location.origin)&&(e=e.slice(location.origin.length)),w(e.startsWith("/")||D(e),n),e}/**
+import{c as w,i as A,d as D,g as j,r as E,u as b,j as t,k as v,e as h,f as I,l as O,m as R,n as k,s as F,o as U,p as W,q as B,t as _}from"./chunk-BSzpdwz7.js";import{g as T,a as K,b as G,i as Y,n as J,c as Q,d as V}from"./chunk-B3ugb0Bs.js";import{c as g,M as X,t as m,S as Z,B as ee,e as te,L as se}from"./chunk-DKIIFLsG.js";function ne(e,s){const n=`URL ${e} passed to ${s}() is invalid`;return w(A(e),n),e.startsWith(location.origin)&&(e=e.slice(location.origin.length)),w(e.startsWith("/")||D(e),n),e}/**
  * @license lucide-react v0.443.0 - ISC
  *
  * This source code is licensed under the ISC license.

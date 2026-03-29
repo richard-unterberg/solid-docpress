@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/entries/pages_-docs-_-config-_error.zmq_Gfh3.js","assets/chunks/chunk-DKIIFLsG.js","assets/chunks/chunk-BSzpdwz7.js","assets/static/components_css_tailwind-80b22bf9.ihtXLMUV.css","assets/chunks/chunk-p3HOeOVm.js","assets/entries/pages_index.Caoqs0oU.js","assets/entries/pages_-docs-_-config-.BTtCEh-c.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/entries/pages_-docs-_-config-_error.DIs_gklJ.js","assets/chunks/chunk-DKIIFLsG.js","assets/chunks/chunk-BSzpdwz7.js","assets/static/components_css_tailwind-80b22bf9.ihtXLMUV.css","assets/chunks/chunk-D2Cg1T0a.js","assets/entries/pages_index.Caoqs0oU.js","assets/entries/pages_-docs-_-config-.Dv01rZOf.js"])))=>i.map(i=>d[i]);
 import{t as C,j as a,a as n,b as i,L as l,E as R,F as u,h as be,z as Ne,q as v,G as Oe,H as $e,I as ze,J as He,K as Xe,M as We,N as Ve,l as T,O as Ye,P as Ge,Q as Ke,S as Qe,s as ve,A as xe,T as we,U as Je,W as Te,X as Ze,Y as en,Z as nn,_ as I,$ as sn,a0 as ln,a1 as rn,a2 as an,a3 as tn,a4 as on,a5 as cn,a6 as dn,a7 as hn}from"./chunk-BSzpdwz7.js";const c=({type:s="info",heading:e,children:r})=>a.jsxs(kn,{$variant:s,children:[e&&a.jsx(pn,{children:e}),r]}),kn=C.section.variants({base:`
     p-4
     mb-5
@@ -82,9 +82,7 @@ import{t as C,j as a,a as n,b as i,L as l,E as R,F as u,h as be,z as Ne,q as v,G
 `,i(e.p,{children:["Handle expected errors (e.g., ",n(e.code,{children:'"Email exists"'}),") by early-returning an error code and/or message to the display to the user. For more info, see ",n(l,{href:"/error-handling"}),"."]}),`
 `,n(e.h2,{id:"multiple-clients",className:"scroll-mt-24",children:"Multiple clients"}),`
 `,n(e.p,{children:"If your telefunctions are used by multiple clients, we recommend deploying one Telefunc server per client. This helps keep telefunctions slim, so you can get the most out of Telefunc."}),`
-`,n(c,{children:i(e.p,{children:["If clients need to share a resources, it ",n(e.em,{children:"can"})," make sense to make (slightly) more generic telefunctions."]})}),`
-`,n(e.h3,{id:"next",className:"scroll-mt-24",children:"Next"}),`
-`,n(l,{href:"/initial-data",children:"Initial Data"})]})}function un(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(P,{...s})}):P(s)}const fn=Object.freeze(Object.defineProperty({__proto__:null,default:un},Symbol.toStringTag,{value:"Module"}));function M(s){const e={a:"a",blockquote:"blockquote",code:"code",h2:"h2",li:"li",p:"p",pre:"pre",span:"span",ul:"ul",...s.components};return i(a.Fragment,{children:[n(e.p,{children:"Telefunc can be used in any JavaScript environment without using a transformer but, for improved convenience, we recommend using a transformer plugin if possible."}),`
+`,n(c,{children:i(e.p,{children:["If clients need to share a resources, it ",n(e.em,{children:"can"})," make sense to make (slightly) more generic telefunctions."]})})]})}function un(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(P,{...s})}):P(s)}const fn=Object.freeze(Object.defineProperty({__proto__:null,default:un},Symbol.toStringTag,{value:"Module"}));function M(s){const e={a:"a",blockquote:"blockquote",code:"code",h2:"h2",li:"li",p:"p",pre:"pre",span:"span",ul:"ul",...s.components};return i(a.Fragment,{children:[n(e.p,{children:"Telefunc can be used in any JavaScript environment without using a transformer but, for improved convenience, we recommend using a transformer plugin if possible."}),`
 `,i(e.blockquote,{children:[`
 `,i(e.p,{children:["Telefunc plugins transform ",n(e.code,{children:"*.telefunc.js"})," browser-side imports into a thin HTTP client."]}),`
 `]}),`
@@ -230,9 +228,7 @@ Using database-native queries is always more powerful than REST or GraphQL.`})})
     ├── ...
 `})}),`
 `,n(e.p,{children:`It allows you to colocate (and codevelop) highly-tailored server functions with client code.
-You can write a telefunction for each view and interaction, just as if you were mutating data locally in-memory, but with all the power of a remote server.`}),`
-`,n(e.h3,{id:"next",className:"scroll-mt-24",children:"Next"}),`
-`,n(l,{href:"/best-practices",children:"Best Practices"})]})}function En(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(q,{...s})}):q(s)}const An=Object.freeze(Object.defineProperty({__proto__:null,default:En},Symbol.toStringTag,{value:"Module"}));function U(s){const e={code:"code",p:"p",pre:"pre",span:"span",...s.components};return i(c,{children:[i(e.p,{children:["You usually define server-side configs (",n(e.code,{children:"import { config } from 'telefunc'"}),") at your server entry. For example:"]}),n(e.pre,{className:"shiki shiki-themes github-light one-dark-pro",style:{backgroundColor:"#fff","--shiki-dark-bg":"#282c34",color:"#24292e","--shiki-dark":"#abb2bf"},tabIndex:"0",className:"shiki shiki-themes github-light one-dark-pro doc-code-pre","data-language":"ts","data-language-label":"ts",children:i(e.code,{children:[n(e.span,{className:"line",children:n(e.span,{style:{color:"#6A737D","--shiki-light-font-style":"inherit","--shiki-dark":"#7F848E","--shiki-dark-font-style":"italic"},children:"// /server/index.ts"})}),`
+You can write a telefunction for each view and interaction, just as if you were mutating data locally in-memory, but with all the power of a remote server.`})]})}function En(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(q,{...s})}):q(s)}const An=Object.freeze(Object.defineProperty({__proto__:null,default:En},Symbol.toStringTag,{value:"Module"}));function U(s){const e={code:"code",p:"p",pre:"pre",span:"span",...s.components};return i(c,{children:[i(e.p,{children:["You usually define server-side configs (",n(e.code,{children:"import { config } from 'telefunc'"}),") at your server entry. For example:"]}),n(e.pre,{className:"shiki shiki-themes github-light one-dark-pro",style:{backgroundColor:"#fff","--shiki-dark-bg":"#282c34",color:"#24292e","--shiki-dark":"#abb2bf"},tabIndex:"0",className:"shiki shiki-themes github-light one-dark-pro doc-code-pre","data-language":"ts","data-language-label":"ts",children:i(e.code,{children:[n(e.span,{className:"line",children:n(e.span,{style:{color:"#6A737D","--shiki-light-font-style":"inherit","--shiki-dark":"#7F848E","--shiki-dark-font-style":"italic"},children:"// /server/index.ts"})}),`
 `,n(e.span,{className:"line",children:n(e.span,{style:{color:"#6A737D","--shiki-light-font-style":"inherit","--shiki-dark":"#7F848E","--shiki-dark-font-style":"italic"},children:"// Environment: server"})}),`
 `,i(e.span,{className:"line",children:[n(e.span,{style:{color:"#D73A49","--shiki-dark":"#C678DD"},children:"import"}),n(e.span,{style:{color:"#24292E","--shiki-dark":"#ABB2BF"},children:" { "}),n(e.span,{style:{color:"#24292E","--shiki-dark":"#E06C75"},children:"config"}),n(e.span,{style:{color:"#24292E","--shiki-dark":"#ABB2BF"},children:" } "}),n(e.span,{style:{color:"#D73A49","--shiki-dark":"#C678DD"},children:"from"}),n(e.span,{style:{color:"#032F62","--shiki-dark":"#98C379"},children:" 'telefunc'"})]}),`
 `,i(e.span,{className:"line",children:[n(e.span,{style:{color:"#D73A49","--shiki-dark":"#C678DD"},children:"const"}),n(e.span,{style:{color:"#005CC5","--shiki-dark":"#E5C07B"},children:" app"}),n(e.span,{style:{color:"#D73A49","--shiki-dark":"#56B6C2"},children:" ="}),n(e.span,{style:{color:"#6F42C1","--shiki-dark":"#61AFEF"},children:" express"}),n(e.span,{style:{color:"#24292E","--shiki-dark":"#ABB2BF"},children:"() "}),n(e.span,{style:{color:"#6A737D","--shiki-light-font-style":"inherit","--shiki-dark":"#7F848E","--shiki-dark-font-style":"italic"},children:"// If you use Express.js"})]}),`
@@ -313,8 +309,6 @@ You can write a telefunction for each view and interaction, just as if you were 
 `,n(e.span,{className:"line",children:n(e.span,{style:{color:"#24292E","--shiki-dark":"#ABB2BF"},children:"  }"})}),`
 `,n(e.span,{className:"line",children:n(e.span,{style:{color:"#24292E","--shiki-dark":"#ABB2BF"},children:"})"})}),`
 `,n(e.span,{className:"line"})]})}),`
-`,n(e.h3,{id:"next",className:"scroll-mt-24",children:"Next"}),`
-`,n(l,{href:"/why-schemaless",children:"Why Schemaless?"}),`
 `,n(e.h2,{id:"see-also",className:"scroll-mt-24",children:"See also"}),`
 `,i(e.ul,{children:[`
 `,i(e.li,{children:[`
@@ -476,14 +470,12 @@ That's because all files share a single forward-only HTTP stream (reading `,n(e.
 `,i(e.li,{children:["When your telefunction calls ",n(e.code,{children:"file.stream()"}),", ",n(e.code,{children:"file.text()"}),", or ",n(e.code,{children:"file.arrayBuffer()"}),", the bytes are pulled directly from the HTTP stream on demand."]}),`
 `]}),`
 `,i(e.p,{children:["This means ",n(e.strong,{children:"file bytes only flow through memory when you read them"})," — and if you stream to disk, memory consumption is constant regardless of file size."]}),`
-`,n(e.h3,{id:"next",className:"scroll-mt-24",children:"Next"}),`
-`,n(l,{href:"/error-handling",children:"Error Handling"}),`
 `,n(e.h2,{id:"see-also",className:"scroll-mt-24",children:"See also"}),`
 `,i(e.ul,{children:[`
 `,i(e.li,{children:[`
 `,n(l,{href:"/telefunc",children:n("code",{children:"telefunc()"})}),`
 `]}),`
-`]})]})}function xn(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(X,{...s})}):X(s)}const wn=Object.freeze(Object.defineProperty({__proto__:null,default:xn},Symbol.toStringTag,{value:"Module"}));function W(s){const e={code:"code",h2:"h2",h3:"h3",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...s.components};return i(a.Fragment,{children:[i(e.p,{children:[n(e.strong,{children:"Environment"}),": server."]}),`
+`]})]})}function xn(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(X,{...s})}):X(s)}const wn=Object.freeze(Object.defineProperty({__proto__:null,default:xn},Symbol.toStringTag,{value:"Module"}));function W(s){const e={code:"code",h2:"h2",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...s.components};return i(a.Fragment,{children:[i(e.p,{children:[n(e.strong,{children:"Environment"}),": server."]}),`
 `,i(e.p,{children:[n(e.code,{children:"getContext()"})," allows telefunctions to type-safely access the Telefunc request context."]}),`
 `,n(c,{type:"warning",children:i(e.p,{children:["You must populate ",n(e.code,{children:"Telefunc.Context"})," using the ",n(l,{href:"/telefunc"})," before trying to access it with ",n(e.code,{children:"getContext()"}),"."]})}),`
 `,i(e.p,{children:["It's most commonly used for implementing permissions, see ",n(l,{href:"/permissions"}),"."]}),`
@@ -559,8 +551,6 @@ That's because all files share a single forward-only HTTP stream (reading `,n(e.
 `,n(e.p,{children:"...you will see this error:"}),`
 `,n(e.pre,{children:n(e.code,{children:`[telefunc][Wrong Usage][getContext()] Cannot access context object, see https://telefunc.com/getContext#access
 `})}),`
-`,n(e.h3,{id:"next",className:"scroll-mt-24",children:"Next:"}),`
-`,n(l,{href:"/shield",children:n("code",{children:"shield()"})}),`
 `,n(e.h2,{id:"see-also",className:"scroll-mt-24",children:"See also"}),`
 `,i(e.ul,{children:[`
 `,i(e.li,{children:[`
@@ -724,7 +714,7 @@ Under the hood, Telefunc converts telefunction calls into an HTTP request to you
 `,n(l,{href:"/permissions",children:"Permissions"}),`
 `]}),`
 `,n(e.li,{children:i(e.a,{href:"https://github.com/telefunc/telefunc/issues/167",children:["#167 - Dynamic ",n(e.code,{children:"httpHeaders"}),"?"]})}),`
-`]})]})}function In(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(G,{...s})}):G(s)}const Pn=Object.freeze(Object.defineProperty({__proto__:null,default:In},Symbol.toStringTag,{value:"Module"}));function K(s){const e={a:"a",blockquote:"blockquote",h3:"h3",li:"li",p:"p",ul:"ul",...s.components};return i(a.Fragment,{children:[n(e.p,{children:"For fetching the initial data of pages (SSR data) use your framework's built-in data fetching mechanism instead of Telefunc. For more information, see:"}),`
+`]})]})}function In(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(G,{...s})}):G(s)}const Pn=Object.freeze(Object.defineProperty({__proto__:null,default:In},Symbol.toStringTag,{value:"Module"}));function K(s){const e={a:"a",blockquote:"blockquote",li:"li",p:"p",ul:"ul",...s.components};return i(a.Fragment,{children:[n(e.p,{children:"For fetching the initial data of pages (SSR data) use your framework's built-in data fetching mechanism instead of Telefunc. For more information, see:"}),`
 `,i(e.ul,{children:[`
 `,n(e.li,{children:n(e.a,{href:"https://nextjs.org/docs/app/building-your-application/data-fetching",children:"Next.js Docs > Data Fetching"})}),`
 `,n(e.li,{children:n(e.a,{href:"https://svelte.dev/docs/kit/load#Universal-vs-server",children:"SvelteKit Docs > Loading data > Universal vs server"})}),`
@@ -733,9 +723,7 @@ Under the hood, Telefunc converts telefunction calls into an HTTP request to you
 `,n(e.p,{children:"You can still use Telefunc for fetching data but only after the initial rendering of the page, for example for pagination or infinite scroll."}),`
 `,i(e.blockquote,{children:[`
 `,n(e.p,{children:"You cannot use Telefunc for server-side rendered (SSR) data because only the framework can pass SSR data from the server to the client-side (which is needed for hydration). This is common to all SSR frameworks."}),`
-`]}),`
-`,n(e.h3,{id:"next",className:"scroll-mt-24",children:"Next"}),`
-`,n(l,{href:"/permissions",children:"Permissions"})]})}function Mn(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(K,{...s})}):K(s)}const qn=Object.freeze(Object.defineProperty({__proto__:null,default:Mn},Symbol.toStringTag,{value:"Module"}));function Q(s){const e={br:"br",code:"code",p:"p",pre:"pre",span:"span",strong:"strong",...s.components};return i(a.Fragment,{children:[i(e.p,{children:[n(e.strong,{children:"Environment"}),": server",n(e.br,{}),`
+`]})]})}function Mn(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(K,{...s})}):K(s)}const qn=Object.freeze(Object.defineProperty({__proto__:null,default:Mn},Symbol.toStringTag,{value:"Module"}));function Q(s){const e={br:"br",code:"code",p:"p",pre:"pre",span:"span",strong:"strong",...s.components};return i(a.Fragment,{children:[i(e.p,{children:[n(e.strong,{children:"Environment"}),": server",n(e.br,{}),`
 `,n(e.strong,{children:"Default"}),": ",n(e.code,{children:"{ shieldErrors: { dev: true, prod: false } }{:ts}"})]}),`
 `,n(e.p,{children:"Whether to log shield validation errors."}),`
 `,n(e.pre,{className:"shiki shiki-themes github-light one-dark-pro",style:{backgroundColor:"#fff","--shiki-dark-bg":"#282c34",color:"#24292e","--shiki-dark":"#abb2bf"},tabIndex:"0",className:"shiki shiki-themes github-light one-dark-pro doc-code-pre","data-language":"ts","data-language-label":"ts",children:i(e.code,{children:[n(e.span,{className:"line",children:n(e.span,{style:{color:"#6A737D","--shiki-light-font-style":"inherit","--shiki-dark":"#7F848E","--shiki-dark-font-style":"italic"},children:"// Environment: server"})}),`
@@ -871,7 +859,7 @@ Under the hood, Telefunc converts telefunction calls into an HTTP request to you
 `,i(e.li,{children:[`
 `,n(l,{href:"/permissions",children:"Permissions"}),`
 `]}),`
-`]})]})}function Wn(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(ee,{...s})}):ee(s)}const Vn=Object.freeze(Object.defineProperty({__proto__:null,default:Wn},Symbol.toStringTag,{value:"Module"}));function ne(s){const e={a:"a",code:"code",h2:"h2",h3:"h3",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...s.components};return i(a.Fragment,{children:[i(e.p,{children:[n(e.strong,{children:"Environment"}),": server."]}),`
+`]})]})}function Wn(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(ee,{...s})}):ee(s)}const Vn=Object.freeze(Object.defineProperty({__proto__:null,default:Wn},Symbol.toStringTag,{value:"Module"}));function ne(s){const e={a:"a",code:"code",h2:"h2",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...s.components};return i(a.Fragment,{children:[i(e.p,{children:[n(e.strong,{children:"Environment"}),": server."]}),`
 `,i(e.p,{children:["Unexpected errors trigger the server-side ",n(e.code,{children:"onBug()"})," hook. These may be bugs in your telefunction, or in the Telefunc library."]}),`
 `,n(c,{type:"warning",children:i(e.p,{children:["The ",n(e.code,{children:"onBug()"})," hook is ",n(e.strong,{children:"not"})," called when ",n(l,{href:"/Abort"})," is used, and ",n(e.strong,{children:"cannot"})," be used to implement control flow."]})}),`
 `,i(e.p,{children:["Use ",n(e.code,{children:"onBug()"})," to integrate with logging and monitoring tools like ",n(e.a,{href:"https://sentry.io/",children:"Sentry"}),", ",n(e.a,{href:"https://www.bugsnag.com/",children:"Bugsnag"}),", or ",n(e.a,{href:"https://rollbar.com/",children:"Rollbar"}),"."]}),`
@@ -883,14 +871,12 @@ Under the hood, Telefunc converts telefunction calls into an HTTP request to you
 `,n(e.span,{className:"line",children:n(e.span,{style:{color:"#6A737D","--shiki-light-font-style":"inherit","--shiki-dark":"#7F848E","--shiki-dark-font-style":"italic"},children:"  // ..."})}),`
 `,n(e.span,{className:"line",children:n(e.span,{style:{color:"#24292E","--shiki-dark":"#ABB2BF"},children:"})"})}),`
 `,n(e.span,{className:"line"})]})}),`
-`,n(e.h3,{id:"next",className:"scroll-mt-24",children:"Next:"}),`
-`,n(l,{href:"/onAbort",children:n("code",{children:"onAbort()"})}),`
 `,n(e.h2,{id:"see-also",className:"scroll-mt-24",children:"See also"}),`
 `,i(e.ul,{children:[`
 `,i(e.li,{children:[`
 `,n(l,{href:"/error-handling",children:"Error Handling"}),`
 `]}),`
-`]})]})}function Yn(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(ne,{...s})}):ne(s)}const Gn=Object.freeze(Object.defineProperty({__proto__:null,default:Yn},Symbol.toStringTag,{value:"Module"}));function ie(s){const e={code:"code",h2:"h2",h3:"h3",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...s.components};return i(a.Fragment,{children:[i(e.p,{children:["Always keep in mind that your ",n(e.strong,{children:"telefuncs are public"}),". A simple HTTP request could be used to extract, modify, or destroy user secrets or business-critical data from an unprotected function."]}),`
+`]})]})}function Yn(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(ne,{...s})}):ne(s)}const Gn=Object.freeze(Object.defineProperty({__proto__:null,default:Yn},Symbol.toStringTag,{value:"Module"}));function ie(s){const e={code:"code",h2:"h2",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...s.components};return i(a.Fragment,{children:[i(e.p,{children:["Always keep in mind that your ",n(e.strong,{children:"telefuncs are public"}),". A simple HTTP request could be used to extract, modify, or destroy user secrets or business-critical data from an unprotected function."]}),`
 `,n(e.p,{children:"Add authorization checks to telefunctions using guard expressions in the function body."}),`
 `,n(e.h2,{id:"abort-requests",className:"scroll-mt-24",children:"Abort requests"}),`
 `,i(e.p,{children:["To reject a request for any reason, simply ",n(l,{href:"/Abort"}),". This is equivalent to a status code of ",n(e.code,{children:"403"}),". Include error data like a code to trigger a redirect or a message to display to the user."]}),`
@@ -1016,8 +1002,6 @@ Under the hood, Telefunc converts telefunction calls into an HTTP request to you
 `,n(e.span,{className:"line",children:n(e.span,{style:{color:"#6A737D","--shiki-light-font-style":"inherit","--shiki-dark":"#7F848E","--shiki-dark-font-style":"italic"},children:"  /* ... */"})}),`
 `,n(e.span,{className:"line",children:n(e.span,{style:{color:"#24292E","--shiki-dark":"#ABB2BF"},children:"}"})}),`
 `,n(e.span,{className:"line"})]})}),`
-`,n(e.h3,{id:"next",className:"scroll-mt-24",children:"Next"}),`
-`,n(l,{href:"/validation",children:"Validation"}),`
 `,n(e.h2,{id:"see-also",className:"scroll-mt-24",children:"See also"}),`
 `,i(e.ul,{children:[`
 `,i(e.li,{children:[`
@@ -1205,8 +1189,6 @@ For more info, see `,n(l,{href:"/getContext",children:n("code",{children:"getCon
 `,n(e.p,{children:"To fetch data for the first (server-side) page render, use your framework's built-in data fetching mechanism instead of Telefunc."}),`
 `,n(e.p,{children:"You can still use Telefunc to fetch or mutate data client-side (e.g., for page navigation or infinite scroll)."}),`
 `,n(c,{children:n(e.p,{children:"All SSR frameworks pass hydration data from server to client. Telefunc shouldn't intercept or modify this data, so it can't be used for initial page hydration."})}),`
-`,n(e.h3,{id:"next",className:"scroll-mt-24",children:"Next"}),`
-`,n(l,{href:"/concepts",children:"Concepts"}),`
 `,n(e.h2,{id:"see-also",className:"scroll-mt-24",children:"See also"}),`
 `,i(e.ul,{children:[`
 `,i(e.li,{children:[`
@@ -1390,7 +1372,7 @@ See configuration guide for:`]}),`
 `,i(e.span,{className:"line",children:[n(e.span,{style:{color:"#24292E","--shiki-dark":"#E5C07B"},children:"config"}),n(e.span,{style:{color:"#24292E","--shiki-dark":"#ABB2BF"},children:"."}),n(e.span,{style:{color:"#24292E","--shiki-dark":"#E06C75"},children:"shield"}),n(e.span,{style:{color:"#D73A49","--shiki-dark":"#56B6C2"},children:" ="}),n(e.span,{style:{color:"#24292E","--shiki-dark":"#ABB2BF"},children:" { "}),n(e.span,{style:{color:"#24292E","--shiki-dark":"#E06C75"},children:"dev"}),n(e.span,{style:{color:"#24292E","--shiki-dark":"#ABB2BF"},children:": "}),n(e.span,{style:{color:"#005CC5","--shiki-dark":"#D19A66"},children:"true"}),n(e.span,{style:{color:"#24292E","--shiki-dark":"#ABB2BF"},children:" }"})]}),`
 `,n(e.span,{className:"line"})]})}),`
 `,n(c,{type:"warning",children:i(e.p,{children:["Enabling ",n(e.code,{children:"shield()"})," generation during development can significantly slow down development speed. Depending on how large your app and how fast your computer is, the decreased development speed can range from unnoticeable to significant."]})}),`
-`,n(g,{})]})}function oi(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(ce,{...s})}):ce(s)}const ci=Object.freeze(Object.defineProperty({__proto__:null,default:oi},Symbol.toStringTag,{value:"Module"}));function de(s){const e={code:"code",h2:"h2",h3:"h3",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...s.components};return i(a.Fragment,{children:[i(e.p,{children:[n(e.strong,{children:"Environment"}),": server."]}),`
+`,n(g,{})]})}function oi(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(ce,{...s})}):ce(s)}const ci=Object.freeze(Object.defineProperty({__proto__:null,default:oi},Symbol.toStringTag,{value:"Module"}));function de(s){const e={code:"code",h2:"h2",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...s.components};return i(a.Fragment,{children:[i(e.p,{children:[n(e.strong,{children:"Environment"}),": server."]}),`
 `,i(e.p,{children:["Use ",n(e.code,{children:"shield()"})," to guarantee the type of telefunction arguments at ",n(e.strong,{children:"compile- and run-time"}),"."]}),`
 `,n(e.pre,{className:"shiki shiki-themes github-light one-dark-pro",style:{backgroundColor:"#fff","--shiki-dark-bg":"#282c34",color:"#24292e","--shiki-dark":"#abb2bf"},tabIndex:"0",className:"shiki shiki-themes github-light one-dark-pro doc-code-pre","data-language":"ts","data-language-label":"ts",children:i(e.code,{children:[n(e.span,{className:"line",children:n(e.span,{style:{color:"#6A737D","--shiki-light-font-style":"inherit","--shiki-dark":"#7F848E","--shiki-dark-font-style":"italic"},children:"// CreateTodo.telefunc.ts"})}),`
 `,n(e.span,{className:"line",children:n(e.span,{style:{color:"#6A737D","--shiki-light-font-style":"inherit","--shiki-dark":"#7F848E","--shiki-dark-font-style":"italic"},children:"// Environment: server"})}),`
@@ -1443,8 +1425,6 @@ See configuration guide for:`]}),`
 `,n(e.span,{className:"line",children:n(e.span,{style:{color:"#24292E","--shiki-dark":"#ABB2BF"},children:"  }"})}),`
 `,n(e.span,{className:"line",children:n(e.span,{style:{color:"#24292E","--shiki-dark":"#ABB2BF"},children:")"})}),`
 `,n(e.span,{className:"line"})]})}),`
-`,n(e.h3,{id:"next",className:"scroll-mt-24",children:"Next:"}),`
-`,n(l,{href:"/onBug",children:n("code",{children:"onBug()"})}),`
 `,n(e.h2,{id:"type-examples",className:"scroll-mt-24",children:"Type examples"}),`
 `,i(e.p,{children:["Examples showcasing the most common ",n(e.code,{children:"shield()"})," types:"]}),`
 `,n(e.pre,{className:"shiki shiki-themes github-light one-dark-pro",style:{backgroundColor:"#fff","--shiki-dark-bg":"#282c34",color:"#24292e","--shiki-dark":"#abb2bf"},tabIndex:"0",className:"shiki shiki-themes github-light one-dark-pro doc-code-pre","data-language":"js","data-language-label":"js",children:i(e.code,{children:[n(e.span,{className:"line",children:n(e.span,{style:{color:"#6A737D","--shiki-light-font-style":"inherit","--shiki-dark":"#7F848E","--shiki-dark-font-style":"italic"},children:"// TodoList.telefunc.js"})}),`
@@ -1623,7 +1603,7 @@ See configuration guide for:`]}),`
 `,n(e.span,{className:"line"}),`
 `,n(e.span,{className:"line",children:n(e.span,{style:{color:"#6A737D","--shiki-light-font-style":"inherit","--shiki-dark":"#7F848E","--shiki-dark-font-style":"italic"},children:"// The server-side value always needs to be a URL pathname (such as '/_telefunc')"})}),`
 `,i(e.span,{className:"line",children:[n(e.span,{style:{color:"#24292E","--shiki-dark":"#E5C07B"},children:"config"}),n(e.span,{style:{color:"#24292E","--shiki-dark":"#ABB2BF"},children:"."}),n(e.span,{style:{color:"#24292E","--shiki-dark":"#E06C75"},children:"telefuncUrl"}),n(e.span,{style:{color:"#D73A49","--shiki-dark":"#56B6C2"},children:" ="}),n(e.span,{style:{color:"#032F62","--shiki-dark":"#98C379"},children:" '/api/_telefunc'"})]}),`
-`,n(e.span,{className:"line"})]})})]})}function fi(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(pe,{...s})}):pe(s)}const mi=Object.freeze(Object.defineProperty({__proto__:null,default:fi},Symbol.toStringTag,{value:"Module"}));function ye(s){const e={a:"a",code:"code",h2:"h2",h3:"h3",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...s.components};return i(a.Fragment,{children:[i(e.p,{children:[n(e.strong,{children:"Environment"}),": server."]}),`
+`,n(e.span,{className:"line"})]})})]})}function fi(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(pe,{...s})}):pe(s)}const mi=Object.freeze(Object.defineProperty({__proto__:null,default:fi},Symbol.toStringTag,{value:"Module"}));function ye(s){const e={a:"a",code:"code",h2:"h2",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...s.components};return i(a.Fragment,{children:[i(e.p,{children:[n(e.strong,{children:"Environment"}),": server."]}),`
 `,i(e.p,{children:[n(e.code,{children:"telefunc()"})," acts as an adapter between your server and telefunctions. It intercepts and executes telefunction calls, and returns the result (if any)."]}),`
 `,n(c,{children:n(e.p,{children:"It's a pure function (no side effects)."})}),`
 `,i(e.p,{children:["To add Telefunc to your server, ",n(l,{href:"/server-integration",children:"create middleware"})," that calls ",n(e.code,{children:"telefunc(req)"}),"."]}),`
@@ -1673,14 +1653,12 @@ See configuration guide for:`]}),`
 `,n(e.span,{className:"line",children:n(e.span,{style:{color:"#24292E","--shiki-dark":"#ABB2BF"},children:"  }"})}),`
 `,n(e.span,{className:"line",children:n(e.span,{style:{color:"#24292E","--shiki-dark":"#ABB2BF"},children:"})"})}),`
 `,n(e.span,{className:"line"})]})}),`
-`,n(e.h3,{id:"next",className:"scroll-mt-24",children:"Next"}),`
-`,n(l,{href:"/Abort",children:n("code",{children:"throw Abort()"})}),`
 `,n(e.h2,{id:"see-also",className:"scroll-mt-24",children:"See also"}),`
 `,i(e.ul,{children:[`
 `,i(e.li,{children:[`
 `,n(l,{href:"/error-handling",children:"Error Handling"}),`
 `]}),`
-`]})]})}function Bi(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(ye,{...s})}):ye(s)}const gi=Object.freeze(Object.defineProperty({__proto__:null,default:Bi},Symbol.toStringTag,{value:"Module"}));function ue(s){const e={code:"code",h2:"h2",h3:"h3",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...s.components};return i(a.Fragment,{children:[i(e.p,{children:[n(e.strong,{children:"Environment"}),": server."]}),`
+`]})]})}function Bi(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(ye,{...s})}):ye(s)}const gi=Object.freeze(Object.defineProperty({__proto__:null,default:Bi},Symbol.toStringTag,{value:"Module"}));function ue(s){const e={code:"code",h2:"h2",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...s.components};return i(a.Fragment,{children:[i(e.p,{children:[n(e.strong,{children:"Environment"}),": server."]}),`
 `,i(e.p,{children:["Use ",n(e.code,{children:"throw Abort()"})," to implement ",n(l,{href:"/permissions",children:"permissions and other guards"}),"."]}),`
 `,i(e.p,{children:["Telefunc uses ",n(e.code,{children:"Abort"})," to distinguish ",n(e.strong,{children:"expected failures"})," from bugs (errors in code, logic, data, etc.)."]}),`
 `,i(c,{type:"warning",children:[i(e.p,{children:["Note that using ",n(e.code,{children:"throw Abort()"}),":"]}),i(e.ul,{children:[`
@@ -1709,8 +1687,6 @@ See configuration guide for:`]}),`
 `,i(e.h2,{id:"accessing-abortvalue",className:"scroll-mt-24",children:["Accessing ",n(e.code,{children:"abortValue"})]}),`
 `,i(e.p,{children:["The ",n(e.code,{children:"Abort"})," error data can be accessed client-side from the ",n(l,{href:"/onAbort"})," hook."]}),`
 `,i(e.p,{children:["This pattern is powerful when used in combination with ",n(l,{href:"/permissions#dry-permissions",doNotInferSectionTitle:!0})," helpers."]}),`
-`,n(e.h3,{id:"next",className:"scroll-mt-24",children:"Next:"}),`
-`,n(l,{href:"/get-context",children:n("code",{children:"getContext()"})}),`
 `,n(e.h2,{id:"see-also",className:"scroll-mt-24",children:"See also"}),`
 `,i(e.ul,{children:[`
 `,i(e.li,{children:[`
@@ -1719,7 +1695,7 @@ See configuration guide for:`]}),`
 `,i(e.li,{children:[`
 `,n(l,{href:"/permissions",children:"Permissions"}),`
 `]}),`
-`]})]})}function Ei(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(ue,{...s})}):ue(s)}const Ai=Object.freeze(Object.defineProperty({__proto__:null,default:Ei},Symbol.toStringTag,{value:"Module"}));function fe(s){const e={code:"code",h2:"h2",h3:"h3",li:"li",p:"p",pre:"pre",span:"span",ul:"ul",...s.components};return i(a.Fragment,{children:[n(e.p,{children:"When a user enters a form with invalid inputs, such as an invalid email address, then you want your UI to tell the user what went wrong."}),`
+`]})]})}function Ei(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(ue,{...s})}):ue(s)}const Ai=Object.freeze(Object.defineProperty({__proto__:null,default:Ei},Symbol.toStringTag,{value:"Module"}));function fe(s){const e={code:"code",h2:"h2",li:"li",p:"p",pre:"pre",span:"span",ul:"ul",...s.components};return i(a.Fragment,{children:[n(e.p,{children:"When a user enters a form with invalid inputs, such as an invalid email address, then you want your UI to tell the user what went wrong."}),`
 `,n(e.p,{children:"Simply return early with an error result, including any message the UI should display to the user."}),`
 `,n(e.pre,{className:"shiki shiki-themes github-light one-dark-pro",style:{backgroundColor:"#fff","--shiki-dark-bg":"#282c34",color:"#24292e","--shiki-dark":"#abb2bf"},tabIndex:"0",className:"shiki shiki-themes github-light one-dark-pro doc-code-pre","data-language":"ts","data-language-label":"ts",children:i(e.code,{children:[n(e.span,{className:"line",children:n(e.span,{style:{color:"#6A737D","--shiki-light-font-style":"inherit","--shiki-dark":"#7F848E","--shiki-dark-font-style":"italic"},children:"// SignUpForm.telefunc.ts"})}),`
 `,n(e.span,{className:"line",children:n(e.span,{style:{color:"#6A737D","--shiki-light-font-style":"inherit","--shiki-dark":"#7F848E","--shiki-dark-font-style":"italic"},children:"// Environment: server"})}),`
@@ -1754,8 +1730,6 @@ See configuration guide for:`]}),`
 `,n(e.span,{className:"line",children:n(e.span,{style:{color:"#24292E","--shiki-dark":"#ABB2BF"},children:"}"})}),`
 `,n(e.span,{className:"line"})]})}),`
 `,n(c,{children:i(e.p,{children:["You can also exit early and return error data with ",n(e.code,{children:"throw Abort(errorData)"})," instead of ",n(e.code,{children:"return errorData"}),". This hides the control flow though, and prevents Telefunc from distinguishing between app errors and request errors. See ",n(l,{href:"/error-handling"}),"."]})}),`
-`,n(e.h3,{id:"next",className:"scroll-mt-24",children:"Next"}),`
-`,n(l,{href:"/file-uploads",children:"File Uploads"}),`
 `,n(e.h2,{id:"see-also",className:"scroll-mt-24",children:"See also"}),`
 `,i(e.ul,{children:[`
 `,i(e.li,{children:[`
@@ -1816,7 +1790,7 @@ See configuration guide for:`]}),`
 `,i(e.li,{children:[`
 `,n(l,{path:"https://github.com/telefunc/telefunc/blob/main/examples/react-streaming"}),`
 `]}),`
-`]})]})}function Di(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(me,{...s})}):me(s)}const bi=Object.freeze(Object.defineProperty({__proto__:null,default:Di},Symbol.toStringTag,{value:"Module"}));function Be(s){const e={a:"a",blockquote:"blockquote",code:"code",em:"em",h2:"h2",h3:"h3",li:"li",ol:"ol",p:"p",strong:"strong",ul:"ul",...s.components};return i(a.Fragment,{children:[n(e.h2,{id:"schemaless-vs-schema-full",className:"scroll-mt-24",children:"Schemaless vs schema-full"}),`
+`]})]})}function Di(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(me,{...s})}):me(s)}const bi=Object.freeze(Object.defineProperty({__proto__:null,default:Di},Symbol.toStringTag,{value:"Module"}));function Be(s){const e={a:"a",blockquote:"blockquote",code:"code",em:"em",h2:"h2",li:"li",ol:"ol",p:"p",strong:"strong",ul:"ul",...s.components};return i(a.Fragment,{children:[n(e.h2,{id:"schemaless-vs-schema-full",className:"scroll-mt-24",children:"Schemaless vs schema-full"}),`
 `,n(e.p,{children:"Comparing RPC to GraphQL or REST is a bit like comparing apples to oranges. They each make trade-offs to achieve different goals."}),`
 `,n(e.p,{children:`| RPC                                       | REST + GraphQL               |
 | ----------------------------------------- | ---------------------------- |
@@ -1853,9 +1827,7 @@ See configuration guide for:`]}),`
 `,i(e.ul,{children:[`
 `,n(e.li,{children:"If your goal is to enable third party developers to access your data, then you need a generic API and you'll have to use REST or GraphQL"}),`
 `,n(e.li,{children:"If your goal is to seamlessly add data and interactivity to a front-end, then RPC can improve DX and enable security and performance optimizations."}),`
-`]}),`
-`,n(e.h3,{id:"next",className:"scroll-mt-24",children:"Next"}),`
-`,n(l,{href:"/how-it-works",children:"How it works"})]})}function Ni(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(Be,{...s})}):Be(s)}const vi=Object.freeze(Object.defineProperty({__proto__:null,default:Ni},Symbol.toStringTag,{value:"Module"})),xi=`import { Alert, Link } from '@/components/index'
+`]})]})}function Ni(s={}){const{wrapper:e}=s.components||{};return e?n(e,{...s,children:n(Be,{...s})}):Be(s)}const vi=Object.freeze(Object.defineProperty({__proto__:null,default:Ni},Symbol.toStringTag,{value:"Module"})),xi=`import { Alert, Link } from '@/components/index'
 
 Telefunc unlocks a full-stack development pattern that allows you to colocate (and co-develop) highly-tailored server functions with client code.
 
@@ -1938,10 +1910,6 @@ If your telefunctions are used by multiple clients, we recommend deploying one T
 <Alert>
   If clients need to share a resources, it _can_ make sense to make (slightly) more generic telefunctions.
 </Alert>
-
-### Next
-
-<Link href="/initial-data">Initial Data</Link>
 `;function wi(s){return n(a.Fragment,{})}function Ti(s={}){return n(xi,{...s,children:n(wi,{...s})})}const _i=`import Link from '@/components/docs/Link'
 
 Telefunc can be used in any JavaScript environment without using a transformer but, for improved convenience, we recommend using a transformer plugin if possible.
@@ -2123,10 +2091,6 @@ Telefunc employs a full-stack pattern, and projects that combine front- and back
 
 It allows you to colocate (and codevelop) highly-tailored server functions with client code.
 You can write a telefunction for each view and interaction, just as if you were mutating data locally in-memory, but with all the power of a remote server.
-
-### Next
-
-<Link href="/best-practices">Best Practices</Link>
 `;function Ri(s){return n(a.Fragment,{})}function Ii(s={}){return n(ji,{...s,children:n(Ri,{...s})})}const Pi=`import { Alert, Link } from '@/components/index'
 import ConfigWhereServer from '@/components/ConfigWhereServer.mdx'
 
@@ -2233,10 +2197,6 @@ app.all('/_telefunc', async (req: Request, res: Response) => {
   }
 })
 \`\`\`
-
-### Next
-
-<Link href="/why-schemaless">Why Schemaless?</Link>
 
 ## See also
 
@@ -2444,10 +2404,6 @@ Telefunc uses a custom multipart stream parser — files are **not** buffered in
 
 This means **file bytes only flow through memory when you read them** — and if you stream to disk, memory consumption is constant regardless of file size.
 
-### Next
-
-<Link href="/error-handling">Error Handling</Link>
-
 ## See also
 
 - <Link href="/telefunc"><code>telefunc()</code></Link>
@@ -2555,10 +2511,6 @@ export async function myTelefunction() {
 \`\`\`
 [telefunc][Wrong Usage][getContext()] Cannot access context object, see https://telefunc.com/getContext#access
 \`\`\`
-
-### Next:
-
-<Link href="/shield"><code>shield()</code></Link>
 
 ## See also
 
@@ -2837,10 +2789,6 @@ For fetching the initial data of pages (SSR data) use your framework's built-in 
 You can still use Telefunc for fetching data but only after the initial rendering of the page, for example for pagination or infinite scroll.
 
 > You cannot use Telefunc for server-side rendered (SSR) data because only the framework can pass SSR data from the server to the client-side (which is needed for hydration). This is common to all SSR frameworks.
-
-### Next
-
-<Link href="/permissions">Permissions</Link>
 `;function os(s){return n(a.Fragment,{})}function cs(s={}){return n(ts,{...s,children:n(os,{...s})})}const ds=`import Link from '@/components/docs/Link'
 import ConfigWhereServer from '@/components/ConfigWhereServer.mdx'
 
@@ -3043,9 +2991,6 @@ onBug((error) => {
 })
 \`\`\`
 
-### Next:
-<Link href="/onAbort"><code>onAbort()</code></Link>
-
 ## See also
 
 - <Link href="/error-handling">Error Handling</Link>
@@ -3203,10 +3148,6 @@ export function onTextChange(id: string, text: string) {
   /* ... */
 }
 \`\`\`
-
-### Next
-
-<Link href="/validation">Validation</Link>
 
 ## See also
 
@@ -3451,10 +3392,6 @@ You can still use Telefunc to fetch or mutate data client-side (e.g., for page n
 <Alert>
   All SSR frameworks pass hydration data from server to client. Telefunc shouldn't intercept or modify this data, so it can't be used for initial page hydration.
 </Alert>
-
-### Next
-
-<Link href="/concepts">Concepts</Link>
 
 ## See also
 
@@ -3737,9 +3674,6 @@ export const onNewTodo = shield(
   }
 )
 \`\`\`
-
-### Next:
-<Link href="/onBug"><code>onBug()</code></Link>
 
 ## Type examples
 
@@ -4046,10 +3980,6 @@ const httpResponse = await telefunc({
 })
 \`\`\`
 
-### Next
-
-<Link href="/Abort"><code>throw Abort()</code></Link>
-
 ## See also
 
 - <Link href="/error-handling">Error Handling</Link>
@@ -4096,10 +4026,6 @@ export async function hello(name) {
 The \`Abort\` error data can be accessed client-side from the <Link href="/onAbort" /> hook.
 
 This pattern is powerful when used in combination with <Link href="/permissions#dry-permissions" doNotInferSectionTitle={true} /> helpers.
-
-### Next:
-
-<Link href="/get-context"><code>getContext()</code></Link>
 
 ## See also
 
@@ -4148,10 +4074,6 @@ export async function onFormSubmit(email: string, password: string) {
 <Alert>
   You can also exit early and return error data with \`throw Abort(errorData)\` instead of \`return errorData\`. This hides the control flow though, and prevents Telefunc from distinguishing between app errors and request errors. See <Link href="/error-handling" />.
 </Alert>
-
-### Next
-
-<Link href="/file-uploads">File Uploads</Link>
 
 ## See also
 
@@ -4265,9 +4187,5 @@ In most cases you can start with RPC, and switch to REST or GraphQL as needed.
 There's a simple litmus test for whether RPC is the right solution:
 - If your goal is to enable third party developers to access your data, then you need a generic API and you'll have to use REST or GraphQL
 - If your goal is to seamlessly add data and interactivity to a front-end, then RPC can improve DX and enable security and performance optimizations.
-
-### Next
-
-<Link href="/how-it-works">How it works</Link>
 `;function ml(s){return n(a.Fragment,{})}function Bl(s={}){return n(fl,{...s,children:n(ml,{...s})})}const S=s=>s.replace(/\s+/g," ").trim(),gl=s=>S(s).normalize("NFKD").toLowerCase().replace(/['"]/g,"").replace(/[^\p{Letter}\p{Number}\s-]/gu," ").replace(/\s+/g,"-").replace(/-+/g,"-").replace(/^-+|-+$/g,"")||"section",El=()=>{const s=new Map;return e=>{const r=gl(e),t=s.get(r)??0;return s.set(r,t+1),t===0?r:`${r}-${t}`}},Al=s=>S(s.replace(/!\[([^\]]*)\]\([^)]+\)/g,"$1").replace(/\[([^\]]+)\]\([^)]+\)/g,"$1").replace(/`([^`]+)`/g,"$1").replace(/<[^>]+>/g," ").replace(/\\([\\`*_[\]{}()#+\-.!])/g,"$1").replace(/[*_~]/g,"").replace(/\{[^}]+\}/g," ")),Cl=s=>s.match(/^\s{0,3}(`{3,}|~{3,})/)?.[1]?.[0]??null,Fl=(s,e=2,r=3)=>{const t=El(),o=[];let d=null;for(const h of s.split(`
-`)){const p=Cl(h);if(d){p===d&&(d=null);continue}if(p){d=p;continue}const E=h.match(/^\s{0,3}(#{1,6})\s+(.*?)(?:\s+#+\s*)?$/);if(!E)continue;const k=E[1].length,y=Al(E[2]??"");if(!y)continue;const B=t(y);k<e||k>r||o.push({depth:k,id:B,title:y})}return o},gr=s=>S(s),x=s=>s.replace(/^\/+|\/+$/g,""),_e=s=>be[s],Dl=s=>{const e=x(s);return Object.values(be).find(r=>x(r.docPath)===e)},bl=(s,e)=>Oe(_e(s).docPath,e),Nl=(s,e=u,r)=>{const t=Ne(e),o=_e(s);return{docPath:x(o.docPath),title:o.navTitle?.[t]??o.title[t],href:v(bl(s,r),t),description:o.excerpt?.[t]??null}},Er=(s,e=u,r)=>{const{title:t,href:o}=Nl(s,e,r);return{title:t,href:o}},Ar=(s,e=u)=>{const r=Dl(s);if(!r)return null;const t=Ne(e);return{title:r.title[t],description:r.excerpt?.[t]??null}},Se=Object.assign({"../../pages/(docs)/(content)/best-practices/content.en.mdx":fn,"../../pages/(docs)/(content)/bundler/content.en.mdx":Bn,"../../pages/(docs)/(content)/concepts/content.en.mdx":An,"../../pages/(docs)/(content)/disable-naming-convention/content.en.mdx":Fn,"../../pages/(docs)/(content)/error-handling/content.en.mdx":bn,"../../pages/(docs)/(content)/fetch/content.en.mdx":vn,"../../pages/(docs)/(content)/file-uploads/content.en.mdx":wn,"../../pages/(docs)/(content)/get-context/content.en.mdx":_n,"../../pages/(docs)/(content)/get-started/content.en.mdx":Ln,"../../pages/(docs)/(content)/how-it-works/content.en.mdx":Rn,"../../pages/(docs)/(content)/http-headers/content.en.mdx":Pn,"../../pages/(docs)/(content)/initial-data/content.en.mdx":qn,"../../pages/(docs)/(content)/log/content.en.mdx":On,"../../pages/(docs)/(content)/next/content.en.mdx":zn,"../../pages/(docs)/(content)/nuxt/content.en.mdx":Xn,"../../pages/(docs)/(content)/on-abort/content.en.mdx":Vn,"../../pages/(docs)/(content)/on-bug/content.en.mdx":Gn,"../../pages/(docs)/(content)/permissions/content.en.mdx":Qn,"../../pages/(docs)/(content)/quick-start/content.en.mdx":Zn,"../../pages/(docs)/(content)/react-native/content.en.mdx":ni,"../../pages/(docs)/(content)/react-router/content.en.mdx":si,"../../pages/(docs)/(content)/root/content.en.mdx":ri,"../../pages/(docs)/(content)/server-integration/content.en.mdx":ti,"../../pages/(docs)/(content)/shield-config/content.en.mdx":ci,"../../pages/(docs)/(content)/shield/content.en.mdx":hi,"../../pages/(docs)/(content)/svelte-kit/content.en.mdx":pi,"../../pages/(docs)/(content)/telefunc-files/content.en.mdx":ui,"../../pages/(docs)/(content)/telefunc-url/content.en.mdx":mi,"../../pages/(docs)/(content)/telefunc/content.en.mdx":gi,"../../pages/(docs)/(content)/throw-abort/content.en.mdx":Ai,"../../pages/(docs)/(content)/validation/content.en.mdx":Fi,"../../pages/(docs)/(content)/vike/content.en.mdx":bi,"../../pages/(docs)/(content)/why-schemaless/content.en.mdx":vi}),vl=Object.assign({"../../pages/(docs)/(content)/best-practices/content.en.mdx":Ti,"../../pages/(docs)/(content)/bundler/content.en.mdx":Li,"../../pages/(docs)/(content)/concepts/content.en.mdx":Ii,"../../pages/(docs)/(content)/disable-naming-convention/content.en.mdx":qi,"../../pages/(docs)/(content)/error-handling/content.en.mdx":$i,"../../pages/(docs)/(content)/fetch/content.en.mdx":Xi,"../../pages/(docs)/(content)/file-uploads/content.en.mdx":Yi,"../../pages/(docs)/(content)/get-context/content.en.mdx":Qi,"../../pages/(docs)/(content)/get-started/content.en.mdx":es,"../../pages/(docs)/(content)/how-it-works/content.en.mdx":ss,"../../pages/(docs)/(content)/http-headers/content.en.mdx":as,"../../pages/(docs)/(content)/initial-data/content.en.mdx":cs,"../../pages/(docs)/(content)/log/content.en.mdx":ks,"../../pages/(docs)/(content)/next/content.en.mdx":us,"../../pages/(docs)/(content)/nuxt/content.en.mdx":Bs,"../../pages/(docs)/(content)/on-abort/content.en.mdx":As,"../../pages/(docs)/(content)/on-bug/content.en.mdx":Ds,"../../pages/(docs)/(content)/permissions/content.en.mdx":vs,"../../pages/(docs)/(content)/quick-start/content.en.mdx":Ts,"../../pages/(docs)/(content)/react-native/content.en.mdx":Ls,"../../pages/(docs)/(content)/react-router/content.en.mdx":Is,"../../pages/(docs)/(content)/root/content.en.mdx":qs,"../../pages/(docs)/(content)/server-integration/content.en.mdx":$s,"../../pages/(docs)/(content)/shield-config/content.en.mdx":Xs,"../../pages/(docs)/(content)/shield/content.en.mdx":Ys,"../../pages/(docs)/(content)/svelte-kit/content.en.mdx":Qs,"../../pages/(docs)/(content)/telefunc-files/content.en.mdx":el,"../../pages/(docs)/(content)/telefunc-url/content.en.mdx":sl,"../../pages/(docs)/(content)/telefunc/content.en.mdx":al,"../../pages/(docs)/(content)/throw-abort/content.en.mdx":cl,"../../pages/(docs)/(content)/validation/content.en.mdx":kl,"../../pages/(docs)/(content)/vike/content.en.mdx":ul,"../../pages/(docs)/(content)/why-schemaless/content.en.mdx":Bl}),xl=Object.assign({}),wl=s=>typeof s=="string"?s:typeof s?.default=="string"?s.default:"",Le=s=>s.filter(e=>e!==""&&!(e.startsWith("(")&&e.endsWith(")"))),L=s=>{const e=s.match(/\/pages\/(.+)$/);if(!e)return null;const r=e[1].split("/").filter(Boolean),t=r.at(-1);return t?{segments:r.slice(0,-1),filename:t}:null},je=s=>{const e=s.indexOf("(content)");return e<0?null:Le(s.slice(e+1)).join("/")},Tl=()=>{const s=Object.keys(Se)[0],e=s?L(s):null;if(!e)return[];const r=e.segments.indexOf("(content)");return r<0?[]:e.segments.slice(0,r)},D=Tl(),Re=s=>{const e=L(s);if(!e)return null;const r=e.filename.match(/^content\.([^.]+)\.mdx$/);if(!r)return null;const[,t]=r;if(!$e(t))return null;const o=je(e.segments);return o===null?null:{locale:t,routeId:o}},_l=s=>{const e=L(s);if(!e||!/^content\.config\.[^.]+$/.test(e.filename))return null;const r=je(e.segments);return r!==null?r:D.length===0||!D.every((o,d)=>e.segments[d]===o)?null:Le(e.segments.slice(D.length)).join("/")},Sl=s=>{const e=s.split("/").filter(Boolean),r=[""];for(let t=0;t<e.length;t+=1)r.push(e.slice(0,t+1).join("/"));return r},f={},w=new Map;for(const[s,e]of Object.entries(Se)){const r=Re(s);if(!r)continue;f[r.routeId]??={},f[r.routeId][r.locale]??={};const t=f[r.routeId][r.locale];t&&(t.Page=e.default,t.config=e.docConfig)}for(const[s,e]of Object.entries(vl)){const r=Re(s);if(!r)continue;f[r.routeId]??={},f[r.routeId][r.locale]??={};const t=f[r.routeId][r.locale];if(t){const o=wl(e);t.headings=Fl(o),t.source=o}}for(const[s,e]of Object.entries(xl)){const r=_l(s);if(r!==null){if(w.has(r))throw new Error(`Duplicate content.config for logical route "${r||"/"}". Keep only one config file for that docs path.`);w.set(r,e.default??{})}}const Ll=s=>Sl(s).reduce((e,r)=>({...e,...w.get(r)??{}}),{}),Cr=(s,e,r)=>{const t=f[s];if(!t)return null;const o=t[e]??t[u];if(!o?.Page)return null;const h={...ze(r??He).defaultDocConfig,...Ll(s),...t[u]?.config??{},...t[e]?.config??{}};return{Page:o.Page,headings:o.headings??[],config:h,resolvedLocale:t[e]?e:u}},Ie=s=>jl().includes(s.replace(/^\/+|\/+$/g,"")),ge=(s,e)=>{const r=s.replace(/^\/+|\/+$/g,"");return!!f[r]?.[e]?.Page},jl=()=>Object.keys(f).sort((s,e)=>s.localeCompare(e));function Rl(){window.addEventListener("popstate",Il)}async function Il(){Xe("onPopState()");const s=We();if(s.skip)return;const{previous:e,current:r}=s;await Pl(e,r)}async function Pl(s,e){const r=e.state.vike.scrollPosition||void 0;if(Ee(e.url)===Ee(s.url)&&e.url!==s.url){Ve(r);return}const d=e.state.vike.triggeredBy==="user"||s.state.vike.triggeredBy==="user",h=!e.state.vike.timestamp||!s.state.vike.timestamp?null:e.state.vike.timestamp<s.state.vike.timestamp;await T({scrollTarget:r,isBackwardNavigation:h,doNotRenderIfSamePage:d,isHistoryNavigation:!0})}function Ee(s){return s.split("#")[0]}function Ml(){document.addEventListener("click",ql)}async function ql(s){if(!Ul(s))return;const e=Ol(s.target);if(!e)return;const r=e.getAttribute("href");if(r===null||Ye(e))return;if(r.includes("#")&&Ge(r)){s.preventDefault(),Ke(r.split("#")[1]);return}if(Qe(e))return;s.preventDefault();let t;{const o=e.getAttribute("keep-scroll-position");o!==null&&(t={preserveScroll:o!=="false"})}await T({scrollTarget:t,urlOriginal:r})}function Ul(s){return s.button===0&&!s.ctrlKey&&!s.shiftKey&&!s.altKey&&!s.metaKey}function Ol(s){for(;s.tagName!=="A";){const{parentNode:e}=s;if(!e)return null;s=e}return s}const $l="modulepreload",zl=function(s){return"/vike-docpress/"+s},Ae={},b=function(e,r,t){let o=Promise.resolve();if(r&&r.length>0){let E=function(k){return Promise.all(k.map(y=>Promise.resolve(y).then(B=>({status:"fulfilled",value:B}),B=>({status:"rejected",reason:B}))))};document.getElementsByTagName("link");const h=document.querySelector("meta[property=csp-nonce]"),p=h?.nonce||h?.getAttribute("nonce");o=E(r.map(k=>{if(k=zl(k),k in Ae)return;Ae[k]=!0;const y=k.endsWith(".css"),B=y?'[rel="stylesheet"]':"";if(document.querySelector(`link[href="${k}"]${B}`))return;const m=document.createElement("link");if(m.rel=y?"stylesheet":$l,y||(m.as="script"),m.crossOrigin="",m.href=k,p&&m.setAttribute("nonce",p),document.head.appendChild(m),y)return new Promise((qe,Ue)=>{m.addEventListener("load",qe),m.addEventListener("error",()=>Ue(new Error(`Unable to preload CSS for ${k}`)))})}))}function d(h){const p=new Event("vite:preloadError",{cancelable:!0});if(p.payload=h,window.dispatchEvent(p),!p.defaultPrevented)throw h}return o.then(h=>{for(const p of h||[])p.status==="rejected"&&d(p.reason);return e().catch(d)})},Hl=s=>{const e=ve(s.urlPathname).pathname,r=xe(e);return r===null||!Ie(r)?!1:{routeParams:{slug:r}}},Ce=Object.freeze(Object.defineProperty({__proto__:null,default:Hl},Symbol.toStringTag,{value:"Module"}));function Fe(s,e){return Object.fromEntries(Object.entries(s).filter(e))}function Xl(s,e){const r=we(s,"/"),t=e.pathname??r.pathnameOriginal;Je(t,"modify.pathname");let o=e.search===null?"":e.search?Wl(r,e.search):r.searchOriginal;o==="?"&&(o="");let d;return e.hash===null?d="":e.hash===void 0?d=r.hashOriginal??"":(d=e.hash,d.startsWith("#")||(d="#"+d)),Te(r.origin,t,o,d)}function Wl(s,e){let r;if(e instanceof URLSearchParams)r=e;else{const t=Fe({...s.search,...Fe(e,Vl)},Ze);r=new URLSearchParams(t)}return"?"+r.toString()}function Vl(s){return s[1]!==void 0}function N(s,e){s=Xl(s,e);const r=we(s,"/"),t=[e.protocol??r.protocol??"",e.hostname??r.hostname??""],o=e.port??r.port;(o||o===0)&&t.push(`:${o}`);const d=t.join("");return Te(d,r.pathname,r.searchOriginal,r.hashOriginal)}const Yl=s=>{const e=xe(s);return e!==null&&Ie(e)?e:null},Gl=s=>{const e=s.urlParsed.pathname,r=en(e),{locale:t,pathname:o}=ve(e),d=Yl(o),h=r?null:nn();if(r&&t!==u&&d&&!ge(d,t))throw I(N(s.urlOriginal,{pathname:v(o,u)}));if(typeof window<"u"&&!r&&h&&h!==u&&(!d||ge(d,h)))throw I(N(s.urlOriginal,{pathname:v(o,h)}));return{pageContext:{locale:t,urlPathnameLocalized:e,urlLogical:N(s.urlOriginal,{pathname:o})}}},Kl=Object.freeze(Object.defineProperty({__proto__:null,default:Gl},Symbol.toStringTag,{value:"Module"})),j={},Pe={},Ql={},F={},Jl=[],Me={},Zl=[{pageId:"/pages/(docs)/(config)/_error",isErrorPage:!0,routeFilesystem:void 0,loadVirtualFilePageEntry:()=>({moduleId:"virtual:vike:page-entry:client:/pages/(docs)/(config)/_error",moduleExportsPromise:b(()=>import("../entries/pages_-docs-_-config-_error.zmq_Gfh3.js"),__vite__mapDeps([0,1,2,3,4]))}),configValuesSerialized:{hasServerOnlyHook:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:!1}},isClientRuntimeLoaded:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:!0}},onBeforeRenderEnv:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:null}},dataEnv:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:null}},guardEnv:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:{client:!0,server:!0}}},route:{type:"standard",definedAtData:{filePathToShowToUser:"/pages/(docs)/(config)/+route.ts",fileExportPathToShowToUser:[]},valueSerialized:{type:"plus-file",exportValues:Ce}},clientRouting:{type:"standard",definedAtData:{filePathToShowToUser:"vike-react/config",fileExportPathToShowToUser:["default","clientRouting"]},valueSerialized:{type:"js-serialized",value:!0}}}},{pageId:"/pages/index",isErrorPage:void 0,routeFilesystem:{routeString:"/",definedAtLocation:"/pages/index/"},loadVirtualFilePageEntry:()=>({moduleId:"virtual:vike:page-entry:client:/pages/index",moduleExportsPromise:b(()=>import("../entries/pages_index.Caoqs0oU.js"),__vite__mapDeps([5,1,2,3]))}),configValuesSerialized:{hasServerOnlyHook:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:!1}},isClientRuntimeLoaded:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:!0}},onBeforeRenderEnv:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:null}},dataEnv:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:null}},guardEnv:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:null}},clientRouting:{type:"standard",definedAtData:{filePathToShowToUser:"vike-react/config",fileExportPathToShowToUser:["default","clientRouting"]},valueSerialized:{type:"js-serialized",value:!0}}}},{pageId:"/pages/(docs)/(config)",isErrorPage:void 0,routeFilesystem:{routeString:"/",definedAtLocation:"/pages/(docs)/(config)/"},loadVirtualFilePageEntry:()=>({moduleId:"virtual:vike:page-entry:client:/pages/(docs)/(config)",moduleExportsPromise:b(()=>import("../entries/pages_-docs-_-config-.BTtCEh-c.js"),__vite__mapDeps([6,1,2,3,4]))}),configValuesSerialized:{hasServerOnlyHook:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:!1}},isClientRuntimeLoaded:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:!0}},onBeforeRenderEnv:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:null}},dataEnv:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:null}},guardEnv:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:{client:!0,server:!0}}},route:{type:"standard",definedAtData:{filePathToShowToUser:"/pages/(docs)/(config)/+route.ts",fileExportPathToShowToUser:[]},valueSerialized:{type:"plus-file",exportValues:Ce}},clientRouting:{type:"standard",definedAtData:{filePathToShowToUser:"vike-react/config",fileExportPathToShowToUser:["default","clientRouting"]},valueSerialized:{type:"js-serialized",value:!0}}}}],er={configValuesSerialized:{onBeforeRoute:{type:"standard",definedAtData:{filePathToShowToUser:"/pages/+onBeforeRoute.ts",fileExportPathToShowToUser:[]},valueSerialized:{type:"plus-file",exportValues:Kl}},telefunc:{type:"standard",definedAtData:{filePathToShowToUser:"/pages/+telefunc.ts",fileExportPathToShowToUser:[]},valueSerialized:{type:"plus-file",exportValues:sn}}}},nr=Object.assign({}),ir={...nr};j[".page"]=ir;const sr=Object.assign({}),lr={...sr};F[".page"]=lr;const rr=Object.assign({}),ar={...rr};F[".page.server"]=ar;const tr=Object.assign({}),or={...tr};Pe[".page.route"]=or;const cr=Object.assign({}),dr={...cr};j[".page.client"]=dr;const hr=Object.assign({}),kr={...hr};F[".page.client"]=kr;const pr=Object.assign({}),yr={...pr};Me[".page.server"]=yr;const ur=Object.freeze(Object.defineProperty({__proto__:null,neverLoaded:Me,pageConfigGlobalSerialized:er,pageConfigsSerialized:Zl,pageFilesEager:Pe,pageFilesExportNamesEager:F,pageFilesExportNamesLazy:Ql,pageFilesLazy:j,pageFilesList:Jl},Symbol.toStringTag,{value:"Module"})),De=an("initClientRouter.ts",{});function Fr(){ln(ur),!De.done&&(De.done=!0,mr(),fr(),Ml(),rn())}function fr(){dn(hn()===0),T({scrollTarget:{preserveScroll:!0},isClientSideNavigation:!1})}function mr(){tn(),on(),cn(),Rl()}export{Nl as a,Er as b,El as c,Ar as d,Cr as g,Fr as i,gr as n};
+`)){const p=Cl(h);if(d){p===d&&(d=null);continue}if(p){d=p;continue}const E=h.match(/^\s{0,3}(#{1,6})\s+(.*?)(?:\s+#+\s*)?$/);if(!E)continue;const k=E[1].length,y=Al(E[2]??"");if(!y)continue;const B=t(y);k<e||k>r||o.push({depth:k,id:B,title:y})}return o},gr=s=>S(s),x=s=>s.replace(/^\/+|\/+$/g,""),_e=s=>be[s],Dl=s=>{const e=x(s);return Object.values(be).find(r=>x(r.docPath)===e)},bl=(s,e)=>Oe(_e(s).docPath,e),Nl=(s,e=u,r)=>{const t=Ne(e),o=_e(s);return{docPath:x(o.docPath),title:o.navTitle?.[t]??o.title[t],href:v(bl(s,r),t),description:o.excerpt?.[t]??null}},Er=(s,e=u,r)=>{const{title:t,href:o}=Nl(s,e,r);return{title:t,href:o}},Ar=(s,e=u)=>{const r=Dl(s);if(!r)return null;const t=Ne(e);return{title:r.title[t],description:r.excerpt?.[t]??null}},Se=Object.assign({"../../pages/(docs)/(content)/best-practices/content.en.mdx":fn,"../../pages/(docs)/(content)/bundler/content.en.mdx":Bn,"../../pages/(docs)/(content)/concepts/content.en.mdx":An,"../../pages/(docs)/(content)/disable-naming-convention/content.en.mdx":Fn,"../../pages/(docs)/(content)/error-handling/content.en.mdx":bn,"../../pages/(docs)/(content)/fetch/content.en.mdx":vn,"../../pages/(docs)/(content)/file-uploads/content.en.mdx":wn,"../../pages/(docs)/(content)/get-context/content.en.mdx":_n,"../../pages/(docs)/(content)/get-started/content.en.mdx":Ln,"../../pages/(docs)/(content)/how-it-works/content.en.mdx":Rn,"../../pages/(docs)/(content)/http-headers/content.en.mdx":Pn,"../../pages/(docs)/(content)/initial-data/content.en.mdx":qn,"../../pages/(docs)/(content)/log/content.en.mdx":On,"../../pages/(docs)/(content)/next/content.en.mdx":zn,"../../pages/(docs)/(content)/nuxt/content.en.mdx":Xn,"../../pages/(docs)/(content)/on-abort/content.en.mdx":Vn,"../../pages/(docs)/(content)/on-bug/content.en.mdx":Gn,"../../pages/(docs)/(content)/permissions/content.en.mdx":Qn,"../../pages/(docs)/(content)/quick-start/content.en.mdx":Zn,"../../pages/(docs)/(content)/react-native/content.en.mdx":ni,"../../pages/(docs)/(content)/react-router/content.en.mdx":si,"../../pages/(docs)/(content)/root/content.en.mdx":ri,"../../pages/(docs)/(content)/server-integration/content.en.mdx":ti,"../../pages/(docs)/(content)/shield-config/content.en.mdx":ci,"../../pages/(docs)/(content)/shield/content.en.mdx":hi,"../../pages/(docs)/(content)/svelte-kit/content.en.mdx":pi,"../../pages/(docs)/(content)/telefunc-files/content.en.mdx":ui,"../../pages/(docs)/(content)/telefunc-url/content.en.mdx":mi,"../../pages/(docs)/(content)/telefunc/content.en.mdx":gi,"../../pages/(docs)/(content)/throw-abort/content.en.mdx":Ai,"../../pages/(docs)/(content)/validation/content.en.mdx":Fi,"../../pages/(docs)/(content)/vike/content.en.mdx":bi,"../../pages/(docs)/(content)/why-schemaless/content.en.mdx":vi}),vl=Object.assign({"../../pages/(docs)/(content)/best-practices/content.en.mdx":Ti,"../../pages/(docs)/(content)/bundler/content.en.mdx":Li,"../../pages/(docs)/(content)/concepts/content.en.mdx":Ii,"../../pages/(docs)/(content)/disable-naming-convention/content.en.mdx":qi,"../../pages/(docs)/(content)/error-handling/content.en.mdx":$i,"../../pages/(docs)/(content)/fetch/content.en.mdx":Xi,"../../pages/(docs)/(content)/file-uploads/content.en.mdx":Yi,"../../pages/(docs)/(content)/get-context/content.en.mdx":Qi,"../../pages/(docs)/(content)/get-started/content.en.mdx":es,"../../pages/(docs)/(content)/how-it-works/content.en.mdx":ss,"../../pages/(docs)/(content)/http-headers/content.en.mdx":as,"../../pages/(docs)/(content)/initial-data/content.en.mdx":cs,"../../pages/(docs)/(content)/log/content.en.mdx":ks,"../../pages/(docs)/(content)/next/content.en.mdx":us,"../../pages/(docs)/(content)/nuxt/content.en.mdx":Bs,"../../pages/(docs)/(content)/on-abort/content.en.mdx":As,"../../pages/(docs)/(content)/on-bug/content.en.mdx":Ds,"../../pages/(docs)/(content)/permissions/content.en.mdx":vs,"../../pages/(docs)/(content)/quick-start/content.en.mdx":Ts,"../../pages/(docs)/(content)/react-native/content.en.mdx":Ls,"../../pages/(docs)/(content)/react-router/content.en.mdx":Is,"../../pages/(docs)/(content)/root/content.en.mdx":qs,"../../pages/(docs)/(content)/server-integration/content.en.mdx":$s,"../../pages/(docs)/(content)/shield-config/content.en.mdx":Xs,"../../pages/(docs)/(content)/shield/content.en.mdx":Ys,"../../pages/(docs)/(content)/svelte-kit/content.en.mdx":Qs,"../../pages/(docs)/(content)/telefunc-files/content.en.mdx":el,"../../pages/(docs)/(content)/telefunc-url/content.en.mdx":sl,"../../pages/(docs)/(content)/telefunc/content.en.mdx":al,"../../pages/(docs)/(content)/throw-abort/content.en.mdx":cl,"../../pages/(docs)/(content)/validation/content.en.mdx":kl,"../../pages/(docs)/(content)/vike/content.en.mdx":ul,"../../pages/(docs)/(content)/why-schemaless/content.en.mdx":Bl}),xl=Object.assign({}),wl=s=>typeof s=="string"?s:typeof s?.default=="string"?s.default:"",Le=s=>s.filter(e=>e!==""&&!(e.startsWith("(")&&e.endsWith(")"))),L=s=>{const e=s.match(/\/pages\/(.+)$/);if(!e)return null;const r=e[1].split("/").filter(Boolean),t=r.at(-1);return t?{segments:r.slice(0,-1),filename:t}:null},je=s=>{const e=s.indexOf("(content)");return e<0?null:Le(s.slice(e+1)).join("/")},Tl=()=>{const s=Object.keys(Se)[0],e=s?L(s):null;if(!e)return[];const r=e.segments.indexOf("(content)");return r<0?[]:e.segments.slice(0,r)},D=Tl(),Re=s=>{const e=L(s);if(!e)return null;const r=e.filename.match(/^content\.([^.]+)\.mdx$/);if(!r)return null;const[,t]=r;if(!$e(t))return null;const o=je(e.segments);return o===null?null:{locale:t,routeId:o}},_l=s=>{const e=L(s);if(!e||!/^content\.config\.[^.]+$/.test(e.filename))return null;const r=je(e.segments);return r!==null?r:D.length===0||!D.every((o,d)=>e.segments[d]===o)?null:Le(e.segments.slice(D.length)).join("/")},Sl=s=>{const e=s.split("/").filter(Boolean),r=[""];for(let t=0;t<e.length;t+=1)r.push(e.slice(0,t+1).join("/"));return r},f={},w=new Map;for(const[s,e]of Object.entries(Se)){const r=Re(s);if(!r)continue;f[r.routeId]??={},f[r.routeId][r.locale]??={};const t=f[r.routeId][r.locale];t&&(t.Page=e.default,t.config=e.docConfig)}for(const[s,e]of Object.entries(vl)){const r=Re(s);if(!r)continue;f[r.routeId]??={},f[r.routeId][r.locale]??={};const t=f[r.routeId][r.locale];if(t){const o=wl(e);t.headings=Fl(o),t.source=o}}for(const[s,e]of Object.entries(xl)){const r=_l(s);if(r!==null){if(w.has(r))throw new Error(`Duplicate content.config for logical route "${r||"/"}". Keep only one config file for that docs path.`);w.set(r,e.default??{})}}const Ll=s=>Sl(s).reduce((e,r)=>({...e,...w.get(r)??{}}),{}),Cr=(s,e,r)=>{const t=f[s];if(!t)return null;const o=t[e]??t[u];if(!o?.Page)return null;const h={...ze(r??He).defaultDocConfig,...Ll(s),...t[u]?.config??{},...t[e]?.config??{}};return{Page:o.Page,headings:o.headings??[],config:h,resolvedLocale:t[e]?e:u}},Ie=s=>jl().includes(s.replace(/^\/+|\/+$/g,"")),ge=(s,e)=>{const r=s.replace(/^\/+|\/+$/g,"");return!!f[r]?.[e]?.Page},jl=()=>Object.keys(f).sort((s,e)=>s.localeCompare(e));function Rl(){window.addEventListener("popstate",Il)}async function Il(){Xe("onPopState()");const s=We();if(s.skip)return;const{previous:e,current:r}=s;await Pl(e,r)}async function Pl(s,e){const r=e.state.vike.scrollPosition||void 0;if(Ee(e.url)===Ee(s.url)&&e.url!==s.url){Ve(r);return}const d=e.state.vike.triggeredBy==="user"||s.state.vike.triggeredBy==="user",h=!e.state.vike.timestamp||!s.state.vike.timestamp?null:e.state.vike.timestamp<s.state.vike.timestamp;await T({scrollTarget:r,isBackwardNavigation:h,doNotRenderIfSamePage:d,isHistoryNavigation:!0})}function Ee(s){return s.split("#")[0]}function Ml(){document.addEventListener("click",ql)}async function ql(s){if(!Ul(s))return;const e=Ol(s.target);if(!e)return;const r=e.getAttribute("href");if(r===null||Ye(e))return;if(r.includes("#")&&Ge(r)){s.preventDefault(),Ke(r.split("#")[1]);return}if(Qe(e))return;s.preventDefault();let t;{const o=e.getAttribute("keep-scroll-position");o!==null&&(t={preserveScroll:o!=="false"})}await T({scrollTarget:t,urlOriginal:r})}function Ul(s){return s.button===0&&!s.ctrlKey&&!s.shiftKey&&!s.altKey&&!s.metaKey}function Ol(s){for(;s.tagName!=="A";){const{parentNode:e}=s;if(!e)return null;s=e}return s}const $l="modulepreload",zl=function(s){return"/vike-docpress/"+s},Ae={},b=function(e,r,t){let o=Promise.resolve();if(r&&r.length>0){let E=function(k){return Promise.all(k.map(y=>Promise.resolve(y).then(B=>({status:"fulfilled",value:B}),B=>({status:"rejected",reason:B}))))};document.getElementsByTagName("link");const h=document.querySelector("meta[property=csp-nonce]"),p=h?.nonce||h?.getAttribute("nonce");o=E(r.map(k=>{if(k=zl(k),k in Ae)return;Ae[k]=!0;const y=k.endsWith(".css"),B=y?'[rel="stylesheet"]':"";if(document.querySelector(`link[href="${k}"]${B}`))return;const m=document.createElement("link");if(m.rel=y?"stylesheet":$l,y||(m.as="script"),m.crossOrigin="",m.href=k,p&&m.setAttribute("nonce",p),document.head.appendChild(m),y)return new Promise((qe,Ue)=>{m.addEventListener("load",qe),m.addEventListener("error",()=>Ue(new Error(`Unable to preload CSS for ${k}`)))})}))}function d(h){const p=new Event("vite:preloadError",{cancelable:!0});if(p.payload=h,window.dispatchEvent(p),!p.defaultPrevented)throw h}return o.then(h=>{for(const p of h||[])p.status==="rejected"&&d(p.reason);return e().catch(d)})},Hl=s=>{const e=ve(s.urlPathname).pathname,r=xe(e);return r===null||!Ie(r)?!1:{routeParams:{slug:r}}},Ce=Object.freeze(Object.defineProperty({__proto__:null,default:Hl},Symbol.toStringTag,{value:"Module"}));function Fe(s,e){return Object.fromEntries(Object.entries(s).filter(e))}function Xl(s,e){const r=we(s,"/"),t=e.pathname??r.pathnameOriginal;Je(t,"modify.pathname");let o=e.search===null?"":e.search?Wl(r,e.search):r.searchOriginal;o==="?"&&(o="");let d;return e.hash===null?d="":e.hash===void 0?d=r.hashOriginal??"":(d=e.hash,d.startsWith("#")||(d="#"+d)),Te(r.origin,t,o,d)}function Wl(s,e){let r;if(e instanceof URLSearchParams)r=e;else{const t=Fe({...s.search,...Fe(e,Vl)},Ze);r=new URLSearchParams(t)}return"?"+r.toString()}function Vl(s){return s[1]!==void 0}function N(s,e){s=Xl(s,e);const r=we(s,"/"),t=[e.protocol??r.protocol??"",e.hostname??r.hostname??""],o=e.port??r.port;(o||o===0)&&t.push(`:${o}`);const d=t.join("");return Te(d,r.pathname,r.searchOriginal,r.hashOriginal)}const Yl=s=>{const e=xe(s);return e!==null&&Ie(e)?e:null},Gl=s=>{const e=s.urlParsed.pathname,r=en(e),{locale:t,pathname:o}=ve(e),d=Yl(o),h=r?null:nn();if(r&&t!==u&&d&&!ge(d,t))throw I(N(s.urlOriginal,{pathname:v(o,u)}));if(typeof window<"u"&&!r&&h&&h!==u&&(!d||ge(d,h)))throw I(N(s.urlOriginal,{pathname:v(o,h)}));return{pageContext:{locale:t,urlPathnameLocalized:e,urlLogical:N(s.urlOriginal,{pathname:o})}}},Kl=Object.freeze(Object.defineProperty({__proto__:null,default:Gl},Symbol.toStringTag,{value:"Module"})),j={},Pe={},Ql={},F={},Jl=[],Me={},Zl=[{pageId:"/pages/(docs)/(config)/_error",isErrorPage:!0,routeFilesystem:void 0,loadVirtualFilePageEntry:()=>({moduleId:"virtual:vike:page-entry:client:/pages/(docs)/(config)/_error",moduleExportsPromise:b(()=>import("../entries/pages_-docs-_-config-_error.DIs_gklJ.js"),__vite__mapDeps([0,1,2,3,4]))}),configValuesSerialized:{hasServerOnlyHook:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:!1}},isClientRuntimeLoaded:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:!0}},onBeforeRenderEnv:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:null}},dataEnv:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:null}},guardEnv:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:{client:!0,server:!0}}},route:{type:"standard",definedAtData:{filePathToShowToUser:"/pages/(docs)/(config)/+route.ts",fileExportPathToShowToUser:[]},valueSerialized:{type:"plus-file",exportValues:Ce}},clientRouting:{type:"standard",definedAtData:{filePathToShowToUser:"vike-react/config",fileExportPathToShowToUser:["default","clientRouting"]},valueSerialized:{type:"js-serialized",value:!0}}}},{pageId:"/pages/index",isErrorPage:void 0,routeFilesystem:{routeString:"/",definedAtLocation:"/pages/index/"},loadVirtualFilePageEntry:()=>({moduleId:"virtual:vike:page-entry:client:/pages/index",moduleExportsPromise:b(()=>import("../entries/pages_index.Caoqs0oU.js"),__vite__mapDeps([5,1,2,3]))}),configValuesSerialized:{hasServerOnlyHook:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:!1}},isClientRuntimeLoaded:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:!0}},onBeforeRenderEnv:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:null}},dataEnv:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:null}},guardEnv:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:null}},clientRouting:{type:"standard",definedAtData:{filePathToShowToUser:"vike-react/config",fileExportPathToShowToUser:["default","clientRouting"]},valueSerialized:{type:"js-serialized",value:!0}}}},{pageId:"/pages/(docs)/(config)",isErrorPage:void 0,routeFilesystem:{routeString:"/",definedAtLocation:"/pages/(docs)/(config)/"},loadVirtualFilePageEntry:()=>({moduleId:"virtual:vike:page-entry:client:/pages/(docs)/(config)",moduleExportsPromise:b(()=>import("../entries/pages_-docs-_-config-.Dv01rZOf.js"),__vite__mapDeps([6,1,2,3,4]))}),configValuesSerialized:{hasServerOnlyHook:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:!1}},isClientRuntimeLoaded:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:!0}},onBeforeRenderEnv:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:null}},dataEnv:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:null}},guardEnv:{type:"computed",definedAtData:null,valueSerialized:{type:"js-serialized",value:{client:!0,server:!0}}},route:{type:"standard",definedAtData:{filePathToShowToUser:"/pages/(docs)/(config)/+route.ts",fileExportPathToShowToUser:[]},valueSerialized:{type:"plus-file",exportValues:Ce}},clientRouting:{type:"standard",definedAtData:{filePathToShowToUser:"vike-react/config",fileExportPathToShowToUser:["default","clientRouting"]},valueSerialized:{type:"js-serialized",value:!0}}}}],er={configValuesSerialized:{onBeforeRoute:{type:"standard",definedAtData:{filePathToShowToUser:"/pages/+onBeforeRoute.ts",fileExportPathToShowToUser:[]},valueSerialized:{type:"plus-file",exportValues:Kl}},telefunc:{type:"standard",definedAtData:{filePathToShowToUser:"/pages/+telefunc.ts",fileExportPathToShowToUser:[]},valueSerialized:{type:"plus-file",exportValues:sn}}}},nr=Object.assign({}),ir={...nr};j[".page"]=ir;const sr=Object.assign({}),lr={...sr};F[".page"]=lr;const rr=Object.assign({}),ar={...rr};F[".page.server"]=ar;const tr=Object.assign({}),or={...tr};Pe[".page.route"]=or;const cr=Object.assign({}),dr={...cr};j[".page.client"]=dr;const hr=Object.assign({}),kr={...hr};F[".page.client"]=kr;const pr=Object.assign({}),yr={...pr};Me[".page.server"]=yr;const ur=Object.freeze(Object.defineProperty({__proto__:null,neverLoaded:Me,pageConfigGlobalSerialized:er,pageConfigsSerialized:Zl,pageFilesEager:Pe,pageFilesExportNamesEager:F,pageFilesExportNamesLazy:Ql,pageFilesLazy:j,pageFilesList:Jl},Symbol.toStringTag,{value:"Module"})),De=an("initClientRouter.ts",{});function Fr(){ln(ur),!De.done&&(De.done=!0,mr(),fr(),Ml(),rn())}function fr(){dn(hn()===0),T({scrollTarget:{preserveScroll:!0},isClientSideNavigation:!1})}function mr(){tn(),on(),cn(),Rl()}export{Nl as a,Er as b,El as c,Ar as d,Cr as g,Fr as i,gr as n};
