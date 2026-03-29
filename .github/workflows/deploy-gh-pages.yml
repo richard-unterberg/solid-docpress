@@ -3,7 +3,7 @@ name: Deploy Page
 on:
   push:
     branches:
-      - master
+      - telefunc
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -50,7 +50,7 @@ jobs:
         run: pnpm build
 
       - name: Deploy to GitHub Pages
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/telefunc'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

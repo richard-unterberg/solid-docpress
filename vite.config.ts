@@ -8,7 +8,7 @@ import { defineConfig, type PluginOption } from 'vite'
 import { rehypeDocHeadings } from './lib/docs/rehypeDocHeadings'
 import { rehypeShikiCodeBlocks } from './lib/docs/rehypeShikiCodeBlocks'
 import { searchIndexPlugin } from './lib/search/vitePlugin'
-import tsConf from './lib/tsconf'
+import tsConf from './tsconfig.json'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)

@@ -1,7 +1,7 @@
 import { cmMerge } from '@classmatejs/react'
 import { Fragment, type ReactNode, useEffect, useRef } from 'react'
 import { getLogicalPathname } from '@/lib/i18n/routing'
-import type { MenuRendererGroup, SidebarItem, SidebarLinkItem } from '@/lib/types'
+import type { MenuRendererGroup, SidebarItem, SidebarLinkItem } from '@/lib/navigation/navigation'
 
 const isSidebarLink = (item: SidebarItem): item is SidebarLinkItem => 'href' in item
 

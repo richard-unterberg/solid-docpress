@@ -2,7 +2,7 @@ import { Map as MapIcon, Sprout } from 'lucide-react'
 import { getHeadingData, type HeadingKey } from '@/lib/docs/headings'
 import type { Locale } from '@/lib/i18n/config'
 import { t } from '@/lib/messages'
-import type { MenuGroupShared, MenuRendererGroup } from '@/lib/types'
+import type { MenuGroupShared, MenuRendererGroup } from '@/lib/navigation/navigation'
 
 const GroupKeys = {
   getStarted: 'getStarted',
