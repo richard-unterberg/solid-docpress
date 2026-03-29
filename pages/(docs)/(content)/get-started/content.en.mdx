@@ -1,9 +1,9 @@
-import { Alert, CodeGroup, Link, Table } from '@/components/docs'
+import { Alert, CodeGroup, Link, Table } from '@/components/index'
 
 # Telefunc docs maintainer guide
 
 <Alert type="warning" heading="Content-only workflow">
-  Work in the MDX content files under `pages/(docs)/(content)/**`. Reuse the components exported from `@/components/docs` and avoid changing TSX, layout, routing, or theme files unless a developer explicitly asks for it.
+  Work in the MDX content files under `pages/(docs)/(content)/**`. Reuse the components exported from `@/components/index` and avoid changing TSX, layout, routing, or theme files unless a developer explicitly asks for it.
 </Alert>
 
 ## Where to edit
@@ -16,7 +16,7 @@ import { Alert, CodeGroup, Link, Table } from '@/components/docs'
     ['pages/(docs)/(content)/<slug>/content.config.ts', 'Shared per-document options such as tableOfContents', 'Only touch when the doc needs a TOC change'],
     ['lib/headings.ts', 'Doc metadata registry keyed by heading ids', 'Update titles, navTitle, excerpt, and docPath mappings'],
     ['lib/navigation/menuNavigation.ts', 'Sidebar groups and link order', 'Add, remove, or reorder links under the existing groups'],
-    ['components/docs/index.tsx', 'Whitelisted MDX component exports', 'Import only from here'],
+    ['components/index.tsx', 'Whitelisted MDX component exports', 'Import only from here'],
     ['pages/+telefunc.ts', 'Global docs runtime settings', 'Read for context, but treat as developer-owned'],
     ['pages/(docs)/(config) and components/**', 'Rendered layout, routing, and shared UI', 'Do not edit for normal documentation work'],
   ]
@@ -133,7 +133,7 @@ quickStart: {
 Use this import at the top of a doc:
 
 ```mdx
-import { Alert, CodeGroup, Link, Table } from '@/components/docs'
+import { Alert, CodeGroup, Link, Table } from '@/components/index'
 ```
 
 <Table data={{
@@ -150,7 +150,7 @@ import { Alert, CodeGroup, Link, Table } from '@/components/docs'
 
 <CodeGroup>
 ```mdx
-import { Alert, CodeGroup, Link, Table } from '@/components/docs'
+import { Alert, CodeGroup, Link, Table } from '@/components/index'
 ```
 
 ```mdx

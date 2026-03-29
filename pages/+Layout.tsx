@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
-import Navbar from '@/components/Navbar'
-import UserSettingsSync from '@/components/UserSettingsSync'
+import Navbar from '@/app-components/Navbar'
+import UserSettingsSync from '@/app-components/UserSettingsSync'
 
 const PageLayout = ({ children }: { children: ReactNode }) => {
   return (

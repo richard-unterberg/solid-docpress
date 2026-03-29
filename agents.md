@@ -5,7 +5,7 @@
 - UI rule: this repo uses Tailwind CSS with DaisyUI-driven configuration, so UI changes should align with those constraints.
 - UI rule: prefer DaisyUI and existing Tailwind utilities/tokens over arbitrary values; the less arbitrary styling, the better.
 - Component rule: before inventing a new component, inspect the existing components under `/components` and prefer reuse or extension.
-- Component rule: the exact path for MDX-usable components will be specified later when they move into their own directory.
+- Component rule: MDX-usable shared components are re-exported from `components/index.tsx`.
 
 ## Current Implementation Spec
 
@@ -24,20 +24,20 @@
 - Logical doc slugs are derived from folder segments after `(content)`. Route matching is implemented in `pages/(docs)/(config)/+route.ts` using helpers from `lib/docs/systemConfig.ts`.
 - Docs existence and redirects are enforced in `pages/(docs)/(config)/+guard.ts`. Empty slug requests resolve to `defaultSlug`, and missing docs render the docs-specific 404 page.
 - Prerendered docs URLs are generated in `pages/(docs)/(config)/+onBeforePrerenderStart.ts` using `getPrerenderDocUrls()`, which expands all locales and all discovered doc slugs.
-- Current content inventory is limited to the `get-started` and `intro` doc slugs, each with `content.en.mdx` and `content.zh.mdx`.
+- Current content inventory is limited to the `get-started` doc slug, and it currently has `content.en.mdx` only.
 - Shared per-document options use `content.config.ts` or `content.config.js`, not Vike `+config.ts`. These configs inherit by logical doc path lineage and apply across translations.
 - Current config merge order in `getDocPage()` is: `defaultDocConfig` from `pages/+telefunc.ts`, then inherited `content.config.*`, then `docConfig` exported by the default-locale MDX module, then `docConfig` exported by the active-locale MDX module.
-- `DocConfig` currently supports `tableOfContents?: boolean` only. Example: `pages/(docs)/(content)/intro/content.config.ts` disables the table of contents for the intro page.
+- `DocConfig` currently supports `tableOfContents?: boolean` only.
 - Headings are extracted from raw MDX in `lib/docs/headings.ts` for heading depths 2-3. The Table of Contents also re-syncs headings from the rendered DOM on the client and auto-assigns missing heading IDs.
 - Search text is also extracted from raw MDX. The current search index includes title, slug, headings, and a locale-aware body excerpt limited by `pages/+telefunc.ts -> search.indexedWordsPerDoc`.
 - Docs layout is defined in `pages/(docs)/(config)/+Layout.tsx`. It composes `LayoutComponent`, `Sidebar`, a prose-styled content column, `DocsFooter`, and an optional right-side `TableOfContents`.
 - Global shell layout is defined in `pages/+Layout.tsx`. It always renders `Navbar` plus a `pt-16` page offset to clear the fixed header.
 - Navigation is manually defined, not generated from the filesystem. Top-level heading metadata lives in `lib/headings.ts`, and sidebar group structure lives in `lib/navigation/menuNavigation.ts`.
-- Current manual navigation includes links for `get-started`, `components/overview`, and `guides/overview`. Only `get-started` currently exists as real content among those linked destinations; missing linked docs will 404 until content is added.
-- Reusable shared UI currently lives under `/components`, including `Alert`, navbar parts, sidebar parts, footer, TOC, social icons, and link helpers. Existing MDX already imports shared components directly, for example `Alert` in `pages/(docs)/(content)/intro/content.en.mdx`.
-- The navbar search in `components/Navbar/Search.tsx` is implemented. It lazy-loads a locale-specific search index on focus, scores matches client-side, and links directly to matched documents or heading anchors.
+- Current manual navigation is defined in `lib/headings.ts` and `lib/navigation/menuNavigation.ts`. Many configured links currently point to docs that do not exist yet and will 404 until content is added.
+- Reusable shared UI currently lives under `/components`, with app-shell pieces under `components/app/**` and MDX-usable shared exports aggregated through `components/index.tsx`.
+- The navbar search in `components/app/Search/index.tsx` is implemented. It lazy-loads a locale-specific search index on focus, scores matches client-side, and links directly to matched documents or heading anchors.
 - Search asset generation is handled by `lib/search/vitePlugin.ts`. In dev it serves JSON from `/@search-index/<locale>.json`; in build it emits `dist/client/assets/search-index.<locale>.json` and patches `dist/assets.json` so deployments can reference the files through the normal asset manifest.
-- The current docs footer in `components/Footer.tsx` contains placeholder `href="edit"` links for edit/report actions and is not wired to a repository integration yet.
+- The current docs footer in `components/app/Footer.tsx` contains placeholder `href="edit"` links for edit/report actions and is not wired to a repository integration yet.
 
 - Per-document config under `pages/(docs)/(content)/**` cannot use real Vike `+config.ts` resolution with the current architecture.
 - Reason: the rendered docs page is the single dynamic page under `pages/(docs)/(config)`, while the MDX content folders are only parsed as content modules and are not part of the matched Vike page tree.

@@ -1,4 +1,4 @@
-import MenuTab from '@/components/Sidebar/MenuTab'
+import MenuTab from '@/app-components/Sidebar/MenuTab'
 
 const Sidebar = () => {
   return (

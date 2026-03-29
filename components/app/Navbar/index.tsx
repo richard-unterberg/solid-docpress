@@ -1,21 +1,43 @@
 import { cmMerge } from '@classmatejs/react'
+import { useEffect, useState } from 'react'
 import { usePageContext } from 'vike-react/usePageContext'
-import BrandLogo from '@/components/BrandLogo'
-import LayoutComponent from '@/components/LayoutComponent'
-import DocsMenu from '@/components/Navbar/DocsMenu'
-import ThemeSwitch from '@/components/Navbar/ThemeSwitch'
-import Search from '@/components/Search'
-import SocialIcons from '@/components/SocialIcons'
+import BrandLogo from '@/app-components/BrandLogo'
+import LayoutComponent from '@/app-components/LayoutComponent'
+import DocsMenu from '@/app-components/Navbar/DocsMenu'
+import ThemeSwitch from '@/app-components/Navbar/ThemeSwitch'
+import Search from '@/app-components/Search'
+import SocialIcons from '@/app-components/SocialIcons'
 
 const Navbar = () => {
   const { locale, urlPathname } = usePageContext()
   const isLandingPage = urlPathname === '/'
+  const [isLandingPageScrolled, setIsLandingPageScrolled] = useState(false)
+
+  useEffect(() => {
+    if (!isLandingPage) {
+      setIsLandingPageScrolled(false)
+      return
+    }
+
+    const handleScroll = () => {
+      setIsLandingPageScrolled(window.scrollY > 20)
+    }
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [isLandingPage])
+
+  const isScrolledLandingPage = isLandingPage && isLandingPageScrolled
 
   return (
     <header
       className={cmMerge(
-        isLandingPage ? '' : 'bg-base-100 border-base-muted-light border-b dark:shadow',
-        'z-10 w-full h-16 fixed top-0 left-0',
+        'z-10 w-full h-16 fixed top-0 left-0 border-b border-transparent',
+        isScrolledLandingPage || !isLandingPage ? 'bg-base-100 border-base-muted-light dark:shadow' : '',
       )}
     >
       <LayoutComponent className="h-full">

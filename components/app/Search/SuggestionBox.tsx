@@ -1,7 +1,7 @@
 import { ArrowRightFromLine, MessageCircleQuestion } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
-import LayoutComponent from '@/components/LayoutComponent'
+import LayoutComponent from '@/app-components/LayoutComponent'
 import type { Locale } from '@/lib/i18n/config'
 import { t } from '@/lib/messages'
 import type { SearchResult } from '@/lib/search/shared'

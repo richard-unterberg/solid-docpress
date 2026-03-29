@@ -1,8 +1,8 @@
 import { Bug, Pencil } from 'lucide-react'
 import { usePageContext } from 'vike-react/usePageContext'
-import BrandLogo from '@/components/BrandLogo'
-import LanguageSwitch from '@/components/Navbar/LanguageSwitch'
-import SocialIcons from '@/components/SocialIcons'
+import BrandLogo from '@/app-components/BrandLogo'
+import LanguageSwitch from '@/app-components/Navbar/LanguageSwitch'
+import SocialIcons from '@/app-components/SocialIcons'
 import { t } from '@/lib/messages'
 
 const DocsFooter = () => {

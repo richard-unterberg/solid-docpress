@@ -5,21 +5,13 @@ const icons = {
     icon: `github.svg`,
     href: 'https://github.com/vikejs/vike',
   },
-  // discord: {
-  //   icon: `discord.svg`,
-  //   href: 'https://discord.com/invite/hfHhnJyVg8',
-  // },
-  // x: {
-  //   icon: `x.svg`,
-  //   href: 'https://x.com/vike_js',
-  // },
-  // bluesky: {
-  //   icon: `bluesky.svg`,
-  //   href: 'https://bsky.app/profile/vike.dev',
-  // },
-  linkedin: {
-    icon: `linkedin.svg`,
-    href: 'https://www.linkedin.com/company/vikejs/posts/?feedView=all',
+  discord: {
+    icon: `discord.svg`,
+    href: 'https://discord.com/invite/hfHhnJyVg8',
+  },
+  x: {
+    icon: `x.svg`,
+    href: 'https://x.com/vike_js',
   },
 }
 
