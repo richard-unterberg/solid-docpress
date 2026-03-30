@@ -1,6 +1,5 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { applyTrailingSlashToPathname } from '../lib/vike/urlPathname.js'
 
 const rootDir = process.cwd()
 const pagesRoot = path.resolve(rootDir, 'pages')
@@ -140,7 +139,7 @@ const getGeneratedDataSource = (routeId, entries) => {
 }
 
 const getGeneratedRouteSource = (routeId) => {
-  return [`export default ${JSON.stringify(applyTrailingSlashToPathname(`/${routeId}`))}`, ''].join('\n')
+  return [`export default ${JSON.stringify(`/${routeId}/`)}`, ''].join('\n')
 }
 
 const syncGeneratedDocPages = () => {

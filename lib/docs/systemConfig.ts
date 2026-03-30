@@ -1,6 +1,5 @@
 import telefunc from '../../pages/+telefunc'
 import type { DocConfig } from './config'
-import { applyTrailingSlashToPathname } from '../vike/urlPathname.js'
 
 export type TelefuncSearchConfig = {
   indexedWordsPerDoc?: number
@@ -55,7 +54,7 @@ export const getDocsIndexPath = (
   config: TelefuncSystemConfig | ResolvedTelefuncSystemConfig = telefuncSystemConfig,
 ) => {
   const resolved = resolveTelefuncSystemConfig(config)
-  return applyTrailingSlashToPathname(`/${resolved.defaultSlug}`)
+  return `/${resolved.defaultSlug}/`
 }
 
 export const getDocPath = (
@@ -69,7 +68,7 @@ export const getDocPath = (
     return getDocsIndexPath(resolved)
   }
 
-  return applyTrailingSlashToPathname(`/${normalizedSlug}`)
+  return `/${normalizedSlug}/`
 }
 
 export const matchDocPath = (pathname: string) => {
