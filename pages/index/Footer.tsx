@@ -34,14 +34,11 @@ const StartPageFooter = () => {
           </p>
         </div>
       </div>
-      <div className="flex justify-center gap-x-5 mx-9 mb-20">
+      <div className="flex justify-center gap-x-5 mx-9 mb-20 not-prose">
         <Link href={`/${headingDefinitions.quickStart.docPath}`} className="btn btn-secondary btn-lg">
           {t(locale, 'landing', 'getStartedButton')}
         </Link>
-        <Link
-          href={`/${headingDefinitions.whySchemaless.docPath}`}
-          className="btn btn-ghost border-base-content bg-transparent btn-lg"
-        >
+        <Link href={`/${headingDefinitions.whySchemaless.docPath}`} className="btn btn-primary btn-lg">
           {t(locale, 'landing', 'learnMoreButton')}
         </Link>
       </div>

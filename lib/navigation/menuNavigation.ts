@@ -41,9 +41,6 @@ const menuGroups: MenuGroupDefinition[] = [
     id: 'guides',
     icon: MapIcon,
     groupKey: 'api',
-    collapsible: {
-      isDefaultOpen: true,
-    },
     links: [
       { dividerText: 'Server' },
       'apiTelefunc',
