@@ -32,7 +32,7 @@
         "title": "Multiple clients"
       }
     ],
-    "href": "/vike-docpress/best-practices",
+    "href": "/vike-docpress/best-practices/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "best-practices",
@@ -62,7 +62,7 @@
         "title": "Babel plugin"
       }
     ],
-    "href": "/vike-docpress/bundler",
+    "href": "/vike-docpress/bundler/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "bundler",
@@ -87,7 +87,7 @@
         "title": "Full-stack design"
       }
     ],
-    "href": "/vike-docpress/concepts",
+    "href": "/vike-docpress/concepts/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "concepts",
@@ -96,7 +96,7 @@
   },
   {
     "headings": [],
-    "href": "/vike-docpress/disable-naming-convention",
+    "href": "/vike-docpress/disable-naming-convention/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "disable-naming-convention",
@@ -141,7 +141,7 @@
         "title": "See also"
       }
     ],
-    "href": "/vike-docpress/error-handling",
+    "href": "/vike-docpress/error-handling/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "error-handling",
@@ -156,7 +156,7 @@
         "title": "See also"
       }
     ],
-    "href": "/vike-docpress/fetch",
+    "href": "/vike-docpress/fetch/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "fetch",
@@ -206,7 +206,7 @@
         "title": "See also"
       }
     ],
-    "href": "/vike-docpress/file-uploads",
+    "href": "/vike-docpress/file-uploads/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "file-uploads",
@@ -231,7 +231,7 @@
         "title": "See also"
       }
     ],
-    "href": "/vike-docpress/get-context",
+    "href": "/vike-docpress/get-context/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "get-context",
@@ -271,7 +271,7 @@
         "title": "Starter snippets"
       }
     ],
-    "href": "/vike-docpress/get-started",
+    "href": "/vike-docpress/get-started/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "get-started",
@@ -291,7 +291,7 @@
         "title": "Telefunction lifecycle"
       }
     ],
-    "href": "/vike-docpress/how-it-works",
+    "href": "/vike-docpress/how-it-works/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "how-it-works",
@@ -306,7 +306,7 @@
         "title": "See also"
       }
     ],
-    "href": "/vike-docpress/http-headers",
+    "href": "/vike-docpress/http-headers/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "http-headers",
@@ -315,7 +315,7 @@
   },
   {
     "headings": [],
-    "href": "/vike-docpress/initial-data",
+    "href": "/vike-docpress/initial-data/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "initial-data",
@@ -324,7 +324,7 @@
   },
   {
     "headings": [],
-    "href": "/vike-docpress/log",
+    "href": "/vike-docpress/log/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "log",
@@ -364,7 +364,7 @@
         "title": "Example"
       }
     ],
-    "href": "/vike-docpress/next",
+    "href": "/vike-docpress/next/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "next",
@@ -384,7 +384,7 @@
         "title": "Examples"
       }
     ],
-    "href": "/vike-docpress/nuxt",
+    "href": "/vike-docpress/nuxt/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "nuxt",
@@ -399,7 +399,7 @@
         "title": "See also"
       }
     ],
-    "href": "/vike-docpress/on-abort",
+    "href": "/vike-docpress/on-abort/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "on-abort",
@@ -414,7 +414,7 @@
         "title": "See also"
       }
     ],
-    "href": "/vike-docpress/on-bug",
+    "href": "/vike-docpress/on-bug/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "on-bug",
@@ -444,7 +444,7 @@
         "title": "See also"
       }
     ],
-    "href": "/vike-docpress/permissions",
+    "href": "/vike-docpress/permissions/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "permissions",
@@ -504,7 +504,7 @@
         "title": "See also"
       }
     ],
-    "href": "/vike-docpress/quick-start",
+    "href": "/vike-docpress/quick-start/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "quick-start",
@@ -524,7 +524,7 @@
         "title": "Examples"
       }
     ],
-    "href": "/vike-docpress/react-native",
+    "href": "/vike-docpress/react-native/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "react-native",
@@ -559,7 +559,7 @@
         "title": "Examples"
       }
     ],
-    "href": "/vike-docpress/react-router",
+    "href": "/vike-docpress/react-router/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "react-router",
@@ -579,7 +579,7 @@
         "title": "See also"
       }
     ],
-    "href": "/vike-docpress/root",
+    "href": "/vike-docpress/root/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "root",
@@ -604,7 +604,7 @@
         "title": "See also"
       }
     ],
-    "href": "/vike-docpress/server-integration",
+    "href": "/vike-docpress/server-integration/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "server-integration",
@@ -639,7 +639,7 @@
         "title": "See also"
       }
     ],
-    "href": "/vike-docpress/shield",
+    "href": "/vike-docpress/shield/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "shield",
@@ -648,7 +648,7 @@
   },
   {
     "headings": [],
-    "href": "/vike-docpress/shield-config",
+    "href": "/vike-docpress/shield-config/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "shield-config",
@@ -688,7 +688,7 @@
         "title": "Examples"
       }
     ],
-    "href": "/vike-docpress/svelte-kit",
+    "href": "/vike-docpress/svelte-kit/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "svelte-kit",
@@ -718,7 +718,7 @@
         "title": "See also"
       }
     ],
-    "href": "/vike-docpress/telefunc",
+    "href": "/vike-docpress/telefunc/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "telefunc",
@@ -733,7 +733,7 @@
         "title": "See also"
       }
     ],
-    "href": "/vike-docpress/telefunc-files",
+    "href": "/vike-docpress/telefunc-files/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "telefunc-files",
@@ -753,7 +753,7 @@
         "title": "Different domain"
       }
     ],
-    "href": "/vike-docpress/telefunc-url",
+    "href": "/vike-docpress/telefunc-url/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "telefunc-url",
@@ -778,7 +778,7 @@
         "title": "See also"
       }
     ],
-    "href": "/vike-docpress/throw-abort",
+    "href": "/vike-docpress/throw-abort/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "throw-abort",
@@ -793,7 +793,7 @@
         "title": "See also"
       }
     ],
-    "href": "/vike-docpress/validation",
+    "href": "/vike-docpress/validation/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "validation",
@@ -833,7 +833,7 @@
         "title": "Examples"
       }
     ],
-    "href": "/vike-docpress/vike",
+    "href": "/vike-docpress/vike/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "vike",
@@ -858,7 +858,7 @@
         "title": "RPC vs GraphQL/REST"
       }
     ],
-    "href": "/vike-docpress/why-schemaless",
+    "href": "/vike-docpress/why-schemaless/",
     "locale": "en",
     "resolvedLocale": "en",
     "slug": "why-schemaless",
