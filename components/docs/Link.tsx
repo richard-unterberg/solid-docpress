@@ -1,6 +1,8 @@
+import { cmMerge } from '@classmatejs/react'
+import { ExternalLink } from 'lucide-react'
 import type { ComponentPropsWithoutRef } from 'react'
 import { usePageContext } from 'vike-react/usePageContext'
-import { localizeHref } from '@/lib/i18n/routing'
+import { isExternalHref, localizeHref } from '@/lib/i18n/routing'
 
 type AnchorProps = ComponentPropsWithoutRef<'a'>
 
@@ -11,9 +13,20 @@ const getLocalizedMdxHref = (href: AnchorProps['href'], locale: string | undefin
   return localizeHref(href, locale)
 }
 
-const Link = ({ href, ...props }: AnchorProps) => {
+const Link = ({ href, children, className, ...props }: AnchorProps) => {
   const { locale } = usePageContext()
-  return <a href={getLocalizedMdxHref(href, locale)} {...props} />
+  const isExternal = isExternalHref(href ?? '')
+
+  return (
+    <a
+      href={getLocalizedMdxHref(href, locale)}
+      className={cmMerge(className, 'inline-flex gap-1 items-center')}
+      {...props}
+    >
+      {children}
+      {isExternal && <ExternalLink className="w-3 h-3" />}
+    </a>
+  )
 }
 
 export default Link

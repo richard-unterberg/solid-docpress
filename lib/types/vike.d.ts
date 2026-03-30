@@ -18,6 +18,7 @@ declare global {
 
     interface PageContext {
       locale: Locale
+      title: string
       themePreference: ThemePreference
       urlPathnameLocalized: string
     }

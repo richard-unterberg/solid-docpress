@@ -9,6 +9,7 @@ import TableOfContents from '@/app-components/TableOfContents'
 import baseAssets from '@/lib/baseAssets'
 import { getDocPage } from '@/lib/docs/content'
 import { getTelefuncSystemConfig } from '@/lib/docs/systemConfig'
+import { getDocsHeadMetadata } from '@/pages/(docs)/(config)/docMetadata'
 
 const ProseContainer = cm.section`
   min-h-[calc(100svh-92*var(--spacing))]
@@ -20,6 +21,9 @@ const ProseContainer = cm.section`
 
   prose-pre:bg-base-200!
 
+  prose-code:py-0!
+  prose-code:px-1!
+
   prose-code:rounded!
   prose-code:dark:inset-shadow-2xs
 
@@ -28,6 +32,9 @@ const ProseContainer = cm.section`
 
   prose-code:dark:bg-primary/10!
   prose-code:dark:border-primary/20!
+
+  prose-p:leading-[200%]
+  prose-li:leading-[200%]
 
   prose-p:after:content-none
   prose-p:before:content-none
@@ -55,6 +62,7 @@ const DocsLayout = ({ children }: { children: ReactNode }) => {
   const doc = isDocsErrorPage ? null : getDocPage(docSlug, locale, docsConfig)
   const showTableOfContents = !isDocsErrorPage && (doc?.config.tableOfContents ?? true)
   const tocKey = `${pageId}:${docSlug}:${locale}`
+  const docTitle = getDocsHeadMetadata(pageContext)?.title ?? ''
 
   return (
     <>
@@ -76,6 +84,7 @@ const DocsLayout = ({ children }: { children: ReactNode }) => {
           </div>
           <div className="mt-10 flex-1 min-w-0 relative basis-auto shrink">
             <ProseContainer className="flex-1 z-1 relative" data-doc-content>
+              <h1>{docTitle}</h1>
               {children}
             </ProseContainer>
             <DocsPagination />
