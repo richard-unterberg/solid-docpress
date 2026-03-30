@@ -18,5 +18,5 @@
   },
   "include": ["components", "lib", "pages", "scripts", "vite.config.ts"],
   "exclude": ["dist", "lib/headings-legacy.ts"],
-  "references": [{ "path": "../universal-mdx-mods" }]
+  "references": [{ "path": "../universal-mdx-mods/tsconfig.json" }]
 }

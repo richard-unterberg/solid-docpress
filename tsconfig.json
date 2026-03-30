@@ -1,7 +1,7 @@
 {
   "files": [],
   "references": [
-    { "path": "./packages/universal-mdx-mods" },
-    { "path": "./packages/telefunc" }
+    { "path": "./packages/universal-mdx-mods/tsconfig.json" },
+    { "path": "./packages/telefunc/tsconfig.json" }
   ]
 }
