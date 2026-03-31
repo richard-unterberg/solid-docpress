@@ -12,6 +12,7 @@ import { CodeBlockCopyButton, trimTrailingWhitespace } from './CopyButton'
 import { useIsInCodeBlockGroup } from './context'
 
 type PreProps = ComponentPropsWithoutRef<'pre'> & {
+  'data-code-title'?: string
   'data-language'?: string
   'data-language-label'?: string
   'file-added'?: string
@@ -53,7 +54,7 @@ const getLanguageLabel = (props: PreProps) => {
 function Pre({ children, className, ...props }: PreProps) {
   const preRef = useRef<HTMLPreElement>(null)
   const isInChoiceGroup = useIsInCodeBlockGroup()
-  const label = getLanguageLabel(props)
+  const label = asTrimmedString(props['data-code-title']) ?? getLanguageLabel(props)
   const fileState = props['file-added'] ? 'added' : props['file-removed'] ? 'removed' : null
   const hideMenu = props['hide-menu'] === 'true'
 

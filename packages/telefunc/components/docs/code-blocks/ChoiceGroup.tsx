@@ -1,6 +1,6 @@
 export { ChoiceGroup }
 
-import { Children, isValidElement, type ReactElement, type ReactNode, useEffect, useRef, useState } from 'react'
+import { Children, isValidElement, type ReactElement, type ReactNode, useRef } from 'react'
 import { CodeBlockCopyButton, trimTrailingWhitespace } from './CopyButton'
 import { CodeBlockGroupProvider } from './context'
 import { useRestoreScroll } from './useRestoreScroll'
@@ -22,6 +22,37 @@ const isChoiceElement = (node: ReactNode): node is ReactElement<ChoiceElementPro
   return isValidElement<ChoiceElementProps>(node) && typeof node.props?.['data-choice-value'] === 'string'
 }
 
+const asTrimmedString = (value: unknown) => {
+  return typeof value === 'string' && value.trim() ? value.trim() : null
+}
+
+const getActiveCodeBlockMeta = (node: ReactNode): { hideCopy: boolean; title: string | null } => {
+  for (const child of Children.toArray(node)) {
+    if (!isValidElement(child)) {
+      continue
+    }
+
+    const props = child.props as {
+      children?: ReactNode
+      'data-code-title'?: string
+      'hide-menu'?: string
+    }
+    const title = asTrimmedString(props['data-code-title'])
+    const hideCopy = props['hide-menu'] === 'true'
+
+    if (title || hideCopy) {
+      return { hideCopy, title }
+    }
+
+    const nestedMeta = getActiveCodeBlockMeta(props.children)
+    if (nestedMeta.title || nestedMeta.hideCopy) {
+      return nestedMeta
+    }
+  }
+
+  return { hideCopy: false, title: null }
+}
+
 function ChoiceGroup({
   children,
   choiceGroup,
@@ -33,7 +64,6 @@ function ChoiceGroup({
   lvl?: number
 }) {
   const [selectedChoice, setSelectedChoice] = useSelectedChoice(choiceGroup.name, choiceGroup.default)
-  const [hideCopy, setHideCopy] = useState(false)
   const bodyRef = useRef<HTMLDivElement>(null)
   const previousPositionRef = useRestoreScroll([selectedChoice])
   const choiceElements = Children.toArray(children).filter(isChoiceElement)
@@ -41,14 +71,12 @@ function ChoiceGroup({
     choiceElements.find((choiceElement) => choiceElement.props['data-choice-value'] === selectedChoice) ??
     choiceElements[0]
 
-  useEffect(() => {
-    const activePre = bodyRef.current?.querySelector('pre')
-    setHideCopy(activePre?.getAttribute('hide-menu') === 'true')
-  }, [])
-
   if (!activeChoiceElement) {
     return <>{children}</>
   }
+
+  const activeCodeBlockMeta = getActiveCodeBlockMeta(activeChoiceElement.props.children)
+  const headerLabel = activeCodeBlockMeta.title ?? activeChoiceElement.props['data-choice-value']
 
   if (hide) {
     return <>{activeChoiceElement.props.children}</>
@@ -60,9 +88,7 @@ function ChoiceGroup({
         className="not-prose flex min-h-10 items-center justify-between gap-3 border-b border-base-muted-light bg-base-muted-superlight px-4"
         data-choice-group-header
       >
-        <div className="text-xs font-semibold font-mono tracking-[0.08em] text-base-muted">
-          {activeChoiceElement.props['data-choice-value']}
-        </div>
+        <div className="text-xs font-semibold font-mono tracking-[0.08em] text-base-muted">{headerLabel}</div>
         <div className="flex items-center gap-1">
           <label className="select select-xs w-fit min-w-28">
             <select
@@ -83,7 +109,7 @@ function ChoiceGroup({
               ))}
             </select>
           </label>
-          {!hideCopy && (
+          {!activeCodeBlockMeta.hideCopy && (
             <CodeBlockCopyButton
               onCopy={async () => {
                 const text = trimTrailingWhitespace(bodyRef.current?.textContent ?? '')

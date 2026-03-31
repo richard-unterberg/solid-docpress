@@ -1,7 +1,7 @@
 export { rehypeMetaToProps }
 
 import { visit } from 'unist-util-visit'
-import { parseMetaString } from './meta'
+import { getCodeBlockPropsFromMeta } from './meta'
 
 function rehypeMetaToProps() {
   return (tree: unknown) => {
@@ -10,9 +10,13 @@ function rehypeMetaToProps() {
         return
       }
 
-      const meta = parseMetaString(node.data?.meta)
+      const meta = getCodeBlockPropsFromMeta(node.data?.meta)
       parent.properties ??= {}
-      parent.properties = { ...parent.properties, ...meta.props }
+      parent.properties = {
+        ...parent.properties,
+        ...meta.props,
+        ...(meta.title ? { 'data-code-title': meta.title } : {}),
+      }
     })
   }
 }

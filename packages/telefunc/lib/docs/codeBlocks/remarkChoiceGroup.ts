@@ -15,7 +15,7 @@ function remarkChoiceGroup() {
         if (choice) {
           node.data ??= {}
           node.data.customDataChoice = choice
-          node.data.customDataFilter = `code-${node.lang ?? ''}`
+          node.data.customDataFilter = 'explicitChoice'
         }
       }
 
