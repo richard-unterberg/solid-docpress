@@ -39,16 +39,18 @@ const Navbar = () => {
       className={cmMerge(
         'z-10 w-full h-16 fixed top-0 left-0 border-b border-transparent',
         isScrolledLandingPage || !isLandingPage
-          ? 'bg-linear-to-t from-base-100/10 via-base-100/50 to-base-100 backdrop-grayscale border-base-muted-light dark:shadow'
+          ? 'bg-linear-to-t from-base-100/30 via-base-100/60 to-base-100 backdrop-grayscale border-base-muted-light dark:shadow'
           : '',
       )}
     >
       <div
         className="absolute inset-0 hidden dark:block"
+        // biome-ignore lint/nursery/noInlineStyles: decorator
         style={{ backgroundImage: `url(${baseAssets}decorators/pattern.png)` }}
       />
       <div
         className="absolute inset-0 dark:hidden"
+        // biome-ignore lint/nursery/noInlineStyles: decorator
         style={{ backgroundImage: `url(${baseAssets}decorators/pattern-light.png)` }}
       />
       <LayoutComponent className="h-full">

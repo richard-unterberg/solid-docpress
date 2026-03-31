@@ -1,14 +1,16 @@
 import type { LucideIcon } from 'lucide-react'
 import type { ReactNode } from 'react'
 
+export type MenuCollapsible =
+  | boolean
+  | {
+      isDefaultOpen?: boolean
+    }
+
 export type MenuGroupShared = {
   id: string
   icon?: LucideIcon
-  collapsible?:
-    | boolean
-    | {
-        isDefaultOpen?: boolean
-      }
+  collapsible?: MenuCollapsible
 }
 
 export type SidebarLinkItem = {
@@ -22,9 +24,17 @@ export type SidebarDividerItem = {
   isDivider: true
 }
 
-export type SidebarItem = SidebarLinkItem | SidebarDividerItem
+export type SidebarGroupItem = {
+  id: string
+  title: ReactNode
+  href?: string
+  collapsible?: MenuCollapsible
+  items: SidebarItem[]
+}
+
+export type SidebarItem = SidebarLinkItem | SidebarDividerItem | SidebarGroupItem
 
 export type MenuRendererGroup = MenuGroupShared & {
   title: ReactNode
-  links?: SidebarItem[]
+  items?: SidebarItem[]
 }

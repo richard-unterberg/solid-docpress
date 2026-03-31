@@ -3,7 +3,7 @@ import { getHeadingData, getHeadingLinkData, type HeadingKey } from '@/lib/docs/
 import type { TelefuncSystemConfig } from '@/lib/docs/systemConfig'
 import type { Locale } from '@/lib/i18n/config'
 import { t } from '@/lib/messages'
-import type { MenuGroupShared, MenuRendererGroup } from '@/lib/navigation/navigation'
+import type { MenuGroupShared, MenuRendererGroup, SidebarDividerItem, SidebarItem } from '@/lib/navigation/navigation'
 
 const GroupKeys = {
   getStarted: 'getStarted',
@@ -12,79 +12,142 @@ const GroupKeys = {
 } as const
 type GroupKeys = (typeof GroupKeys)[keyof typeof GroupKeys]
 
+type MenuHeadingDefinition = {
+  heading: HeadingKey
+  collapsible?: MenuGroupShared['collapsible']
+  items?: MenuItemDefinition[]
+}
+
+type MenuDividerDefinition = {
+  dividerText: string
+}
+
+type MenuItemDefinition = MenuHeadingDefinition | MenuDividerDefinition
+
 type MenuGroupDefinition = MenuGroupShared & {
   groupKey: GroupKeys
-  links: (HeadingKey | { dividerText: string })[]
+  items: MenuItemDefinition[]
 }
+
 const menuGroups: MenuGroupDefinition[] = [
   {
     id: 'get-started',
     icon: Sprout,
     groupKey: 'getStarted',
-    links: [
-      'quickStart',
-      'concepts',
-      'bestPractices',
+    items: [
+      { heading: 'quickStart' },
+      { heading: 'concepts' },
+      { heading: 'bestPractices' },
       { dividerText: 'Guides' },
-      'serverIntegration',
-      'initialData',
-      'permissions',
-      'validation',
-      'fileUploads',
-      'errorHandling',
+      {
+        collapsible: {
+          isDefaultOpen: false,
+        },
+        heading: 'serverIntegration',
+        items: [
+          { heading: 'next' },
+          { heading: 'svelteKit' },
+          { heading: 'vike' },
+          { heading: 'nuxt' },
+          { heading: 'reactRouter' },
+          { heading: 'reactNative' },
+          { heading: 'bundler' },
+        ],
+      },
+      { heading: 'initialData' },
+      { heading: 'permissions' },
+      { heading: 'validation' },
+      { heading: 'fileUploads' },
+      { heading: 'errorHandling' },
       { dividerText: 'Learn More' },
-      'whySchemaless',
-      'howItWorks',
+      { heading: 'whySchemaless' },
+      { heading: 'howItWorks' },
     ],
   },
   {
     id: 'guides',
     icon: MapIcon,
     groupKey: 'api',
-    links: [
+    items: [
       { dividerText: 'Server' },
-      'apiTelefunc',
-      'throwAbort',
-      'getContext',
-      'shield',
-      'onBug',
+      { heading: 'apiTelefunc' },
+      { heading: 'throwAbort' },
+      { heading: 'getContext' },
+      { heading: 'shield' },
+      { heading: 'onBug' },
       { dividerText: 'Client' },
-      'onAbort',
+      { heading: 'onAbort' },
       { dividerText: 'Config' },
-      'telefuncUrl',
-      'disableNamingConvention',
-      'httpHeaders',
-      'fetch',
-      'telefuncFiles',
-      'root',
-      'configShield',
-      'log',
+      { heading: 'telefuncUrl' },
+      { heading: 'disableNamingConvention' },
+      { heading: 'httpHeaders' },
+      { heading: 'fetch' },
+      { heading: 'telefuncFiles' },
+      { heading: 'root' },
+      { heading: 'configShield' },
+      { heading: 'log' },
     ],
   },
   {
     id: 'maintainers',
     icon: Sprout,
     groupKey: 'maintainers',
-    links: ['getStarted'],
+    items: [{ heading: 'getStarted' }],
   },
 ]
 
 export type MenuDocLink = ReturnType<typeof getHeadingLinkData>
 
+const isMenuDividerDefinition = (item: MenuItemDefinition): item is MenuDividerDefinition => 'dividerText' in item
+
+const getDividerItem = (dividerText: string): SidebarDividerItem => ({
+  id: `divider-${dividerText}`,
+  title: dividerText,
+  isDivider: true,
+})
+
+const flattenMenuHeadings = (items: MenuItemDefinition[]): HeadingKey[] => {
+  return items.flatMap((item) => {
+    if (isMenuDividerDefinition(item)) {
+      return []
+    }
+
+    return item.items ? [item.heading, ...flattenMenuHeadings(item.items)] : [item.heading]
+  })
+}
+
+const renderMenuItem = (
+  item: MenuItemDefinition,
+  locale: Locale,
+  telefuncConfig?: TelefuncSystemConfig,
+): SidebarItem => {
+  if (isMenuDividerDefinition(item)) {
+    return getDividerItem(item.dividerText)
+  }
+
+  const headingData = getHeadingData(item.heading, locale, telefuncConfig)
+
+  if (!item.items) {
+    return headingData
+  }
+
+  return {
+    id: `group-${item.heading}`,
+    title: headingData.title,
+    href: headingData.href,
+    collapsible: item.collapsible,
+    items: item.items.map((childItem) => renderMenuItem(childItem, locale, telefuncConfig)),
+  }
+}
+
 export const getHeadingGroupTitle = (headingKey: HeadingKey, locale: Locale) => {
-  const group = menuGroups.find((menuGroup) => menuGroup.links.some((item) => item === headingKey))
+  const group = menuGroups.find((menuGroup) => flattenMenuHeadings(menuGroup.items).includes(headingKey))
   return group ? t(locale, 'sidebar', group.groupKey) : null
 }
 
 export const getMenuDocLinks = (locale: Locale, telefuncConfig?: TelefuncSystemConfig): MenuDocLink[] => {
   return menuGroups.flatMap((group) =>
-    group.links.flatMap((item) => {
-      if (typeof item === 'object' && 'dividerText' in item) {
-        return []
-      }
-
-      return [getHeadingLinkData(item, locale, telefuncConfig)]
-    }),
+    flattenMenuHeadings(group.items).map((headingKey) => getHeadingLinkData(headingKey, locale, telefuncConfig)),
   )
 }
 
@@ -94,15 +157,6 @@ export const getMenuNavigation = (locale: Locale, telefuncConfig?: TelefuncSyste
     icon: group.icon,
     title: t(locale, 'sidebar', group.groupKey),
     collapsible: group.collapsible,
-    links: group.links.map((item) => {
-      if (typeof item === 'object' && 'dividerText' in item) {
-        return {
-          id: `divider-${item.dividerText}`,
-          title: item.dividerText,
-          isDivider: true,
-        }
-      }
-      return getHeadingData(item, locale, telefuncConfig)
-    }),
+    items: group.items.map((item) => renderMenuItem(item, locale, telefuncConfig)),
   }))
 }
