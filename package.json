@@ -10,7 +10,7 @@
     "build:telefunc": "pnpm --filter ./packages/telefunc build",
     "build:mods": "pnpm --filter @unterberg/universal-mdx-mods build",
     "preview": "pnpm --filter ./packages/telefunc preview",
-    "typecheck": "pnpm --filter ./packages/telefunc generate:docs && pnpm build:mods && pnpm --filter @unterberg/universal-mdx-mods typecheck && pnpm --filter ./packages/telefunc typecheck",
+    "typecheck": "pnpm build:mods && pnpm --filter ./packages/telefunc generate:docs && pnpm --filter @unterberg/universal-mdx-mods typecheck && pnpm --filter ./packages/telefunc typecheck:prepared",
     "lint": "biome lint --write .",
     "format": "biome format --write .",
     "knip": "pnpm --filter ./packages/telefunc generate:docs && pnpm build:mods && knip",

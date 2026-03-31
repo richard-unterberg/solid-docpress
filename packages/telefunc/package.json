@@ -9,7 +9,8 @@
     "predev": "pnpm --filter @unterberg/universal-mdx-mods build && pnpm generate:docs",
     "prebuild": "pnpm --filter @unterberg/universal-mdx-mods build && pnpm generate:docs",
     "pretypecheck": "pnpm --filter @unterberg/universal-mdx-mods build && pnpm generate:docs",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "typecheck:prepared": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
     "@unterberg/universal-mdx-mods": "workspace:*",
