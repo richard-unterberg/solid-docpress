@@ -3,7 +3,7 @@
   "private": true,
   "packageManager": "pnpm@10.28.1",
   "scripts": {
-    "dev": "pnpm build:mods && pnpm --parallel --filter @unterberg/universal-mdx-mods --filter ./packages/telefunc dev",
+    "dev": "pnpm --parallel --filter @unterberg/universal-mdx-mods --filter ./packages/telefunc dev",
     "dev:telefunc": "pnpm --filter ./packages/telefunc dev",
     "dev:mods": "pnpm --filter @unterberg/universal-mdx-mods dev",
     "build": "pnpm build:mods && pnpm build:telefunc",
