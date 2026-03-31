@@ -28,6 +28,7 @@ const ProseContainer = cm.section`
   prose-p:before:content-none
   prose-blockquote:not-italic
   prose-blockquote:bg-base-200
+  prose-blockquote:py-2
   prose-li:my-1
   [&_blockquote_p]:mt-0
   [&_blockquote_p]:mb-2
