@@ -1,4 +1,5 @@
 export { CodeBlockTransformer }
+export type { LineBreak }
 
 import type { ReactNode } from 'react'
 

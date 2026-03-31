@@ -1,20 +1,12 @@
 import path, { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import mdx from '@mdx-js/rollup'
-import { transformerNotationHighlight } from '@brillout/shiki-transformers'
-import { transformerNotationDiff, transformerNotationWordHighlight } from '@shikijs/transformers'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
-import rehypePrettyCode from 'rehype-pretty-code'
-import remarkDirective from 'remark-directive'
+import { getCodeBlockMdxPlugins } from '@unterberg/universal-mdx-mods/code-blocks'
 import remarkGfm from 'remark-gfm'
 import vike from 'vike/plugin'
 import { defineConfig, type PluginOption } from 'vite'
-import { rehypeMetaToProps } from './lib/docs/codeBlocks/rehypeMetaToProps'
-import { remarkChoiceGroup } from './lib/docs/codeBlocks/remarkChoiceGroup'
-import { remarkDetype } from './lib/docs/codeBlocks/remarkDetype'
-import { remarkPkgManager } from './lib/docs/codeBlocks/remarkPkgManager'
-import { shikiTransformerAutoLinks } from './lib/docs/codeBlocks/shikiTransformerAutoLinks'
 import { rehypeDocHeadings } from './lib/docs/rehypeDocHeadings'
 import { docsPagesPlugin } from './lib/docs/vitePlugin'
 import { searchIndexPlugin } from './lib/search/vitePlugin'
@@ -39,22 +31,7 @@ const normalizeBaseUrl = (value: string | undefined) => {
 }
 
 const base = normalizeBaseUrl(process.env.PAGES_BASE_PATH)
-const prettyCode: any = [
-  rehypePrettyCode,
-  {
-    keepBackground: false,
-    theme: {
-      light: 'github-light',
-      dark: 'one-dark-pro',
-    },
-    transformers: [
-      transformerNotationDiff(),
-      transformerNotationHighlight(),
-      transformerNotationWordHighlight(),
-      shikiTransformerAutoLinks(),
-    ],
-  },
-]
+const codeBlockPlugins = getCodeBlockMdxPlugins()
 
 export const pathAliases = Object.entries(tsConf.compilerOptions.paths).map(([key, [value]]) => {
   if (key.includes('*')) {
@@ -71,8 +48,8 @@ export default defineConfig({
     {
       ...mdx({
         providerImportSource: '@/lib/mdx/provider',
-        remarkPlugins: [remarkGfm, remarkDirective, remarkDetype, remarkPkgManager, remarkChoiceGroup],
-        rehypePlugins: [prettyCode, rehypeMetaToProps, rehypeDocHeadings],
+        remarkPlugins: [remarkGfm, ...codeBlockPlugins.remarkPlugins],
+        rehypePlugins: [...codeBlockPlugins.rehypePlugins, rehypeDocHeadings],
       }),
       enforce: 'pre',
     },

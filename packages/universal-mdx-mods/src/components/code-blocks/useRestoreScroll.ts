@@ -21,7 +21,7 @@ export const useRestoreScroll = (deps: ReadonlyArray<unknown>) => {
     }
 
     previousPositionRef.current = null
-    // biome-ignore lint/correctness/useExhaustiveDependencies: @todo: investigate if this can be safely ignored
+    // biome-ignore lint/correctness/useExhaustiveDependencies: restore only when the tracked value changes
   }, deps)
 
   return previousPositionRef

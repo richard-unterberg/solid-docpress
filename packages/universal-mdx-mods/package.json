@@ -1,6 +1,6 @@
 {
   "name": "@unterberg/universal-mdx-mods",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "sideEffects": false,
   "files": [
@@ -12,6 +12,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./code-blocks": {
+      "types": "./dist/code-blocks.d.ts",
+      "import": "./dist/code-blocks.js"
     }
   },
   "publishConfig": {
@@ -21,15 +25,26 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "pack:check": "pnpm pack --dry-run"
+    "pack:check": "pnpm pack --dry-run",
+    "pack:publish": "pnpm pack:check --dry-run && pnpm pack && npm publish --access public"
   },
   "peerDependencies": {
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
   "dependencies": {
+    "@brillout/shiki-transformers": "^4.0.2",
     "@classmatejs/react": "^0.2.1",
-    "lucide-react": "0.443.0"
+    "@shikijs/transformers": "^4.0.2",
+    "detype": "^2.0.6",
+    "estree-util-value-to-estree": "^3.5.0",
+    "lucide-react": "0.443.0",
+    "mdast-util-mdx-jsx": "^3.2.0",
+    "npm-to-yarn": "^3.0.1",
+    "rehype-pretty-code": "^0.14.3",
+    "remark-directive": "^4.0.0",
+    "shiki": "^4.0.2",
+    "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
     "@types/react": "^19.1.12",

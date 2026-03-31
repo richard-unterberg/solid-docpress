@@ -10,6 +10,15 @@
 - Component rule: before inventing a new component, inspect the existing components under `/components` and prefer reuse or extension.
 - Component rule: MDX-usable shared components are re-exported from `components/index.tsx`.
 
+## Active Migration Plan
+
+- Status: completed. The emitted code-block React component stack now ships from the published `@unterberg/universal-mdx-mods` bundle, while Telefunc retains routing, MDX AST transforms, and styling ownership.
+- Completed step 1: extended the shared runtime adapter contract so code-block choice persistence flows through `UniversalMdxProvider` instead of importing Telefunc Zustand/storage code directly.
+- Completed step 2: moved the emitted code-block React pieces (`pre`, choice groups, copy button, file-state wrappers, and code-block transformer helpers) into `packages/universal-mdx-mods` and exported them from the shared package entrypoint.
+- Completed step 3: rewired Telefunc MDX component registration and app layout to consume the shared exports and provide the Telefunc-specific runtime adapter values.
+- Completed step 4: kept the remark/rehype code-block authoring pipeline in `packages/telefunc`, preserved existing CSS class names/theme tokens, and validated the migration with full-repo `typecheck` and `pnpm knip`.
+- Follow-up status: the code-block-only build-time tooling and its package dependencies now also ship from `@unterberg/universal-mdx-mods/code-blocks`, while Telefunc keeps only general MDX/Vite integration dependencies.
+
 ## Current Implementation Spec
 
 - Stack: Vike + `vike-react`, React 19, Vite 7, MDX via `@mdx-js/rollup`, Tailwind CSS 4, DaisyUI 5, Zustand, and `@classmatejs/react`.
@@ -40,6 +49,9 @@
 - The navbar search in `components/app/Search/index.tsx` is implemented. It lazy-loads a locale-specific search index on focus, scores matches client-side, and links directly to matched documents or heading anchors.
 - Search asset generation is handled by `lib/search/vitePlugin.ts`. In dev it serves JSON from `/@search-index/<locale>.json`; in build it emits `dist/client/assets/search-index.<locale>.json` and patches `dist/assets.json` so deployments can reference the files through the normal asset manifest.
 - The current docs footer in `components/app/Footer.tsx` contains placeholder `href="edit"` links for edit/report actions and is not wired to a repository integration yet.
+- Emitted code-block UI now ships from `packages/universal-mdx-mods` and is consumed through the shared package exports. The shared bundle currently owns `Pre`, `ChoiceGroup`, `FileAdded`, `FileRemoved`, and `CodeBlockTransformer`.
+- Code-block build-time tooling now ships from `packages/universal-mdx-mods` through the `@unterberg/universal-mdx-mods/code-blocks` subpath, including the remark/rehype transforms, Shiki transformer wiring, and generated `ChoiceGroup` JSX helpers.
+- Telefunc bridges persisted code-block choice state into the shared runtime through `lib/mdx/runtime.ts`, and the app provides that adapter with `UniversalMdxProvider` from `pages/+Layout.tsx`.
 
 - Even though docs now render as generated real Vike pages, docs authors still do not create or edit per-doc `+config.ts` files directly.
 - Current rule: per-document content options must use the custom content-level config convention (`content.config.ts` / `content.config.js`) plus optional `docConfig` exports from MDX modules.

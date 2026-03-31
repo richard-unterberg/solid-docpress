@@ -1,7 +1,10 @@
 import { defineConfig } from 'tsup'
 
 export default defineConfig({
-  entry: ['src/index.ts'],
+  entry: {
+    index: 'src/index.ts',
+    'code-blocks': 'src/code-blocks/index.ts',
+  },
   format: ['esm'],
   dts: true,
   tsconfig: './tsconfig.build.json',
