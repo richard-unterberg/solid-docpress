@@ -68,6 +68,9 @@ const menuGroups: MenuGroupDefinition[] = [
     id: 'guides',
     icon: MapIcon,
     groupKey: 'api',
+    collapsible: {
+      isDefaultOpen: false,
+    },
     items: [
       { dividerText: 'Server' },
       { heading: 'apiTelefunc' },
@@ -90,6 +93,9 @@ const menuGroups: MenuGroupDefinition[] = [
   },
   {
     id: 'maintainers',
+    collapsible: {
+      isDefaultOpen: false,
+    },
     icon: Sprout,
     groupKey: 'maintainers',
     items: [{ heading: 'getStarted' }],

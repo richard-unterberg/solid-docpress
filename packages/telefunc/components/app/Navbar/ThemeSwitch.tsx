@@ -1,6 +1,6 @@
 import { cmMerge } from '@classmatejs/react'
 import { Moon, Sun } from 'lucide-react'
-import { useUserSettingsStore } from '@/lib/settings-store'
+import { useUserSettingsStore } from '@/lib/store/settings-store'
 
 const ThemeSwitch = () => {
   const themePreference = useUserSettingsStore((state) => state.themePreference)

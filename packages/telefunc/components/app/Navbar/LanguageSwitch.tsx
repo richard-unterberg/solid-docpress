@@ -4,7 +4,7 @@ import { navigate } from 'vike/client/router'
 import { usePageContext } from 'vike-react/usePageContext'
 import { localeLabels, locales } from '@/lib/i18n/config'
 import { getLogicalPathname, localizeHref, stripLocaleFromPathname } from '@/lib/i18n/routing'
-import { useUserSettingsStore } from '@/lib/settings-store'
+import { useUserSettingsStore } from '@/lib/store/settings-store'
 
 const LanguageSwitch = () => {
   const { urlPathnameLocalized, urlPathname } = usePageContext()

@@ -1,4 +1,4 @@
-import { USER_SETTINGS_STORAGE_KEY } from '@/lib/settings-storage'
+import { USER_SETTINGS_STORAGE_KEY } from '@/lib/store/settings-storage'
 import { DEFAULT_THEME_PREFERENCE, getDataTheme } from '@/lib/theme'
 
 const themeBootstrapScript = `(() => {

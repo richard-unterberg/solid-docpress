@@ -11,8 +11,8 @@ import { getDocPath } from '@/lib/docs/systemConfig'
 import { DEFAULT_LOCALE, resolveLocale } from '@/lib/i18n/config'
 import { localizeHref } from '@/lib/i18n/routing'
 import { getHeadingGroupTitle } from '@/lib/navigation/menuNavigation'
-import { useUserSettingsStore } from '@/lib/settings-store'
-import { readLegacyCodeBlockChoice } from '@/lib/settings-storage'
+import { readLegacyCodeBlockChoice } from '@/lib/store/settings-storage'
+import { useUserSettingsStore } from '@/lib/store/settings-store'
 
 const telefuncCodeBlockChoiceStore: UniversalMdxCodeBlockChoiceStore = {
   subscribe: (listener) => useUserSettingsStore.subscribe(listener),

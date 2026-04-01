@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import { DEFAULT_LOCALE, isLocale, type Locale } from '@/lib/i18n/config'
-import { readPersistedSettingsState, USER_SETTINGS_STORAGE_KEY } from '@/lib/settings-storage'
+import { readPersistedSettingsState, USER_SETTINGS_STORAGE_KEY } from '@/lib/store/settings-storage'
 import { DEFAULT_THEME_PREFERENCE, type ThemePreference } from '@/lib/theme'
 
 type UserSettingsState = {

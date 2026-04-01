@@ -1,13 +1,12 @@
 import { redirect } from 'vike/abort'
 import { modifyUrl } from 'vike/modifyUrl'
-import { getDocPath } from '@/lib/docs/systemConfig'
 import type { PageContext } from 'vike/types'
-import { resolveHeadingByHrefPathname } from '@/lib/docs/headings'
 import { hasDocPageForLocale, hasDocSlug } from '@/lib/docs/contentManifest'
-import { matchDocPath } from '@/lib/docs/systemConfig'
+import { resolveHeadingByHrefPathname } from '@/lib/docs/headings'
+import { getDocPath, matchDocPath } from '@/lib/docs/systemConfig'
 import { DEFAULT_LOCALE } from '@/lib/i18n/config'
 import { hasLocalePrefix, localizeHref, stripLocaleFromPathname } from '@/lib/i18n/routing'
-import { getStoredLocalePreference } from '@/lib/settings-store'
+import { getStoredLocalePreference } from '@/lib/store/settings-store'
 
 const isPageContextRequest = (url: string) => {
   return url.split('?')[0]?.endsWith('.pageContext.json') ?? false

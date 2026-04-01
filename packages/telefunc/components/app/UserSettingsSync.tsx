@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useUserSettingsStore } from '@/lib/settings-store'
+import { useUserSettingsStore } from '@/lib/store/settings-store'
 import { applyThemePreference } from '@/lib/theme'
 
 const UserSettingsSync = () => {
