@@ -1,4 +1,4 @@
-import { cmMerge } from '@classmatejs/react'
+import cm, { cmMerge } from '@classmatejs/react'
 import { useEffect, useState } from 'react'
 import { usePageContext } from 'vike-react/usePageContext'
 import { renderInlineMarkdown } from '../../components/renderInlineMarkdown.js'
@@ -41,13 +41,7 @@ export const Navbar = ({ brand, activeSectionId, navbarItems, theme }: NavbarPro
   const showChrome = !isLandingPage || isLandingPageScrolled
 
   return (
-    <header
-      className={cmMerge(
-        'fixed top-0 left-0 z-20 h-16 w-full border-b border-transparent',
-        showChrome &&
-          'bg-linear-to-t from-base-100 via-base-100/40 to-base-100 backdrop-grayscale border-base-muted-light dark:shadow',
-      )}
-    >
+    <StyledNavbar $showChrome={showChrome}>
       <div
         className="absolute inset-0 hidden dark:block"
         // biome-ignore lint/nursery/noInlineStyles: decorator
@@ -119,6 +113,22 @@ export const Navbar = ({ brand, activeSectionId, navbarItems, theme }: NavbarPro
           </div>
         )}
       </LayoutComponent>
-    </header>
+    </StyledNavbar>
   )
 }
+
+const StyledNavbar = cm.header<{ $showChrome: boolean }>`
+  fixed top-0 left-0 z-20 h-16 w-full border-b border-transparent
+  ${({ $showChrome }) =>
+    $showChrome &&
+    `
+    bg-linear-to-t 
+    from-base-100/60 
+    via-base-100/30 
+    to-base-100 
+    backdrop-grayscale 
+    border-base-muted-light 
+    dark:shadow 
+    backdrop-blur
+  `}
+`
