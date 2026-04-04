@@ -1,7 +1,7 @@
 <!DOCTYPE html>
     <html data-theme="telefunc-dark" lang="en">
       <head>
-        <link rel="stylesheet" type="text/css" href="/vike-docpress/assets/static/styles_global-552010f8.CiZHW0yD.css">
+        <link rel="stylesheet" type="text/css" href="/vike-docpress/assets/static/styles_global-552010f8.GbVd1FpF.css">
         <link rel="stylesheet" type="text/css" href="/vike-docpress/assets/static/pages_index_landing-code-samples-d3e0eb6e.B5H6UJ71.css">
         <meta charset="UTF-8" />
         
@@ -10,6 +10,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="apple-touch-icon" href="/vike-docpress/apple-touch-icon.png"/><link rel="icon" type="image/svg+xml" href="/vike-docpress/favicon.svg"/><link rel="shortcut icon" type="image/x-icon" href="/vike-docpress/favicon.ico"/><link rel="icon" type="image/x-icon" href="/vike-docpress/favicon.ico"/><link rel="preload" href="/vike-docpress/docsengine/fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous"/><link rel="preload" href="/vike-docpress/docsengine/fonts/inter-v20-latin-600.woff2" as="font" type="font/woff2" crossorigin="anonymous"/><link rel="preload" href="/vike-docpress/docsengine/fonts/inter-v20-latin-800.woff2" as="font" type="font/woff2" crossorigin="anonymous"/><script>(() => {
   const storageKey = "docsengine-user-settings";
+  const darkThemeMediaQuery = "(prefers-color-scheme: dark)";
+  const defaultThemePreference = "dark";
   const themes = {
     light: "telefunc-light",
     dark: "telefunc-dark"
@@ -22,11 +24,22 @@
     const themePreference =
       storedThemePreference === 'light' || storedThemePreference === 'dark'
         ? storedThemePreference
-        : "light";
+        : typeof window.matchMedia === 'function'
+          ? window.matchMedia(darkThemeMediaQuery).matches
+            ? 'dark'
+            : 'light'
+          : defaultThemePreference;
 
     document.documentElement.setAttribute('data-theme', themes[themePreference]);
   } catch {
-    document.documentElement.setAttribute('data-theme', themes["light"]);
+    const themePreference =
+      typeof window.matchMedia === 'function'
+        ? window.matchMedia(darkThemeMediaQuery).matches
+          ? 'dark'
+          : 'light'
+        : defaultThemePreference;
+
+    document.documentElement.setAttribute('data-theme', themes[themePreference]);
   }
 })();</script><link rel="stylesheet" href="/vike-docpress/docsengine/fonts/fonts-inter.css"/>
     
@@ -127,9 +140,9 @@
         
         <script id="vike_pageContext" type="application/json">{"pageId":"\\/pages\\/index","routeParams":{}}</script>
         <script id="vike_globalContext" type="application/json">{}</script>
-        <script src="/vike-docpress/assets/entries/entry-client-routing.D1oFQaMz.js" type="module" async></script>
-        <link rel="modulepreload" href="/vike-docpress/assets/entries/pages_index.CKb24z-f.js" as="script" type="text/javascript">
-        <link rel="modulepreload" href="/vike-docpress/assets/chunks/chunk-DVFfwxJZ.js" as="script" type="text/javascript">
+        <script src="/vike-docpress/assets/entries/entry-client-routing.BkM3Z6JC.js" type="module" async></script>
+        <link rel="modulepreload" href="/vike-docpress/assets/entries/pages_index.CBHXugEj.js" as="script" type="text/javascript">
+        <link rel="modulepreload" href="/vike-docpress/assets/chunks/chunk-BNusNsS2.js" as="script" type="text/javascript">
         <link rel="modulepreload" href="/vike-docpress/assets/chunks/chunk-CCcHbYLi.js" as="script" type="text/javascript">
         <link rel="modulepreload" href="/vike-docpress/assets/chunks/chunk-CQdtMwz-.js" as="script" type="text/javascript">
       </body>
