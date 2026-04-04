@@ -1,13 +1,1 @@
-<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_123_9)">
-<path d="M23.5101 45.4601C35.6327 45.4601 45.4601 35.6327 45.4601 23.5101C45.4601 11.3874 35.6327 1.56006 23.5101 1.56006C11.3874 1.56006 1.56006 11.3874 1.56006 23.5101C1.56006 35.6327 11.3874 45.4601 23.5101 45.4601Z" stroke="#F9F9F9" stroke-width="3.12" stroke-linejoin="round"/>
-<path d="M21.1675 14.2989L27.3115 23.511L21.1675 32.7214H26.7853L30.1213 27.7216L33.4556 32.7214H39.0734L26.7851 14.2988L21.1675 14.2989Z" fill="#F9F9F9"/>
-<path d="M14.5569 14.2988L20.7009 23.5109L14.5569 32.7213H20.1748C22.1665 29.5782 24.038 26.7085 26.117 23.2074L20.1748 14.2988H14.5569Z" fill="#F9F9F9" fill-opacity="0.57"/>
-<path d="M7.94653 14.2988L14.0905 23.5109L7.94653 32.7213H13.5644C15.5561 29.5782 17.4277 26.7085 19.5067 23.2074L13.5644 14.2988H7.94653Z" fill="#F9F9F9" fill-opacity="0.24"/>
-</g>
-<defs>
-<clipPath id="clip0_123_9">
-<rect width="47.02" height="47.02" fill="white"/>
-</clipPath>
-</defs>
-</svg>
+<svg width='47.02' height='47.02' version='1.1' viewBox='0 0 47.02 47.02' xmlns='http://www.w3.org/2000/svg'><circle cx='23.51' cy='23.51' r='21.95' fill='#f7e018' stroke='#31343d' stroke-linejoin='round' stroke-width='3.12' /><g transform='matrix(.95503 0 0 .95503 .34405 1.0117)' fill='#31343d' shape-rendering='auto'><path d='m21.804 13.913 6.4333 9.6458-6.4333 9.6441h5.8824l3.493-5.2352 3.4913 5.2352h5.8824l-12.867-19.29z' color='#000000' color-rendering='auto' dominant-baseline='auto' image-rendering='auto' solid-color='#000000' /><path d='m14.882 13.913 6.4333 9.6458-6.4333 9.6441h5.8824c2.0855-3.2911 4.0452-6.2959 6.2221-9.9618l-6.2221-9.3281z' color='#000000' color-rendering='auto' dominant-baseline='auto' fill-opacity='.57315' image-rendering='auto' solid-color='#000000' /><path d='m7.9604 13.913 6.4333 9.6458-6.4333 9.6441h5.8824c2.0855-3.2911 4.0452-6.2959 6.2221-9.9618l-6.2221-9.3281z' color='#000000' color-rendering='auto' dominant-baseline='auto' fill-opacity='.27655' image-rendering='auto' solid-color='#000000' /></g></svg>
