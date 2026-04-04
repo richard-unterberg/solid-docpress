@@ -9,6 +9,15 @@ const siteBasePath = normalizeSiteBasePath(importMetaEnv?.BASE_URL ?? process.en
 
 const isExternalUrl = (value: string) => value.startsWith('//') || /^[a-z][a-z\d+.-]*:/i.test(value)
 
+const prependSiteBaseUrl = (value: string) => {
+  if (value === '' || value.startsWith('#') || isExternalUrl(value)) {
+    return value
+  }
+
+  const pathname = value.startsWith('/') ? value : `/${value.replace(/^\/+/, '')}`
+  return siteBasePath === '/' ? pathname : `${siteBasePath.slice(0, -1)}${pathname}`
+}
+
 export const withSiteBaseUrl = (value: string) => {
   if (value === '' || value.startsWith('#') || isExternalUrl(value)) {
     return value
@@ -40,6 +49,8 @@ export const resolvePublicAssetUrl = (value: string | undefined) => {
 
 export const nivelPublicRoute = '/nivel'
 
-export const baseAssets = `${withSiteBaseUrl(nivelPublicRoute).replace(/\/?$/, '/')}`
+// Engine-owned assets always live under the site base, even if the public route
+// happens to match the repository base path on GitHub Pages.
+export const baseAssets = `${prependSiteBaseUrl(nivelPublicRoute).replace(/\/?$/, '/')}`
 
 export const nivelAssetUrl = (assetPath: string) => `${baseAssets}${assetPath.replace(/^\/+/, '')}`
