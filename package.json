@@ -1,25 +1,20 @@
 {
-  "name": "vike-docpress-monorepo",
+  "name": "docsengine-monorepo",
   "private": true,
   "packageManager": "pnpm@10.28.1",
   "scripts": {
-    "dev": "pnpm --parallel --filter @unterberg/universal-mdx-mods --filter ./packages/telefunc dev",
-    "dev:telefunc": "pnpm --filter ./packages/telefunc dev",
-    "dev:mods": "pnpm --filter @unterberg/universal-mdx-mods dev",
-    "build": "pnpm build:mods && pnpm build:telefunc",
-    "build:telefunc": "pnpm --filter ./packages/telefunc build",
-    "build:mods": "pnpm --filter @unterberg/universal-mdx-mods build",
-    "preview": "pnpm --filter ./packages/telefunc preview",
-    "typecheck": "pnpm build:mods && pnpm --filter ./packages/telefunc generate:docs && pnpm --filter @unterberg/universal-mdx-mods typecheck && pnpm --filter ./packages/telefunc typecheck:prepared",
-    "check:inline-styles": "node scripts/checkInlineStyles.mjs",
+    "preview": "pnpm --filter ./packages/consumer preview",
+    "dev": "pnpm --parallel --filter @unterberg/docsengine --filter ./packages/consumer dev",
+    "build": "pnpm --filter @unterberg/docsengine build && pnpm --filter ./packages/consumer build",
+    "typecheck": "pnpm --filter @unterberg/docsengine typecheck && pnpm --filter ./packages/consumer typecheck",
     "lint": "biome lint --write .",
     "format": "biome format --write .",
-    "knip": "pnpm --filter ./packages/telefunc generate:docs && pnpm build:mods && knip",
+    "knip": "pnpm --filter @unterberg/docsengine build && pnpm --filter ./packages/consumer generate:docs && knip",
     "prepare": "lefthook install"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.10",
-    "knip": "^6.0.5",
+    "knip": "^6.0.13",
     "lefthook": "^2.1.4",
     "typescript": "^5.9.3"
   }

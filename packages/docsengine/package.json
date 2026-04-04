@@ -1,0 +1,78 @@
+{
+  "name": "@unterberg/docsengine",
+  "version": "0.0.0",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "assets"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./config": {
+      "types": "./dist/config.d.ts",
+      "import": "./dist/config.js"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "import": "./dist/client.js"
+    },
+    "./mdx": {
+      "types": "./dist/mdx.d.ts",
+      "import": "./dist/mdx.js"
+    },
+    "./code-blocks": {
+      "types": "./dist/code-blocks.d.ts",
+      "import": "./dist/code-blocks.js"
+    },
+    "./runtime": {
+      "types": "./dist/runtime/node.d.ts",
+      "import": "./dist/runtime/node.js"
+    },
+    "./runtime/client": {
+      "types": "./dist/runtime/client.d.ts",
+      "import": "./dist/runtime/client.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@brillout/shiki-transformers": "^4.0.2",
+    "@classmatejs/react": "^0.2.1",
+    "@mdx-js/rollup": "^3.1.1",
+    "@shikijs/transformers": "^4.0.2",
+    "detype": "^2.0.6",
+    "estree-util-value-to-estree": "^3.5.0",
+    "lucide-react": "0.543.0",
+    "mdast-util-mdx-jsx": "^3.2.0",
+    "npm-to-yarn": "^3.0.1",
+    "rehype-pretty-code": "^0.14.3",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "remark-directive": "^4.0.0",
+    "remark-gfm": "^4.0.1",
+    "shiki": "^4.0.2",
+    "unist-util-visit": "^5.1.0",
+    "vike-react": "^0.6.21",
+    "zustand": "^5.0.8"
+  },
+  "peerDependencies": {
+    "vike": "^0.4.255",
+    "vite": "^7.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3"
+  }
+}

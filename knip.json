@@ -1,10 +1,22 @@
 {
   "$schema": "./node_modules/knip/schema.json",
-  "workspaces": {
-    "packages/telefunc": {
-      "entry": ["lib/mdx/provider.tsx"],
-      "ignoreFiles": ["public/**/*", "**/*.build-*.mjs"]
-    }
-  },
-  "tags": ["-lintignore"]
+  "ignore": ["packages/docsengine/assets/**"],
+  "ignoreDependencies": [
+    "@brillout/shiki-transformers",
+    "@mdx-js/rollup",
+    "@shikijs/transformers",
+    "detype",
+    "estree-util-value-to-estree",
+    "mdast-util-mdx-jsx",
+    "npm-to-yarn",
+    "rehype-pretty-code",
+    "remark-directive",
+    "remark-gfm",
+    "shiki",
+    "unist-util-visit"
+  ],
+  "ignoreIssues": {
+    "packages/consumer/docs/content/concepts/CodeComparison.tsx": ["exports"],
+    "packages/docsengine/src/index.ts": ["exports", "types"]
+  }
 }

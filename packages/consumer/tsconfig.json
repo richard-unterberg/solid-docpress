@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["react", "react-dom"],
+    "paths": {
+      "@unterberg/docsengine": ["../docsengine/src/index.ts"],
+      "@unterberg/docsengine/client": ["../docsengine/src/runtime/client.ts"],
+      "@unterberg/docsengine/config": ["../docsengine/src/config.ts"],
+      "@unterberg/docsengine/runtime": ["../docsengine/src/runtime/node.ts"],
+      "@unterberg/docsengine/mdx": ["../docsengine/src/mdx.ts"]
+    }
+  },
+  "include": [
+    "global.d.ts",
+    "docs/**/*.ts",
+    "docs/**/*.tsx",
+    "pages/**/*.ts",
+    "pages/**/*.tsx",
+    "scripts/**/*.ts"
+  ]
+}

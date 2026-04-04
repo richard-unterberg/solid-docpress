@@ -1,0 +1,22 @@
+@import 'tailwindcss';
+@import './theme.css';
+@import './code.css';
+
+@source '../pages';
+@source '../docs';
+@source '../../docsengine/src';
+@source '../../docsengine/dist';
+
+@plugin '@tailwindcss/typography';
+
+@plugin 'daisyui' {
+  exclude: rootcolor;
+  themes: false;
+}
+
+@layer base {
+  html,
+  body {
+    @apply bg-base-100 text-base-content font-sans antialiased md:subpixel-antialiased;
+  }
+}

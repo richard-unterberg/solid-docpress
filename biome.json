@@ -1,18 +1,13 @@
 {
-  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.10/schema.json",
   "files": {
     "includes": [
       "**",
-      "!*.cjs",
-      "!*.js",
-      "!*.mjs",
-      "!*.spec.ts",
-      "!**/*.ts.build-*.mjs",
-      "!dist/*",
-      "!**/dist/*",
-      "!node_modules/*",
-      "!**/node_modules/*",
-      "!**/.DS_Store"
+      "!legacy",
+      "!**/*.build-*.mjs",
+      "!packages/consumer/pages/(docsengine-generated)",
+      "!packages/docsengine/dist",
+      "!packages/consumer/dist"
     ]
   },
   "formatter": {
@@ -64,5 +59,19 @@
     "formatter": {
       "quoteStyle": "single"
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "packages/docsengine/src/runtime/components/MetaHead/ThemeBootstrap.tsx"
+      ],
+      "linter": {
+        "rules": {
+          "security": {
+            "noDangerouslySetInnerHtml": "off"
+          }
+        }
+      }
+    }
+  ]
 }
