@@ -4,6 +4,7 @@ import type {
   UniversalResolvedDocLink,
   UniversalResolvedOverviewItem,
 } from '../components/types.js'
+import { withSiteBaseUrl } from '../docsengineAssets.js'
 import {
   getActiveSectionByPathname,
   getResolvedPageByPathname,
@@ -67,7 +68,7 @@ const resolveDocLink = (options: {
   const section = getResolvedSectionById(options.resolvedConfig, page.sectionId)
 
   return {
-    href: `${page.href}${hash}`,
+    href: withSiteBaseUrl(`${page.href}${hash}`),
     title: page.title,
     breadcrumb: section ? [section.navTitle] : [],
     isCurrentPage: isSamePagePathname(page, currentPathname),
@@ -86,7 +87,7 @@ const resolveOverviewItem = (options: {
 
   return {
     title: page.title,
-    href: page.href,
+    href: withSiteBaseUrl(page.href),
     excerpt: page.description ?? null,
   }
 }
@@ -113,10 +114,10 @@ export const getMdxRuntimeValue = (options: {
       const page = docsPathname ? getResolvedPageByPathname(resolvedConfig, docsPathname) : null
 
       if (!page) {
-        return href
+        return withSiteBaseUrl(href)
       }
 
-      return `${page.href}${hash}`
+      return withSiteBaseUrl(`${page.href}${hash}`)
     },
     resolveDocLink: ({ href }) =>
       resolveDocLink({

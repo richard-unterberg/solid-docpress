@@ -1,6 +1,7 @@
 import { cmMerge } from '@classmatejs/react'
 import { useEffect } from 'react'
 import { create } from 'zustand'
+import { withSiteBaseUrl } from '../../docsengineAssets.js'
 import { renderInlineMarkdown } from '../../components/renderInlineMarkdown.js'
 import type {
   ResolvedDocsSection,
@@ -107,7 +108,7 @@ const SidebarPageLink = ({ title, href, currentHref }: SidebarPageLinkProps) => 
   return (
     <li>
       <a
-        href={href}
+        href={withSiteBaseUrl(href)}
         className={cmMerge(
           'text-base-muted hover:text-base-content justify-start hover:bg-base-200',
           href === currentHref && 'text-primary! font-semibold bg-base-200',
@@ -149,7 +150,7 @@ const SidebarGroupTitle = ({ title, href, isActive, allowNavigation = false }: S
   if (allowNavigation && href) {
     return (
       <a
-        href={href}
+        href={withSiteBaseUrl(href)}
         onClick={(event) => {
           event.stopPropagation()
         }}

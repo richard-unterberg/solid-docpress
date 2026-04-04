@@ -1,5 +1,6 @@
 import { cmMerge } from '@classmatejs/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { withSiteBaseUrl } from '../../docsengineAssets.js'
 import { renderInlineMarkdown } from '../../components/renderInlineMarkdown.js'
 import type { DocPageData } from '../../types.js'
 
@@ -14,7 +15,7 @@ const PaginationCard = ({ item, direction, isOffset }: PaginationCardProps) => {
 
   return (
     <a
-      href={item.href}
+      href={withSiteBaseUrl(item.href)}
       className={cmMerge(
         'group rounded-box border border-base-muted-light bg-base-100 p-5 no-underline hover:border-primary-muted-medium hover:bg-base-200',
         isPrevious ? 'text-left' : 'text-right',

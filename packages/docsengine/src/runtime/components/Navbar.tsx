@@ -2,7 +2,7 @@ import { cmMerge } from '@classmatejs/react'
 import { useEffect, useState } from 'react'
 import { usePageContext } from 'vike-react/usePageContext'
 import { renderInlineMarkdown } from '../../components/renderInlineMarkdown.js'
-import { baseAssets } from '../../docsengineAssets.js'
+import { baseAssets, withSiteBaseUrl } from '../../docsengineAssets.js'
 import type { ResolvedDocsBrandConfig, ResolvedNavbarItem } from '../../types.js'
 import { Brand } from './Brand.js'
 import { LayoutComponent } from './LayoutComponent.js'
@@ -71,7 +71,7 @@ export const Navbar = ({ brand, activeSectionId, navbarItems }: NavbarProps) => 
                 {navbarItems.map((item) => (
                   <li key={item.id}>
                     <a
-                      href={item.href}
+                      href={withSiteBaseUrl(item.href)}
                       className={cmMerge(
                         'btn px-2 whitespace-nowrap',
                         item.id === activeSectionId ? 'btn-primary btn-soft' : 'btn-ghost',
@@ -100,7 +100,7 @@ export const Navbar = ({ brand, activeSectionId, navbarItems }: NavbarProps) => 
                 {navbarItems.map((item) => (
                   <li key={item.id}>
                     <a
-                      href={item.href}
+                      href={withSiteBaseUrl(item.href)}
                       className={cmMerge(
                         'btn px-2 whitespace-nowrap',
                         item.id === activeSectionId ? 'btn-primary btn-soft' : 'btn-ghost',

@@ -1,5 +1,6 @@
 import { cmMerge } from '@classmatejs/react'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
+import { withSiteBaseUrl } from '../docsengineAssets'
 import { useUniversalMdxRuntime } from './UniversalMdxProvider'
 
 export type LinkProps = ComponentPropsWithoutRef<'a'> & {
@@ -161,7 +162,7 @@ export const Link = ({
     doNotInferSectionTitle,
     noWarning,
   })
-  const localizedHref = resolvedDocLink?.href ?? runtime?.localizeHref?.(href) ?? href
+  const localizedHref = resolvedDocLink?.href ?? runtime?.localizeHref?.(href) ?? withSiteBaseUrl(href)
   const inferredSectionTitle =
     resolvedDocLink?.sectionTitle ?? (!doNotInferSectionTitle ? determineSectionTitle(href) : null)
   const inferredText =

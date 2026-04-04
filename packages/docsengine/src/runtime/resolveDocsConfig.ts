@@ -1,4 +1,4 @@
-import { docsengineAssetUrl } from '../docsengineAssets.js'
+import { docsengineAssetUrl, resolvePublicAssetUrl, withSiteBaseUrl } from '../docsengineAssets.js'
 import type {
   DocsBrandConfig,
   DocsConfig,
@@ -91,9 +91,9 @@ const resolveBrandConfig = (brand: DocsBrandConfig | undefined, siteTitle: strin
 
   return {
     text,
-    href: brand?.href ?? '/',
-    logoLight: brand?.logoLight,
-    logoDark: brand?.logoDark,
+    href: withSiteBaseUrl(brand?.href ?? '/'),
+    logoLight: resolvePublicAssetUrl(brand?.logoLight),
+    logoDark: resolvePublicAssetUrl(brand?.logoDark),
     logoAlt: brand?.logoAlt ?? `${text} logo`,
   }
 }
@@ -111,17 +111,13 @@ const resolveHeadConfig = (head: DocsHeadConfig | undefined) => {
       : []
 
   return {
-    faviconSvg: head?.faviconSvg,
-    faviconIco: head?.faviconIco,
-    appleTouchIcon: head?.appleTouchIcon,
+    faviconSvg: resolvePublicAssetUrl(head?.faviconSvg),
+    faviconIco: resolvePublicAssetUrl(head?.faviconIco),
+    appleTouchIcon: resolvePublicAssetUrl(head?.appleTouchIcon),
     fontPreset,
     fontStylesheetHref: head?.fontStylesheetHref ?? defaultFontStylesheetHref,
     fontPreloadHrefs: head?.fontPreloadHrefs ?? defaultFontPreloadHrefs,
   }
-}
-
-const isAbsoluteAssetUrl = (value: string) => {
-  return value.startsWith('/') || value.startsWith('//') || /^[a-z][a-z\d+.-]*:/i.test(value)
 }
 
 const resolvePartnerAssetUrl = (value: string | undefined) => {
@@ -129,13 +125,13 @@ const resolvePartnerAssetUrl = (value: string | undefined) => {
     return undefined
   }
 
-  return isAbsoluteAssetUrl(value) ? value : `/${value.replace(/^\/+/, '')}`
+  return resolvePublicAssetUrl(value)
 }
 
 const resolvePartner = (partner: DocsPartnerConfig): ResolvedDocsPartnerConfig => {
   return {
     name: partner.name,
-    href: partner.href,
+    href: withSiteBaseUrl(partner.href),
     logoLight: resolvePartnerAssetUrl(partner.logoLight) ?? partner.logoLight,
     logoDark: resolvePartnerAssetUrl(partner.logoDark),
     logoAlt: partner.logoAlt ?? `${partner.name} logo`,

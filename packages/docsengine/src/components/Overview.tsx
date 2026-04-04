@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { withSiteBaseUrl } from '../docsengineAssets'
 import { renderInlineMarkdown } from './renderInlineMarkdown'
 import type { UniversalResolvedOverviewItem } from './types'
 import { useUniversalMdxRuntime } from './UniversalMdxProvider'
@@ -61,7 +62,7 @@ const groupOverviewItems = (items: OverviewItem[]) => {
 const OverviewCard = ({ excerpt, href, title }: OverviewLinkItem) => {
   return (
     <a
-      href={href}
+      href={withSiteBaseUrl(href)}
       className="group flex h-full flex-col gap-3 rounded-box border border-base-muted-light bg-base-muted-superlight p-5 no-underline hover:border-primary-muted-medium hover:bg-base-muted-superlight/50"
     >
       <h3 className="text-lg font-semibold text-base-content">{renderInlineMarkdown(title)}</h3>
