@@ -3,12 +3,8 @@ import { useEffect } from 'react'
 import { create } from 'zustand'
 import { renderInlineMarkdown } from '../../components/renderInlineMarkdown.js'
 import { withSiteBaseUrl } from '../../nivelAssets.js'
-import type {
-  ResolvedDocsSection,
-  ResolvedSidebarGroup,
-  ResolvedSidebarNode,
-  ResolvedSidebarPage,
-} from '../../types.js'
+import type { ResolvedDocsSection, ResolvedSidebarGroup, ResolvedSidebarNode } from '../../types.js'
+import { containsActiveHref, getGroupLandingPage, getVisibleGroupItems, hasActiveItem } from './docsNavigation.js'
 
 type SidebarDisclosureState = {
   openNodes: Record<string, boolean>
@@ -31,50 +27,6 @@ const useSidebarDisclosureStore = create<SidebarDisclosureState>()((set) => ({
       }
     }),
 }))
-
-const containsActiveHref = (items: ResolvedSidebarNode[], currentHref: string): boolean => {
-  return items.some((item) => {
-    if (item.kind === 'page') {
-      return item.href === currentHref
-    }
-
-    if (item.kind === 'group') {
-      return containsActiveHref(item.items, currentHref)
-    }
-
-    return false
-  })
-}
-
-const hasActiveItem = (items: ResolvedSidebarNode[], activeHref: string) => {
-  return items.some((item) => {
-    if (item.kind === 'group') {
-      return containsActiveHref(item.items, activeHref)
-    }
-
-    return item.kind === 'page' && item.href === activeHref
-  })
-}
-
-const getGroupLandingPage = (group: ResolvedSidebarGroup) => {
-  return (
-    group.items.find((item): item is ResolvedSidebarPage => {
-      if (item.kind !== 'page') {
-        return false
-      }
-
-      return item.navTitle === group.title || item.title === group.title
-    }) ?? null
-  )
-}
-
-const getVisibleGroupItems = (group: ResolvedSidebarGroup, landingPage: ResolvedSidebarPage | null) => {
-  if (!landingPage) {
-    return group.items
-  }
-
-  return group.items.filter((item) => item.id !== landingPage.id)
-}
 
 const useAutoOpenDetails = (nodeId: string, isOpenByDefault: boolean, hasActiveDescendant: boolean) => {
   const storedOpen = useSidebarDisclosureStore((state) => state.openNodes[nodeId])
