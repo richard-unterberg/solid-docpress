@@ -154,7 +154,7 @@ export const Navbar = ({ brand, activeSectionId, algolia, navbarItems, theme, se
       <MegaMenu
         showChrome={showChrome}
         sections={sections}
-        isActive={isMegaMenuOpen}
+        isActive={true}
         onOpen={openMegaMenu}
         onClose={scheduleMegaMenuClose}
       />
