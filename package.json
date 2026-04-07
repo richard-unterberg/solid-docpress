@@ -14,7 +14,6 @@
     "preview": "pnpm --filter ./packages/consumer-test preview",
     "dev": "pnpm --parallel --filter @unterberg/nivel --filter ./packages/consumer-test dev",
     "build": "pnpm --filter @unterberg/nivel build && pnpm --filter ./packages/consumer-test build",
-    "build:consumer-test:prod": "node ./scripts/buildConsumerTestProd.mjs",
     "typecheck": "pnpm --filter @unterberg/nivel typecheck && pnpm --filter ./packages/consumer-test typecheck",
     "lint": "biome lint --write .",
     "format": "biome format --write .",
