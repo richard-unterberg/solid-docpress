@@ -1,17 +1,13 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { nivelPublicRoute } from '@unterberg/nivel'
+import { nivelPublicRoute } from '../../engine/src/shared/assets'
 
-const getNivelPackageRoot = () => {
-  const nivelConfigUrl = import.meta.resolve('@unterberg/nivel/vike')
-  const nivelConfigPath = fileURLToPath(nivelConfigUrl)
-  return path.resolve(path.dirname(nivelConfigPath), '..')
-}
+const nivelRoot = fileURLToPath(new URL('../../engine', import.meta.url))
 
 const syncNivelAssets = () => {
   const consumerRoot = process.cwd()
-  const nivelAssetsRoot = path.join(getNivelPackageRoot(), 'assets', nivelPublicRoute.replace(/^\/+/, ''))
+  const nivelAssetsRoot = path.join(nivelRoot, 'assets', nivelPublicRoute.replace(/^\/+/, ''))
   const outputRoot = path.join(consumerRoot, 'dist', 'client', nivelPublicRoute.replace(/^\/+/, ''))
 
   if (!fs.existsSync(nivelAssetsRoot)) {

@@ -5,6 +5,9 @@ const kebabCase = (value: string) => {
     .toLowerCase()
 }
 
+const CODE_BLOCK_HEADER_ENVIRONMENTS = ['client', 'server'] as const
+const CODE_BLOCK_PRE_PROP_NAMES = ['data-language-label', 'file-added', 'file-removed', 'hide-menu'] as const
+
 type ParsedMeta<Name extends string = string> = {
   props: Partial<Record<Name, string>>
   rest: string
@@ -18,15 +21,22 @@ type ParsedMetaToken = {
   value?: string
 }
 
-const KEY_VALUE_PAIR_RE = /(?<name>[a-zA-Z_-]+)(?:=([^"'\s]+))?/g
-const RESERVED_CODE_BLOCK_META_NAMES = new Set([
-  'choice',
-  'file-added',
-  'file-removed',
-  'hide-menu',
-  'max-width',
-  'ts-only',
-])
+type CodeBlockHeaderEnvironment = (typeof CODE_BLOCK_HEADER_ENVIRONMENTS)[number]
+
+const KEY_VALUE_PAIR_RE =
+  /(?<name>[a-zA-Z_-]+)(?:=(?:"(?<doubleQuotedValue>[^"]*)"|'(?<singleQuotedValue>[^']*)'|(?<bareValue>[^\s"'=]+)))?/g
+const CODE_BLOCK_PRE_PROP_NAME_SET = new Set<string>(CODE_BLOCK_PRE_PROP_NAMES)
+
+const normalizeCodeBlockEnv = (value: unknown): CodeBlockHeaderEnvironment | null => {
+  if (typeof value !== 'string') {
+    return null
+  }
+
+  const normalizedValue = value.trim().toLowerCase()
+  return CODE_BLOCK_HEADER_ENVIRONMENTS.includes(normalizedValue as CodeBlockHeaderEnvironment)
+    ? (normalizedValue as CodeBlockHeaderEnvironment)
+    : null
+}
 
 export const parseMetaString = <Name extends string = string>(meta: unknown, propNames?: Name[]): ParsedMeta<Name> => {
   if (typeof meta !== 'string' || meta.trim() === '') {
@@ -35,7 +45,21 @@ export const parseMetaString = <Name extends string = string>(meta: unknown, pro
 
   const props: ParsedMeta['props'] = {}
   const tokens: ParsedMetaToken[] = []
-  const rest = meta.replaceAll(KEY_VALUE_PAIR_RE, (match, name: string, value: string | undefined) => {
+  const rest = meta.replaceAll(KEY_VALUE_PAIR_RE, (match, ...args) => {
+    const groups = args.at(-1) as
+      | {
+          bareValue?: string
+          doubleQuotedValue?: string
+          name?: string
+          singleQuotedValue?: string
+        }
+      | undefined
+    const name = groups?.name
+    if (!name) {
+      return match
+    }
+
+    const value = groups?.doubleQuotedValue ?? groups?.singleQuotedValue ?? groups?.bareValue
     const normalizedName = kebabCase(name)
     tokens.push({
       hasExplicitValue: value !== undefined,
@@ -59,21 +83,22 @@ export const parseMetaString = <Name extends string = string>(meta: unknown, pro
   }
 }
 
+export const stripMetaProps = <Name extends string = string>(meta: unknown, propNames: Name[]) => {
+  return parseMetaString(meta, propNames).rest
+}
+
 export const getCodeBlockPropsFromMeta = (meta: unknown) => {
   const parsed = parseMetaString(meta)
-  const props = { ...parsed.props } as Record<string, string>
-  const implicitTitleToken = parsed.tokens.find(
-    (token) => !token.hasExplicitValue && !RESERVED_CODE_BLOCK_META_NAMES.has(token.name),
-  )
-  const explicitTitle = typeof props.title === 'string' && props.title.trim() ? props.title.trim() : null
-
-  delete props.title
-  if (implicitTitleToken) {
-    delete props[implicitTitleToken.name]
-  }
+  const props = Object.fromEntries(
+    Object.entries(parsed.props).filter(([name]) => CODE_BLOCK_PRE_PROP_NAME_SET.has(name)),
+  ) as Record<string, string>
+  const explicitTitle =
+    typeof parsed.props.title === 'string' && parsed.props.title.trim() ? parsed.props.title.trim() : null
+  const env = normalizeCodeBlockEnv(parsed.props.env)
 
   return {
     props,
-    title: explicitTitle ?? implicitTitleToken?.raw.trim() ?? null,
+    env,
+    title: explicitTitle,
   }
 }

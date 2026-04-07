@@ -2,13 +2,14 @@ import { transformerNotationHighlight } from '@brillout/shiki-transformers'
 import { transformerNotationDiff, transformerNotationWordHighlight } from '@shikijs/transformers'
 import rehypePrettyCode from 'rehype-pretty-code'
 import remarkDirective from 'remark-directive'
+import { stripMetaProps } from './meta.js'
 import { rehypeMetaToProps } from './rehypeMetaToProps.js'
 import { remarkChoiceGroup } from './remarkChoiceGroup.js'
 import { remarkDetype } from './remarkDetype.js'
 import { remarkPkgManager } from './remarkPkgManager.js'
 import { shikiTransformerAutoLinks } from './shikiTransformerAutoLinks.js'
 
-export { getCodeBlockPropsFromMeta, parseMetaString } from './meta.js'
+export { getCodeBlockPropsFromMeta, parseMetaString, stripMetaProps } from './meta.js'
 export { rehypeMetaToProps } from './rehypeMetaToProps.js'
 export { remarkChoiceGroup } from './remarkChoiceGroup.js'
 export { remarkDetype } from './remarkDetype.js'
@@ -26,6 +27,7 @@ export const getCodeBlockMdxPlugins = (): {
         rehypePrettyCode,
         {
           keepBackground: false,
+          filterMetaString: (meta: string) => stripMetaProps(meta, ['title']),
           theme: {
             light: 'github-light',
             dark: 'one-dark-pro',

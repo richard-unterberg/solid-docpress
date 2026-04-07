@@ -13,10 +13,10 @@
   height: 100%;
 }
 
-.landing-code-samples [data-code-block-header],
+/* .landing-code-samples [data-code-block-header],
 .landing-code-samples [data-choice-group-header] {
   display: none !important;
-}
+} */
 
 .landing-code-samples [data-choice-group-outer] {
   margin-top: 0 !important;

@@ -1,6 +1,7 @@
 export { ChoiceGroup }
 
 import { Children, isValidElement, type ReactElement, type ReactNode, useRef } from 'react'
+import { CodeBlockHeaderMeta } from './CodeBlockHeaderMeta.js'
 import { CodeBlockCopyButton, trimTrailingWhitespace } from './CopyButton.js'
 import { CodeBlockGroupProvider } from './context.js'
 import { useRestoreScroll } from './useRestoreScroll.js'
@@ -26,7 +27,7 @@ const asTrimmedString = (value: unknown) => {
   return typeof value === 'string' && value.trim() ? value.trim() : null
 }
 
-const getActiveCodeBlockMeta = (node: ReactNode): { hideCopy: boolean; title: string | null } => {
+const getActiveCodeBlockMeta = (node: ReactNode): { env: string | null; hideCopy: boolean; title: string | null } => {
   for (const child of Children.toArray(node)) {
     if (!isValidElement(child)) {
       continue
@@ -34,23 +35,25 @@ const getActiveCodeBlockMeta = (node: ReactNode): { hideCopy: boolean; title: st
 
     const props = child.props as {
       children?: ReactNode
+      'data-code-env'?: string
       'data-code-title'?: string
       'hide-menu'?: string
     }
+    const env = asTrimmedString(props['data-code-env'])
     const title = asTrimmedString(props['data-code-title'])
     const hideCopy = props['hide-menu'] === 'true'
 
-    if (title || hideCopy) {
-      return { hideCopy, title }
+    if (title || env || hideCopy) {
+      return { env, hideCopy, title }
     }
 
     const nestedMeta = getActiveCodeBlockMeta(props.children)
-    if (nestedMeta.title || nestedMeta.hideCopy) {
+    if (nestedMeta.title || nestedMeta.env || nestedMeta.hideCopy) {
       return nestedMeta
     }
   }
 
-  return { hideCopy: false, title: null }
+  return { env: null, hideCopy: false, title: null }
 }
 
 const ChoiceGroup = ({
@@ -76,7 +79,7 @@ const ChoiceGroup = ({
   }
 
   const activeCodeBlockMeta = getActiveCodeBlockMeta(activeChoiceElement.props.children)
-  const headerLabel = activeCodeBlockMeta.title ?? activeChoiceElement.props['data-choice-value']
+  const headerLabel = activeCodeBlockMeta.title ?? activeChoiceElement.props['data-choice-value'] ?? ''
 
   if (hide) {
     return <>{activeChoiceElement.props.children}</>
@@ -88,10 +91,10 @@ const ChoiceGroup = ({
       className="mt-5 mb-5 flex h-full flex-col overflow-hidden rounded-box border border-base-muted-light"
     >
       <div
-        className="not-prose flex min-h-10 items-center justify-between gap-3 border-b border-base-muted-light bg-base-muted-superlight px-4"
+        className="not-prose flex min-h-10 items-center relative justify-between gap-3 border-b border-base-muted-light bg-base-muted-superlight px-4"
         data-choice-group-header
       >
-        <div className="font-mono text-xs font-semibold tracking-[0.08em] text-base-muted">{headerLabel}</div>
+        <CodeBlockHeaderMeta label={headerLabel} env={activeCodeBlockMeta.env} />
         <div className="flex items-center gap-1">
           <label className="select select-xs min-w-28 w-fit">
             <select

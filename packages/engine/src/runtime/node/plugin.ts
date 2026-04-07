@@ -23,10 +23,9 @@ const loadDocsConfig = async (server: ViteDevServer, rootDir: string): Promise<D
   return docsConfig
 }
 
-const syncAndRestart = async (server: ViteDevServer, rootDir: string) => {
+const syncGeneratedPages = async (server: ViteDevServer, rootDir: string) => {
   const docsConfig = await loadDocsConfig(server, rootDir)
   syncGeneratedDocsPages({ rootDir, docsConfig })
-  await server.restart()
 }
 
 export const nivelPagesPlugin = (): Plugin => {
@@ -36,20 +35,27 @@ export const nivelPagesPlugin = (): Plugin => {
     configureServer(server) {
       const rootDir = server.config.root
       const assetsRoot = getNivelPublicAssetsRoot()
+      let pendingSync = Promise.resolve()
 
       server.watcher.add(assetsRoot)
 
-      const onChange = async (filePath: string) => {
+      const queueSync = (filePath: string) => {
         if (!isDocsSourcePath(filePath, rootDir)) {
           return
         }
 
-        await syncAndRestart(server, rootDir)
+        pendingSync = pendingSync
+          .then(async () => {
+            await syncGeneratedPages(server, rootDir)
+            server.ws.send({ type: 'full-reload' })
+          })
+          .catch((error: unknown) => {
+            console.error(error)
+          })
       }
 
-      server.watcher.on('add', onChange)
-      server.watcher.on('change', onChange)
-      server.watcher.on('unlink', onChange)
+      server.watcher.on('add', queueSync)
+      server.watcher.on('unlink', queueSync)
 
       server.watcher.on('change', (filePath) => {
         if (!isNivelAssetPath(filePath)) {
@@ -79,7 +85,7 @@ export const nivelPagesPlugin = (): Plugin => {
         next()
       })
     },
-    handleHotUpdate(ctx) {
+    async handleHotUpdate(ctx) {
       if (isNivelAssetPath(ctx.file)) {
         ctx.server.ws.send({ type: 'full-reload' })
         return []
@@ -89,6 +95,7 @@ export const nivelPagesPlugin = (): Plugin => {
         return
       }
 
+      await syncGeneratedPages(ctx.server, ctx.server.config.root)
       ctx.server.ws.send({ type: 'full-reload' })
       return []
     },

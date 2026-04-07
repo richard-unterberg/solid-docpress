@@ -4,14 +4,14 @@
   "type": "module",
   "scripts": {
     "generate:docs": "node --import tsx ./scripts/generateDocsPages.ts",
-    "predev": "pnpm --filter @unterberg/nivel build && pnpm generate:docs",
+    "predev": "pnpm generate:docs",
     "dev": "vike dev",
-    "prebuild": "pnpm --filter @unterberg/nivel build && pnpm generate:docs",
+    "prebuild": "pnpm generate:docs",
     "build": "vike build",
     "postbuild": "node --import tsx ./scripts/syncNivelAssets.ts",
     "prepreview": "pnpm build",
     "preview": "vike preview",
-    "pretypecheck": "pnpm --filter @unterberg/nivel build && pnpm generate:docs",
+    "pretypecheck": "pnpm generate:docs",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {

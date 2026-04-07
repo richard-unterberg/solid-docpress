@@ -1,6 +1,6 @@
 import { defineConfig } from 'tsup'
 
-export default defineConfig({
+export default defineConfig((overrideOptions) => ({
   entry: {
     index: 'src/index.ts',
     vike: 'src/vike/index.ts',
@@ -13,6 +13,6 @@ export default defineConfig({
   format: ['esm'],
   dts: true,
   sourcemap: true,
-  clean: true,
+  clean: !overrideOptions.watch,
   external: ['react', 'react-dom', 'vike', 'vike-react', 'vite'],
-})
+}))

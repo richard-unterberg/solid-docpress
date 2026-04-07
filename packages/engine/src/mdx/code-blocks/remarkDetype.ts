@@ -124,6 +124,7 @@ const transformTsToJs = async (node: { codeBlock: any; index: number; parent: an
   const jsCode = {
     ...codeBlock,
     lang: String(codeBlock.lang).replace('t', 'j'),
+    meta: replaceCodeBlockTitleFileExtension(codeBlock.meta, String(codeBlock.lang).replace('t', 'j')),
     value: codeBlockContentJs,
   }
 
@@ -143,6 +144,40 @@ const transformTsToJs = async (node: { codeBlock: any; index: number; parent: an
 }
 
 const replaceFileNameSuffixes = (value: string) => value.replaceAll('.ts', '.js')
+
+const replaceCodeBlockTitleFileExtension = (meta: unknown, outputLang: string) => {
+  if (typeof meta !== 'string' || meta.trim() === '') {
+    return meta
+  }
+
+  const parsedMeta = parseMetaString(meta)
+  const titleToken = parsedMeta.tokens.find((token) => token.name === 'title' && token.hasExplicitValue)
+  const titleValue = typeof parsedMeta.props.title === 'string' ? parsedMeta.props.title : null
+
+  if (!titleToken || !titleValue) {
+    return meta
+  }
+
+  const nextTitleValue = replaceTitleFileExtension(titleValue, outputLang)
+  if (nextTitleValue === titleValue) {
+    return meta
+  }
+
+  const quote = titleToken.raw.includes("title='") ? "'" : '"'
+  return meta.replace(titleToken.raw, `title=${quote}${nextTitleValue}${quote}`)
+}
+
+const replaceTitleFileExtension = (title: string, outputLang: string) => {
+  if (outputLang === 'jsx') {
+    return title.replace(/\.tsx$/i, '.jsx').replace(/\.ts$/i, '.js')
+  }
+
+  if (outputLang === 'js') {
+    return title.replace(/\.tsx$/i, '.jsx').replace(/\.ts$/i, '.js')
+  }
+
+  return title
+}
 
 const cleanUpCode = (code: string, isJsCode = false) => {
   if (isJsCode) {

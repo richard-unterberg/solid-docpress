@@ -7,6 +7,8 @@ import FrontendCode from './frontendCode.mdx'
 import { Quickstart } from './QuickStart/QuickStart'
 import SectionHeading from './SectionHeading'
 
+import './landing-code-samples.css'
+
 const Page = () => {
   return (
     <div className="landing-code-samples">

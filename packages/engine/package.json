@@ -54,6 +54,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
+    "test": "pnpm build && node --test tests/meta.test.mjs",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {

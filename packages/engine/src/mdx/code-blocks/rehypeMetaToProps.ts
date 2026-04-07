@@ -13,6 +13,7 @@ export const rehypeMetaToProps = () => {
       parent.properties = {
         ...parent.properties,
         ...meta.props,
+        ...(meta.env ? { 'data-code-env': meta.env } : {}),
         ...(meta.title ? { 'data-code-title': meta.title } : {}),
       }
     })

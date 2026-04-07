@@ -18,10 +18,7 @@ This includes server frameworks like [Hono](https://hono.dev) or [Express](https
   For more info, see <Link href="/getContext"><code>getContext()</code></Link>.
 </Alert>
 
-```js
-// server.js
-// Environment: server
-
+```js title="server.js" env=server
 import { Hono } from 'hono'
 import { telefunc } from 'telefunc'
 
@@ -52,10 +49,7 @@ After adding the `telefunc` middleware to your server, create a new file for you
 
 By convention, telefunctions are named after the events they handle (e.g., `onNewTodo`). This ensures close coupling between telefunctions and the UI that calls them.
 
-```ts
-// components/TodoList.telefunc.ts
-// Environment: server
-
+```ts title="components/TodoList.telefunc.ts" env=server
 export async function onNewTodo(title: string, text: string) {
   await db.execute('INSERT INTO todos VALUES (:title,:text)', { title, text })
   return await db.execute('SELECT id, title, text FROM todos')
@@ -76,10 +70,7 @@ Add guards to Telefunctions to prevent illegitimate access.
 - Use <b><Link href="/Abort" text={(<code>throw Abort()</code>)} /></b> (or return early) if the client is unauthenticated or doesn't have permission to access the requested resource.
 - Use <b><Link href="/shield" text={(<code>shield()</code>)} /></b> to validate telefunction call arguments.
   
-```ts
-// Todos.telefunc.ts
-// Environment: server
-
+```ts title="components/TodoList.telefunc.ts" env=server
 import { getContext, shield } from 'telefunc'
 // When using TypeScript, Telefunc automatically generates
 // shield for argument type inference and runtime validation
@@ -99,10 +90,7 @@ export async function onNewTodo(title: string, text: string) {
 
 You can use Telefunc with most UI frameworks (e.g., React, Vue, Solid) or plain JavaScript.
 
-```jsx choice=react client
-// components/TodoList.jsx
-// Environment: client
-
+```jsx choice=react title="components/TodoList.jsx" env=client
 import { onNewTodo } from './TodoList.telefunc'
 
 function TodoList() {
@@ -114,12 +102,7 @@ function TodoList() {
 }
 ```
 
-```html choice=vue client
-<!-- components/TodoList.vue -->
-<!-- Environment: client -->
-
-<!-- ... -->
-
+```html choice=vue title="components/TodoList.vue" env=client
 <script>
 import { onNewTodo } from './TodoList.telefunc.js'
 
@@ -133,10 +116,7 @@ export default {
 </script>
 ```
 
-```jsx choice=solid client
-// components/TodoList.jsx
-// Environment: client
-
+```jsx choice=solid title="components/TodoList.jsx" env=client
 import { onNewTodo } from './TodoList.telefunc'
 
 function TodoList() {
@@ -148,9 +128,7 @@ function TodoList() {
 }
 ```
 
-```html choice=svelte MyNewTitle
-<!-- src/routes/TodoList.svelte -->
-<!-- Environment: client -->
+```html choice=svelte title="src/routes/TodoList.svelte" env=client
 
 <script>
 import { onNewTodo } from './TodoList.telefunc'
@@ -175,10 +153,7 @@ _Context is not populated by default._ Add arbitrary values, including from serv
   The following example uses Hono, but the same pattern applies for all framework integrations.
 </Alert>
 
-```js
-// server.ts
-// Environment: server
- 
+```js title="server.ts" env=server
 import { Hono } from 'hono'
 import { telefunc } from 'telefunc'
 
@@ -202,10 +177,7 @@ Properties added to Telefunc context are returned type-safely from `getContext()
 </Alert>
 
 
-```js
-// TodoList.telefunc.js
-// Environment: server
- 
+```js title="components/TodoList.telefunc.js" env=server
 import { getContext } from 'telefunc'
  
 export async function onLoad() {

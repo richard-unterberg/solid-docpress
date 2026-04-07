@@ -1,6 +1,19 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "paths": {
+      "@unterberg/nivel": ["../engine/src/index.ts"],
+      "@unterberg/nivel/client": ["../engine/src/runtime/client/index.ts"],
+      "@unterberg/nivel/mdx": ["../engine/src/mdx/index.ts"],
+      "@unterberg/nivel/mdx/code-blocks": [
+        "../engine/src/mdx/code-blocks/index.ts"
+      ],
+      "@unterberg/nivel/runtime/client": [
+        "../engine/src/runtime/client/index.ts"
+      ],
+      "@unterberg/nivel/runtime/node": ["../engine/src/runtime/node/index.ts"],
+      "@unterberg/nivel/vike": ["../engine/src/vike/index.ts"]
+    },
     "types": ["react", "react-dom"]
   },
   "include": [

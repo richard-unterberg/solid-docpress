@@ -9,10 +9,12 @@ import {
   type ReactNode,
   useRef,
 } from 'react'
+import { CodeBlockHeaderMeta } from './CodeBlockHeaderMeta.js'
 import { CodeBlockCopyButton, trimTrailingWhitespace } from './CopyButton.js'
 import { useIsInCodeBlockGroup } from './context.js'
 
 type PreProps = ComponentPropsWithoutRef<'pre'> & {
+  'data-code-env'?: string
   'data-code-title'?: string
   'data-language'?: string
   'data-language-label'?: string
@@ -56,6 +58,7 @@ const Pre = ({ children, className, ...props }: PreProps) => {
   const preRef = useRef<HTMLPreElement>(null)
   const isInChoiceGroup = useIsInCodeBlockGroup()
   const label = asTrimmedString(props['data-code-title']) ?? getLanguageLabel(props)
+  const env = asTrimmedString(props['data-code-env'])
   const fileState = props['file-added'] ? 'added' : props['file-removed'] ? 'removed' : null
   const hideMenu = props['hide-menu'] === 'true'
 
@@ -79,7 +82,7 @@ const Pre = ({ children, className, ...props }: PreProps) => {
     <div
       className={cmMerge(
         'group relative h-full not-prose overflow-hidden',
-        isInChoiceGroup ? '' : 'mb-6 rounded-box border border-base-muted-light bg-base-100/60',
+        isInChoiceGroup ? '' : 'mb-6 rounded-box border border-base-muted-light',
         className,
       )}
       data-code-block-frame=""
@@ -87,10 +90,10 @@ const Pre = ({ children, className, ...props }: PreProps) => {
     >
       {!isInChoiceGroup && (
         <div
-          className="flex min-h-10 items-center justify-between gap-3 border-b border-base-muted-light bg-base-muted-superlight! px-4"
+          className="flex min-h-10 relative items-center justify-between gap-3 border-b border-base-muted-light bg-base-muted-superlight! px-4"
           data-code-block-header=""
         >
-          <div className="font-mono text-xs font-semibold tracking-[0.08em] text-base-muted">{label}</div>
+          <CodeBlockHeaderMeta label={label} env={env} />
           {copyButton}
         </div>
       )}
