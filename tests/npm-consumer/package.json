@@ -9,7 +9,6 @@
     "dev": "vike dev",
     "prebuild": "npm run generate:docs",
     "build": "vike build",
-    "postbuild": "node --import tsx ./scripts/syncNivelAssets.ts",
     "pretypecheck": "npm run generate:docs",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
