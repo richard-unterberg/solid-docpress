@@ -1,7 +1,7 @@
-import type { DocsConfig } from '@unterberg/nivel'
+import { defineDocsConfig } from '@unterberg/nivel/config'
 import { docsGraph } from '../docs/docs.graph'
 
-const docsConfig = {
+const docsConfig = defineDocsConfig({
   graph: docsGraph,
   siteTitle: 'Nivel npm consumer',
   siteDescription: 'Minimal standalone consumer for the published @unterberg/nivel package.',
@@ -18,6 +18,6 @@ const docsConfig = {
     dark: 'telefunc-dark',
     defaultPreference: 'dark',
   },
-} satisfies DocsConfig
+})
 
 export default docsConfig

@@ -1,44 +1,7 @@
-export { Alert, type AlertVariant } from './mdx/components/Alert.js'
-export { ChoiceGroup } from './mdx/code-blocks/ChoiceGroup.js'
 export {
-  CodeBlockTransformer,
-  type LineBreak,
-} from './mdx/code-blocks/CodeBlockTransformer.js'
-export {
-  FileAdded,
-  FileRemoved,
-} from './mdx/code-blocks/FileState.js'
-export { Pre } from './mdx/code-blocks/Pre.js'
-export { Link, type LinkProps } from './mdx/components/Link.js'
-export {
-  Overview,
-  type OverviewItem,
-} from './mdx/components/Overview.js'
-export { RepoLink } from './mdx/components/RepoLink.js'
-export {
-  Table,
-  type TableData,
-  type TableProps,
-} from './mdx/components/Table.js'
-export type {
-  UniversalMdxCodeBlockChoiceStore,
-  UniversalMdxRuntimeValue,
-  UniversalMdxTranslationFn,
-  UniversalResolveDocLinkArgs,
-  UniversalResolveDocLinkFn,
-  UniversalResolvedDocLink,
-  UniversalResolvedOverviewItem,
-  UniversalResolveOverviewItemFn,
-} from './mdx/components/types.js'
-export {
-  UniversalMdxProvider,
-  useUniversalMdxRuntime,
-} from './mdx/components/UniversalMdxProvider.js'
-export {
-  baseAssets,
-  nivelAssetUrl,
-  nivelPublicRoute,
-} from './shared/assets.js'
+  defineDocsConfig,
+  defineDocsGraph,
+} from './docs/defineDocs.js'
 export type {
   DocHeading,
   DocPageData,
@@ -70,4 +33,45 @@ export type {
   ResolvedDocsSection,
   ThemePreference,
 } from './docs/types.js'
+export { ChoiceGroup } from './mdx/code-blocks/ChoiceGroup.js'
+export {
+  CodeBlockTransformer,
+  type LineBreak,
+} from './mdx/code-blocks/CodeBlockTransformer.js'
+export {
+  FileAdded,
+  FileRemoved,
+} from './mdx/code-blocks/FileState.js'
+export { Pre } from './mdx/code-blocks/Pre.js'
+export { Alert, type AlertVariant } from './mdx/components/Alert.js'
+export { Link, type LinkProps } from './mdx/components/Link.js'
+export {
+  Overview,
+  type OverviewItem,
+} from './mdx/components/Overview.js'
+export { RepoLink } from './mdx/components/RepoLink.js'
+export {
+  Table,
+  type TableData,
+  type TableProps,
+} from './mdx/components/Table.js'
+export type {
+  UniversalMdxCodeBlockChoiceStore,
+  UniversalMdxRuntimeValue,
+  UniversalMdxTranslationFn,
+  UniversalResolveDocLinkArgs,
+  UniversalResolveDocLinkFn,
+  UniversalResolvedDocLink,
+  UniversalResolvedOverviewItem,
+  UniversalResolveOverviewItemFn,
+} from './mdx/components/types.js'
+export {
+  UniversalMdxProvider,
+  useUniversalMdxRuntime,
+} from './mdx/components/UniversalMdxProvider.js'
+export {
+  baseAssets,
+  nivelAssetUrl,
+  nivelPublicRoute,
+} from './shared/assets.js'
 export { renderInlineMarkdown } from './shared/renderInlineMarkdown.js'

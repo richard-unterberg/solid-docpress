@@ -1,6 +1,6 @@
 {
   "name": "@unterberg/nivel",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "sideEffects": false,
   "repository": {
@@ -31,6 +31,10 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./config": {
+      "types": "./dist/config.d.ts",
+      "import": "./dist/config.js"
+    },
     "./vike": {
       "types": "./dist/vike.d.ts",
       "import": "./dist/vike.js"
@@ -60,7 +64,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "test": "pnpm build && node --test tests/meta.test.mjs",
+    "test": "pnpm build && node --test tests/*.test.mjs",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {

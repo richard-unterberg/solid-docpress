@@ -1,6 +1,6 @@
-import type { DocsGraph } from '@unterberg/nivel'
+import { defineDocsGraph } from '@unterberg/nivel/config'
 
-export const docsGraph = {
+export const docsGraph = defineDocsGraph({
   items: [
     {
       kind: 'section',
@@ -18,4 +18,4 @@ export const docsGraph = {
       ],
     },
   ],
-} satisfies DocsGraph
+})

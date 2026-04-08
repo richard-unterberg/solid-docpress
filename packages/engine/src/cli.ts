@@ -1,17 +1,21 @@
 import path from 'node:path'
 import { syncGeneratedDocsPages } from './runtime/node/codegen.js'
 import { loadDocsConfigWithTsx } from './runtime/node/loadDocsConfigWithTsx.js'
+import { getInitSummary, initConsumer } from './runtime/node/scaffold.js'
 
 const usage = [
   'Usage:',
   '  nivel prepare [--root <path>]',
+  '  nivel init [--root <path>] [--force]',
   '',
   'Commands:',
   '  prepare    Generate docs pages from pages/+docs.ts',
+  '  init       Scaffold visible consumer files and standard docs scripts',
 ].join('\n')
 
 const parseCliArgs = (args: string[]) => {
   let command: string | null = null
+  let force = false
   let rootDir = process.cwd()
 
   for (let index = 0; index < args.length; index += 1) {
@@ -20,6 +24,7 @@ const parseCliArgs = (args: string[]) => {
     if (value === '--help' || value === '-h') {
       return {
         command: 'help',
+        force,
         rootDir,
       }
     }
@@ -36,6 +41,11 @@ const parseCliArgs = (args: string[]) => {
       continue
     }
 
+    if (value === '--force') {
+      force = true
+      continue
+    }
+
     if (value.startsWith('--')) {
       throw new Error(`Unknown option ${value}`)
     }
@@ -49,6 +59,7 @@ const parseCliArgs = (args: string[]) => {
 
   return {
     command,
+    force,
     rootDir,
   }
 }
@@ -62,6 +73,15 @@ const runPrepare = async (rootDir: string) => {
   })
 }
 
+const runInit = (rootDir: string, force: boolean) => {
+  const result = initConsumer({
+    force,
+    rootDir,
+  })
+
+  process.stdout.write(getInitSummary(result))
+}
+
 export const runCli = async (args: string[]) => {
   const parsed = parseCliArgs(args)
 
@@ -71,7 +91,12 @@ export const runCli = async (args: string[]) => {
   }
 
   if (parsed.command !== 'prepare') {
-    throw new Error(`Unknown command ${parsed.command}`)
+    if (parsed.command !== 'init') {
+      throw new Error(`Unknown command ${parsed.command}`)
+    }
+
+    runInit(parsed.rootDir, parsed.force)
+    return
   }
 
   await runPrepare(parsed.rootDir)

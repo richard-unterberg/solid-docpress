@@ -1,13 +1,16 @@
 # Nivel Architecture
 
 - Read this file before making structural changes to the repo.
-- This repo is a pnpm TypeScript monorepo with exactly two packages: `packages/engine` and `packages/consumer-test`.
+- This repo is a pnpm TypeScript monorepo with two workspace packages: `packages/engine` and `packages/consumer-test`. It also contains the standalone npm fixture at `tests/npm-consumer`.
 - `@unterberg/nivel` owns the docs runtime. That includes Vike integration, MDX/Vite setup, graph validation, route code generation, page-shell rendering, and any engine-provided UI primitives.
 - `packages/consumer-test` is intentionally thin. It should only own docs content, `docs/docs.graph.ts`, `pages/+docs.ts`, and any optional leaf-level custom components needed by content.
+- `tests/npm-consumer` is the external-consumer compatibility fixture. Keep it aligned with the recommended published-package integration, not workspace-only shortcuts.
 - `docs/docs.graph.ts` is the single source of truth for docs structure. Do not introduce consumer-owned `headings.ts`, `menuNavigation.ts`, or duplicated route metadata.
 - Generated pages under `packages/consumer-test/pages/(nivel-generated)` are engine internals. They may be regenerated at any time and must not be edited by hand.
-- Keep v1 minimal. Do not add search, i18n, theme switching, product-site shell concerns, or docpress-style feature expansion unless explicitly requested.
+- Keep v1 minimal. Do not add i18n, product-site shell concerns, or docpress-style feature expansion unless explicitly requested.
 - Prefer moving logic into `@unterberg/nivel` over duplicating docs behavior inside the consumer.
+- The standard visible consumer shell files are `pages/+config.ts`, `pages/+Head.tsx`, `pages/+Layout.tsx`, `pages/+onCreateGlobalContext.ts`, `pages/+Wrapper.tsx`, and `global.d.ts`. They should remain local, visible, and editable in the consumer even when scaffolded by the CLI.
+- Consumer CSS and Tailwind/theme files stay hand-authored. Do not move them into engine-generated scaffolding.
 - When the user provides repo URLs as alignment references, inspect those repos before adapting UI, branding, layout, or content structure. Do not rely on memory or placeholders when a reference repo/package was supplied.
 - `https://github.com/richard-unterberg/vike-docpress`, specifically `packages/telefunc`, is the main UI migration spec for this repo. When migrating UI, inspect that reference first and preserve its layout and styling direction unless explicitly told otherwise.
 - `legacy/telefunc-consumer` is the source of truth for Telefunc branding direction, docs layout direction, content/path structure, formatting workflow, and graph migration details.

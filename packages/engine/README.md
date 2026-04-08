@@ -1,70 +1,33 @@
 # nivel engine
 
-docs builder proof of concept for generating vike-based documentation sites with a single docs graph as the source of truth.
+`@unterberg/nivel` is the docs runtime for this repo's Vike-based documentation sites.
 
-monorepo structure:
-
-- `packages/engine`: the reusable `@unterberg/nivel` package
-- `packages/consumer-test`: the reference consumer used to exercise the engine against real docs content, currently based on the [Telefunc docs](https://telefunc.com)
-
-## Alpha Status
-
-This project is an early proof of concept and should be expected to have rough edges. The main goal is to validate the core engine ideas and architecture, not to provide a polished general-purpose doc builder right now. Some specific things to keep in mind:
-
-- Expect breaking changes.
-- The public API is not stable yet. (blackbox)
-- The supported stack fixed currently to Vike + Vite + React.
-- `basePath` is currently fixed to `/docs`.
-- The consumer app in this repo is still the main integration example.
-
-If you need a polished general-purpose docpress replacement today, this is not that yet.
-
-## What It Does
-
-The engine currently owns the core docs runtime:
+It currently owns:
 
 - docs graph validation and resolution
 - generated Vike routes from MDX content
-- shared docs layout pieces such as navbar, sidebar, table of contents, pagination, and meta head wiring
+- docs layout primitives such as navbar, sidebar, table of contents, pagination, and meta head wiring
 - MDX setup with built-in docs components and code-block transforms
-- asset handling for engine-owned fonts and shared static assets
+- optional Algolia search wiring
+- engine-owned fonts and shared assets
 
-The intended split is:
+The supported stack is currently Vike + Vite + React. Expect breaking changes while the package is still alpha.
 
-- the engine owns behavior, runtime wiring, and reusable UI primitives
-- the consumer owns docs content, `docs/docs.graph.ts`, `pages/+docs.ts`, and brand/theme assets
-
-## Minimal Shape
-
-At the moment, a consumer looks roughly like this:
+## Public Helpers
 
 ```ts
-// pages/+docs.ts
-import { defineDocsConfig } from '@unterberg/nivel'
-import { docsGraph } from '../docs/docs.graph'
-
-export default defineDocsConfig({
-  siteTitle: 'My Docs',
-  basePath: '/docs',
-  graph: docsGraph,
-  algolia: {
-    appId: 'YOUR_APP_ID',
-    apiKey: 'YOUR_SEARCH_ONLY_API_KEY',
-    indexName: 'YOUR_INDEX_NAME',
-  },
-})
+import { defineDocsConfig, defineDocsGraph } from '@unterberg/nivel/config'
 ```
 
-```ts
-// docs/docs.graph.ts
-import { defineDocsGraph } from '@unterberg/nivel'
+Both helpers are identity functions. They are also re-exported from `@unterberg/nivel`, but the dedicated config entry keeps `pages/+docs.ts` and `docs/docs.graph.ts` on a lean config-time import path.
 
-export const docsGraph = defineDocsGraph({
+```ts
+const docsGraph = defineDocsGraph({
   items: [
     {
       kind: 'section',
       id: 'docs',
-      title: 'Documentation',
+      title: 'Docs',
       items: [
         {
           kind: 'page',
@@ -77,31 +40,71 @@ export const docsGraph = defineDocsGraph({
     },
   ],
 })
+
+export default defineDocsConfig({
+  siteTitle: 'My Docs',
+  siteDescription: 'Documentation site powered by @unterberg/nivel.',
+  basePath: '/docs',
+  graph: docsGraph,
+})
 ```
 
-Then the consumer wires:
+## Recommended Consumer Files
 
-- `@unterberg/nivel/vike` into Vike config
-- `MetaHead` in global `+Head`
-- `AppLayout` in global `+Layout`
-- `nivel prepare` before dev/build/typecheck
-- `@import '@unterberg/nivel/tailwind-sources.css'` in the consumer Tailwind entry
+A consumer should keep these files explicit and local:
 
-Algolia search is optional. When configured, `apiKey` must be a search-only public key because requests are made from the browser.
+- hand-authored: `pages/+docs.ts`, `docs/docs.graph.ts`, docs content, brand assets, and consumer CSS/Tailwind/theme files
+- scaffolded once but still editable: `pages/+config.ts`, `pages/+Head.tsx`, `pages/+Layout.tsx`, `pages/+onCreateGlobalContext.ts`, `pages/+Wrapper.tsx`, and `global.d.ts`
 
-## Current Limitations
+Only `(nivel-generated)` stays engine-generated.
 
-- The package is still alpha and should be expected to change.
-- The supported stack is currently narrow: Vike + Vite + React.
-- `basePath` is currently fixed to `/docs`.
-- The package is still validated mainly through one real consumer, not a broad set of independent adopters.
-- The setup and examples are still catching up with the implementation, so the integration story is not fully polished yet.
+## Standard Vike Config
 
-## Future Plans
+Use the helper from `@unterberg/nivel/vike` for the standard Vike setup:
 
-- Continue hardening the engine/consumer split so docs behavior stays in `@unterberg/nivel` and the consumer remains thin.
-- Improve the package-level docs and examples so setup is easier to understand without reading the consumer app in detail.
-- Reduce hard-coded assumptions where it makes sense, starting with the areas that currently make the engine feel too tied to its first consumer.
+```ts
+// pages/+docs.ts
+import { defineDocsConfig } from '@unterberg/nivel/config'
+import { docsGraph } from '../docs/docs.graph'
+
+export default defineDocsConfig({
+  siteTitle: 'My Docs',
+  siteDescription: 'Documentation site powered by @unterberg/nivel.',
+  basePath: '/docs',
+  graph: docsGraph,
+})
+```
+
+```ts
+// pages/+config.ts
+import { createNivelVikeConfig } from '@unterberg/nivel/vike'
+import docsConfig from './+docs'
+
+export { config }
+
+const config = createNivelVikeConfig(docsConfig)
+```
+
+`createNivelVikeConfig()` owns the standard `title`, `description`, Vike React extension, default `data-theme`, `passToClient`, and `prerender` wiring. Consumers can still spread or override it locally if they need extra Vike config.
+
+## CLI
+
+`nivel prepare` generates docs pages from `pages/+docs.ts`.
+
+`nivel init` scaffolds the visible consumer shell files and updates the standard docs scripts in `package.json`.
+
+```bash
+nivel init
+nivel prepare
+```
+
+`nivel init` does not create or overwrite consumer CSS/Tailwind/theme files. Keep those hand-authored. Add the engine Tailwind helper manually in your stylesheet:
+
+```css
+@import '@unterberg/nivel/tailwind-sources.css';
+```
+
+If you use Algolia, `apiKey` must be a search-only public key because requests are made from the browser.
 
 ## Commands
 
