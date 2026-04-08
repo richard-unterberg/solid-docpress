@@ -27,13 +27,13 @@ importers:
         specifier: workspace:*
         version: link:../engine
       react:
-        specifier: ^19.1.1
+        specifier: ^19.2.4
         version: 19.2.4
       react-dom:
-        specifier: ^19.1.1
+        specifier: ^19.2.4
         version: 19.2.4(react@19.2.4)
       vike:
-        specifier: ^0.4.255
+        specifier: ^0.4.256
         version: 0.4.256(react-streaming@0.4.17(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3))
       vike-react:
         specifier: ^0.6.21
@@ -58,10 +58,10 @@ importers:
         specifier: ^4.1.12
         version: 4.2.2(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3))
       '@types/react':
-        specifier: ^19.1.12
+        specifier: ^19.2.14
         version: 19.2.14
       '@types/react-dom':
-        specifier: ^19.1.9
+        specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.14)
       daisyui:
         specifier: ^5.5.19
@@ -91,7 +91,7 @@ importers:
         specifier: ^4.0.2
         version: 4.0.2
       tailwindcss:
-        specifier: ^4.1.12
+        specifier: ^4.2.2
         version: 4.2.2
       typescript:
         specifier: ^6.0.2
@@ -160,7 +160,7 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0
       vike:
-        specifier: ^0.4.255
+        specifier: ^0.4.256
         version: 0.4.256(react-streaming@0.4.17(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3))
       vike-react:
         specifier: ^0.6.21
@@ -169,20 +169,20 @@ importers:
         specifier: ^7.3.1
         version: 7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.3)
       zustand:
-        specifier: ^5.0.8
+        specifier: ^5.0.12
         version: 5.0.12(@types/react@19.2.14)(react@19.2.4)
     devDependencies:
       '@types/node':
         specifier: ^24.5.2
         version: 24.12.0
       '@types/react':
-        specifier: ^19.1.12
+        specifier: ^19.2.14
         version: 19.2.14
       '@types/react-dom':
-        specifier: ^19.1.9
+        specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.14)
       tsup:
-        specifier: ^8.5.0
+        specifier: ^8.5.1
         version: 8.5.1(jiti@2.6.1)(postcss@8.5.8)(tsx@4.21.0)(typescript@6.0.2)(yaml@2.8.3)
       typescript:
         specifier: ^6.0.2
