@@ -1,11 +1,10 @@
 import cm, { cmMerge } from '@classmatejs/react'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, TextSearch } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { usePageContext } from 'vike-react/usePageContext'
 import { getActiveSectionByPathname } from '../../../../docs/resolveDocsConfig.js'
 import type {
   DocsThemeConfig,
-  ResolvedDocsAlgoliaConfig,
   ResolvedDocsBrandConfig,
   ResolvedDocsSection,
   ResolvedNavbarItem,
@@ -13,9 +12,10 @@ import type {
 import { withSiteBaseUrl } from '../../../../shared/assets.js'
 import { renderInlineMarkdown } from '../../../../shared/renderInlineMarkdown.js'
 import { getDocsGlobalContext } from '../../docsGlobalContext.js'
+import { useDocsSearchActions } from '../../store/runtime-store.js'
 import { Brand } from '../Brand.js'
 import { LayoutComponent } from '../LayoutComponent.js'
-import { Search } from '../Search.js'
+import { Search, SearchTrigger } from '../Search.js'
 import SocialIcons from '../SocialLinks.js'
 import { ThemeSwitch } from '../ThemeSwitch.js'
 import { MegaMenu } from './MegaMenu/index.js'
@@ -23,13 +23,12 @@ import { useNavbarScroll } from './useNavbarScroll.js'
 
 interface NavbarProps {
   brand: ResolvedDocsBrandConfig
-  algolia: ResolvedDocsAlgoliaConfig | null
   navbarItems: ResolvedNavbarItem[]
   theme: Required<DocsThemeConfig>
   sections: ResolvedDocsSection[]
 }
 
-export const Navbar = ({ brand, algolia, navbarItems, theme, sections }: NavbarProps) => {
+export const Navbar = ({ brand, navbarItems, theme, sections }: NavbarProps) => {
   const { urlPathname } = usePageContext()
   const isLandingPage = urlPathname === '/'
   const { isLandingPageScrolled } = useNavbarScroll(isLandingPage)
@@ -39,6 +38,7 @@ export const Navbar = ({ brand, algolia, navbarItems, theme, sections }: NavbarP
   const docs = getDocsGlobalContext(pageContext as Parameters<typeof getDocsGlobalContext>[0])
   const activeSection = getActiveSectionByPathname(docs, pageContext.urlPathname)
   const [hoveredSectionId, setHoveredSectionId] = useState<string | undefined>(activeSection?.id ?? sections[0]?.id)
+  const { toggle: toggleSearch } = useDocsSearchActions()
 
   const showChrome = useMemo(
     () => !isLandingPage || isLandingPageScrolled || !isMegaMenuOpen,
@@ -116,10 +116,21 @@ export const Navbar = ({ brand, algolia, navbarItems, theme, sections }: NavbarP
                       </a>
                     </li>
                   ))}
+                  {docs.algolia ? (
+                    <li>
+                      <button
+                        type="button"
+                        onClick={toggleSearch}
+                        className="btn btn-ghost min-w-30 px-2 text-lg whitespace-nowrap tracking-tight"
+                      >
+                        Search
+                        <TextSearch className="h-4 w-4" />
+                      </button>
+                    </li>
+                  ) : null}
                 </ul>
               </nav>
               <div className="flex flex-1 items-center justify-end gap-2">
-                <Search algolia={algolia} />
                 <SocialIcons />
                 <ThemeSwitch theme={theme} />
               </div>
@@ -153,7 +164,7 @@ export const Navbar = ({ brand, algolia, navbarItems, theme, sections }: NavbarP
                     </li>
                   ))}
                 </ul>
-                <Search algolia={algolia} />
+                <SearchTrigger />
               </nav>
               <div className="flex w-78 flex-1 items-center justify-end gap-2 lg:flex-none">
                 <SocialIcons />
@@ -163,6 +174,7 @@ export const Navbar = ({ brand, algolia, navbarItems, theme, sections }: NavbarP
           )}
         </LayoutComponent>
       </StyledNavbar>
+      <Search />
       <MegaMenu
         sections={sections}
         activeSectionId={activeSection?.id}

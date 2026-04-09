@@ -1,11 +1,14 @@
 import { cmMerge } from '@classmatejs/react'
 import { useQuery } from '@tanstack/react-query'
 import { ArrowRightFromLine, MessageCircleQuestion, Search as SearchIcon, TriangleAlert } from 'lucide-react'
+import type { RefObject } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import type { ResolvedDocsAlgoliaConfig } from '../../../docs/types.js'
+import { usePageContext } from 'vike-react/usePageContext'
 import { withSiteBaseUrl } from '../../../shared/assets.js'
 import { searchAlgoliaIndex } from '../search.js'
+import { getDocsGlobalContext } from '../docsGlobalContext.js'
+import { useDocsSearchActions, useDocsSearchStore } from '../store/runtime-store.js'
 import { LayoutComponent } from './LayoutComponent.js'
 
 const MIN_QUERY_LENGTH = 2
@@ -27,57 +30,19 @@ const useDebouncedValue = (value: string, delayMs: number) => {
   return debouncedValue
 }
 
-export const Search = ({ algolia }: { algolia: ResolvedDocsAlgoliaConfig | null }) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [query, setQuery] = useState('')
+export const SearchTrigger = () => {
+  const pageContext = usePageContext()
+  const docs = getDocsGlobalContext(pageContext as Parameters<typeof getDocsGlobalContext>[0])
+  const { open, setQuery } = useDocsSearchActions()
+  const query = useDocsSearchStore((state) => state.query)
   const [isSearchHovered, setIsSearchHovered] = useState(false)
-  const containerRef = useRef<HTMLDivElement | null>(null)
-  const suggestionBoxRef = useRef<HTMLDivElement | null>(null)
-  const debouncedQuery = useDebouncedValue(query, QUERY_DEBOUNCE_MS)
-  const normalizedQuery = debouncedQuery.trim()
-  const canSearch = Boolean(algolia) && normalizedQuery.length >= MIN_QUERY_LENGTH
 
-  const searchQuery = useQuery({
-    queryKey: ['nivel-algolia-search', algolia?.appId, algolia?.indexName, normalizedQuery],
-    queryFn: ({ signal }) => searchAlgoliaIndex({ config: algolia!, query: normalizedQuery, signal }),
-    enabled: isOpen && canSearch,
-    retry: false,
-  })
-
-  useEffect(() => {
-    if (!isOpen) {
-      return
-    }
-
-    const handlePointerDown = (event: PointerEvent) => {
-      const target = event.target as Node
-
-      if (!containerRef.current?.contains(target) && !suggestionBoxRef.current?.contains(target)) {
-        setIsOpen(false)
-      }
-    }
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsOpen(false)
-      }
-    }
-
-    document.addEventListener('pointerdown', handlePointerDown)
-    document.addEventListener('keydown', handleKeyDown)
-
-    return () => {
-      document.removeEventListener('pointerdown', handlePointerDown)
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [isOpen])
-
-  if (!algolia) {
+  if (!docs.algolia) {
     return null
   }
 
   return (
-    <div ref={containerRef} className="relative">
+    <>
       <div className="hidden md:block">
         <label
           className={cmMerge(
@@ -98,38 +63,89 @@ export const Search = ({ algolia }: { algolia: ResolvedDocsAlgoliaConfig | null 
               'w-full placeholder:text-base-muted-medium transition-colors',
               isSearchHovered && 'placeholder:text-base-muted',
             )}
-            onFocus={() => {
-              setIsOpen(true)
-            }}
+            onFocus={open}
             onChange={(event) => {
               setQuery(event.target.value)
-              setIsOpen(true)
+              open()
             }}
           />
         </label>
       </div>
-      <button
-        type="button"
-        className="btn btn-ghost btn-square md:hidden"
-        aria-label="Search docs"
-        onClick={() => {
-          setIsOpen(true)
-        }}
-      >
+      <button type="button" className="btn btn-ghost btn-square md:hidden" aria-label="Search docs" onClick={open}>
         <SearchIcon className="h-4 w-4" />
       </button>
+    </>
+  )
+}
+
+export const Search = () => {
+  const pageContext = usePageContext()
+  const docs = getDocsGlobalContext(pageContext as Parameters<typeof getDocsGlobalContext>[0])
+  const { close, setQuery } = useDocsSearchActions()
+  const isOpen = useDocsSearchStore((state) => state.isOpen)
+  const query = useDocsSearchStore((state) => state.query)
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const suggestionBoxRef = useRef<HTMLDivElement | null>(null)
+  const previousPathnameRef = useRef(pageContext.urlPathname)
+  const debouncedQuery = useDebouncedValue(query, QUERY_DEBOUNCE_MS)
+  const normalizedQuery = debouncedQuery.trim()
+  const canSearch = Boolean(docs.algolia) && normalizedQuery.length >= MIN_QUERY_LENGTH
+
+  const searchQuery = useQuery({
+    queryKey: ['nivel-algolia-search', docs.algolia?.appId, docs.algolia?.indexName, normalizedQuery],
+    queryFn: ({ signal }) => searchAlgoliaIndex({ config: docs.algolia!, query: normalizedQuery, signal }),
+    enabled: isOpen && canSearch,
+    retry: false,
+  })
+
+  useEffect(() => {
+    if (previousPathnameRef.current !== pageContext.urlPathname) {
+      close()
+      previousPathnameRef.current = pageContext.urlPathname
+    }
+  }, [close, pageContext.urlPathname])
+
+  useEffect(() => {
+    if (!isOpen) {
+      return
+    }
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target as Node
+
+      if (!containerRef.current?.contains(target) && !suggestionBoxRef.current?.contains(target)) {
+        close()
+      }
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        close()
+      }
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown)
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [close, isOpen])
+
+  if (!docs.algolia) {
+    return null
+  }
+
+  return (
+    <div ref={containerRef} className="relative">
       <SearchSuggestionBox
         contentRef={suggestionBoxRef}
         isError={searchQuery.isError}
         isLoading={searchQuery.isFetching}
         isOpen={isOpen}
-        onClose={() => {
-          setIsOpen(false)
-        }}
-        onQueryChange={(nextQuery) => {
-          setQuery(nextQuery)
-          setIsOpen(true)
-        }}
+        onClose={close}
+        onQueryChange={setQuery}
         query={query}
         results={searchQuery.data ?? []}
       />
@@ -138,7 +154,7 @@ export const Search = ({ algolia }: { algolia: ResolvedDocsAlgoliaConfig | null 
 }
 
 type SearchSuggestionBoxProps = {
-  contentRef: React.RefObject<HTMLDivElement | null>
+  contentRef: RefObject<HTMLDivElement | null>
   isError: boolean
   isLoading: boolean
   isOpen: boolean
@@ -187,7 +203,7 @@ const SearchSuggestionBox = ({
       <LayoutComponent
         ref={contentRef}
         $size="sm"
-        className="mt-5 relative z-2 pt-6 p-6 bg-base-100/70 rounded-box shadow-lg shadow-primary-muted-light"
+        className="mt-5 relative z-2 rounded-box bg-base-100/70 p-6 pt-6 shadow-lg shadow-primary-muted-light"
       >
         <input
           placeholder="Search docs"
@@ -221,17 +237,17 @@ const SearchSuggestionBox = ({
           ) : !isLoading && results.length === 0 ? (
             <div className="text-sm text-base-muted">No results found.</div>
           ) : (
-            <div className="max-h-80 overflow-y-auto -mx-2 p-2">
+            <div className="-mx-2 max-h-80 overflow-y-auto p-2">
               <ul className="flex flex-col gap-2">
                 {results.map((result) => (
                   <li key={result.href}>
                     <a
                       href={withSiteBaseUrl(result.href)}
-                      className="block rounded-box border border-base-muted-medium bg-base-100 p-4 hover:border-primary-muted hover:bg-base-200 shadow-md"
+                      className="block rounded-box border border-base-muted-medium bg-base-100 p-4 shadow-md hover:border-primary-muted hover:bg-base-200"
                       onClick={onClose}
                     >
                       <div className="mb-2 flex items-center justify-start gap-2">
-                        <div className="text-base-content font-bold">{result.title}</div>
+                        <div className="font-bold text-base-content">{result.title}</div>
                         {result.sectionTitle ? (
                           <div className="flex items-center gap-1 text-sm text-base-muted-medium">
                             <ArrowRightFromLine className="h-3 w-3" /> {result.sectionTitle}
