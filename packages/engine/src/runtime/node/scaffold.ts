@@ -24,6 +24,26 @@ type PackageJsonShape = {
   scripts?: Record<string, string>
 }
 
+const getViteConfigTemplate = () => {
+  return [
+    "import { nivelTailwindVite } from '@unterberg/nivel/tailwind'",
+    "import vike from 'vike/plugin'",
+    '',
+    'process.env.VIKE_CRAWL ??= JSON.stringify({ git: false })',
+    '',
+    'const base = (() => {',
+    "  const normalized = process.env.PAGES_BASE_PATH?.trim().replace(/^\\/+|\\/+$/g, '') ?? ''",
+    "  return normalized ? `/${normalized}/` : '/'",
+    '})()',
+    '',
+    'export default {',
+    '  base,',
+    '  plugins: [nivelTailwindVite(), vike()],',
+    '}',
+    '',
+  ].join('\n')
+}
+
 const getDocsConfigTemplate = () => {
   return [
     "import { defineDocsConfig } from '@unterberg/nivel/config'",
@@ -139,12 +159,176 @@ const getGlobalContextTemplate = () => {
 const getWrapperTemplate = () => {
   return [
     "import type { ReactNode } from 'react'",
+    "import '../styles/global.css'",
     '',
     'const Wrapper = ({ children }: { children: ReactNode }) => {',
     '  return <>{children}</>',
     '}',
     '',
     'export default Wrapper',
+    '',
+  ].join('\n')
+}
+
+const getGlobalStyleTemplate = () => {
+  return [
+    "@import '@unterberg/nivel/tailwind.css';",
+    "@import './theme.css';",
+    '',
+    "@source '../pages';",
+    "@source '../docs';",
+    '',
+    '@layer base {',
+    '  html,',
+    '  body {',
+    '    @apply bg-base-100 text-base-content font-sans antialiased md:subpixel-antialiased;',
+    '  }',
+    '',
+    '  .prose-container {',
+    '    @apply prose prose-neutral max-w-none dark:prose-invert;',
+    '    @apply prose-a:text-primary;',
+    '    @apply prose-pre:bg-base-200!;',
+    '    @apply prose-code:rounded!;',
+    '    @apply prose-code:bg-primary/5!;',
+    '    @apply prose-code:border-primary/15!;',
+    '    @apply prose-code:dark:bg-primary/10!;',
+    '    @apply prose-code:dark:border-primary/20!;',
+    '    @apply prose-p:leading-[180%];',
+    '    @apply prose-li:leading-[180%];',
+    '    @apply prose-p:after:content-none;',
+    '    @apply prose-p:before:content-none;',
+    '    @apply prose-blockquote:not-italic;',
+    '    @apply prose-blockquote:bg-base-200;',
+    '    @apply prose-blockquote:py-2;',
+    '  }',
+    '}',
+    '',
+  ].join('\n')
+}
+
+const getThemeTemplate = () => {
+  return [
+    '@custom-variant dark (&:where(',
+    "    [data-theme='consumer-dark'],",
+    "    [data-theme='consumer-dark'] *",
+    '  ));',
+    '',
+    "@plugin '@unterberg/nivel/daisyui-theme' {",
+    "  name: 'consumer-light';",
+    '  default: true;',
+    '  prefersdark: false;',
+    "  color-scheme: 'light';",
+    '  --color-base-100: #f6f6f4;',
+    '  --color-base-200: #ffffff;',
+    '  --color-base-300: #ecebe7;',
+    '  --color-base-content: #171717;',
+    '  --color-primary: #0f766e;',
+    '  --color-primary-content: #f8fafc;',
+    '  --color-secondary: #d97706;',
+    '  --color-secondary-content: #111827;',
+    '  --color-accent: #1d4ed8;',
+    '  --color-accent-content: #f8fafc;',
+    '  --color-neutral: #171717;',
+    '  --color-neutral-content: #f8fafc;',
+    '  --color-info: #2563eb;',
+    '  --color-info-content: #eff6ff;',
+    '  --color-success: #15803d;',
+    '  --color-success-content: #f0fdf4;',
+    '  --color-warning: #d97706;',
+    '  --color-warning-content: #fff7ed;',
+    '  --color-error: #dc2626;',
+    '  --color-error-content: #fef2f2;',
+    '  --radius-selector: 0.25rem;',
+    '  --radius-field: 0.5rem;',
+    '  --radius-box: 1rem;',
+    '  --size-selector: 0.25rem;',
+    '  --size-field: 0.25rem;',
+    '  --border: 1px;',
+    '  --depth: 0;',
+    '  --noise: 0;',
+    '}',
+    '',
+    "@plugin '@unterberg/nivel/daisyui-theme' {",
+    "  name: 'consumer-dark';",
+    '  default: false;',
+    '  prefersdark: false;',
+    "  color-scheme: 'dark';",
+    '  --color-base-100: #151515;',
+    '  --color-base-200: #1e1e1e;',
+    '  --color-base-300: #2a2a2a;',
+    '  --color-base-content: #ededed;',
+    '  --color-primary: #2dd4bf;',
+    '  --color-primary-content: #042f2e;',
+    '  --color-secondary: #f59e0b;',
+    '  --color-secondary-content: #1c1917;',
+    '  --color-accent: #60a5fa;',
+    '  --color-accent-content: #172554;',
+    '  --color-neutral: #ededed;',
+    '  --color-neutral-content: #171717;',
+    '  --color-info: #60a5fa;',
+    '  --color-info-content: #172554;',
+    '  --color-success: #4ade80;',
+    '  --color-success-content: #052e16;',
+    '  --color-warning: #fbbf24;',
+    '  --color-warning-content: #451a03;',
+    '  --color-error: #f87171;',
+    '  --color-error-content: #450a0a;',
+    '  --radius-selector: 0.25rem;',
+    '  --radius-field: 0.5rem;',
+    '  --radius-box: 1rem;',
+    '  --size-selector: 0.25rem;',
+    '  --size-field: 0.25rem;',
+    '  --border: 1px;',
+    '  --depth: 0;',
+    '  --noise: 0;',
+    '}',
+    '',
+    '@theme inline {',
+    '  --color-base-muted: color-mix(',
+    '    in oklab,',
+    '    var(--color-base-content) 65%,',
+    '    transparent',
+    '  );',
+    '  --color-base-muted-medium: color-mix(',
+    '    in oklab,',
+    '    var(--color-base-content) 40%,',
+    '    transparent',
+    '  );',
+    '  --color-base-muted-light: color-mix(',
+    '    in oklab,',
+    '    var(--color-base-content) 12%,',
+    '    transparent',
+    '  );',
+    '  --color-base-muted-superlight: color-mix(',
+    '    in oklab,',
+    '    var(--color-base-content) 5%,',
+    '    transparent',
+    '  );',
+    '  --color-primary-muted: color-mix(',
+    '    in oklab,',
+    '    var(--color-primary) 80%,',
+    '    transparent',
+    '  );',
+    '  --color-primary-muted-medium: color-mix(',
+    '    in oklab,',
+    '    var(--color-primary) 50%,',
+    '    transparent',
+    '  );',
+    '  --color-primary-muted-light: color-mix(',
+    '    in oklab,',
+    '    var(--color-primary) 20%,',
+    '    transparent',
+    '  );',
+    '  --color-primary-muted-superlight: color-mix(',
+    '    in oklab,',
+    '    var(--color-primary) 5%,',
+    '    transparent',
+    '  );',
+    "  --font-sans: 'Inter', 'Helvetica Neue', sans-serif;",
+    '  --font-mono:',
+    "    'Monaco', 'SF Mono', SF Mono, SF Mono Regular, Consolas, 'Liberation Mono',",
+    '    Menlo, Courier, monospace;',
+    '}',
     '',
   ].join('\n')
 }
@@ -173,6 +357,7 @@ const getGlobalTypesTemplate = () => {
 
 const getManagedFileEntries = () => {
   return [
+    ['vite.config.ts', getViteConfigTemplate()],
     ['pages/+docs.ts', getDocsConfigTemplate()],
     ['docs/docs.graph.ts', getDocsGraphTemplate()],
     ['pages/+config.ts', getConfigTemplate()],
@@ -180,8 +365,61 @@ const getManagedFileEntries = () => {
     ['pages/+Layout.tsx', getLayoutTemplate()],
     ['pages/+onCreateGlobalContext.ts', getGlobalContextTemplate()],
     ['pages/+Wrapper.tsx', getWrapperTemplate()],
+    ['styles/global.css', getGlobalStyleTemplate()],
+    ['styles/theme.css', getThemeTemplate()],
     ['global.d.ts', getGlobalTypesTemplate()],
   ] as const
+}
+
+const readFileIfExists = (filePath: string) => {
+  if (!fs.existsSync(filePath)) {
+    return null
+  }
+
+  return fs.readFileSync(filePath, 'utf8')
+}
+
+export const getTailwindBootstrapWarnings = (rootDir: string) => {
+  const warnings: string[] = []
+  const viteConfigPath = path.join(rootDir, 'vite.config.ts')
+  const wrapperPath = path.join(rootDir, 'pages', '+Wrapper.tsx')
+  const globalCssPath = path.join(rootDir, 'styles', 'global.css')
+  const themeCssPath = path.join(rootDir, 'styles', 'theme.css')
+
+  const viteConfigSource = readFileIfExists(viteConfigPath)
+  if (
+    !viteConfigSource ||
+    !viteConfigSource.includes('@unterberg/nivel/tailwind') ||
+    !viteConfigSource.includes('nivelTailwindVite()')
+  ) {
+    warnings.push(
+      'vite.config.ts should use @unterberg/nivel/tailwind and call nivelTailwindVite() for the engine-owned Tailwind integration.',
+    )
+  }
+
+  const wrapperSource = readFileIfExists(wrapperPath)
+  if (!wrapperSource || !wrapperSource.includes('../styles/global.css')) {
+    warnings.push('pages/+Wrapper.tsx should import ../styles/global.css.')
+  }
+
+  const globalCssSource = readFileIfExists(globalCssPath)
+  if (
+    !globalCssSource ||
+    !globalCssSource.includes('@unterberg/nivel/tailwind.css') ||
+    !globalCssSource.includes("@import './theme.css';") ||
+    !globalCssSource.includes("@source '../pages';") ||
+    !globalCssSource.includes("@source '../docs';")
+  ) {
+    warnings.push(
+      "styles/global.css should import @unterberg/nivel/tailwind.css, import ./theme.css, and declare @source '../pages' plus @source '../docs'.",
+    )
+  }
+
+  if (!fs.existsSync(themeCssPath)) {
+    warnings.push('styles/theme.css is missing; define local daisyUI themes there.')
+  }
+
+  return warnings
 }
 
 const getGenerateDocsRunner = (packageJson: PackageJsonShape) => {
@@ -301,11 +539,10 @@ export const getInitSummary = (result: InitConsumerResult) => {
     lines.push(`Updated package.json scripts: ${result.updatedScripts.join(', ')}`)
   }
 
+  lines.push('Scaffolded vite.config.ts and local Tailwind starter files remain visible and editable in the consumer.')
+
   if (result.missingDependencies.length > 0) {
     lines.push(`Missing dependencies: ${result.missingDependencies.join(', ')}`)
-    lines.push(
-      'Consumer CSS stays hand-authored. Add your stylesheet import manually, for example in pages/+Wrapper.tsx.',
-    )
   } else if (!result.allDependenciesPresent) {
     lines.push('Dependency validation completed with warnings.')
   } else {

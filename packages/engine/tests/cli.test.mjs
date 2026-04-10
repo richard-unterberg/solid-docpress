@@ -23,6 +23,18 @@ const createTempRoot = (packageJson = {}) => {
   return rootDir
 }
 
+const linkWorkspaceEngine = (rootDir) => {
+  const targetDir = path.join(rootDir, 'node_modules', '@unterberg')
+  fs.mkdirSync(targetDir, { recursive: true })
+  fs.symlinkSync(path.join(repoRoot, 'packages', 'engine'), path.join(targetDir, 'nivel'))
+}
+
+const createDocsContent = (rootDir) => {
+  const filePath = path.join(rootDir, 'docs', 'content', 'getting-started', 'content.mdx')
+  fs.mkdirSync(path.dirname(filePath), { recursive: true })
+  fs.writeFileSync(filePath, '# Getting started\n')
+}
+
 test('nivel init creates visible consumer files and standard scripts', () => {
   const rootDir = createTempRoot({
     name: 'consumer-app',
@@ -44,6 +56,7 @@ test('nivel init creates visible consumer files and standard scripts', () => {
   assert.equal(packageJson.scripts.predev, 'npm run generate:docs')
   assert.equal(packageJson.scripts.prebuild, 'npm run generate:docs')
   assert.equal(packageJson.scripts.pretypecheck, 'npm run generate:docs')
+  assert.equal(fs.existsSync(path.join(rootDir, 'vite.config.ts')), true)
   assert.equal(fs.existsSync(path.join(rootDir, 'pages', '+config.ts')), true)
   assert.equal(fs.existsSync(path.join(rootDir, 'pages', '+Head.tsx')), true)
   assert.equal(fs.existsSync(path.join(rootDir, 'pages', '+Layout.tsx')), true)
@@ -52,12 +65,18 @@ test('nivel init creates visible consumer files and standard scripts', () => {
   assert.equal(fs.existsSync(path.join(rootDir, 'pages', '+docs.ts')), true)
   assert.equal(fs.existsSync(path.join(rootDir, 'docs', 'docs.graph.ts')), true)
   assert.equal(fs.existsSync(path.join(rootDir, 'global.d.ts')), true)
-  assert.equal(fs.existsSync(path.join(rootDir, 'styles', 'global.css')), false)
+  assert.equal(fs.existsSync(path.join(rootDir, 'styles', 'global.css')), true)
+  assert.equal(fs.existsSync(path.join(rootDir, 'styles', 'theme.css')), true)
   const configSource = fs.readFileSync(path.join(rootDir, 'pages', '+config.ts'), 'utf8')
+  const viteConfigSource = fs.readFileSync(path.join(rootDir, 'vite.config.ts'), 'utf8')
+  const wrapperSource = fs.readFileSync(path.join(rootDir, 'pages', '+Wrapper.tsx'), 'utf8')
   assert.match(configSource, /import nivel from '@unterberg\/nivel\/vike'/)
   assert.match(configSource, /extends: \[vikeReact\]/)
   assert.match(configSource, /prerender: true/)
   assert.match(configSource, /prefetchStaticAssets/)
+  assert.match(viteConfigSource, /@unterberg\/nivel\/tailwind/)
+  assert.match(viteConfigSource, /nivelTailwindVite\(\)/)
+  assert.match(wrapperSource, /\.\.\/styles\/global\.css/)
 })
 
 test('nivel init does not overwrite existing files without --force', () => {
@@ -102,9 +121,31 @@ test('nivel init overwrites managed files with --force and reports missing depen
   assert.equal(result.status, 0, result.stderr)
   assert.match(result.stdout, /Overwritten files: .*pages\/\+Head\.tsx/)
   assert.match(result.stdout, /Missing dependencies: /)
-  assert.match(result.stdout, /Consumer CSS stays hand-authored/)
+  assert.doesNotMatch(result.stdout, /tailwindcss|@tailwindcss\/vite|@tailwindcss\/typography|daisyui/)
   assert.equal(fs.readFileSync(headFilePath, 'utf8').includes('MetaHead'), true)
-  assert.equal(fs.readFileSync(path.join(rootDir, 'styles', 'global.css'), 'utf8'), 'body {}\n')
+  assert.match(fs.readFileSync(path.join(rootDir, 'styles', 'global.css'), 'utf8'), /@unterberg\/nivel\/tailwind\.css/)
+})
+
+test('nivel prepare warns when the Tailwind bootstrap contract is missing', () => {
+  const rootDir = createTempRoot({
+    name: 'consumer-app',
+    packageManager: 'npm@11.6.3',
+    type: 'module',
+  })
+
+  linkWorkspaceEngine(rootDir)
+
+  const initResult = runCli(['init', '--root', rootDir], repoRoot)
+  assert.equal(initResult.status, 0, initResult.stderr)
+
+  createDocsContent(rootDir)
+  fs.rmSync(path.join(rootDir, 'styles', 'global.css'))
+
+  const result = runCli(['prepare', '--root', rootDir], repoRoot)
+
+  assert.equal(result.status, 0, result.stderr)
+  assert.match(result.stderr, /Tailwind integration warning:/)
+  assert.match(result.stderr, /styles\/global\.css should import @unterberg\/nivel\/tailwind\.css/)
 })
 
 test('nivel init rejects unknown options', () => {

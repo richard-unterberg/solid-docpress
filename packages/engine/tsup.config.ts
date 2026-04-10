@@ -6,6 +6,8 @@ export default defineConfig((overrideOptions) => ({
     config: 'src/docs/defineDocs.ts',
     index: 'src/index.ts',
     vike: 'src/vike/index.ts',
+    tailwind: 'src/tailwind/index.ts',
+    'daisyui-theme': 'src/tailwind/daisyuiTheme.ts',
     mdx: 'src/mdx/index.ts',
     'mdx/code-blocks': 'src/mdx/code-blocks/index.ts',
     client: 'src/runtime/client/index.ts',

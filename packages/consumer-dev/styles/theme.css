@@ -3,7 +3,7 @@
     [data-theme='telefunc-dark'] *
   ));
 
-@plugin 'daisyui/theme' {
+@plugin '@unterberg/nivel/daisyui-theme' {
   name: 'telefunc-light';
   default: true;
   prefersdark: false;
@@ -38,7 +38,7 @@
   --noise: 1;
 }
 
-@plugin 'daisyui/theme' {
+@plugin '@unterberg/nivel/daisyui-theme' {
   name: 'telefunc-dark';
   default: false;
   prefersdark: false;

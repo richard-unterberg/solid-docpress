@@ -1,17 +1,9 @@
-@import 'tailwindcss';
-@import '@unterberg/nivel/tailwind-sources.css';
+@import '@unterberg/nivel/tailwind.css';
 @import './theme.css';
 @import './code.css';
 
 @source '../pages';
 @source '../docs';
-
-@plugin '@tailwindcss/typography';
-
-@plugin 'daisyui' {
-  exclude: rootcolor;
-  themes: false;
-}
 
 @layer base {
   html,

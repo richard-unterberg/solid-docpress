@@ -2,4 +2,4 @@ export { getResolvedPageById, resolveDocsConfig, resolveDocsHref } from '../../d
 export { getGeneratedPagesRoot, syncGeneratedDocsPages } from './codegen.js'
 export { loadDocsConfig } from './loadDocsConfig.js'
 export { nivelPagesPlugin } from './plugin.js'
-export { getInitSummary, initConsumer } from './scaffold.js'
+export { getInitSummary, getTailwindBootstrapWarnings, initConsumer } from './scaffold.js'

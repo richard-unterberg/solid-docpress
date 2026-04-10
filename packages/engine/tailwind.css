@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+@import './tailwind-sources.css';
+
+@plugin '@tailwindcss/typography';
+
+@plugin 'daisyui' {
+  exclude: rootcolor;
+  themes: false;
+}

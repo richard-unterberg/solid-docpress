@@ -9,5 +9,5 @@
     "ignoreDeprecations": "6.0",
     "types": ["node", "react"]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts"]
 }

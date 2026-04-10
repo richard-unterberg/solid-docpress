@@ -1,4 +1,4 @@
-import tailwindcss from '@tailwindcss/vite'
+import { nivelTailwindVite } from '@unterberg/nivel/tailwind'
 import vike from 'vike/plugin'
 
 process.env.VIKE_CRAWL ??= JSON.stringify({ git: false })
@@ -10,5 +10,5 @@ const base = (() => {
 
 export default {
   base,
-  plugins: [tailwindcss(), vike()],
+  plugins: [nivelTailwindVite(), vike()],
 }

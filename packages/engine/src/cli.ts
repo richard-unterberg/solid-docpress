@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { syncGeneratedDocsPages } from './runtime/node/codegen.js'
 import { loadDocsConfigWithTsx } from './runtime/node/loadDocsConfigWithTsx.js'
-import { getInitSummary, initConsumer } from './runtime/node/scaffold.js'
+import { getInitSummary, getTailwindBootstrapWarnings, initConsumer } from './runtime/node/scaffold.js'
 
 const usage = [
   'Usage:',
@@ -71,6 +71,12 @@ const runPrepare = async (rootDir: string) => {
     rootDir,
     docsConfig,
   })
+
+  const warnings = getTailwindBootstrapWarnings(rootDir)
+
+  for (const warning of warnings) {
+    process.stderr.write(`Tailwind integration warning: ${warning}\n`)
+  }
 }
 
 const runInit = (rootDir: string, force: boolean) => {
