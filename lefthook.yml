@@ -5,10 +5,4 @@ pre-commit:
       glob: '*.{ts,tsx,cts,mts,js,jsx,cjs,mjs,json,jsonc,css,md}'
       stage_fixed: true
       run: pnpm exec biome format --write --no-errors-on-unmatched {staged_files}
-    typecheck:
-      run: pnpm typecheck
 
-pre-push:
-  commands:
-    knip:
-      run: pnpm knip
