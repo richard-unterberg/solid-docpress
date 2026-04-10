@@ -1,7 +1,7 @@
-name: Deploy Page
+name: Test Engine
 
 on:
-  push:
+  pull_request:
     branches:
       - master
 
@@ -12,8 +12,8 @@ permissions:
   contents: write
 
 jobs:
-  build-and-deploy:
-    name: Build and Deploy
+  test-engine:
+    name: Test Engine
     runs-on: ubuntu-latest
 
     steps:
@@ -37,15 +37,3 @@ jobs:
 
       - name: Run Engine Tests
         run: pnpm test:engine
-
-      - name: Build Page
-        env:
-          PAGES_BASE_PATH: /${{ github.event.repository.name }}
-        run: pnpm build
-
-      - name: Deploy to GitHub Pages
-        if: github.ref == 'refs/heads/master'
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./packages/consumer-dev/dist/client
