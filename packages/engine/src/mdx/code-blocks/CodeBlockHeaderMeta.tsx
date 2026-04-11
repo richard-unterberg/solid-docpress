@@ -9,8 +9,8 @@ const CodeBlockHeaderMeta = ({ env, label }: { env?: string | null; label: strin
     <div className="flex min-w-0 items-center gap-2">
       {env && <StyledDivider $env={env === 'server' || env === 'client' ? env : undefined} />}
       {env && <StyledBgShade $env={env === 'server' || env === 'client' ? env : undefined} />}
-      <div className="font-mono text-xs font-semibold text-base-muted">{label}</div>
       {env && <StyledBadge $env={effectiveEnv}>{env}</StyledBadge>}
+      <div className="font-mono text-xs font-semibold text-base-muted">{label}</div>
     </div>
   )
 }
