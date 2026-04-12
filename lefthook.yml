@@ -1,8 +1,15 @@
 pre-commit:
-  parallel: true
+  parallel: false
   commands:
     format:
       glob: '*.{ts,tsx,cts,mts,js,jsx,cjs,mjs,json,jsonc,css,md}'
       stage_fixed: true
       run: pnpm exec biome format --write --no-errors-on-unmatched {staged_files}
-
+    lint:
+      glob: '*.{ts,tsx,cts,mts,js,jsx,cjs,mjs,json,jsonc,css,md}'
+      stage_fixed: true
+      run: pnpm exec biome lint --no-errors-on-unmatched {staged_files}
+    knip:
+      glob: '*.{ts,tsx,cts,mts,js,jsx,cjs,mjs}'
+      stage_fixed: true
+      run: pnpm run check:knip

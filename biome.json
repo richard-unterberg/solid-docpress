@@ -5,6 +5,7 @@
       "**",
       "!legacy",
       "!**/*.build-*.mjs",
+      "!tests/npm-consumer/dist",
       "!packages/consumer-dev/pages/(nivel-generated)",
       "!packages/engine/dist",
       "!packages/consumer-dev/dist"
@@ -35,10 +36,11 @@
         "noUnusedFunctionParameters": "off"
       },
       "security": {
-        "noDangerouslySetInnerHtml": "warn"
+        "noDangerouslySetInnerHtml": "info"
       },
       "suspicious": {
-        "noArrayIndexKey": "warn"
+        "noArrayIndexKey": "warn",
+        "noTemplateCurlyInString": "info"
       },
       "complexity": {
         "noImportantStyles": "off"

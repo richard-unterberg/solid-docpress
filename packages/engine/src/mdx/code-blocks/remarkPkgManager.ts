@@ -1,5 +1,6 @@
 import convert_ from 'npm-to-yarn'
 import { visit } from 'unist-util-visit'
+import type { ChoiceGroupElement, CodeNode, ParentNode, RootNode } from '../ast.js'
 import { generateChoiceGroupCode } from './generateChoiceGroupCode.js'
 import { parseMetaString } from './meta.js'
 
@@ -8,8 +9,8 @@ const convert: (input: string, target: 'npm' | 'pnpm' | 'bun' | 'yarn') => strin
 const PACKAGE_MANAGERS = ['pnpm', 'Bun', 'Yarn'] as const
 
 export const remarkPkgManager = () => {
-  return (tree: unknown) => {
-    visit(tree as any, 'code', (node: any, index: number | undefined, parent: any) => {
+  return (tree: RootNode) => {
+    visit(tree, 'code', (node: CodeNode, index: number | undefined, parent: ParentNode | undefined) => {
       if (!parent || typeof index !== 'number') {
         return
       }
@@ -35,14 +36,15 @@ export const remarkPkgManager = () => {
 
       node.value = node.value.replaceAll('npm i ', 'npm install ')
 
-      const nodes = new Map<string, any>()
+      const nodes = new Map<string, CodeNode>()
       nodes.set('npm', node)
 
       for (const packageManager of PACKAGE_MANAGERS) {
-        nodes.set(packageManager, {
+        const packageManagerNode: CodeNode = {
           ...node,
           value: convert(node.value, packageManager.toLowerCase() as 'pnpm' | 'bun' | 'yarn'),
-        })
+        }
+        nodes.set(packageManager, packageManagerNode)
       }
 
       const replacement = generateChoiceGroupCode(
@@ -50,11 +52,11 @@ export const remarkPkgManager = () => {
           choiceValue,
           children: [childNode],
         })),
-      )
+      ) as ChoiceGroupElement
 
-      replacement.data ??= {} as any
-      ;(replacement.data as any).customDataChoice = choice
-      ;(replacement.data as any).customDataFilter = replacement.type
+      replacement.data ??= {}
+      replacement.data.customDataChoice = choice
+      replacement.data.customDataFilter = replacement.type
       parent.children.splice(index, 1, replacement)
     })
   }

@@ -53,7 +53,6 @@ export const MegaMenu = ({
   }, [visibleSectionElement, visibleSectionId])
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: ok
     <div
       className={cmMerge(
         'fixed top-13 left-0 z-3 w-full pt-3',

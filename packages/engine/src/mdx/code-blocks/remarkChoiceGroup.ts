@@ -1,37 +1,54 @@
 import { visit } from 'unist-util-visit'
+import type { AstNode, ChoiceCarrierNode, ChoiceGroupElement, CodeNode, ContainerDirective, RootNode } from '../ast.js'
+import { hasChildren } from '../ast.js'
 import { generateChoiceGroupCode } from './generateChoiceGroupCode.js'
 import { parseMetaString } from './meta.js'
 
+type ChoiceNodeGroup = Array<{ choiceValue: string; children: ChoiceCarrierNode[] }>
+const isChoiceCarrierNode = (node: AstNode): node is ChoiceCarrierNode => {
+  return ['code', 'containerDirective', 'mdxJsxFlowElement'].includes(node.type)
+}
+
 export const remarkChoiceGroup = () => {
-  return (tree: unknown) => {
-    visit(tree as any, (node: any) => {
-      if (node.type === 'code' && node.meta) {
-        const meta = parseMetaString(node.meta, ['choice'])
+  return (tree: RootNode) => {
+    visit(tree, (node) => {
+      if (node.type === 'code') {
+        const codeNode = node as CodeNode
+        if (!codeNode.meta) {
+          return
+        }
+
+        const meta = parseMetaString(codeNode.meta, ['choice'])
         const choice = meta.props.choice
-        node.meta = meta.rest
+        codeNode.meta = meta.rest
 
         if (choice) {
-          node.data ??= {}
-          node.data.customDataChoice = choice
-          node.data.customDataFilter = 'explicitChoice'
+          codeNode.data ??= {}
+          codeNode.data.customDataChoice = choice
+          codeNode.data.customDataFilter = 'explicitChoice'
         }
       }
 
-      if (node.type === 'containerDirective' && node.name === 'Choice') {
-        const choice = typeof node.attributes?.id === 'string' ? node.attributes.id : null
+      if (node.type === 'containerDirective') {
+        const directiveNode = node as ContainerDirective
+        if (directiveNode.name !== 'Choice') {
+          return
+        }
+
+        const choice = typeof directiveNode.attributes?.id === 'string' ? directiveNode.attributes.id : null
         if (!choice) {
           return
         }
 
-        node.data ??= {}
-        node.data.customDataChoice = choice
-        node.data.customDataFilter = node.type
-        node.attributes = {}
+        directiveNode.data ??= {}
+        directiveNode.data.customDataChoice = choice
+        directiveNode.data.customDataFilter = directiveNode.type
+        directiveNode.attributes = {}
       }
     })
 
-    visit(tree as any, (node: any) => {
-      if (!Array.isArray(node.children)) {
+    visit(tree, (node) => {
+      if (!hasChildren(node)) {
         return
       }
 
@@ -43,8 +60,10 @@ export const remarkChoiceGroup = () => {
           return
         }
 
-        const nodes = node.children.slice(start, end)
-        const replacements = filterChoices(nodes).map((choiceNodes) => generateChoiceGroupCode(choiceNodes, node))
+        const nodes = node.children.slice(start, end).filter(isChoiceCarrierNode)
+        const replacements = filterChoices(nodes).map(
+          (choiceNodes) => generateChoiceGroupCode(choiceNodes, node) as ChoiceGroupElement,
+        )
         node.children.splice(start, end - start, ...replacements)
         end = start + replacements.length
         start = -1
@@ -53,7 +72,7 @@ export const remarkChoiceGroup = () => {
       for (; end < node.children.length; end += 1) {
         const child = node.children[end]
 
-        if (!['code', 'mdxJsxFlowElement', 'containerDirective'].includes(child?.type)) {
+        if (!child || !isChoiceCarrierNode(child as AstNode)) {
           processRange()
           continue
         }
@@ -73,20 +92,27 @@ export const remarkChoiceGroup = () => {
   }
 }
 
-const filterChoices = (nodes: any[]) => {
-  const filteredChoices: Array<Array<{ choiceValue: string; children: any[] }>> = []
-  const filters = [...new Set(nodes.map((node) => node.data?.customDataFilter).filter(Boolean))]
+const filterChoices = (nodes: ChoiceCarrierNode[]): ChoiceNodeGroup[] => {
+  const filteredChoices: ChoiceNodeGroup[] = []
+  const filters = [
+    ...new Set(
+      nodes
+        .map((node) => node.data?.customDataFilter)
+        .filter((filter): filter is string => typeof filter === 'string' && filter !== ''),
+    ),
+  ]
 
   for (const filter of filters) {
-    const nodesByChoice = new Map<string, any[]>()
+    const nodesByChoice = new Map<string, ChoiceCarrierNode[]>()
 
     for (const node of nodes.filter((candidate) => candidate.data?.customDataFilter === filter)) {
-      const choice = node.data?.customDataChoice
-      if (!choice) {
+      const data = node.data
+      const choice = data?.customDataChoice
+      if (!choice || !data) {
         continue
       }
 
-      node.data.customDataChoice = undefined
+      data.customDataChoice = undefined
       const choiceNodes = nodesByChoice.get(choice) ?? []
       choiceNodes.push(node)
       nodesByChoice.set(choice, choiceNodes)

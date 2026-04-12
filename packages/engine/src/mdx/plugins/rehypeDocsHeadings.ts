@@ -1,20 +1,17 @@
 // attention: no HMR is active for this file, changes require a full engine pre-build -> dev / preview
 import { visit } from 'unist-util-visit'
+import type { ElementContentNode, ElementNode, HtmlRootNode } from '../ast.js'
 import { createHeadingSlugger, normalizeHeadingTitle } from '../../docs/docHeadings.js'
 
 const headingTags = new Set(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])
 
-const getNodeText = (node: any): string => {
-  if (!node || typeof node !== 'object') {
-    return ''
-  }
-
+const getNodeText = (node: ElementContentNode | HtmlRootNode): string => {
   if (node.type === 'text') {
     return typeof node.value === 'string' ? node.value : ''
   }
 
-  if (Array.isArray(node.children)) {
-    return node.children.map((child: any) => getNodeText(child)).join('')
+  if ('children' in node) {
+    return node.children.map((child) => getNodeText(child)).join('')
   }
 
   return ''
@@ -32,11 +29,20 @@ const getClassNames = (value: unknown): string[] => {
   return []
 }
 
+const createLinkIconLine = (x1: number, y1: number, x2: number, y2: number): ElementNode => {
+  return {
+    type: 'element',
+    tagName: 'line',
+    properties: { x1, y1, x2, y2 },
+    children: [],
+  }
+}
+
 export const rehypeDocsHeadings = () => {
-  return (tree: any) => {
+  return (tree: HtmlRootNode) => {
     const slugify = createHeadingSlugger()
 
-    visit(tree as any, 'element', (node: any) => {
+    visit(tree, 'element', (node: ElementNode) => {
       if (!headingTags.has(node?.tagName)) {
         return
       }
@@ -65,7 +71,7 @@ export const rehypeDocsHeadings = () => {
       }
 
       // create link element with has and anchor icon
-      const linkElement = {
+      const linkElement: ElementNode = {
         type: 'element',
         tagName: 'a',
         properties: {
@@ -93,30 +99,10 @@ export const rehypeDocsHeadings = () => {
               className: ['w-4 h-4 hidden group-hover:block translate-x-5'],
             },
             children: [
-              {
-                type: 'element',
-                tagName: 'line',
-                properties: { x1: 4, y1: 9, x2: 20, y2: 9 },
-                children: [],
-              },
-              {
-                type: 'element',
-                tagName: 'line',
-                properties: { x1: 4, y1: 15, x2: 20, y2: 15 },
-                children: [],
-              },
-              {
-                type: 'element',
-                tagName: 'line',
-                properties: { x1: 10, y1: 3, x2: 8, y2: 21 },
-                children: [],
-              },
-              {
-                type: 'element',
-                tagName: 'line',
-                properties: { x1: 16, y1: 3, x2: 14, y2: 21 },
-                children: [],
-              },
+              createLinkIconLine(4, 9, 20, 9),
+              createLinkIconLine(4, 15, 20, 15),
+              createLinkIconLine(10, 3, 8, 21),
+              createLinkIconLine(16, 3, 14, 21),
             ],
           },
         ],

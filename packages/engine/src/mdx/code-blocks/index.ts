@@ -16,31 +16,27 @@ export { remarkDetype } from './remarkDetype.js'
 export { remarkPkgManager } from './remarkPkgManager.js'
 export { shikiTransformerAutoLinks } from './shikiTransformerAutoLinks.js'
 
-export const getCodeBlockMdxPlugins = (): {
-  remarkPlugins: any[]
-  rehypePlugins: any[]
-} => {
+export const getCodeBlockMdxPlugins = () => {
+  const rehypePrettyCodePlugin = [
+    rehypePrettyCode,
+    {
+      keepBackground: false,
+      filterMetaString: (meta: string) => stripMetaProps(meta, ['title']),
+      theme: {
+        light: 'github-light',
+        dark: 'one-dark-pro',
+      },
+      transformers: [
+        transformerNotationDiff(),
+        transformerNotationHighlight(),
+        transformerNotationWordHighlight(),
+        shikiTransformerAutoLinks(),
+      ],
+    },
+  ] as [typeof rehypePrettyCode, Parameters<typeof rehypePrettyCode>[0]]
+
   return {
     remarkPlugins: [remarkDirective, remarkDetype, remarkPkgManager, remarkChoiceGroup],
-    rehypePlugins: [
-      [
-        rehypePrettyCode,
-        {
-          keepBackground: false,
-          filterMetaString: (meta: string) => stripMetaProps(meta, ['title']),
-          theme: {
-            light: 'github-light',
-            dark: 'one-dark-pro',
-          },
-          transformers: [
-            transformerNotationDiff(),
-            transformerNotationHighlight(),
-            transformerNotationWordHighlight(),
-            shikiTransformerAutoLinks(),
-          ],
-        },
-      ],
-      rehypeMetaToProps,
-    ],
+    rehypePlugins: [rehypePrettyCodePlugin, rehypeMetaToProps],
   }
 }

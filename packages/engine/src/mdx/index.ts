@@ -1,4 +1,3 @@
-import type { ComponentType } from 'react'
 import {
   Alert,
   ChoiceGroup,
@@ -12,7 +11,7 @@ import {
   Table,
 } from '../index.js'
 
-type MdxComponents = Record<string, ComponentType<any> | string>
+type MdxComponents = Record<string, unknown>
 
 export const useMDXComponents = (components?: MdxComponents): MdxComponents => {
   return {

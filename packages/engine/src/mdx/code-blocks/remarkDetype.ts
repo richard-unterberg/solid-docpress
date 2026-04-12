@@ -1,5 +1,6 @@
 import { transform as detype } from 'detype'
 import { visit } from 'unist-util-visit'
+import type { ChoiceGroupElement, CodeNode, FileLike, ParentNode, RootNode } from '../ast.js'
 import { generateChoiceGroupCode } from './generateChoiceGroupCode.js'
 import { parseMetaString } from './meta.js'
 
@@ -9,11 +10,17 @@ const prettierOptions = {
   trailingComma: 'none',
 } as const
 
-export const remarkDetype = () => {
-  return async (tree: unknown, file: any) => {
-    const codeNodes: Array<{ codeBlock: any; index: number; parent: any }> = []
+type TransformNode = {
+  codeBlock: CodeNode
+  index: number
+  parent: ParentNode
+}
 
-    visit(tree as any, 'code', (node: any, index: number | undefined, parent: any) => {
+export const remarkDetype = () => {
+  return async (tree: RootNode, file: FileLike) => {
+    const codeNodes: TransformNode[] = []
+
+    visit(tree, 'code', (node: CodeNode, index: number | undefined, parent: ParentNode | undefined) => {
       if (!parent || typeof index !== 'number') {
         return
       }
@@ -39,7 +46,7 @@ export const remarkDetype = () => {
   }
 }
 
-const transformYaml = (node: { codeBlock: any; index: number; parent: any }) => {
+const transformYaml = (node: TransformNode) => {
   const { codeBlock, index, parent } = node
   const codeBlockContentJs = replaceFileNameSuffixes(codeBlock.value)
 
@@ -59,16 +66,16 @@ const transformYaml = (node: { codeBlock: any; index: number; parent: any }) => 
   const replacement = generateChoiceGroupCode([
     { choiceValue: 'JavaScript', children: [yamlJsCode] },
     { choiceValue: 'TypeScript', children: [codeBlock] },
-  ])
+  ]) as ChoiceGroupElement
 
   replacement.attributes.push({ type: 'mdxJsxAttribute', name: 'hide' })
-  replacement.data ??= {} as any
-  ;(replacement.data as any).customDataChoice = choice
-  ;(replacement.data as any).customDataFilter = 'codeLang'
+  replacement.data ??= {}
+  replacement.data.customDataChoice = choice
+  replacement.data.customDataFilter = 'codeLang'
   parent.children.splice(index, 1, replacement)
 }
 
-const transformTsToJs = async (node: { codeBlock: any; index: number; parent: any }, file: any) => {
+const transformTsToJs = async (node: TransformNode, file: FileLike) => {
   const { codeBlock, index, parent } = node
   const meta = parseMetaString(codeBlock.meta, ['max-width', 'choice'])
   const maxWidth = Number(meta.props['max-width'])
@@ -120,8 +127,8 @@ const transformTsToJs = async (node: { codeBlock: any; index: number; parent: an
     return
   }
 
-  const tsCode = { ...codeBlock, lang: codeBlock.lang }
-  const jsCode = {
+  const tsCode: CodeNode = { ...codeBlock, lang: codeBlock.lang }
+  const jsCode: CodeNode = {
     ...codeBlock,
     lang: String(codeBlock.lang).replace('t', 'j'),
     meta: replaceCodeBlockTitleFileExtension(codeBlock.meta, String(codeBlock.lang).replace('t', 'j')),
@@ -131,23 +138,23 @@ const transformTsToJs = async (node: { codeBlock: any; index: number; parent: an
   const replacement = generateChoiceGroupCode([
     { choiceValue: 'JavaScript', children: [jsCode] },
     { choiceValue: 'TypeScript', children: [tsCode] },
-  ])
+  ]) as ChoiceGroupElement
 
   if (codeBlockReplacedJs === codeBlockContentJs) {
     replacement.attributes.push({ type: 'mdxJsxAttribute', name: 'hide' })
   }
 
-  replacement.data ??= {} as any
-  ;(replacement.data as any).customDataChoice = codeBlock.data.customDataChoice
-  ;(replacement.data as any).customDataFilter = codeBlock.data.customDataFilter
+  replacement.data ??= {}
+  replacement.data.customDataChoice = codeBlock.data.customDataChoice
+  replacement.data.customDataFilter = codeBlock.data.customDataFilter
   parent.children.splice(index, 1, replacement)
 }
 
 const replaceFileNameSuffixes = (value: string) => value.replaceAll('.ts', '.js')
 
-const replaceCodeBlockTitleFileExtension = (meta: unknown, outputLang: string) => {
+const replaceCodeBlockTitleFileExtension = (meta: unknown, outputLang: string): string | null | undefined => {
   if (typeof meta !== 'string' || meta.trim() === '') {
-    return meta
+    return typeof meta === 'string' ? meta : undefined
   }
 
   const parsedMeta = parseMetaString(meta)

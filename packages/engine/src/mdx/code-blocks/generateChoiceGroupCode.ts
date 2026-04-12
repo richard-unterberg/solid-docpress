@@ -1,9 +1,11 @@
 import { valueToEstree } from 'estree-util-value-to-estree'
-import type { MdxJsxAttribute, MdxJsxFlowElement } from 'mdast-util-mdx-jsx'
+import type { MdxJsxAttribute, MdxJsxAttributeValueExpression, MdxJsxFlowElement } from 'mdast-util-mdx-jsx'
+import type { ChoiceCarrierNode, ChoiceGroupElement, ParentNode } from '../ast.js'
+import { isContainerDirective } from '../ast.js'
 
 type ChoiceNode = {
   choiceValue: string
-  children: any[]
+  children: ChoiceCarrierNode[]
 }
 
 const BUILT_IN_CHOICE_GROUPS = {
@@ -41,7 +43,9 @@ const getChoiceGroup = (choicesRaw: string[]) => {
   }
 }
 
-export const generateChoiceGroupCode = (choiceNodes: ChoiceNode[], parent?: any): MdxJsxFlowElement => {
+type AttributeEstree = NonNullable<NonNullable<MdxJsxAttributeValueExpression['data']>['estree']>
+
+export const generateChoiceGroupCode = (choiceNodes: ChoiceNode[], parent?: ParentNode): ChoiceGroupElement => {
   const choiceGroup = getChoiceGroup(choiceNodes.map((choiceNode) => choiceNode.choiceValue))
   const mergedChoiceNodes = choiceGroup.choices.map((choice) => {
     const choiceNode = choiceNodes.find((node) => node.choiceValue === choice)
@@ -67,10 +71,10 @@ export const generateChoiceGroupCode = (choiceNodes: ChoiceNode[], parent?: any)
             body: [
               {
                 type: 'ExpressionStatement',
-                expression: valueToEstree(choiceGroup) as any,
-              } as any,
+                expression: valueToEstree(choiceGroup),
+              },
             ],
-          } as any,
+          } as unknown as AttributeEstree,
         },
       },
     },
@@ -87,8 +91,8 @@ export const generateChoiceGroupCode = (choiceNodes: ChoiceNode[], parent?: any)
   })
 
   const children: MdxJsxFlowElement[] = mergedChoiceNodes.map((choiceNode) => {
-    const choiceChildren =
-      choiceNode.children.length > 0 && choiceNode.children.every((node) => node.type === 'containerDirective')
+    const choiceChildren: ChoiceCarrierNode[] =
+      choiceNode.children.length > 0 && choiceNode.children.every(isContainerDirective)
         ? choiceNode.children.flatMap((node) => node.children ?? [])
         : choiceNode.children
 
@@ -107,7 +111,7 @@ export const generateChoiceGroupCode = (choiceNodes: ChoiceNode[], parent?: any)
         },
         { type: 'mdxJsxAttribute', name: 'className', value: 'choice' },
       ],
-      children: choiceChildren,
+      children: choiceChildren as MdxJsxFlowElement['children'],
     }
   })
 
@@ -116,16 +120,17 @@ export const generateChoiceGroupCode = (choiceNodes: ChoiceNode[], parent?: any)
     name: 'ChoiceGroup',
     attributes,
     children,
-  }
+  } as ChoiceGroupElement
 }
 
-const increaseLvl = (node: any) => {
-  if (node?.type !== 'mdxJsxFlowElement' || node.name !== 'ChoiceGroup') {
+const increaseLvl = (node: ChoiceCarrierNode) => {
+  if (node.type !== 'mdxJsxFlowElement' || node.name !== 'ChoiceGroup') {
     return
   }
 
   const attribute = node.attributes.find(
-    (candidate: any) => candidate.type === 'mdxJsxAttribute' && candidate.name === 'lvl',
+    (candidate: ChoiceGroupElement['attributes'][number]): candidate is MdxJsxAttribute =>
+      candidate.type === 'mdxJsxAttribute' && candidate.name === 'lvl',
   )
 
   if (typeof attribute?.value === 'string') {
