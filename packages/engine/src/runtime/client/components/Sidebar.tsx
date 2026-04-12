@@ -205,10 +205,9 @@ interface SidebarProps {
   sections: ResolvedDocsSection[]
   activeSectionId: string
   currentHref: string
-  horizontal?: boolean
 }
 
-export const Sidebar = ({ sections, activeSectionId, currentHref, horizontal }: SidebarProps) => {
+export const Sidebar = ({ sections, activeSectionId, currentHref }: SidebarProps) => {
   const scrollContainerRef = useRef<HTMLDivElement | null>(null)
   const scrollTop = useDocsSidebarStore((state) => state.scrollTop)
   const { setScrollTop } = useDocsSidebarActions()
