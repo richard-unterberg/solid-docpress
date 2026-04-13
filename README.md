@@ -1,6 +1,38 @@
 ## nivel ✨
 
-documentation engine for vike yeah
+static site builder for mdx documentations - alpha
+
+⚠️ This project is under development and built in mind to mainly support vike & telefunc documentation pages.
+Expect breaking changes on engine updates.
+
+Ok, with that out of the way, have fun:
+
+## Install
+
+```bash
+pnpm add @unterberg/nivel react react-dom vike vike-react
+pnpm add -D vite typescript @types/react @types/react-dom
+```
+
+`vike` and `vite` are peer dependencies. The package exposes a local `nivel` binary after install.
+
+## Quick Start
+
+Scaffold a consumer:
+
+```bash
+pnpm exec nivel init
+```
+
+Generate docs pages:
+
+```bash
+pnpm exec nivel prepare
+```
+
+[Read more here](https://github.com/richard-unterberg/nivel/blob/master/packages/engine/README.md) 
+
+https://www.npmjs.com/package/@unterberg/nivel
 
 ### [`packages/engine`](packages/engine)
 
