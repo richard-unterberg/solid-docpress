@@ -86,7 +86,7 @@
     "@mdx-js/rollup": "^3.1.1",
     "@shikijs/transformers": "^4.0.2",
     "daisyui": "^5.5.19",
-    "detype": "^2.0.6",
+    "detype": "^2.0.7",
     "estree-util-value-to-estree": "^3.5.0",
     "lucide-react": "0.543.0",
     "mdast-util-mdx-jsx": "^3.2.0",
