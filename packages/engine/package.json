@@ -81,7 +81,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.12",
     "@brillout/shiki-transformers": "^4.0.2",
-    "@tanstack/react-query": "^5.90.2",
+    "@tanstack/react-query": "^5.99.0",
     "@classmatejs/react": "^0.2.1",
     "@mdx-js/rollup": "^3.1.1",
     "@shikijs/transformers": "^4.0.2",
