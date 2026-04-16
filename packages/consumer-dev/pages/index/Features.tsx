@@ -4,6 +4,7 @@ import { ProseContainer } from '@unterberg/nivel/client'
 
 const FeatureProse = cm.extend(ProseContainer)`
   prose-headings:my-0 
+  prose-p:my-0 
   prose-headings:mb-4 
   prose-img:my-0
 `
@@ -11,14 +12,13 @@ const FeatureProse = cm.extend(ProseContainer)`
 const FeatureHeading = cm.h3`
   flex items-center 
   gap-x-3
-  font-semibold
 `
 
 const FeatureBox = cm.div`
   bg-base-200
-  p-6 rounded-box
+  p-3 lg:p-6 
+  rounded-box
   prose-headings:text-xl
-
   border-base-muted-light
   border
 `
@@ -26,7 +26,7 @@ const FeatureBox = cm.div`
 export const Features = () => {
   return (
     <FeatureProse>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 gap-y-6 m-auto max-w-none">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 m-auto max-w-none">
         <FeatureBox>
           <FeatureHeading>
             <span className="h-fit">

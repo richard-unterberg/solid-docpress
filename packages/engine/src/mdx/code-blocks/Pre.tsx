@@ -81,7 +81,7 @@ const Pre = ({ children, className, ...props }: PreProps) => {
   return (
     <div
       className={cmMerge(
-        'group relative h-full not-prose overflow-hidden',
+        'group relative h-full min-w-0 max-w-full not-prose overflow-hidden',
         isInChoiceGroup ? '' : 'rounded-box border border-base-muted-light',
         className,
       )}
@@ -100,7 +100,10 @@ const Pre = ({ children, className, ...props }: PreProps) => {
       <pre
         {...props}
         ref={preRef}
-        className={cmMerge('doc-code-pre m-0 h-full overflow-x-auto bg-base-200! p-4 text-sm', className)}
+        className={cmMerge(
+          'doc-code-pre m-0 h-full min-w-0 max-w-full overflow-x-auto bg-base-200! p-4 text-sm',
+          className,
+        )}
         data-code-block-content=""
       >
         {children}

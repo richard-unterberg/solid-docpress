@@ -71,7 +71,7 @@ export const Navbar = memo(() => {
   return (
     <>
       <StyledNavbar $border={isLandingPage}>
-        <LayoutComponent className="h-full">
+        <LayoutComponent className="h-full hidden md:block">
           {isLandingPage ? (
             <div className="relative z-3 flex h-full items-center justify-between py-4">
               <div className="flex flex-1 items-center gap-4">
@@ -159,17 +159,21 @@ export const Navbar = memo(() => {
             </div>
           )}
         </LayoutComponent>
+        {/* this should be only rendered on desktop */}
+        <MegaMenu
+          sections={sections}
+          activeSectionId={activeSection?.id}
+          hoveredSectionId={hoveredSectionId}
+          isActive={isMegaMenuOpen}
+          onOpen={openMegaMenu}
+          onClose={scheduleMegaMenuClose}
+          isLandingPage={isLandingPage}
+        />
+      </StyledNavbar>
+      <StyledNavbar $border={false} className="block md:hidden ">
+        MOBILE
       </StyledNavbar>
       <Search />
-      <MegaMenu
-        sections={sections}
-        activeSectionId={activeSection?.id}
-        hoveredSectionId={hoveredSectionId}
-        isActive={isMegaMenuOpen}
-        onOpen={openMegaMenu}
-        onClose={scheduleMegaMenuClose}
-        isLandingPage={isLandingPage}
-      />
     </>
   )
 })

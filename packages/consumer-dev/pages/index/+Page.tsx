@@ -13,7 +13,10 @@ const Page = () => {
   return (
     <div className="landing-code-samples">
       <div className="overflow-x-clip min-h-[calc(100svh-20*var(--spacing))] flex flex-col justify-center py-16 w-full">
-        <div className="absolute top-0 min-w-300 left-1/2 w-full h-svh bg-radial-[at_50%_50%] from-primary-muted-light/30 dark:from-primary-muted-light/30 to-55% translate-x-[-50%] pointer-events-none" />
+        <div className="w-full overflow-x-hidden h-full max-w-full absolute top-0 left-0">
+          <div className="absolute top-0 min-w-300 left-1/2 w-full h-svh bg-radial-[at_50%_50%] from-primary-muted-light/30 dark:from-primary-muted-light/30 to-55% translate-x-[-50%] pointer-events-none" />
+        </div>
+
         <LayoutComponent className="relative">
           <div className="text-center mx-auto z-2 relative">
             {/* <div className="flex rounded-field justify-center w-fit mx-auto shadow border border-base-muted-medium/50 overflow-hidden">
@@ -49,8 +52,9 @@ const Page = () => {
       </div>
 
       <div className="relative h-fit overflow-x-clip">
-        <div className="absolute top-0 left-0 w-[160svh] h-[160svh] bg-radial from-primary-muted-light/30 to-65%" />
-
+        <div className="w-full overflow-hidden h-full max-w-full absolute top-0 left-0">
+          <div className="absolute top-0 left-0 w-[160svh] h-full bg-radial from-primary-muted-light/30 to-65%" />
+        </div>
         <LayoutComponent $size="md">
           <SectionHeading>Features</SectionHeading>
           <Features />
@@ -62,8 +66,10 @@ const Page = () => {
         <Quickstart />
         <CTAButtons />
       </LayoutComponent>
-      <div className="relative overflow-hidden h-fit">
-        <div className="absolute top-0 left-0 w-full h-[60svh] bg-radial-[at_65%_85%] from-primary-muted-light to-65%" />
+      <div className="relative overflow-hidden">
+        <div className="w-full overflow-x-hidden overflow-y-hidden h-full max-w-full absolute top-0 left-0">
+          <div className="absolute top-0 left-0 w-full h-[60svh] bg-radial from-primary-muted-light/40 to-65%" />
+        </div>
         <LayoutComponent $size="sm">
           <SectionHeading>You may not need an API schema</SectionHeading>
           <StartPageFooter />

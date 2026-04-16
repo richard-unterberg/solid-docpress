@@ -5,27 +5,10 @@ import DefineTelefunctionSnippet from './DefineTelefunctionSnippet.mdx'
 import ServerSetupSnippet from './ServerSetupSnippet.mdx'
 import SimpleQuerySnippet from './SimpleQuerySnippet.mdx'
 
-const QuickStartProse = cm.extend(ProseContainer)`
-  prose-headings:my-0 
-  prose-headings:mb-4 
-  prose-img:my-0
-`
-
-const StyledHeadingNumber = cm.span`
-  xl:-ml-12
-  w-6 xl:w-9 
-  h-6 xl:h-9
-  text-base! xl:text-lg! 
-  flex justify-center items-center 
-  rounded-full 
-  text-center font-bold 
-  bg-primary text-primary-content 
-`
-
 export const Quickstart = () => {
   return (
-    <QuickStartProse className="grid lg:grid-cols-2 gap-4 md:gap-y-12">
-      <div className="lg:pr-10">
+    <QuickStartProse className="grid min-w-0 gap-4 lg:gap-y-12 *:min-w-0 lg:grid-cols-2">
+      <StyledOuter>
         <NumberedHeading index={1} label="Define your telefunction" />
         <p>Telefunctions are slim server functions that are scoped to UI events or interactions.</p>
         <p>
@@ -40,12 +23,12 @@ export const Quickstart = () => {
           Since our telefunction is scoped to a specific event, we only need to return the data our UI needs (in this
           case, nothing).
         </p>
-      </div>
-      <div>
+      </StyledOuter>
+      <div className="mb-8 lg:mb-0">
         <DefineTelefunctionSnippet />
       </div>
 
-      <div className="lg:pr-10">
+      <StyledOuter>
         <NumberedHeading index={2} label="Add to your server" />
         <p>
           Telefunc is built on Web Standards, and works out-of-box with any <code>Request</code>- or Node.js-
@@ -67,12 +50,11 @@ export const Quickstart = () => {
             streaming is coming soon.
           </a>
         </Alert>
-      </div>
-      <div>
+      </StyledOuter>
+      <div className="mb-8 lg:mb-0">
         <ServerSetupSnippet />
       </div>
-
-      <div className="lg:pr-10">
+      <StyledOuter>
         <NumberedHeading index={3} label="Start querying" />
         <p>With Telefunc added to our server, we just need to import and call our telefunction!</p>
         <p>
@@ -83,8 +65,8 @@ export const Quickstart = () => {
           Likewise, naming telefunctions <code>onSomeEvent</code> is an easy wasy to prevent scope keep. That way our
           app is more secure and performant by design.
         </p>
-      </div>
-      <div>
+      </StyledOuter>
+      <div className="mb-8 lg:mb-0">
         <SimpleQuerySnippet />
       </div>
     </QuickStartProse>
@@ -93,9 +75,32 @@ export const Quickstart = () => {
 
 const NumberedHeading = ({ index, label }: { index: number; label: string }) => {
   return (
-    <h3 className="flex items-center gap-3 text-2xl">
+    <h3 className="flex items-center gap-3">
       <StyledHeadingNumber>{index}</StyledHeadingNumber>
       <span>{label}</span>
     </h3>
   )
 }
+
+const QuickStartProse = cm.extend(ProseContainer)`
+  prose-headings:my-0 
+  prose-headings:mb-4 
+  prose-img:my-0
+  prose-h3:lg:text-2xl
+  prose-h3:text-lg
+`
+
+const StyledHeadingNumber = cm.span`
+  xl:-ml-12
+  w-6 xl:w-9 
+  h-6 xl:h-9
+  text-base! xl:text-lg! 
+  flex justify-center items-center 
+  rounded-full 
+  text-center font-bold 
+  bg-primary text-primary-content 
+`
+
+const StyledOuter = cm.div`
+  lg:pr-10
+`

@@ -87,7 +87,7 @@ const ChoiceGroup = ({
   return (
     <div
       data-choice-group-outer
-      className="my-6 flex h-full flex-col overflow-hidden rounded-box border border-base-muted-light"
+      className="my-6 flex h-full min-w-0 max-w-full flex-col overflow-hidden rounded-box border border-base-muted-light"
     >
       <div
         className="not-prose flex min-h-10 items-center relative justify-between gap-3 border-b border-base-muted-light bg-base-muted-superlight px-4"
@@ -126,7 +126,10 @@ const ChoiceGroup = ({
           )}
         </div>
       </div>
-      <div ref={bodyRef} className="h-full flex-1 bg-base-200! [&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
+      <div
+        ref={bodyRef}
+        className="h-full min-w-0 max-w-full flex-1 bg-base-200! [&>*:first-child]:mt-0 [&>*:last-child]:mb-0"
+      >
         <CodeBlockGroupProvider value={true}>{activeChoiceElement.props.children}</CodeBlockGroupProvider>
       </div>
     </div>
