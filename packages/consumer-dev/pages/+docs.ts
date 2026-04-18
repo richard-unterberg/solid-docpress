@@ -5,7 +5,7 @@ const docsConfig = {
   graph: docsGraph,
   siteTitle: 'telefunc',
   siteDescription: 'telefunc documentation',
-  siteUrl: 'https://telefunc.com',
+  siteUrl: 'https://richard-unterberg.github.io/nivel',
   basePath: '/',
   contentDir: 'docs',
   theme: {
