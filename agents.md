@@ -16,4 +16,4 @@
 - Navbar and sidebar behavior must be driven by the unified docs graph, not by separate manual navigation files.
 - Code style rule: use arrow functions only. Do not introduce `function` declarations in repo code.
 - Migrated MDX/content must be passed through the repo formatter after import and path rewrites; do not copy legacy content over unformatted.
-- Finish workspace changes by running `pnpm format`, `pnpm typecheck`, and `pnpm knip`. Keep `pnpm build` required for structural or runtime changes.
+- Finish workspace changes by running `pnpm verify` to run all checks and tests, including the engine tests. Do not skip this step.

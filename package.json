@@ -21,7 +21,8 @@
     "check:knip": "pnpm knip",
     "deploy:npm": "node ./scripts/deployNpm.mjs",
     "test:engine": "cd packages/engine && pnpm test",
-    "prepare": "lefthook install"
+    "prepare": "lefthook install",
+    "verify": "pnpm format && pnpm run check:knip && pnpm run lint && pnpm run typecheck && pnpm run test:engine"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.11",
