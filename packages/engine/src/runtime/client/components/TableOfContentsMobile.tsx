@@ -1,6 +1,6 @@
 import cm from '@classmatejs/react'
 import { TableOfContents } from 'lucide-react'
-import type { Dispatch, SetStateAction } from 'react'
+import { type Dispatch, type SetStateAction, useId } from 'react'
 import type { DocHeading } from '../../../docs/types'
 import BreadcrumbSidebarTrigger from './BreadcrumbSidebarTrigger'
 
@@ -22,6 +22,8 @@ const TableOfContentsMobile = ({
   setActiveHeadingId = () => undefined,
 }: TableOfContentsProps) => {
   const topOptionValue = '__docs-page-top__'
+  const selectId = useId()
+  const labelId = `${selectId}-label`
   const selectedValue =
     tableOfContents && headings.some((heading) => heading.id === activeHeadingId) ? activeHeadingId : ''
 
@@ -31,12 +33,16 @@ const TableOfContentsMobile = ({
       <StyledTOC>
         <StyledTOCInner>
           <BreadcrumbSidebarTrigger currentHref={currentHref} />
-          <label className="select select-sm md:w-80 w-full" htmlFor="table-of-contents-select">
-            <span className="label flex">
+          <label className="select select-sm md:w-80 w-full" htmlFor={selectId}>
+            <span id={labelId} className="sr-only">
+              {pageTitle}
+            </span>
+            <span className="label flex" aria-hidden="true">
               <TableOfContents className="w-4 h-4" />
             </span>
             <select
-              id="table-of-contents-select"
+              id={selectId}
+              aria-labelledby={labelId}
               value={selectedValue || topOptionValue}
               onChange={(e) => {
                 const value = e.target.value

@@ -78,7 +78,6 @@ export const rehypeDocsHeadings = () => {
         properties: {
           href: `#${node.properties.id}`,
           'data-copy-heading-link': '',
-          'aria-hidden': 'true',
           'aria-label': `Copy link to heading: ${title}`,
           title: `Copy link to heading: ${title}`,
           className: ['docs-heading-link absolute inset-0 flex items-center justify-end text-primary-muted'],
@@ -97,7 +96,8 @@ export const rehypeDocsHeadings = () => {
               'stroke-width': 2,
               'stroke-linecap': 'round',
               'stroke-linejoin': 'round',
-              className: ['w-4 h-4 hidden group-hover:block translate-x-5'],
+              'aria-hidden': 'true',
+              className: ['w-4 h-4 hidden group-hover:block group-focus-within:block translate-x-5'],
             },
             children: [
               createLinkIconLine(4, 9, 20, 9),

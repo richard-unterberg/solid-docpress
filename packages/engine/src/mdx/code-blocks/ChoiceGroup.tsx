@@ -1,6 +1,6 @@
 export { ChoiceGroup }
 
-import { Children, isValidElement, type ReactElement, type ReactNode, useRef } from 'react'
+import { Children, isValidElement, type ReactElement, type ReactNode, useId, useRef } from 'react'
 import { CodeBlockHeaderMeta } from './CodeBlockHeaderMeta.js'
 import { CodeBlockCopyButton, trimTrailingWhitespace } from './CopyButton.js'
 import { CodeBlockGroupProvider } from './context.js'
@@ -67,6 +67,8 @@ const ChoiceGroup = ({
 }) => {
   const [selectedChoice, setSelectedChoice] = useSelectedChoice(choiceGroup.name, choiceGroup.default)
   const bodyRef = useRef<HTMLDivElement>(null)
+  const selectId = useId()
+  const labelId = `${selectId}-label`
   // const previousPositionRef = useRestoreScroll([selectedChoice])
   const choiceElements = Children.toArray(children).filter(isChoiceElement)
   const activeChoiceElement =
@@ -95,8 +97,13 @@ const ChoiceGroup = ({
       >
         <CodeBlockHeaderMeta label={headerLabel} env={activeCodeBlockMeta.env} />
         <div className="flex items-center gap-1">
-          <label className="select select-xs min-w-28 w-fit">
+          <label className="select select-xs min-w-28 w-fit" htmlFor={selectId}>
+            <span id={labelId} className="sr-only">
+              Choose code example variant
+            </span>
             <select
+              id={selectId}
+              aria-labelledby={labelId}
               name={`choicesFor-${choiceGroup.name}`}
               value={activeChoiceElement.props['data-choice-value']}
               onChange={(event) => {
