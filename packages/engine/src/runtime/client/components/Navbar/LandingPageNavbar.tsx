@@ -96,7 +96,7 @@ const LandingPageNavbar = ({
       <div className="min-w-40 hidden lg:block">
         <AsideButtons />
       </div>
-      <button type="button" className="block lg:hidden" onClick={handleClick}>
+      <button type="button" className="block lg:hidden" aria-label="Open navigation menu" onClick={handleClick}>
         <Menu className="w-6 h-6" />
       </button>
     </div>

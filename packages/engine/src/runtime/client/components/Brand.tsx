@@ -10,7 +10,11 @@ export const Brand = ({ brand, noText = false }: BrandProps) => {
   const defaultLogo = brand.logoLight ?? brand.logoDark
 
   return (
-    <a href={brand.href} className="flex items-center gap-3 text-base-content no-underline">
+    <a
+      href={brand.href}
+      className="flex items-center gap-3 text-base-content no-underline"
+      aria-label={noText ? `${brand.text} homepage` : undefined}
+    >
       {defaultLogo && (
         <span className="relative block h-8 w-8 shrink-0">
           {brand.logoLight && (
