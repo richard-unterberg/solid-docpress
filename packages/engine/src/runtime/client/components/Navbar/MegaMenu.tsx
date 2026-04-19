@@ -102,8 +102,8 @@ export const MegaMenu = ({
       />
       <div
         className={cmMerge(
-          'relative z-4 overflow-hidden transition-[height] bg-base-100 duration-300',
-          isLandingPage && !isActive ? '' : 'border-b border-base-muted-light ease-out',
+          'relative z-4 overflow-hidden transition-[height] bg-base-100 duration-300 ease-out',
+          !isLandingPage && isActive ? '' : 'border-b border-base-muted-light',
         )}
         // biome-ignore lint/nursery/noInlineStyles: needed here
         style={{ height: isActive ? contentHeight : 0 }}

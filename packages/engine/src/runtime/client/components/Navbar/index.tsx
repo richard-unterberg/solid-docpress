@@ -1,5 +1,4 @@
 import cm from '@classmatejs/react'
-import { useEffect, useState } from 'react'
 import { usePageContext } from 'vike-react/usePageContext'
 import { getActiveSectionByPathname } from '../../../../docs/runtime'
 import { useDocsGlobalContext } from '../../docsGlobalContext'
@@ -11,8 +10,6 @@ import LandingPageNavbar from './LandingPageNavbar'
 import { MegaMenu } from './MegaMenu'
 import useMegaMenu from './useMegaMenu'
 
-const LARGE_SCREEN_MEDIA_QUERY = '(min-width: 1024px)'
-
 const NavbarNew = () => {
   const docs = useDocsGlobalContext()
   const { urlPathname, urlParsed } = usePageContext()
@@ -20,31 +17,12 @@ const NavbarNew = () => {
   const sections = docs.sidebarSections
   const activeSection = getActiveSectionByPathname(docs, urlPathname)
   const { toggle: toggleSearch } = useDocsSearchActions()
-  const [isLargeScreen, setIsLargeScreen] = useState(false)
 
   const { closeMegaMenu, hoveredSectionId, isMegaMenuOpen, openMegaMenu, scheduleMegaMenuOpen, scheduleMegaMenuClose } =
     useMegaMenu({
       activeSectionId: activeSection?.id,
       sections,
     })
-
-  useEffect(() => {
-    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
-      return
-    }
-
-    const mediaQueryList = window.matchMedia(LARGE_SCREEN_MEDIA_QUERY)
-    const updateLargeScreenState = () => {
-      setIsLargeScreen(mediaQueryList.matches)
-    }
-
-    updateLargeScreenState()
-    mediaQueryList.addEventListener('change', updateLargeScreenState)
-
-    return () => {
-      mediaQueryList.removeEventListener('change', updateLargeScreenState)
-    }
-  }, [])
 
   return (
     <StyledNavbar $border={isLandingPage}>
@@ -73,17 +51,15 @@ const NavbarNew = () => {
         )}
       </LayoutComponent>
       <Search />
-      {isLargeScreen ? (
-        <MegaMenu
-          sections={sections}
-          activeSectionId={activeSection?.id}
-          hoveredSectionId={hoveredSectionId}
-          isActive={isMegaMenuOpen}
-          onOpen={openMegaMenu}
-          onClose={scheduleMegaMenuClose}
-          isLandingPage={isLandingPage}
-        />
-      ) : null}
+      <MegaMenu
+        sections={sections}
+        activeSectionId={activeSection?.id}
+        hoveredSectionId={hoveredSectionId}
+        isActive={isMegaMenuOpen}
+        onOpen={openMegaMenu}
+        onClose={scheduleMegaMenuClose}
+        isLandingPage={isLandingPage}
+      />
     </StyledNavbar>
   )
 }

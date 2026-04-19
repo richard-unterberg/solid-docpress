@@ -1,5 +1,5 @@
 const apiKey = process.env.BUNNY_API_KEY?.trim()
-const pullZoneUrl = process.env.BUNNY_PULL_ZONE_URL?.trim()
+const purgeUrl = process.env.BUNNY_PULL_ZONE_URL?.trim()
 
 const fail = (message) => {
   console.error(message)
@@ -10,23 +10,27 @@ if (!apiKey) {
   fail('Missing BUNNY_API_KEY.')
 }
 
-if (!pullZoneUrl) {
-  fail('Missing BUNNY_PULL_ZONE_URL.')
+if (!purgeUrl) {
+  fail('Missing purge target. Set BUNNY_PURGE_URL or BUNNY_PULL_ZONE_URL.')
 }
 
-const requestUrl = `https://api.bunny.net/purge=${pullZoneUrl}`
-const requestInit = {
-  method: 'POST',
-  headers: {
-    AccessKey: apiKey,
-  },
+const runUrlPurge = async () => {
+  const requestUrl = new URL('https://api.bunny.net/purge')
+  requestUrl.searchParams.set('url', purgeUrl)
+
+  const response = await fetch(requestUrl, {
+    method: 'POST',
+    headers: {
+      AccessKey: apiKey,
+    },
+  })
+
+  if (!response.ok) {
+    const responseText = await response.text()
+    fail(`Bunny URL purge failed with ${response.status} ${response.statusText}: ${responseText}`)
+  }
+
+  console.log(`Purged Bunny cache for URL ${purgeUrl}.`)
 }
 
-const response = await fetch(requestUrl, requestInit)
-
-if (!response.ok) {
-  const responseText = await response.text()
-  fail(`Bunny purge failed with ${response.status} ${response.statusText}: ${responseText}`)
-}
-
-console.log(`Purged Bunny cache for pull zone ${pullZoneUrl}.`)
+await runUrlPurge()
