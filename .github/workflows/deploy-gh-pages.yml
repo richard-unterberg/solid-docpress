@@ -57,13 +57,10 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Wait for GitHub Pages Propagation
-        if: github.ref == 'refs/heads/master'
-        run: sleep 30
-
       - name: Purge Bunny Pull Zone Cache
         if: github.ref == 'refs/heads/master'
         env:
           BUNNY_API_KEY: ${{ secrets.BUNNY_API_KEY }}
-          BUNNY_PULL_ZONE_URL: ${{ secrets.BUNNY_PULL_ZONE_URL }}
+          BUNNY_PULL_ZONE_ID: ${{ secrets.BUNNY_PULL_ZONE_ID }}
+          BUNNY_CACHE_TAG: gh-pages-deploy
         run: pnpm purge:bunny
