@@ -6,7 +6,7 @@ Opinionated docs engine for Vike + Vite + React.
 
 ## What It Provides
 
-- typed docs config and docs graph helpers
+- typed docs config and docs graph surfaces
 - generated Vike docs pages from a single docs graph
 - docs shell primitives such as navbar, sidebar, table of contents, pagination, search, and meta head wiring
 - MDX support with built-in docs components and code-block tooling
@@ -77,9 +77,9 @@ Only `pages/(nivel-generated)` is engine-generated and should not be edited by h
 `docs/docs.graph.ts`
 
 ```ts
-import { defineDocsGraph } from '@unterberg/nivel/config'
+import type { DocsGraph } from '@unterberg/nivel'
 
-export const docsGraph = defineDocsGraph({
+export const docsGraph = {
   items: [
     {
       kind: 'section',
@@ -97,22 +97,22 @@ export const docsGraph = defineDocsGraph({
       ],
     },
   ],
-})
+} satisfies DocsGraph
 ```
 
 `pages/+docs.ts`
 
 ```ts
-import { defineDocsConfig } from '@unterberg/nivel/config'
+import type { DocsConfig } from '@unterberg/nivel'
 import { docsGraph } from '../docs/docs.graph'
 
-const docsConfig = defineDocsConfig({
+const docsConfig = {
   graph: docsGraph,
   siteTitle: 'My Docs',
   siteDescription: 'Documentation site powered by @unterberg/nivel.',
   siteUrl: 'https://docs.example.com',
   basePath: '/docs',
-})
+} satisfies DocsConfig
 
 export default docsConfig
 ```
@@ -209,8 +209,7 @@ nivel --help
 
 | Entry | Purpose |
 | --- | --- |
-| `@unterberg/nivel` | main types, docs helpers, MDX components, shared utilities |
-| `@unterberg/nivel/config` | lean config-time entry for `defineDocsConfig()` and `defineDocsGraph()` |
+| `@unterberg/nivel` | main types, MDX components, shared utilities |
 | `@unterberg/nivel/vike` | engine-owned Vike config for the consumer's `pages/+config.ts` |
 | `@unterberg/nivel/client` | `AppLayout`, `MetaHead`, `UserSettingsSync`, `DocsPage`, and client stores |
 | `@unterberg/nivel/mdx` | MDX provider entry |

@@ -3,7 +3,7 @@ import { defineConfig } from 'tsup'
 export default defineConfig((overrideOptions) => ({
   entry: {
     cli: 'src/cli.ts',
-    config: 'src/docs/defineDocs.ts',
+    icons: 'src/icons.ts',
     index: 'src/index.ts',
     vike: 'src/vike/index.ts',
     tailwind: 'src/tailwind/index.ts',

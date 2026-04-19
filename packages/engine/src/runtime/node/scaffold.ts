@@ -65,9 +65,9 @@ const getDocsConfigTemplate = () => {
 
 const getDocsGraphTemplate = () => {
   return [
-    "import { defineDocsGraph } from '@unterberg/nivel/config'",
+    "import type { DocsGraph } from '@unterberg/nivel'",
     '',
-    'export const docsGraph = defineDocsGraph({',
+    'export const docsGraph = {',
     '  items: [',
     '    {',
     "      kind: 'section',",
@@ -85,7 +85,7 @@ const getDocsGraphTemplate = () => {
     '      ],',
     '    },',
     '  ],',
-    '})',
+    '} satisfies DocsGraph',
     '',
   ].join('\n')
 }

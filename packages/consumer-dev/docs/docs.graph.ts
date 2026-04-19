@@ -12,6 +12,7 @@ export const docsGraph = {
           kind: 'group',
           id: 'getting-started',
           title: 'Getting Started',
+          icon: 'Rocket',
           items: [
             {
               kind: 'page',
@@ -47,6 +48,7 @@ export const docsGraph = {
           kind: 'group',
           id: 'guides',
           title: 'Guides',
+          icon: 'Signpost',
           items: [
             {
               kind: 'group',
@@ -185,6 +187,7 @@ export const docsGraph = {
           kind: 'group',
           id: 'learn-more',
           title: 'Learn More',
+          icon: 'Sparkles',
           items: [
             {
               kind: 'page',
@@ -227,6 +230,7 @@ export const docsGraph = {
           kind: 'group',
           id: 'server-api',
           title: 'Server',
+          icon: 'Server',
           items: [
             {
               kind: 'page',
@@ -282,6 +286,7 @@ export const docsGraph = {
           kind: 'group',
           id: 'client-api',
           title: 'Client',
+          icon: 'MonitorSmartphone',
           items: [
             {
               kind: 'page',
@@ -299,6 +304,7 @@ export const docsGraph = {
           kind: 'group',
           id: 'config-api',
           title: 'Config',
+          icon: 'SlidersHorizontal',
           items: [
             {
               kind: 'page',

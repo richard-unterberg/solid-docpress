@@ -1,6 +1,6 @@
 {
   "name": "@unterberg/nivel",
-  "version": "0.1.14",
+  "version": "0.2.0",
   "type": "module",
   "sideEffects": false,
   "repository": {
@@ -32,9 +32,9 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./config": {
-      "types": "./dist/config.d.ts",
-      "import": "./dist/config.js"
+    "./icons": {
+      "types": "./dist/icons.d.ts",
+      "import": "./dist/icons.js"
     },
     "./vike": {
       "types": "./dist/vike.d.ts",

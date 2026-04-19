@@ -3,11 +3,10 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import test from 'node:test'
-import { defineDocsConfig, defineDocsGraph } from '../dist/index.js'
 import { createNivelVikeConfig } from '../dist/vike.js'
 
 const createDocsGraph = () => {
-  return defineDocsGraph({
+  return {
     items: [
       {
         kind: 'section',
@@ -25,7 +24,7 @@ const createDocsGraph = () => {
         ],
       },
     ],
-  })
+  }
 }
 
 const createTempRoot = () => {
@@ -79,12 +78,12 @@ test('sitemap output uses canonical docs URLs and robots references the correct 
     writeFile(path.join(rootDir, 'pages', '(nivel-generated)', 'start', '+Page.tsx'), 'export default null\n')
 
     await withCwd(rootDir, async () => {
-      const docsConfig = defineDocsConfig({
+      const docsConfig = {
         basePath: '/docs',
         graph: createDocsGraph(),
         siteTitle: 'My Docs',
         siteUrl: 'https://docs.example.com/base',
-      })
+      }
       const config = createNivelVikeConfig(docsConfig)
       const sitemapPlugin = getPlugin(config, 'nivel-sitemap-plugin')
 
@@ -118,14 +117,12 @@ test('sitemap generation fails when docs canonical URLs clash with consumer file
     writeFile(path.join(rootDir, 'pages', 'intro', '+Page.tsx'), 'export default null\n')
 
     await withCwd(rootDir, async () => {
-      const config = createNivelVikeConfig(
-        defineDocsConfig({
-          basePath: '/',
-          graph: createDocsGraph(),
-          siteTitle: 'My Docs',
-          siteUrl: 'https://docs.example.com',
-        }),
-      )
+      const config = createNivelVikeConfig({
+        basePath: '/',
+        graph: createDocsGraph(),
+        siteTitle: 'My Docs',
+        siteUrl: 'https://docs.example.com',
+      })
       const sitemapPlugin = getPlugin(config, 'nivel-sitemap-plugin')
 
       await assert.rejects(async () => {

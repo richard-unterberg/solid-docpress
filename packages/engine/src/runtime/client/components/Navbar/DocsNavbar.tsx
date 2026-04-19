@@ -1,6 +1,7 @@
 import cm, { cmMerge } from '@classmatejs/react'
 import { ChevronDown, Menu, TextSearch } from 'lucide-react'
 import { useCallback } from 'react'
+import { getDocsIconMapKey } from '../../../../docs/icons.js'
 import type { ResolvedDocsSection } from '../../../../docs/types'
 import { withSiteBaseUrl } from '../../../../shared/assets'
 import { renderInlineMarkdown } from '../../../../shared/renderInlineMarkdown'
@@ -53,6 +54,7 @@ const DocsNavbar = ({
       <StyledNav aria-label="Primary">
         <StyledNavList className="">
           {docs.navbarItems.map((item) => {
+            const ItemIcon = docs.docsIconMap[getDocsIconMapKey('section', item.id)]
             const isMegaMenuItemActive = isMegaMenuOpen && hoveredSectionId === item.id
 
             return (
@@ -72,6 +74,7 @@ const DocsNavbar = ({
                       activeSection?.id === item.id ? 'btn-primary btn-soft' : 'btn-ghost ',
                     )}
                   >
+                    {ItemIcon ? <ItemIcon className="size-4 shrink-0" aria-hidden="true" /> : null}
                     {renderInlineMarkdown(item.title)}
                     <ChevronDown
                       className={cmMerge(

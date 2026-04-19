@@ -70,6 +70,7 @@ test('nivel init creates visible consumer files and standard scripts', () => {
   const configSource = fs.readFileSync(path.join(rootDir, 'pages', '+config.ts'), 'utf8')
   const viteConfigSource = fs.readFileSync(path.join(rootDir, 'vite.config.ts'), 'utf8')
   const wrapperSource = fs.readFileSync(path.join(rootDir, 'pages', '+Wrapper.tsx'), 'utf8')
+  const docsGraphSource = fs.readFileSync(path.join(rootDir, 'docs', 'docs.graph.ts'), 'utf8')
   assert.match(configSource, /createNivelVikeConfig/)
   assert.match(configSource, /prerender: true/)
   assert.match(configSource, /prefetchStaticAssets/)
@@ -80,6 +81,8 @@ test('nivel init creates visible consumer files and standard scripts', () => {
   const docsConfigSource = fs.readFileSync(path.join(rootDir, 'pages', '+docs.ts'), 'utf8')
   assert.match(docsConfigSource, /satisfies DocsConfig/)
   assert.doesNotMatch(docsConfigSource, /defineDocsConfig/)
+  assert.match(docsGraphSource, /satisfies DocsGraph/)
+  assert.doesNotMatch(docsGraphSource, /defineDocsGraph/)
 })
 
 test('nivel init does not overwrite existing files without --force', () => {

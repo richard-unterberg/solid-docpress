@@ -17,3 +17,5 @@
 - Code style rule: use arrow functions only. Do not introduce `function` declarations in repo code.
 - Migrated MDX/content must be passed through the repo formatter after import and path rewrites; do not copy legacy content over unformatted.
 - Finish workspace changes by running `pnpm verify` to run all checks and tests, including the engine tests. Do not skip this step.
+
+- do not again add `defineDocsConfig` or `defineDocsGraph` helpers that wrap the config/graph objects. They add no value and just create an extra step for users to understand and import from the engine. The only reason they exist in the current code is that they were needed for internal type inference during early development, but now they are redundant and just add confusion. The engine should export the types for `DocsConfig` and `DocsGraph`, but the consumer can just create plain objects that satisfy those types without needing wrapper functions. If you do that ever again I swear I will unsubscribe open ai plus.

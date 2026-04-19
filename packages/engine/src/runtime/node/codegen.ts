@@ -2,7 +2,15 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { extractDocHeadings } from '../../docs/docHeadings.js'
 import { getResolvedPageById, resolveDocsConfig } from '../../docs/resolveDocsConfig.js'
-import type { DocPageData, DocPageLinkData, DocsConfig, DocsGlobalContextData } from '../../docs/types.js'
+import type {
+  DocPageData,
+  DocPageLinkData,
+  DocsConfig,
+  DocsGlobalContextSerializableData,
+  DocsIconName,
+  ResolvedSidebarNode,
+} from '../../docs/types.js'
+import { getDocsIconMapKey } from '../../docs/icons.js'
 
 const GENERATED_DIRNAME = '(nivel-generated)'
 
@@ -26,7 +34,7 @@ const getRelativeImportPath = (fromDirectory: string, toFile: string) => {
   return `./${relativePath}`
 }
 
-const serializeData = (data: DocPageData | DocsGlobalContextData) => JSON.stringify(data, null, 2)
+const serializeData = (data: DocPageData | DocsGlobalContextSerializableData) => JSON.stringify(data, null, 2)
 
 const collectFiles = (directoryPath: string): string[] => {
   if (!fs.existsSync(directoryPath)) {
@@ -106,11 +114,53 @@ const getGeneratedDataSource = (data: DocPageData) => {
   ].join('\n')
 }
 
-const getGeneratedGlobalContextSource = (data: DocsGlobalContextData) => {
+type IconEntry = {
+  iconKey: string
+  iconName: DocsIconName
+}
+
+const getSidebarIconEntries = (nodes: ResolvedSidebarNode[]): IconEntry[] => {
+  return nodes.flatMap((node) => {
+    const iconEntries = node.icon ? [{ iconKey: getDocsIconMapKey(node.kind, node.id), iconName: node.icon }] : []
+
+    if (node.kind === 'group') {
+      return [...iconEntries, ...getSidebarIconEntries(node.items)]
+    }
+
+    return iconEntries
+  })
+}
+
+const getGeneratedIconMapSource = (entries: IconEntry[]) => {
+  if (entries.length === 0) {
+    return '{}'
+  }
+
+  return ['{', ...entries.map(({ iconKey, iconName }) => `  ${JSON.stringify(iconKey)}: ${iconName},`), '}'].join('\n')
+}
+
+const getGeneratedGlobalContextSource = (data: DocsGlobalContextSerializableData) => {
+  const iconEntries = data.sidebarSections.flatMap((section) => {
+    const sectionIconEntries = section.icon
+      ? [{ iconKey: getDocsIconMapKey('section', section.id), iconName: section.icon }]
+      : []
+
+    return [...sectionIconEntries, ...getSidebarIconEntries(section.items)]
+  })
+  const iconImports = [...new Set(iconEntries.map(({ iconName }) => iconName))].sort()
+
   return [
-    "import type { DocsGlobalContextData } from '@unterberg/nivel'",
+    "import type { DocsGlobalContextData, DocsGlobalContextSerializableData, DocsIconMap } from '@unterberg/nivel'",
+    ...(iconImports.length > 0 ? [`import { ${iconImports.join(', ')} } from '@unterberg/nivel/icons'`] : []),
     '',
-    `const docsGlobalContextData: DocsGlobalContextData = ${serializeData(data)}`,
+    `const docsGlobalContextSerializableData: DocsGlobalContextSerializableData = ${serializeData(data)}`,
+    '',
+    `const docsIconMap: DocsIconMap = ${getGeneratedIconMapSource(iconEntries)}`,
+    '',
+    'const docsGlobalContextData: DocsGlobalContextData = {',
+    '  ...docsGlobalContextSerializableData,',
+    '  docsIconMap,',
+    '}',
     '',
     'export { docsGlobalContextData }',
     '',
@@ -181,14 +231,13 @@ export const getDocsSourcePaths = (options: { rootDir: string; docsConfig: DocsC
 
 export const isDocsSourcePath = (filePath: string, docsSourcePaths: DocsSourcePaths) => {
   const normalized = toPosix(filePath)
-  const generatedRootPath = toPosix(docsSourcePaths.generatedRootPath)
+  if (isGeneratedDocsPath(filePath, docsSourcePaths)) {
+    return false
+  }
+
   const docsConfigPath = toPosix(docsSourcePaths.docsConfigPath)
   const docsGraphPath = toPosix(docsSourcePaths.docsGraphPath)
   const contentRootPath = toPosix(docsSourcePaths.contentRootPath)
-
-  if (normalized.startsWith(generatedRootPath)) {
-    return false
-  }
 
   return (
     normalized === docsConfigPath ||
@@ -196,6 +245,13 @@ export const isDocsSourcePath = (filePath: string, docsSourcePaths: DocsSourcePa
     normalized === contentRootPath ||
     normalized.startsWith(`${contentRootPath}/`)
   )
+}
+
+export const isGeneratedDocsPath = (filePath: string, docsSourcePaths: DocsSourcePaths) => {
+  const normalized = toPosix(filePath)
+  const generatedRootPath = toPosix(docsSourcePaths.generatedRootPath)
+
+  return normalized.startsWith(generatedRootPath)
 }
 
 export const syncGeneratedDocsPages = (options: { rootDir: string; docsConfig: DocsConfig }) => {
@@ -209,7 +265,7 @@ export const syncGeneratedDocsPages = (options: { rootDir: string; docsConfig: D
 
   fs.mkdirSync(generatedPagesRoot, { recursive: true })
 
-  const globalContextData: DocsGlobalContextData = {
+  const globalContextData: DocsGlobalContextSerializableData = {
     siteTitle: resolved.siteTitle,
     basePath: resolved.basePath,
     theme: resolved.theme,

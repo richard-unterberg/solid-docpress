@@ -13,7 +13,7 @@ This fixture exists to verify that a consumer can install `@unterberg/nivel` as 
 - The fixture points to the local engine package using <code>file:../../packages/engine</code>.
 - The consumer lives under <code>tests/npm-consumer</code> and is not part of the workspace packages list.
 - Tailwind is still configured in a hand-authored consumer stylesheet.
-- The authored docs config imports helpers from <code>@unterberg/nivel/config</code>.
+- The authored docs config and graph are plain objects typed with <code>satisfies</code>.
 - The Vike setup keeps a normal-looking <code>+config.ts</code> and spreads in <code>@unterberg/nivel/vike</code>.
 
 ## Next step

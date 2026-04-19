@@ -1,7 +1,13 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import type { Plugin, ViteDevServer } from 'vite'
-import { getDocsSourcePaths, isDocsSourcePath, syncGeneratedDocsPages, type DocsSourcePaths } from './codegen.js'
+import {
+  getDocsSourcePaths,
+  isDocsSourcePath,
+  isGeneratedDocsPath,
+  syncGeneratedDocsPages,
+  type DocsSourcePaths,
+} from './codegen.js'
 import {
   getNivelPublicAssetContentType,
   getNivelPublicAssetFilePath,
@@ -150,6 +156,10 @@ export const nivelPagesPlugin = (): Plugin => {
 
       const rootDir = ctx.server.config.root
       const resolvedDocsSourcePaths = docsSourcePaths ?? getDefaultDocsSourcePaths(rootDir)
+
+      if (isGeneratedDocsPath(ctx.file, resolvedDocsSourcePaths)) {
+        return []
+      }
 
       if (!isDocsSourcePath(ctx.file, resolvedDocsSourcePaths)) {
         return

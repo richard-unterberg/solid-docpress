@@ -12,12 +12,14 @@ const createDocsGraph = () => {
         kind: 'section',
         id: 'docs',
         title: 'Docs',
+        icon: 'BookOpen',
         items: [
           {
             kind: 'group',
             id: 'getting-started',
             title: 'Getting Started',
             href: 'intro',
+            icon: 'FolderOpen',
             items: [
               {
                 kind: 'page',
@@ -26,6 +28,7 @@ const createDocsGraph = () => {
                 slug: 'intro',
                 source: 'content/intro/content.mdx',
                 aliases: ['start'],
+                icon: 'FileText',
               },
             ],
           },
@@ -35,6 +38,7 @@ const createDocsGraph = () => {
         kind: 'section',
         id: 'more',
         title: 'More',
+        icon: 'SquareTerminal',
         href: '/pricing/',
         items: [
           {
@@ -43,6 +47,7 @@ const createDocsGraph = () => {
             title: 'Pricing',
             slug: 'pricing',
             source: 'content/pricing/content.mdx',
+            icon: 'BadgeDollarSign',
           },
         ],
       },
@@ -73,7 +78,12 @@ test('resolveDocsConfig supports custom route bases, content roots, and docs-rel
   assert.deepEqual(resolved.pages[0]?.aliasHrefs, ['/guide/start/'])
   assert.equal(resolved.sections[0]?.items[0]?.kind, 'group')
   assert.equal(resolved.sections[0]?.items[0]?.href, '/guide/intro/')
+  assert.equal(resolved.sections[0]?.icon, 'BookOpen')
+  assert.equal(resolved.sections[0]?.items[0]?.icon, 'FolderOpen')
+  assert.equal(resolved.pages[0]?.icon, 'FileText')
   assert.equal(resolved.sections[1]?.href, '/pricing/')
+  assert.equal(resolved.sections[1]?.icon, 'SquareTerminal')
+  assert.equal(resolved.pages[1]?.icon, 'BadgeDollarSign')
 })
 
 test('root route bases and docs-local href resolution avoid malformed slashes', () => {
@@ -98,6 +108,30 @@ test('basePath and contentDir validation fail fast for invalid values', () => {
   assert.throws(() => resolveDocsConfig(createDocsConfig({ basePath: '/guide#hash' })))
   assert.throws(() => resolveDocsConfig(createDocsConfig({ contentDir: '../docs' })))
   assert.throws(() => resolveDocsConfig(createDocsConfig({ contentDir: '/docs' })))
+  assert.throws(() =>
+    resolveDocsConfig({
+      ...createDocsConfig(),
+      graph: {
+        items: [
+          {
+            kind: 'section',
+            id: 'docs',
+            title: 'Docs',
+            icon: 'NotALucideIcon',
+            items: [
+              {
+                kind: 'page',
+                id: 'intro',
+                title: 'Intro',
+                slug: 'intro',
+                source: 'content/intro/content.mdx',
+              },
+            ],
+          },
+        ],
+      },
+    }),
+  )
 })
 
 test('syncGeneratedDocsPages reads custom contentDir and emits custom route files', () => {
@@ -130,6 +164,15 @@ test('syncGeneratedDocsPages reads custom contentDir and emits custom route file
     assert.equal(introRoute, 'export default "/guide/intro"\n')
     assert.equal(aliasRoute, 'export default "/guide/start"\n')
     assert.match(globalContext, /"basePath": "\/guide"/)
+    assert.match(
+      globalContext,
+      /import \{ BadgeDollarSign, BookOpen, FileText, FolderOpen, SquareTerminal \} from '@unterberg\/nivel\/icons'/,
+    )
+    assert.match(globalContext, /"section:docs": BookOpen/)
+    assert.match(globalContext, /"group:getting-started": FolderOpen/)
+    assert.match(globalContext, /"page:intro": FileText/)
+    assert.match(globalContext, /"section:more": SquareTerminal/)
+    assert.match(globalContext, /"page:pricing": BadgeDollarSign/)
   } finally {
     fs.rmSync(rootDir, { force: true, recursive: true })
   }

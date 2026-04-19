@@ -21,6 +21,7 @@ import type {
   ResolvedSidebarNode,
   ThemePreference,
 } from './types.js'
+import { assertDocsIconName } from './icons.js'
 
 export const isExternalHref = (value: string) => {
   return /^(?:[a-z]+:)?\/\//i.test(value) || value.startsWith('mailto:') || value.startsWith('tel:')
@@ -340,6 +341,10 @@ export const resolveDocsConfig = (config: DocsConfig): ResolvedDocsConfig => {
           throw new Error(`Duplicate docs group id "${node.id}".`)
         }
 
+        if (node.icon) {
+          assertDocsIconName(node.icon, `Docs group "${node.id}" icon`)
+        }
+
         groupIds.add(node.id)
 
         return {
@@ -350,6 +355,7 @@ export const resolveDocsConfig = (config: DocsConfig): ResolvedDocsConfig => {
           showInNav: node.showInNav ?? true,
           collapsible: node.collapsible,
           items: resolveSidebarNodes(node.items, sectionId),
+          icon: node.icon,
         }
       }
 
@@ -360,6 +366,10 @@ export const resolveDocsConfig = (config: DocsConfig): ResolvedDocsConfig => {
       const pageNode = node as DocsPageNode
       const slug = normalizeSlug(pageNode.slug)
       const aliases = normalizeAliases(pageNode.aliases, slug)
+
+      if (pageNode.icon) {
+        assertDocsIconName(pageNode.icon, `Docs page "${pageNode.id}" icon`)
+      }
 
       if (!slug) {
         throw new Error(`Docs page "${pageNode.id}" must define a non-empty slug.`)
@@ -406,6 +416,7 @@ export const resolveDocsConfig = (config: DocsConfig): ResolvedDocsConfig => {
         navTitle: pageNode.navTitle ?? pageNode.title,
         href,
         showInNav: pageNode.showInNav ?? true,
+        icon: pageNode.icon,
       }
     })
   }
@@ -417,6 +428,10 @@ export const resolveDocsConfig = (config: DocsConfig): ResolvedDocsConfig => {
 
     if (sectionIds.has(section.id)) {
       throw new Error(`Duplicate docs section id "${section.id}".`)
+    }
+
+    if (section.icon) {
+      assertDocsIconName(section.icon, `Docs section "${section.id}" icon`)
     }
 
     sectionIds.add(section.id)
@@ -437,6 +452,7 @@ export const resolveDocsConfig = (config: DocsConfig): ResolvedDocsConfig => {
       navTitle: section.navTitle ?? section.title,
       href,
       items,
+      icon: section.icon,
     }
 
     navbarItems.push({

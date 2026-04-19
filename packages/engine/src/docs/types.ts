@@ -1,4 +1,6 @@
 import type { LucideIcon } from 'lucide-react'
+import type { DocsIconName } from './icons.js'
+export type { DocsIconName } from './icons.js'
 
 export type DocsCollapsible = {
   isDefaultOpen?: boolean
@@ -84,6 +86,7 @@ export type DocsPageNode = {
   tableOfContents?: boolean
   navTitle?: string
   description?: string
+  icon?: DocsIconName
 }
 
 export type DocsGroupNode = {
@@ -94,6 +97,7 @@ export type DocsGroupNode = {
   showInNav?: boolean
   items: DocsSidebarNode[]
   collapsible?: DocsCollapsible
+  icon?: DocsIconName
 }
 
 export type DocsSectionNode = {
@@ -103,7 +107,7 @@ export type DocsSectionNode = {
   navTitle?: string
   href?: string
   items: DocsSidebarNode[]
-  icon?: LucideIcon
+  icon?: DocsIconName
 }
 
 export type DocsSidebarNode = DocsGroupNode | DocsPageNode
@@ -191,6 +195,7 @@ export type ResolvedSidebarGroup = {
   showInNav: boolean
   items: ResolvedSidebarNode[]
   collapsible?: DocsCollapsible
+  icon?: DocsIconName
 }
 
 export type ResolvedSidebarPage = {
@@ -200,6 +205,7 @@ export type ResolvedSidebarPage = {
   navTitle: string
   href: string
   showInNav: boolean
+  icon?: DocsIconName
 }
 
 export type ResolvedSidebarNode = ResolvedSidebarGroup | ResolvedSidebarPage
@@ -210,6 +216,7 @@ export type ResolvedDocsSection = {
   navTitle: string
   href: string
   items: ResolvedSidebarNode[]
+  icon?: DocsIconName
 }
 
 export type ResolvedNavbarItem = {
@@ -237,7 +244,9 @@ export type ResolvedDocsConfig = {
 
 export type DocPageLinkData = Pick<ResolvedDocsPage, 'id' | 'title' | 'href' | 'documentTitle'>
 
-export type DocsGlobalContextData = Pick<
+export type DocsIconMap = Partial<Record<string, LucideIcon>>
+
+export type DocsGlobalContextSerializableData = Pick<
   ResolvedDocsConfig,
   | 'siteTitle'
   | 'basePath'
@@ -252,6 +261,10 @@ export type DocsGlobalContextData = Pick<
   | 'social'
 > & {
   sidebarSections: ResolvedDocsConfig['sections']
+}
+
+export type DocsGlobalContextData = DocsGlobalContextSerializableData & {
+  docsIconMap: DocsIconMap
 }
 
 export type DocPageData = {

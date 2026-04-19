@@ -13,9 +13,9 @@ npx nivel init
 npm run dev
 ```
 
-The fixture keeps the consumer shell files visible in `pages/`, but uses the recommended helper APIs:
+The fixture keeps the consumer shell files visible in `pages/`, and uses the recommended engine contract:
 
-- `defineDocsConfig()` and `defineDocsGraph()` from `@unterberg/nivel/config` for authored config
+- plain objects typed with `satisfies DocsConfig` and `satisfies DocsGraph` from `@unterberg/nivel`
 - `createNivelVikeConfig(docsConfig)` from `@unterberg/nivel/vike` for engine-owned Vike wiring
 - `nivel prepare` for generated docs routes
 

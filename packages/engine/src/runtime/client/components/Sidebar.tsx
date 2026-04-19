@@ -1,9 +1,16 @@
 import { cmMerge } from '@classmatejs/react'
 import type { ReactNode } from 'react'
 import { memo, useEffect, useRef } from 'react'
-import { usePageContext } from 'vike-react/usePageContext'
+import type { LucideIcon } from 'lucide-react'
+import { getDocsIconMapKey } from '../../../docs/icons.js'
 import { getActiveSectionByPathname } from '../../../docs/resolveDocsConfig.js'
-import type { ResolvedDocsSection, ResolvedSidebarGroup, ResolvedSidebarNode } from '../../../docs/types.js'
+import type {
+  DocsIconMap,
+  ResolvedDocsSection,
+  ResolvedSidebarGroup,
+  ResolvedSidebarNode,
+} from '../../../docs/types.js'
+import { usePageContext } from 'vike-react/usePageContext'
 import { withSiteBaseUrl } from '../../../shared/assets.js'
 import { renderInlineMarkdown } from '../../../shared/renderInlineMarkdown.js'
 import { useDocsGlobalContext } from '../docsGlobalContext.js'
@@ -42,9 +49,10 @@ interface SidebarPageLinkProps {
   title: string
   href: string
   currentHref: string
+  icon?: LucideIcon
 }
 
-const SidebarPageLink = ({ title, href, currentHref }: SidebarPageLinkProps) => {
+const SidebarPageLink = ({ title, href, currentHref, icon: Icon }: SidebarPageLinkProps) => {
   return (
     <li className="rounded-none">
       <a
@@ -54,16 +62,22 @@ const SidebarPageLink = ({ title, href, currentHref }: SidebarPageLinkProps) => 
           href === currentHref && 'text-primary! font-semibold bg-base-200',
         )}
       >
-        {renderInlineMarkdown(title, { codeClassName: 'text-sm!' })}
+        <span className="flex items-center gap-2">
+          {Icon ? <Icon className="size-4 shrink-0" aria-hidden="true" /> : null}
+          <span>{renderInlineMarkdown(title, { codeClassName: 'text-sm!' })}</span>
+        </span>
       </a>
     </li>
   )
 }
 
-const SidebarGroupDivider = ({ title }: { title: string }) => {
+const SidebarGroupDivider = ({ title, icon: Icon }: { title: string; icon?: LucideIcon }) => {
   return (
     <li className="ml-3 mt-2 mb-2 border-b border-base-muted-light text-xs text-base-muted-medium pointer-events-none font-semibold">
-      <span className="-ml-3">{renderInlineMarkdown(title, { codeClassName: 'text-sm!' })}</span>
+      <span className="-ml-3 flex items-center gap-2">
+        {Icon ? <Icon className="size-4 shrink-0" aria-hidden="true" /> : null}
+        <span>{renderInlineMarkdown(title, { codeClassName: 'text-sm!' })}</span>
+      </span>
     </li>
   )
 }
@@ -73,17 +87,21 @@ interface SidebarGroupTitleProps {
   href?: string
   isActive: boolean
   allowNavigation?: boolean
+  icon?: LucideIcon
 }
 
-const SidebarGroupTitle = ({ title, href, isActive, allowNavigation = false }: SidebarGroupTitleProps) => {
+const SidebarGroupTitle = ({ title, href, isActive, allowNavigation = false, icon: Icon }: SidebarGroupTitleProps) => {
   const content = (
-    <span
-      className={cmMerge(
-        allowNavigation ? 'font-medium' : 'font-semibold',
-        isActive && allowNavigation && 'text-primary!',
-      )}
-    >
-      {title ? renderInlineMarkdown(title, { codeClassName: 'text-sm!' }) : null}
+    <span className="flex items-center gap-2">
+      {Icon ? <Icon className="size-4 shrink-0" aria-hidden="true" /> : null}
+      <span
+        className={cmMerge(
+          allowNavigation ? 'font-medium' : 'font-semibold',
+          isActive && allowNavigation && 'text-primary!',
+        )}
+      >
+        {title ? renderInlineMarkdown(title, { codeClassName: 'text-sm!' }) : null}
+      </span>
     </span>
   )
 
@@ -104,49 +122,64 @@ const SidebarGroupTitle = ({ title, href, isActive, allowNavigation = false }: S
   return <span className="flex items-center gap-2 text-base-content">{content}</span>
 }
 
-const renderSidebarItems = (items: ResolvedSidebarNode[], currentHref: string): ReactNode[] => {
+const renderSidebarItems = (
+  items: ResolvedSidebarNode[],
+  currentHref: string,
+  docsIconMap: DocsIconMap,
+): ReactNode[] => {
   return items.map((item) => {
     if (item.kind === 'page') {
-      return <SidebarPageLink key={item.id} title={item.navTitle} href={item.href} currentHref={currentHref} />
+      return (
+        <SidebarPageLink
+          key={item.id}
+          title={item.navTitle}
+          href={item.href}
+          currentHref={currentHref}
+          icon={docsIconMap[getDocsIconMapKey('page', item.id)]}
+        />
+      )
     }
 
-    return <SidebarNestedGroup key={item.id} group={item} currentHref={currentHref} />
+    return <SidebarNestedGroup key={item.id} group={item} currentHref={currentHref} docsIconMap={docsIconMap} />
   })
 }
 
 interface SidebarItemListProps {
   items: ResolvedSidebarNode[]
   currentHref: string
+  docsIconMap: DocsIconMap
 }
 
-const SidebarItemList = ({ items, currentHref }: SidebarItemListProps) => {
+const SidebarItemList = ({ items, currentHref, docsIconMap }: SidebarItemListProps) => {
   const visibleItems = getVisibleNavItems(items)
 
-  return <ul className="menu lg:w-[97%]">{renderSidebarItems(visibleItems, currentHref)}</ul>
+  return <ul className="menu lg:w-[97%]">{renderSidebarItems(visibleItems, currentHref, docsIconMap)}</ul>
 }
 
 interface SidebarNestedGroupProps {
   group: ResolvedSidebarGroup
   currentHref: string
+  docsIconMap: DocsIconMap
 }
 
-const SidebarNestedGroup = ({ group, currentHref }: SidebarNestedGroupProps) => {
+const SidebarNestedGroup = ({ group, currentHref, docsIconMap }: SidebarNestedGroupProps) => {
   const groupHref = getGroupHref(group)
   const visibleItems = getVisibleGroupItems(group)
   const isCollapsible = group.collapsible !== undefined
   const isOpenByDefault = group.collapsible?.isDefaultOpen ?? true
   const nestedHasActiveItem = groupHref === currentHref || hasActiveItem(group.items, currentHref)
   const { isOpen, setIsOpen } = useAutoOpenDetails(`group:${group.id}`, isOpenByDefault, nestedHasActiveItem)
+  const GroupIcon = docsIconMap[getDocsIconMapKey('group', group.id)]
 
   if (!isCollapsible) {
     if (!group.title) {
-      return <>{renderSidebarItems(visibleItems, currentHref)}</>
+      return <>{renderSidebarItems(visibleItems, currentHref, docsIconMap)}</>
     }
 
     return (
       <>
-        <SidebarGroupDivider title={group.title} />
-        {renderSidebarItems(visibleItems, currentHref)}
+        <SidebarGroupDivider title={group.title} icon={GroupIcon} />
+        {renderSidebarItems(visibleItems, currentHref, docsIconMap)}
       </>
     )
   }
@@ -165,9 +198,12 @@ const SidebarNestedGroup = ({ group, currentHref }: SidebarNestedGroupProps) => 
             href={groupHref ?? undefined}
             isActive={nestedHasActiveItem}
             allowNavigation={Boolean(groupHref)}
+            icon={GroupIcon}
           />
         </summary>
-        {visibleItems.length > 0 ? <SidebarItemList items={visibleItems} currentHref={currentHref} /> : null}
+        {visibleItems.length > 0 ? (
+          <SidebarItemList items={visibleItems} currentHref={currentHref} docsIconMap={docsIconMap} />
+        ) : null}
       </details>
     </li>
   )
@@ -180,6 +216,8 @@ interface SidebarSectionGroupProps {
 }
 
 const SidebarSectionGroup = ({ section, currentHref, activeSectionId }: SidebarSectionGroupProps) => {
+  const docs = useDocsGlobalContext()
+  const SectionIcon = docs.docsIconMap[getDocsIconMapKey('section', section.id)]
   const sectionHasActiveItem = section.id === activeSectionId || containsActiveHref(section.items, currentHref)
   const { isOpen, setIsOpen } = useAutoOpenDetails(
     `section:${section.id}`,
@@ -196,9 +234,9 @@ const SidebarSectionGroup = ({ section, currentHref, activeSectionId }: SidebarS
         }}
       >
         <summary>
-          <SidebarGroupTitle title={section.title} isActive={sectionHasActiveItem} />
+          <SidebarGroupTitle title={section.title} isActive={sectionHasActiveItem} icon={SectionIcon} />
         </summary>
-        <SidebarItemList items={section.items} currentHref={currentHref} />
+        <SidebarItemList items={section.items} currentHref={currentHref} docsIconMap={docs.docsIconMap} />
       </details>
     </li>
   )

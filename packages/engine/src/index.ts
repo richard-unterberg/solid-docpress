@@ -1,7 +1,3 @@
-export {
-  defineDocsConfig,
-  defineDocsGraph,
-} from './docs/defineDocs.js'
 export type {
   DocHeading,
   DocPageData,
@@ -13,9 +9,12 @@ export type {
   DocsConfig,
   DocsFooterConfig,
   DocsGlobalContextData,
+  DocsGlobalContextSerializableData,
   DocsGraph,
   DocsGroupNode,
   DocsHeadConfig,
+  DocsIconMap,
+  DocsIconName,
   DocsPageNode,
   DocsPartnerConfig,
   DocsPartnersConfig,
