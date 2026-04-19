@@ -1,7 +1,8 @@
 import { cmMerge } from '@classmatejs/react'
+import type { LucideIcon } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { memo, useEffect, useRef } from 'react'
-import type { LucideIcon } from 'lucide-react'
+import { usePageContext } from 'vike-react/usePageContext'
 import { getDocsIconMapKey } from '../../../docs/iconKeys.js'
 import { getActiveSectionByPathname } from '../../../docs/runtime.js'
 import type {
@@ -10,7 +11,6 @@ import type {
   ResolvedSidebarGroup,
   ResolvedSidebarNode,
 } from '../../../docs/types.js'
-import { usePageContext } from 'vike-react/usePageContext'
 import { withSiteBaseUrl } from '../../../shared/assets.js'
 import { renderInlineMarkdown } from '../../../shared/renderInlineMarkdown.js'
 import { useDocsGlobalContext } from '../docsGlobalContext.js'
@@ -58,7 +58,7 @@ const SidebarPageLink = ({ title, href, currentHref, icon: Icon }: SidebarPageLi
       <a
         href={withSiteBaseUrl(href)}
         className={cmMerge(
-          'text-base-muted hover:text-base-content justify-start hover:bg-base-200',
+          'rounded-field py-2 text-base-muted hover:text-base-content justify-start hover:bg-base-200',
           href === currentHref && 'text-primary! font-semibold bg-base-200',
         )}
       >
@@ -110,7 +110,7 @@ const SidebarGroupTitle = ({ title, href, isActive, allowNavigation = false, ico
       <a
         href={withSiteBaseUrl(href)}
         className={cmMerge(
-          'flex items-center gap-2 text-base-muted hover:text-base-content no-underline',
+          'flex items-center gap-2 rounded-field py-2 text-base-muted hover:text-base-content no-underline',
           isActive && 'text-primary! font-semibold',
         )}
       >
@@ -119,7 +119,7 @@ const SidebarGroupTitle = ({ title, href, isActive, allowNavigation = false, ico
     )
   }
 
-  return <span className="flex items-center gap-2 text-base-content">{content}</span>
+  return <span className="flex  items-center gap-2 rounded-field py-2 text-base-content">{content}</span>
 }
 
 const renderSidebarItems = (
@@ -192,7 +192,7 @@ const SidebarNestedGroup = ({ group, currentHref, docsIconMap }: SidebarNestedGr
           setIsOpen(event.currentTarget.open)
         }}
       >
-        <summary>
+        <summary className="rounded-field">
           <SidebarGroupTitle
             title={group.title}
             href={groupHref ?? undefined}
@@ -226,14 +226,14 @@ const SidebarSectionGroup = ({ section, currentHref, activeSectionId }: SidebarS
   )
 
   return (
-    <li className="pb-4">
+    <li className="pb-1">
       <details
         open={isOpen}
         onToggle={(event) => {
           setIsOpen(event.currentTarget.open)
         }}
       >
-        <summary>
+        <summary className="rounded-field max-h-9 flex items-center">
           <SidebarGroupTitle title={section.title} isActive={sectionHasActiveItem} icon={SectionIcon} />
         </summary>
         <SidebarItemList items={section.items} currentHref={currentHref} docsIconMap={docs.docsIconMap} />

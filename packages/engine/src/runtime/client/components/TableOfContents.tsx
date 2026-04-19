@@ -116,7 +116,8 @@ const PartnerLogo = ({
   )
 }
 
-const AdbarItem = cm.div`
+const AdbarItem = cm.li`
+  list-none
   px-5
   py-5
   bg-base-200
