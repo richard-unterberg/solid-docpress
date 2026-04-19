@@ -57,10 +57,6 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Wait for GitHub Pages Propagation
-        if: github.ref == 'refs/heads/master'
-        run: sleep 5
-
       - name: Purge Bunny Pull Zone Cache
         if: github.ref == 'refs/heads/master'
         env:
