@@ -48,3 +48,11 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./packages/consumer-dev/dist/client
           cname: nivel-docs.de
+
+      - name: Purge Bunny Pull Zone Cache
+        if: github.ref == 'refs/heads/master'
+        env:
+          BUNNY_API_KEY: ${{ secrets.BUNNY_API_KEY }}
+          BUNNY_PULL_ZONE_ID: ${{ secrets.BUNNY_PULL_ZONE_ID }}
+          BUNNY_CACHE_TAG: ${{ secrets.BUNNY_CACHE_TAG }}
+        run: pnpm purge:bunny
