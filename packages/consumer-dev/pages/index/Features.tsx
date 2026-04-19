@@ -7,6 +7,7 @@ const FeatureProse = cm.extend(ProseContainer)`
   prose-p:my-0 
   prose-headings:mb-4 
   prose-img:my-0
+  mb-8
 `
 
 const FeatureHeading = cm.h3`

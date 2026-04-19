@@ -49,7 +49,7 @@ const Page = () => {
               <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl! font-bold tracking-tight">
                 Telefunc(tions)
               </h1>
-              <p className="font-normal text-base-muted text-lg lg:text-3xl mt-4">
+              <p className="font-normal text-base-muted text-lg md:text-2xl lg:text-3xl mt-4">
                 End-to-End type safety without the schema
               </p>
             </div>
@@ -60,12 +60,15 @@ const Page = () => {
           <CTAButtons />
         </LayoutComponent>
         <LayoutComponent $size="sm">
-          <div className="grid grid-cols-2 gap-4">
-            <h2 className="text-lg font mb-2 text-center">Call in the browser</h2>
-            <h2 className="text-lg font mb-2 text-center">Run on the server</h2>
+          <div className="hidden md:grid md:grid-cols-2 gap-4">
+            <h2 className="text-lg mb-2 text-center">Call in the browser</h2>
+            <h2 className="text-lg  mb-2 text-center">Run on the server</h2>
           </div>
-          <div className="landing-code-samples grid grid-cols-2 gap-4 items-stretch">
+          <div className="landing-code-samples grid md:grid-cols-2 gap-4 md:items-stretch">
+            <span className="md:hidden text-lg text-center  font-semibold">Call in the browser</span>
+
             <FrontendCode />
+            <span className="md:hidden text-lg text-center  font-semibold">Run on the server</span>
             <BackendCode />
           </div>
         </LayoutComponent>

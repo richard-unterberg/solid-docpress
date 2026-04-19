@@ -2,6 +2,7 @@ import fs from 'node:fs'
 import { createRequire } from 'node:module'
 import path from 'node:path'
 import { extractDocHeadings } from '../../docs/docHeadings.js'
+import { getDocsIconMapKey } from '../../docs/iconKeys.js'
 import { getResolvedPageById, resolveDocsConfig } from '../../docs/resolveDocsConfig.js'
 import type {
   DocPageData,
@@ -11,7 +12,6 @@ import type {
   DocsIconName,
   ResolvedSidebarNode,
 } from '../../docs/types.js'
-import { getDocsIconMapKey } from '../../docs/iconKeys.js'
 
 const GENERATED_DIRNAME = '(nivel-generated)'
 const require = createRequire(import.meta.url)

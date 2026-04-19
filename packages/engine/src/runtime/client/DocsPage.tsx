@@ -4,6 +4,7 @@ import { usePageContext } from 'vike-react/usePageContext'
 import type { DocPageData } from '../../docs/types.js'
 import { UniversalMdxProvider } from '../../mdx/components/UniversalMdxProvider.js'
 import { renderInlineMarkdown } from '../../shared/renderInlineMarkdown.js'
+import DocsBreadcrumbs from './components/DocsBreadcrumbs.js'
 import { ProseContainer } from './components/ProseContainer.js'
 import { useDocsGlobalContext } from './docsGlobalContext.js'
 import { getMdxRuntimeValue } from './getMdxRuntimeValue.js'
@@ -25,6 +26,7 @@ export const DocsPage = ({ Content }: DocsPageProps) => {
       })}
     >
       <ProseContainer data-doc-content="">
+        <DocsBreadcrumbs currentHref={page.href} />
         <h1 className="scroll-mt-32 xl:scroll-mt-24">{renderInlineMarkdown(page.title)}</h1>
         <Content />
       </ProseContainer>
