@@ -104,6 +104,13 @@ test('root route bases and docs-local href resolution avoid malformed slashes', 
 test('basePath and contentDir validation fail fast for invalid values', () => {
   assert.equal(resolveDocsConfig(createDocsConfig()).robots, true)
   assert.equal(resolveDocsConfig(createDocsConfig({ robots: false })).robots, false)
+  assert.equal(resolveDocsConfig(createDocsConfig()).customFonts, true)
+  assert.equal(resolveDocsConfig(createDocsConfig({ customFonts: false })).customFonts, false)
+  assert.equal(resolveDocsConfig(createDocsConfig()).head.customFonts, true)
+  assert.equal(resolveDocsConfig(createDocsConfig({ customFonts: false })).head.customFonts, false)
+  assert.equal(resolveDocsConfig(createDocsConfig({ customFonts: false })).head.fontPreset, 'none')
+  assert.equal(resolveDocsConfig(createDocsConfig({ customFonts: false })).head.fontStylesheetHref, undefined)
+  assert.deepEqual(resolveDocsConfig(createDocsConfig({ customFonts: false })).head.fontPreloadHrefs, [])
   assert.equal(resolveDocsConfig(createDocsConfig({ basePath: '/guide/' })).basePath, '/guide')
   assert.equal(resolveDocsConfig(createDocsConfig({ contentDir: './docs/content' })).contentDir, 'docs/content')
   assert.throws(() => resolveDocsConfig(createDocsConfig({ basePath: 'guide' })))

@@ -121,6 +121,7 @@ export type DocsConfig = {
   siteDescription?: string
   siteUrl?: string
   robots?: boolean
+  customFonts?: boolean
   basePath: string
   contentDir?: string
   graph: DocsGraph
@@ -171,7 +172,9 @@ export type ResolvedDocsAlgoliaConfig = {
   searchParams: Record<string, JsonValue>
 }
 
-export type ResolvedDocsHeadConfig = DocsHeadConfig
+export type ResolvedDocsHeadConfig = DocsHeadConfig & {
+  customFonts: boolean
+}
 
 export type DocHeading = {
   depth: number
@@ -230,6 +233,7 @@ export type ResolvedDocsConfig = {
   siteTitle: string
   siteDescription: string | null
   robots: boolean
+  customFonts: boolean
   basePath: string
   contentDir: string
   theme: Required<DocsThemeConfig>

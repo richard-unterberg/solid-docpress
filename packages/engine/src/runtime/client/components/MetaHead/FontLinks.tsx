@@ -30,6 +30,10 @@ const defaultInterFontCss = `
 `
 
 export const FontLinks = ({ head }: { head: ResolvedDocsHeadConfig }) => {
+  if (!head.customFonts) {
+    return null
+  }
+
   const { fontStylesheetHref, fontPreloadHrefs } = head
   const effectivePreloadHrefs = fontPreloadHrefs ?? []
   const shouldInlineDefaultInterFonts = fontStylesheetHref === defaultInterFontStylesheetHref

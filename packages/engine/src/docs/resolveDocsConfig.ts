@@ -216,6 +216,10 @@ const resolveRobotsConfig = (robots: DocsConfig['robots']) => {
   return robots ?? true
 }
 
+const resolveCustomFontsConfig = (customFonts: DocsConfig['customFonts']) => {
+  return customFonts ?? true
+}
+
 const resolveBrandConfig = (brand: DocsBrandConfig | undefined, siteTitle: string): ResolvedDocsBrandConfig => {
   const text = brand?.text ?? siteTitle
 
@@ -228,8 +232,8 @@ const resolveBrandConfig = (brand: DocsBrandConfig | undefined, siteTitle: strin
   }
 }
 
-const resolveHeadConfig = (head: DocsHeadConfig | undefined) => {
-  const fontPreset = head?.fontPreset ?? 'inter'
+const resolveHeadConfig = (head: DocsHeadConfig | undefined, customFonts: boolean) => {
+  const fontPreset = customFonts ? (head?.fontPreset ?? 'inter') : 'none'
   const defaultFontStylesheetHref = fontPreset === 'inter' ? nivelAssetUrl('fonts/fonts-inter.css') : undefined
   const defaultFontPreloadHrefs =
     fontPreset === 'inter'
@@ -241,6 +245,7 @@ const resolveHeadConfig = (head: DocsHeadConfig | undefined) => {
       : []
 
   return {
+    customFonts,
     faviconSvg: resolvePublicAssetUrl(head?.faviconSvg),
     faviconIco: resolvePublicAssetUrl(head?.faviconIco),
     appleTouchIcon: resolvePublicAssetUrl(head?.appleTouchIcon),
@@ -329,6 +334,7 @@ const normalizeAliases = (aliases: string[] | undefined, slug: string) => {
 export const resolveDocsConfig = (config: DocsConfig): ResolvedDocsConfig => {
   const normalizedBasePath = normalizeBasePath(config.basePath)
   const normalizedContentDir = normalizeContentDir(config.contentDir)
+  const customFonts = resolveCustomFontsConfig(config.customFonts)
 
   const pageIds = new Set<string>()
   const pageSlugs = new Set<string>()
@@ -476,12 +482,13 @@ export const resolveDocsConfig = (config: DocsConfig): ResolvedDocsConfig => {
     siteTitle: config.siteTitle,
     siteDescription: config.siteDescription ?? null,
     robots: resolveRobotsConfig(config.robots),
+    customFonts,
     basePath: normalizedBasePath,
     contentDir: normalizedContentDir,
     theme: resolveThemeConfig(config.theme),
     footer: resolveFooterConfig(config.footer),
     brand: resolveBrandConfig(config.brand, config.siteTitle),
-    head: resolveHeadConfig(config.head),
+    head: resolveHeadConfig(config.head, customFonts),
     partners: resolvePartnersConfig(config.partners),
     social: resolveSocialConfig(config.social),
     algolia: resolveAlgoliaConfig(config.algolia),

@@ -58,6 +58,8 @@ const getDocsConfigTemplate = () => {
     "  // siteUrl: 'https://docs.example.com',",
     '  // Set robots to false to emit noindex/nofollow and a disallow-all robots.txt.',
     '  // robots: false,',
+    '  // Set customFonts to false if you want to fully own font loading in consumer CSS.',
+    '  // customFonts: false,',
     "  basePath: '/docs',",
     '} satisfies DocsConfig',
     '',
