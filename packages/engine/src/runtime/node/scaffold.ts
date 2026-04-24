@@ -95,8 +95,6 @@ const getDocsGraphTemplate = () => {
 
 const getGettingStartedTemplate = () => {
   return [
-    '# Getting Started',
-    '',
     'This page is scaffolded by `nivel init` and wired through `docs/docs.graph.ts`.',
     '',
     '## Next steps',
@@ -110,14 +108,15 @@ const getGettingStartedTemplate = () => {
 
 const getLandingPageTemplate = () => {
   return [
-    "import { Link } from '@unterberg/nivel'",
+    "import { Link, LayoutComponent } from '@unterberg/nivel'",
     '',
+    '<LayoutComponent>',
     '# Welcome',
     '',
     'This starter page is scaffolded by `nivel init` so the app can boot before you build a custom landing page.',
     '',
     '<Link href="/docs/getting-started/">Read the getting started guide</Link>',
-    '',
+    '</LayoutComponent>',
   ].join('\n')
 }
 
