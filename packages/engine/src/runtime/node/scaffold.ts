@@ -22,6 +22,7 @@ type PackageJsonShape = {
   devDependencies?: Record<string, string>
   packageManager?: string
   scripts?: Record<string, string>
+  type?: string
 }
 
 const getViteConfigTemplate = () => {
@@ -103,6 +104,19 @@ const getGettingStartedTemplate = () => {
     '- Update `pages/+docs.ts` with your site metadata.',
     '- Expand `docs/docs.graph.ts` with your docs structure.',
     '- Replace this page with your real getting-started guide.',
+    '',
+  ].join('\n')
+}
+
+const getLandingPageTemplate = () => {
+  return [
+    "import { Link } from '@unterberg/nivel'",
+    '',
+    '# Welcome',
+    '',
+    'This starter page is scaffolded by `nivel init` so the app can boot before you build a custom landing page.',
+    '',
+    '<Link href="/docs/getting-started/">Read the getting started guide</Link>',
     '',
   ].join('\n')
 }
@@ -368,10 +382,11 @@ const getGlobalTypesTemplate = () => {
 
 const getManagedFileEntries = () => {
   return [
-    ['vite.config.ts', getViteConfigTemplate()],
+    ['vite.config.mts', getViteConfigTemplate()],
     ['pages/+docs.ts', getDocsConfigTemplate()],
     ['docs/docs.graph.ts', getDocsGraphTemplate()],
     ['docs/content/getting-started/content.mdx', getGettingStartedTemplate()],
+    ['pages/index/+Page.mdx', getLandingPageTemplate()],
     ['pages/+config.ts', getConfigTemplate()],
     ['pages/+Head.tsx', getHeadTemplate()],
     ['pages/+Layout.tsx', getLayoutTemplate()],
@@ -393,16 +408,33 @@ const readFileIfExists = (filePath: string) => {
 
 export const getTailwindBootstrapWarnings = (rootDir: string) => {
   const warnings: string[] = []
-  const viteConfigPath = path.join(rootDir, 'vite.config.ts')
   const wrapperPath = path.join(rootDir, 'pages', '+Wrapper.tsx')
   const globalCssPath = path.join(rootDir, 'styles', 'global.css')
   const themeCssPath = path.join(rootDir, 'styles', 'theme.css')
+  const packageJsonPath = path.join(rootDir, 'package.json')
+  const viteConfigMtsPath = path.join(rootDir, 'vite.config.mts')
+  const viteConfigTsPath = path.join(rootDir, 'vite.config.ts')
 
+  const viteConfigPath = fs.existsSync(viteConfigMtsPath) ? viteConfigMtsPath : viteConfigTsPath
   const viteConfigSource = readFileIfExists(viteConfigPath)
   if (!viteConfigSource?.includes('@unterberg/nivel/tailwind') || !viteConfigSource.includes('nivelTailwindVite()')) {
     warnings.push(
-      'vite.config.ts should use @unterberg/nivel/tailwind and call nivelTailwindVite() for the engine-owned Tailwind integration.',
+      'vite.config.mts should use @unterberg/nivel/tailwind and call nivelTailwindVite() for the engine-owned Tailwind integration.',
     )
+  }
+
+  if (viteConfigPath === viteConfigTsPath) {
+    const packageJson = readFileIfExists(packageJsonPath)
+
+    if (packageJson) {
+      const parsedPackageJson = JSON.parse(packageJson) as PackageJsonShape
+
+      if (parsedPackageJson.type !== 'module') {
+        warnings.push(
+          'vite.config.ts is loaded through CommonJS in packages without "type": "module". Rename it to vite.config.mts to avoid ESM-only dependency errors.',
+        )
+      }
+    }
   }
 
   const wrapperSource = readFileIfExists(wrapperPath)
@@ -546,7 +578,7 @@ export const getInitSummary = (result: InitConsumerResult) => {
     lines.push(`Updated package.json scripts: ${result.updatedScripts.join(', ')}`)
   }
 
-  lines.push('Scaffolded vite.config.ts and local Tailwind starter files remain visible and editable in the consumer.')
+  lines.push('Scaffolded vite.config.mts and local Tailwind starter files remain visible and editable in the consumer.')
 
   if (result.missingDependencies.length > 0) {
     lines.push(`Missing dependencies: ${result.missingDependencies.join(', ')}`)

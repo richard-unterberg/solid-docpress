@@ -133,7 +133,7 @@ const config: Config = {
 }
 ```
 
-`vite.config.ts`
+`vite.config.mts`
 
 ```ts
 import { nivelTailwindVite } from '@unterberg/nivel/tailwind'

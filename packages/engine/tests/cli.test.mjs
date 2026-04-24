@@ -50,22 +50,24 @@ test('nivel init creates visible consumer files and standard scripts', () => {
   assert.equal(packageJson.scripts.predev, 'npm run generate:docs')
   assert.equal(packageJson.scripts.prebuild, 'npm run generate:docs')
   assert.equal(packageJson.scripts.pretypecheck, 'npm run generate:docs')
-  assert.equal(fs.existsSync(path.join(rootDir, 'vite.config.ts')), true)
+  assert.equal(fs.existsSync(path.join(rootDir, 'vite.config.mts')), true)
   assert.equal(fs.existsSync(path.join(rootDir, 'pages', '+config.ts')), true)
   assert.equal(fs.existsSync(path.join(rootDir, 'pages', '+Head.tsx')), true)
   assert.equal(fs.existsSync(path.join(rootDir, 'pages', '+Layout.tsx')), true)
   assert.equal(fs.existsSync(path.join(rootDir, 'pages', '+onCreateGlobalContext.ts')), true)
   assert.equal(fs.existsSync(path.join(rootDir, 'pages', '+Wrapper.tsx')), true)
   assert.equal(fs.existsSync(path.join(rootDir, 'pages', '+docs.ts')), true)
+  assert.equal(fs.existsSync(path.join(rootDir, 'pages', 'index', '+Page.mdx')), true)
   assert.equal(fs.existsSync(path.join(rootDir, 'docs', 'docs.graph.ts')), true)
   assert.equal(fs.existsSync(path.join(rootDir, 'docs', 'content', 'getting-started', 'content.mdx')), true)
   assert.equal(fs.existsSync(path.join(rootDir, 'global.d.ts')), true)
   assert.equal(fs.existsSync(path.join(rootDir, 'styles', 'global.css')), true)
   assert.equal(fs.existsSync(path.join(rootDir, 'styles', 'theme.css')), true)
   const configSource = fs.readFileSync(path.join(rootDir, 'pages', '+config.ts'), 'utf8')
-  const viteConfigSource = fs.readFileSync(path.join(rootDir, 'vite.config.ts'), 'utf8')
+  const viteConfigSource = fs.readFileSync(path.join(rootDir, 'vite.config.mts'), 'utf8')
   const wrapperSource = fs.readFileSync(path.join(rootDir, 'pages', '+Wrapper.tsx'), 'utf8')
   const docsGraphSource = fs.readFileSync(path.join(rootDir, 'docs', 'docs.graph.ts'), 'utf8')
+  const landingPageSource = fs.readFileSync(path.join(rootDir, 'pages', 'index', '+Page.mdx'), 'utf8')
   assert.match(configSource, /createNivelVikeConfig/)
   assert.match(configSource, /prerender: true/)
   assert.match(configSource, /prefetchStaticAssets/)
@@ -78,6 +80,8 @@ test('nivel init creates visible consumer files and standard scripts', () => {
   assert.doesNotMatch(docsConfigSource, /defineDocsConfig/)
   assert.match(docsGraphSource, /satisfies DocsGraph/)
   assert.doesNotMatch(docsGraphSource, /defineDocsGraph/)
+  assert.match(landingPageSource, /import \{ Link \} from '@unterberg\/nivel'/)
+  assert.match(landingPageSource, /href="\/docs\/getting-started\/"/)
 })
 
 test('nivel init does not overwrite existing files without --force', () => {
@@ -146,6 +150,26 @@ test('nivel prepare warns when the Tailwind bootstrap contract is missing', () =
   assert.equal(result.status, 0, result.stderr)
   assert.match(result.stderr, /Tailwind integration warning:/)
   assert.match(result.stderr, /styles\/global\.css should import @unterberg\/nivel\/tailwind\.css/)
+})
+
+test('nivel prepare warns when vite.config.ts is used in a non-ESM package', () => {
+  const rootDir = createTempRoot({
+    name: 'consumer-app',
+    packageManager: 'npm@11.6.3',
+  })
+
+  linkWorkspaceEngine(rootDir)
+
+  const initResult = runCli(['init', '--root', rootDir], repoRoot)
+  assert.equal(initResult.status, 0, initResult.stderr)
+
+  fs.renameSync(path.join(rootDir, 'vite.config.mts'), path.join(rootDir, 'vite.config.ts'))
+
+  const result = runCli(['prepare', '--root', rootDir], repoRoot)
+
+  assert.equal(result.status, 0, result.stderr)
+  assert.match(result.stderr, /Tailwind integration warning:/)
+  assert.match(result.stderr, /vite\.config\.ts is loaded through CommonJS in packages without "type": "module"/)
 })
 
 test('nivel init rejects unknown options', () => {
