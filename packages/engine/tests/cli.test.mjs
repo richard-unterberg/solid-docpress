@@ -80,7 +80,7 @@ test('nivel init creates visible consumer files and standard scripts', () => {
   assert.doesNotMatch(docsConfigSource, /defineDocsConfig/)
   assert.match(docsGraphSource, /satisfies DocsGraph/)
   assert.doesNotMatch(docsGraphSource, /defineDocsGraph/)
-  assert.match(landingPageSource, /import \{ Link \} from '@unterberg\/nivel'/)
+  assert.match(landingPageSource, /import \{ Link, LayoutComponent \} from '@unterberg\/nivel'/)
   assert.match(landingPageSource, /href="\/docs\/getting-started\/"/)
 })
 

@@ -44,6 +44,7 @@ export {
 export { Pre } from './mdx/code-blocks/Pre.js'
 export { Alert, type AlertVariant } from './mdx/components/Alert.js'
 export { Link, type LinkProps } from './mdx/components/Link.js'
+export { LayoutComponent } from './runtime/client/components/LayoutComponent.js'
 export {
   Overview,
   type OverviewItem,
