@@ -3,7 +3,7 @@
 
 @plugin '@tailwindcss/typography';
 
-@plugin 'daisyui' {
+@plugin '@unterberg/nivel/daisyui-plugin' {
   exclude: rootcolor;
   themes: false;
 }

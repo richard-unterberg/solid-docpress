@@ -1,6 +1,6 @@
 {
   "name": "@unterberg/nivel",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "type": "module",
   "sideEffects": false,
   "repository": {
@@ -63,6 +63,10 @@
     "./tailwind": {
       "types": "./dist/tailwind.d.ts",
       "import": "./dist/tailwind.js"
+    },
+    "./daisyui-plugin": {
+      "types": "./dist/daisyui-plugin.d.ts",
+      "import": "./dist/daisyui-plugin.js"
     },
     "./daisyui-theme": {
       "types": "./dist/daisyui-theme.d.ts",

@@ -100,3 +100,9 @@ test('daisyui-theme entry is importable in Node ESM', async () => {
 
   assert.equal(typeof mod.default, 'function')
 })
+
+test('daisyui-plugin entry is importable in Node ESM', async () => {
+  const mod = await import('../dist/daisyui-plugin.js')
+
+  assert.equal(typeof mod.default, 'function')
+})
