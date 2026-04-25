@@ -12,7 +12,7 @@ export const Brand = ({ brand, noText = false }: BrandProps) => {
   return (
     <a
       href={brand.href}
-      className="flex items-center gap-3 text-base-content no-underline"
+      className="flex items-center gap-3 text-base-content h-full no-underline"
       aria-label={noText ? `${brand.text} homepage` : undefined}
     >
       {defaultLogo && (
