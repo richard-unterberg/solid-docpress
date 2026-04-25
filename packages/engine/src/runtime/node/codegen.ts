@@ -16,12 +16,10 @@ import type {
 const GENERATED_DIRNAME = '(nivel-generated)'
 const require = createRequire(import.meta.url)
 const lucidePackageRoot = path.dirname(require.resolve('lucide-react/package.json'))
-const lucideEsmEntryPath = path.join(lucidePackageRoot, 'dist', 'esm', 'lucide-react.js')
-const lucideEsmIconsDirectoryPath = path.join(lucidePackageRoot, 'dist', 'esm', 'icons')
 
 type GeneratedDocsIconNode = [tagName: string, attrs: Record<string, string>][]
 
-let lucideIconModuleNameByExportName: Map<string, string> | null = null
+let lucideIconModulePathByIconKey: Map<string, string> | null = null
 const lucideIconNodeByName = new Map<DocsIconName, GeneratedDocsIconNode>()
 
 const writeFileIfChanged = (filePath: string, source: string) => {
@@ -149,36 +147,64 @@ const getGeneratedIconMapSource = (entries: IconEntry[]) => {
   return ['{', ...entries.map(({ iconKey, iconName }) => `  ${JSON.stringify(iconKey)}: ${iconName},`), '}'].join('\n')
 }
 
-const getLucideIconModuleNameByExportName = () => {
-  if (lucideIconModuleNameByExportName) {
-    return lucideIconModuleNameByExportName
+const getLucideIconModulePathByIconKey = () => {
+  if (lucideIconModulePathByIconKey) {
+    return lucideIconModulePathByIconKey
   }
 
-  const lucideEntrySource = fs.readFileSync(lucideEsmEntryPath, 'utf8')
-  const exportMap = new Map<string, string>()
-  const exportPattern = /export\s+\{\s*([\s\S]*?)\s*\}\s+from\s+'\.\/icons\/([^']+)\.js';/g
+  const pathCandidates = [
+    path.join(lucidePackageRoot, 'dist', 'esm', 'dynamicIconImports.js'),
+    path.join(lucidePackageRoot, 'dist', 'dynamicIconImports.js'),
+    path.join(lucidePackageRoot, 'dynamicIconImports.mjs'),
+    path.join(lucidePackageRoot, 'dynamicIconImports.js'),
+  ]
+  const iconImportPattern = /"([^"]+)":\s*\(\)\s*=>\s*import\('([^']+)'\)/g
 
-  for (const match of lucideEntrySource.matchAll(exportPattern)) {
-    const exportsSource = match[1]
-    const moduleName = match[2]
-
-    if (!exportsSource || !moduleName) {
+  for (const candidatePath of pathCandidates) {
+    if (!fs.existsSync(candidatePath)) {
       continue
     }
 
-    for (const exportPart of exportsSource.split(',').map((value) => value.trim())) {
-      const exportMatch = /^default as (\w+)$/.exec(exportPart)
+    const candidateSource = fs.readFileSync(candidatePath, 'utf8')
+    const iconModulePathByKey = new Map<string, string>()
 
-      if (!exportMatch?.[1]) {
+    for (const match of candidateSource.matchAll(iconImportPattern)) {
+      const iconKey = match[1]
+      const importPath = match[2]
+
+      if (!iconKey || !importPath) {
         continue
       }
 
-      exportMap.set(exportMatch[1], moduleName)
+      iconModulePathByKey.set(iconKey, path.resolve(path.dirname(candidatePath), importPath))
+    }
+
+    if (iconModulePathByKey.size > 0) {
+      lucideIconModulePathByIconKey = iconModulePathByKey
+      return iconModulePathByKey
     }
   }
 
-  lucideIconModuleNameByExportName = exportMap
-  return exportMap
+  throw new Error('Unable to locate lucide-react dynamic icon imports manifest.')
+}
+
+const toLucideIconKey = (value: string) => {
+  return value
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1-$2')
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+    .replace(/([A-Za-z])([0-9])/g, '$1-$2')
+    .toLowerCase()
+}
+
+const getLucideIconKeyCandidates = (iconName: DocsIconName) => {
+  const rawCandidates = [
+    iconName,
+    iconName.replace(/^Lucide/, ''),
+    iconName.replace(/Icon$/, ''),
+    iconName.replace(/^Lucide/, '').replace(/Icon$/, ''),
+  ]
+
+  return [...new Set(rawCandidates.filter(Boolean).map(toLucideIconKey))]
 }
 
 const getDocsIconNode = (iconName: DocsIconName) => {
@@ -188,13 +214,15 @@ const getDocsIconNode = (iconName: DocsIconName) => {
     return cachedIconNode
   }
 
-  const moduleName = getLucideIconModuleNameByExportName().get(iconName)
+  const modulePath = getLucideIconKeyCandidates(iconName)
+    .map((iconKey) => getLucideIconModulePathByIconKey().get(iconKey))
+    .find((value) => typeof value === 'string')
 
-  if (!moduleName) {
+  if (!modulePath) {
     throw new Error(`Unable to resolve lucide-react module for docs icon "${iconName}".`)
   }
 
-  const iconModuleSource = fs.readFileSync(path.join(lucideEsmIconsDirectoryPath, `${moduleName}.js`), 'utf8')
+  const iconModuleSource = fs.readFileSync(modulePath, 'utf8')
   const iconNodeMatch = /const __iconNode = (\[[\s\S]*?\]);\s*const /.exec(iconModuleSource)
 
   if (!iconNodeMatch?.[1]) {
