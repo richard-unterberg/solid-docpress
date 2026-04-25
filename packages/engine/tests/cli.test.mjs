@@ -84,6 +84,22 @@ test('nivel init creates visible consumer files and standard scripts', () => {
   assert.match(landingPageSource, /href="\/docs\/getting-started\/"/)
 })
 
+test('nivel init creates vite.config.ts for module consumers', () => {
+  const rootDir = createTempRoot({
+    name: 'consumer-app',
+    packageManager: 'pnpm@10.28.1',
+    type: 'module',
+  })
+
+  const result = runCli(['init', '--root', rootDir], repoRoot)
+
+  assert.equal(result.status, 0, result.stderr)
+  assert.equal(fs.existsSync(path.join(rootDir, 'vite.config.ts')), true)
+  assert.equal(fs.existsSync(path.join(rootDir, 'vite.config.mts')), false)
+  assert.match(result.stdout, /Created files: vite\.config\.ts/)
+  assert.match(result.stdout, /Scaffolded vite\.config\.ts/)
+})
+
 test('nivel init does not overwrite existing files without --force', () => {
   const rootDir = createTempRoot({
     name: 'consumer-app',
@@ -170,6 +186,27 @@ test('nivel prepare warns when vite.config.ts is used in a non-ESM package', () 
   assert.equal(result.status, 0, result.stderr)
   assert.match(result.stderr, /Tailwind integration warning:/)
   assert.match(result.stderr, /vite\.config\.ts is loaded through CommonJS in packages without "type": "module"/)
+})
+
+test('nivel prepare warns when both vite config variants exist', () => {
+  const rootDir = createTempRoot({
+    name: 'consumer-app',
+    packageManager: 'npm@11.6.3',
+    type: 'module',
+  })
+
+  linkWorkspaceEngine(rootDir)
+
+  const initResult = runCli(['init', '--root', rootDir], repoRoot)
+  assert.equal(initResult.status, 0, initResult.stderr)
+
+  fs.copyFileSync(path.join(rootDir, 'vite.config.ts'), path.join(rootDir, 'vite.config.mts'))
+
+  const result = runCli(['prepare', '--root', rootDir], repoRoot)
+
+  assert.equal(result.status, 0, result.stderr)
+  assert.match(result.stderr, /Tailwind integration warning:/)
+  assert.match(result.stderr, /Both vite\.config\.mts and vite\.config\.ts exist/)
 })
 
 test('nivel init rejects unknown options', () => {

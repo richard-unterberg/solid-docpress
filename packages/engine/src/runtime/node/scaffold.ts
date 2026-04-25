@@ -13,6 +13,7 @@ type InitConsumerResult = {
   createdFiles: string[]
   missingDependencies: string[]
   overwrittenFiles: string[]
+  packageJson: PackageJsonShape
   skippedFiles: string[]
   updatedScripts: string[]
 }
@@ -23,6 +24,10 @@ type PackageJsonShape = {
   packageManager?: string
   scripts?: Record<string, string>
   type?: string
+}
+
+const getConsumerViteConfigFilename = (packageJson: PackageJsonShape) => {
+  return packageJson.type === 'module' ? 'vite.config.ts' : 'vite.config.mts'
 }
 
 const getViteConfigTemplate = () => {
@@ -381,9 +386,9 @@ const getGlobalTypesTemplate = () => {
   ].join('\n')
 }
 
-const getManagedFileEntries = () => {
+const getManagedFileEntries = (packageJson: PackageJsonShape) => {
   return [
-    ['vite.config.mts', getViteConfigTemplate()],
+    [getConsumerViteConfigFilename(packageJson), getViteConfigTemplate()],
     ['pages/+docs.ts', getDocsConfigTemplate()],
     ['docs/docs.graph.ts', getDocsGraphTemplate()],
     ['docs/content/getting-started/content.mdx', getGettingStartedTemplate()],
@@ -407,6 +412,37 @@ const readFileIfExists = (filePath: string) => {
   return fs.readFileSync(filePath, 'utf8')
 }
 
+const getConfigPathToWrite = (rootDir: string, packageJson: PackageJsonShape) => {
+  const expectedFilename = getConsumerViteConfigFilename(packageJson)
+  const expectedPath = path.join(rootDir, expectedFilename)
+  const alternateFilename = expectedFilename === 'vite.config.ts' ? 'vite.config.mts' : 'vite.config.ts'
+  const alternatePath = path.join(rootDir, alternateFilename)
+
+  if (fs.existsSync(expectedPath)) {
+    return expectedFilename
+  }
+
+  if (fs.existsSync(alternatePath)) {
+    return alternateFilename
+  }
+
+  return expectedFilename
+}
+
+const getScaffoldVisibilitySummary = (packageJson: PackageJsonShape) => {
+  return `Scaffolded ${getConsumerViteConfigFilename(packageJson)} and local Tailwind starter files remain visible and editable in the consumer.`
+}
+
+const getManagedFileEntriesForConsumer = (rootDir: string, packageJson: PackageJsonShape) => {
+  return getManagedFileEntries(packageJson).map(([relativeFilePath, source]) => {
+    if (relativeFilePath !== getConsumerViteConfigFilename(packageJson)) {
+      return [relativeFilePath, source] as const
+    }
+
+    return [getConfigPathToWrite(rootDir, packageJson), source] as const
+  })
+}
+
 export const getTailwindBootstrapWarnings = (rootDir: string) => {
   const warnings: string[] = []
   const wrapperPath = path.join(rootDir, 'pages', '+Wrapper.tsx')
@@ -415,27 +451,32 @@ export const getTailwindBootstrapWarnings = (rootDir: string) => {
   const packageJsonPath = path.join(rootDir, 'package.json')
   const viteConfigMtsPath = path.join(rootDir, 'vite.config.mts')
   const viteConfigTsPath = path.join(rootDir, 'vite.config.ts')
-
+  const packageJsonSource = readFileIfExists(packageJsonPath)
+  const packageJson = packageJsonSource ? (JSON.parse(packageJsonSource) as PackageJsonShape) : null
+  const expectedViteConfigFilename = getConsumerViteConfigFilename(packageJson ?? {})
   const viteConfigPath = fs.existsSync(viteConfigMtsPath) ? viteConfigMtsPath : viteConfigTsPath
   const viteConfigSource = readFileIfExists(viteConfigPath)
+
   if (!viteConfigSource?.includes('@unterberg/nivel/tailwind') || !viteConfigSource.includes('nivelTailwindVite()')) {
     warnings.push(
-      'vite.config.mts should use @unterberg/nivel/tailwind and call nivelTailwindVite() for the engine-owned Tailwind integration.',
+      `${expectedViteConfigFilename} should use @unterberg/nivel/tailwind and call nivelTailwindVite() for the engine-owned Tailwind integration.`,
     )
   }
 
-  if (viteConfigPath === viteConfigTsPath) {
-    const packageJson = readFileIfExists(packageJsonPath)
+  if (viteConfigPath === viteConfigTsPath && packageJson?.type !== 'module') {
+    warnings.push(
+      'vite.config.ts is loaded through CommonJS in packages without "type": "module". Rename it to vite.config.mts to avoid ESM-only dependency errors.',
+    )
+  }
 
-    if (packageJson) {
-      const parsedPackageJson = JSON.parse(packageJson) as PackageJsonShape
+  if (packageJson?.type === 'module' && fs.existsSync(viteConfigMtsPath) && !fs.existsSync(viteConfigTsPath)) {
+    warnings.push('vite.config.mts is unnecessary in packages with "type": "module". Rename it to vite.config.ts.')
+  }
 
-      if (parsedPackageJson.type !== 'module') {
-        warnings.push(
-          'vite.config.ts is loaded through CommonJS in packages without "type": "module". Rename it to vite.config.mts to avoid ESM-only dependency errors.',
-        )
-      }
-    }
+  if (fs.existsSync(viteConfigMtsPath) && fs.existsSync(viteConfigTsPath)) {
+    warnings.push(
+      'Both vite.config.mts and vite.config.ts exist. Keep only the expected config file for the package module type.',
+    )
   }
 
   const wrapperSource = readFileIfExists(wrapperPath)
@@ -579,7 +620,7 @@ export const getInitSummary = (result: InitConsumerResult) => {
     lines.push(`Updated package.json scripts: ${result.updatedScripts.join(', ')}`)
   }
 
-  lines.push('Scaffolded vite.config.mts and local Tailwind starter files remain visible and editable in the consumer.')
+  lines.push(getScaffoldVisibilitySummary(result.packageJson))
 
   if (result.missingDependencies.length > 0) {
     lines.push(`Missing dependencies: ${result.missingDependencies.join(', ')}`)
@@ -600,11 +641,13 @@ export const initConsumer = (options: InitConsumerOptions): InitConsumerResult =
     overwrittenFiles: [],
     skippedFiles: [],
     updatedScripts: [],
+    packageJson: {} as PackageJsonShape,
   }
 
   const { packageJson, packageJsonPath } = readPackageJson(options.rootDir)
+  result.packageJson = packageJson
 
-  for (const [relativeFilePath, source] of getManagedFileEntries()) {
+  for (const [relativeFilePath, source] of getManagedFileEntriesForConsumer(options.rootDir, packageJson)) {
     writeManagedFile(options.rootDir, relativeFilePath, source, options.force, result)
   }
 

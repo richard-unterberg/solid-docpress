@@ -16,10 +16,14 @@ import type {
 const GENERATED_DIRNAME = '(nivel-generated)'
 const require = createRequire(import.meta.url)
 const lucidePackageRoot = path.dirname(require.resolve('lucide-react/package.json'))
+const lucideIconsDirectoryCandidates = [
+  path.join(lucidePackageRoot, 'dist', 'esm', 'icons'),
+  path.join(lucidePackageRoot, 'dist', 'icons'),
+]
 
 type GeneratedDocsIconNode = [tagName: string, attrs: Record<string, string>][]
 
-let lucideIconModulePathByIconKey: Map<string, string> | null = null
+let lucideIconsDirectoryPath: string | null = null
 const lucideIconNodeByName = new Map<DocsIconName, GeneratedDocsIconNode>()
 
 const writeFileIfChanged = (filePath: string, source: string) => {
@@ -147,45 +151,19 @@ const getGeneratedIconMapSource = (entries: IconEntry[]) => {
   return ['{', ...entries.map(({ iconKey, iconName }) => `  ${JSON.stringify(iconKey)}: ${iconName},`), '}'].join('\n')
 }
 
-const getLucideIconModulePathByIconKey = () => {
-  if (lucideIconModulePathByIconKey) {
-    return lucideIconModulePathByIconKey
+const getLucideIconsDirectoryPath = () => {
+  if (lucideIconsDirectoryPath) {
+    return lucideIconsDirectoryPath
   }
 
-  const pathCandidates = [
-    path.join(lucidePackageRoot, 'dist', 'esm', 'dynamicIconImports.js'),
-    path.join(lucidePackageRoot, 'dist', 'dynamicIconImports.js'),
-    path.join(lucidePackageRoot, 'dynamicIconImports.mjs'),
-    path.join(lucidePackageRoot, 'dynamicIconImports.js'),
-  ]
-  const iconImportPattern = /"([^"]+)":\s*\(\)\s*=>\s*import\('([^']+)'\)/g
-
-  for (const candidatePath of pathCandidates) {
-    if (!fs.existsSync(candidatePath)) {
-      continue
-    }
-
-    const candidateSource = fs.readFileSync(candidatePath, 'utf8')
-    const iconModulePathByKey = new Map<string, string>()
-
-    for (const match of candidateSource.matchAll(iconImportPattern)) {
-      const iconKey = match[1]
-      const importPath = match[2]
-
-      if (!iconKey || !importPath) {
-        continue
-      }
-
-      iconModulePathByKey.set(iconKey, path.resolve(path.dirname(candidatePath), importPath))
-    }
-
-    if (iconModulePathByKey.size > 0) {
-      lucideIconModulePathByIconKey = iconModulePathByKey
-      return iconModulePathByKey
+  for (const candidatePath of lucideIconsDirectoryCandidates) {
+    if (fs.existsSync(candidatePath)) {
+      lucideIconsDirectoryPath = candidatePath
+      return candidatePath
     }
   }
 
-  throw new Error('Unable to locate lucide-react dynamic icon imports manifest.')
+  throw new Error('Unable to locate lucide-react icons directory.')
 }
 
 const toLucideIconKey = (value: string) => {
@@ -215,8 +193,8 @@ const getDocsIconNode = (iconName: DocsIconName) => {
   }
 
   const modulePath = getLucideIconKeyCandidates(iconName)
-    .map((iconKey) => getLucideIconModulePathByIconKey().get(iconKey))
-    .find((value) => typeof value === 'string')
+    .map((iconKey) => path.join(getLucideIconsDirectoryPath(), `${iconKey}.js`))
+    .find((candidatePath) => fs.existsSync(candidatePath))
 
   if (!modulePath) {
     throw new Error(`Unable to resolve lucide-react module for docs icon "${iconName}".`)
