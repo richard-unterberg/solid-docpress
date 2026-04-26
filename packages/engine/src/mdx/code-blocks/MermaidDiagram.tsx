@@ -8,45 +8,45 @@ let mermaidModulePromise: Promise<typeof import('mermaid').default> | null = nul
 const MERMAID_SVG_CLASS_NAME = 'nivel-mermaid-svg'
 const MERMAID_ROOT_CLASS_NAME = 'nivel-mermaid'
 
-const MERMAID_SVG_OVERRIDE_CSS = `
-.${MERMAID_SVG_CLASS_NAME} {
+const getMermaidSvgOverrideCss = (diagramId: string) => `
+#${diagramId}.${MERMAID_SVG_CLASS_NAME} {
   font-family: var(--font-sans);
 }
 
-.${MERMAID_SVG_CLASS_NAME} .node rect,
-.${MERMAID_SVG_CLASS_NAME} .node circle,
-.${MERMAID_SVG_CLASS_NAME} .node ellipse,
-.${MERMAID_SVG_CLASS_NAME} .node polygon,
-.${MERMAID_SVG_CLASS_NAME} .node path {
+#${diagramId} .node rect,
+#${diagramId} .node circle,
+#${diagramId} .node ellipse,
+#${diagramId} .node polygon,
+#${diagramId} .node path {
   fill: var(--nivel-mermaid-node-fill, var(--color-primary-muted-superlight));
   stroke: var(--nivel-mermaid-node-stroke, var(--color-primary-muted-medium));
   stroke-width: var(--nivel-mermaid-node-stroke-width, 1px);
 }
 
-.${MERMAID_SVG_CLASS_NAME} .node .label,
-.${MERMAID_SVG_CLASS_NAME} .node .label text,
-.${MERMAID_SVG_CLASS_NAME} .cluster-label text,
-.${MERMAID_SVG_CLASS_NAME} .label text {
+#${diagramId} .node .label,
+#${diagramId} .node .label text,
+#${diagramId} .cluster-label text,
+#${diagramId} .label text {
   fill: var(--nivel-mermaid-node-text, var(--color-base-content));
   color: var(--nivel-mermaid-node-text, var(--color-base-content));
 }
 
-.${MERMAID_SVG_CLASS_NAME} .edgePath .path,
-.${MERMAID_SVG_CLASS_NAME} .flowchart-link,
-.${MERMAID_SVG_CLASS_NAME} .relationshipLine,
-.${MERMAID_SVG_CLASS_NAME} .messageLine0,
-.${MERMAID_SVG_CLASS_NAME} .messageLine1 {
+#${diagramId} .edgePath .path,
+#${diagramId} .flowchart-link,
+#${diagramId} .relationshipLine,
+#${diagramId} .messageLine0,
+#${diagramId} .messageLine1 {
   stroke: var(--nivel-mermaid-line-color, var(--color-primary-muted));
   stroke-width: var(--nivel-mermaid-line-width, 1.5px);
 }
 
-.${MERMAID_SVG_CLASS_NAME} marker path,
-.${MERMAID_SVG_CLASS_NAME} .marker {
+#${diagramId} marker path,
+#${diagramId} .marker {
   fill: var(--nivel-mermaid-line-color, var(--color-primary-muted));
   stroke: var(--nivel-mermaid-line-color, var(--color-primary-muted));
 }
 
-.${MERMAID_SVG_CLASS_NAME} .cluster rect {
+#${diagramId} .cluster rect {
   fill: var(--nivel-mermaid-cluster-fill, var(--color-base-100));
   stroke: var(--nivel-mermaid-cluster-stroke, var(--color-primary-muted-light));
   stroke-width: var(--nivel-mermaid-cluster-stroke-width, 1px);
@@ -75,7 +75,7 @@ const ensureMermaidInitialized = async () => {
   return mermaid
 }
 
-const decorateSvg = (svg: string) => {
+const decorateSvg = (svg: string, diagramId: string) => {
   const svgWithClassName = svg.replace(/<svg\b([^>]*?)>/, (match, attributes: string) => {
     const classMatch = attributes.match(/\sclass="([^"]*)"/)
     if (classMatch) {
@@ -86,7 +86,7 @@ const decorateSvg = (svg: string) => {
     return `<svg${attributes} class="${MERMAID_SVG_CLASS_NAME}" data-mermaid-graphic="">`
   })
 
-  return svgWithClassName.replace('</svg>', `<style>${MERMAID_SVG_OVERRIDE_CSS}</style></svg>`)
+  return svgWithClassName.replace('</svg>', `<style>${getMermaidSvgOverrideCss(diagramId)}</style></svg>`)
 }
 
 const MermaidDiagram = ({ className, source }: { className?: string; source: string }) => {
@@ -106,7 +106,7 @@ const MermaidDiagram = ({ className, source }: { className?: string; source: str
           return
         }
 
-        setSvg(decorateSvg(renderedSvg))
+        setSvg(decorateSvg(renderedSvg, `nivel-mermaid-${diagramId}`))
         setError(null)
       } catch (renderError) {
         if (!isActive) {
