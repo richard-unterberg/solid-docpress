@@ -25,6 +25,8 @@ const getMermaidSvgOverrideCss = (diagramId: string) => `
 
 #${diagramId} .node .label,
 #${diagramId} .node .label text,
+#${diagramId} .nodeLabel,
+#${diagramId} .nodeLabel *,
 #${diagramId} .cluster-label text,
 #${diagramId} .label text {
   fill: var(--nivel-mermaid-node-text, var(--color-base-content));
