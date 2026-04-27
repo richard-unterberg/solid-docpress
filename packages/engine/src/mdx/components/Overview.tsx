@@ -9,7 +9,6 @@ type OverviewLinkItem = {
   title: ReactNode
   href: string
   excerpt?: ReactNode | null
-  compact?: boolean
 }
 
 type OverviewDividerItem = {
@@ -20,7 +19,6 @@ export type OverviewItem = OverviewLinkItem | OverviewDividerItem
 
 interface OverviewProps {
   items: Array<string | OverviewItem>
-  compact?: boolean
 }
 
 const isOverviewDividerItem = (item: string | OverviewItem): item is OverviewDividerItem =>
@@ -62,36 +60,23 @@ const groupOverviewItems = (items: OverviewItem[]) => {
   return groups
 }
 
-const OverviewCard = ({ excerpt, href, title, compact }: OverviewLinkItem) => {
+const OverviewCard = ({ href, title }: OverviewLinkItem) => {
   return (
-    <StyleOverviewCard href={withSiteBaseUrl(href)} $compact={compact}>
+    <StyleOverviewCard href={withSiteBaseUrl(href)}>
       <span className="text-lg font-semibold text-base-content">{renderInlineMarkdown(title)}</span>
-      {excerpt && !compact ? (
-        <p className="text-sm leading-relaxed text-base-muted">{renderInlineMarkdown(excerpt)}</p>
-      ) : null}
     </StyleOverviewCard>
   )
 }
 
-const StyleOverviewCard = cm.a.variants<{ $compact?: boolean }>({
-  base: `
+const StyleOverviewCard = cm.a`
     flex h-full flex-col gap-3 
     rounded-box border 
     border-base-muted-light hover:border-primary-muted
     hover:bg-primary-muted-superlight 
     no-underline transition-colors 
     shadow shadow-transparent hover:shadow-primary-muted-light
-  `,
-  variants: {
-    $compact: {
-      true: 'p-3',
-      false: 'p-5',
-    },
-  },
-  defaultVariants: {
-    $compact: false,
-  },
-})
+    p-5
+  `
 
 const normalizeOverviewItems = (
   items: Array<string | OverviewItem>,
@@ -113,7 +98,7 @@ const normalizeOverviewItems = (
   })
 }
 
-export const Overview = ({ items, compact }: OverviewProps) => {
+export const Overview = ({ items }: OverviewProps) => {
   const runtime = useUniversalMdxRuntime()
   const groups = groupOverviewItems(normalizeOverviewItems(items, runtime?.resolveOverviewItem))
 
@@ -130,7 +115,7 @@ export const Overview = ({ items, compact }: OverviewProps) => {
           ) : null}
           <div className="grid gap-3 sm:grid-cols-2">
             {group.items.map((item, itemIndex) => (
-              <OverviewCard {...item} key={item.href || itemIndex} excerpt={item.excerpt} compact={compact} />
+              <OverviewCard {...item} key={item.href || itemIndex} />
             ))}
           </div>
         </section>

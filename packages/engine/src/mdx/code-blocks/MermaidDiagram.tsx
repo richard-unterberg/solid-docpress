@@ -91,6 +91,14 @@ const decorateSvg = (svg: string, diagramId: string) => {
   return svgWithClassName.replace('</svg>', `<style>${getMermaidSvgOverrideCss(diagramId)}</style></svg>`)
 }
 
+const MermaidSource = ({ source }: { source: string }) => {
+  return (
+    <pre className="sr-only" data-mermaid-source="">
+      <code>{source}</code>
+    </pre>
+  )
+}
+
 const MermaidDiagram = ({ className, source }: { className?: string; source: string }) => {
   const [svg, setSvg] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -154,6 +162,7 @@ const MermaidDiagram = ({ className, source }: { className?: string; source: str
           <span className="loading loading-spinner loading-md"></span>
           Rendering diagram...
         </div>
+        <MermaidSource source={source} />
       </div>
     )
   }
@@ -167,7 +176,9 @@ const MermaidDiagram = ({ className, source }: { className?: string; source: str
       )}
       data-mermaid-diagram=""
       data-mermaid-status="ready"
-      dangerouslySetInnerHTML={{ __html: svg }}
-    />
+    >
+      <div dangerouslySetInnerHTML={{ __html: svg }} />
+      <MermaidSource source={source} />
+    </div>
   )
 }
