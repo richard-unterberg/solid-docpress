@@ -6,6 +6,7 @@ import type { Config } from 'vike/types'
 import type { PluginOption, UserConfig } from 'vite'
 import type { DocsConfig } from '../docs/types.js'
 import { getCodeBlockMdxPlugins } from '../mdx/code-blocks/index.js'
+import { rehypeDefinitionLists } from '../mdx/plugins/rehypeDefinitionLists.js'
 import { rehypeDocsHeadings } from '../mdx/plugins/rehypeDocsHeadings.js'
 import { nivelPagesPlugin } from '../runtime/node/index.js'
 import { createNivelSitemapPlugins } from './sitemap.js'
@@ -20,7 +21,7 @@ const viteConfig: UserConfig = {
       ...mdx({
         providerImportSource: '@unterberg/nivel/mdx',
         ...codeBlockMdxPlugins,
-        rehypePlugins: [...codeBlockMdxPlugins.rehypePlugins, rehypeDocsHeadings],
+        rehypePlugins: [...codeBlockMdxPlugins.rehypePlugins, rehypeDefinitionLists, rehypeDocsHeadings],
         remarkPlugins: [remarkGfm, ...codeBlockMdxPlugins.remarkPlugins],
       }),
       enforce: 'pre',
