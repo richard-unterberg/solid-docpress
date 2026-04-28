@@ -359,6 +359,8 @@ const getThemeTemplate = () => {
     '  --nivel-mermaid-node-stroke: var(--color-primary-muted-medium);',
     '  --nivel-mermaid-node-stroke-width: 1px;',
     '  --nivel-mermaid-node-text: var(--color-base-content);',
+    '  --nivel-mermaid-edge-label-fill: var(--color-base-100);',
+    '  --nivel-mermaid-edge-label-text: var(--color-base-content);',
     '  --nivel-mermaid-line-color: var(--color-primary-muted);',
     '  --nivel-mermaid-line-width: 1.5px;',
     '  --nivel-mermaid-cluster-fill: var(--color-base-100);',
