@@ -119,7 +119,7 @@ const MegaMenuNodeList = ({
   }
 
   return (
-    <ul className={cmMerge('menu menu-sm w-full p-0', depth > 0 && 'mt-1 border-l border-base-muted-light pl-3')}>
+    <ul className={cmMerge('menu menu-sm w-full p-0', depth > 0 && 'mt-1 pl-3')}>
       {visibleItems.map((item) => (
         <MegaMenuNode
           key={item.id}
@@ -415,7 +415,7 @@ const MegaMenuGroupColumn = ({
   if (isCollapsible) {
     return (
       <li className="mb-6 flex-1 px-4 py-3">
-        <ul className="menu w-full p-0">
+        <ul className="w-full p-0">
           <li>
             <details
               open={isOpen}
