@@ -10,9 +10,11 @@ import { Brand } from '../Brand'
 import AsideButtons from './AsideButtons'
 
 const StyledNav = cm.nav`
-  gap-4
-  flex-1 pl-10 items-center justify-end lg:justify-start 
+  gap-4 flex-1 
   hidden lg:flex
+  pl-6 xl:pl-12
+  items-center 
+  justify-end lg:justify-start 
 `
 
 const StyledNavList = cm.ul`

@@ -22,6 +22,7 @@ import {
   getVisibleNavItems,
   hasActiveItem,
 } from './docsNavigation.js'
+import StickyContent from './StickyContent.js'
 
 const useAutoOpenDetails = (nodeId: string, isOpenByDefault: boolean, hasActiveDescendant: boolean) => {
   const storedOpen = useDocsSidebarStore((state) => state.openNodes[nodeId])
@@ -252,13 +253,10 @@ export const Sidebar = memo(
     const { sidebarSections } = docs
 
     return (
-      <aside className="hidden basis-76 shrink-0 lg:block">
+      <aside className="hidden basis-72 shrink-0 lg:block">
         <div className="-ml-3 sticky top-14">
           <div className="absolute h-full w-px right-0 top-0 bg-linear-to-t to-base-muted-light via-base-muted-light pointer-events-none z-1" />
-          <div
-            ref={scrollContainerRef}
-            className="pr-4 h-[calc(100svh-14*var(--spacing))] overflow-y-scroll relative z-10"
-          >
+          <StickyContent ref={scrollContainerRef} className="pr-4 relative z-10">
             <ul className={cmMerge('menu p-0 m-0 w-full px-0 pt-3 li:last-child:border-0')}>
               {sidebarSections.map((section) => (
                 <SidebarSectionGroup
@@ -269,7 +267,7 @@ export const Sidebar = memo(
                 />
               ))}
             </ul>
-          </div>
+          </StickyContent>
         </div>
       </aside>
     )

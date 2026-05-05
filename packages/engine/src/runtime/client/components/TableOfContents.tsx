@@ -3,6 +3,20 @@ import { Flame, TableOfContentsIcon } from 'lucide-react'
 import type { Dispatch, SetStateAction } from 'react'
 import type { DocHeading, ResolvedDocsPartnersConfig } from '../../../docs/types.js'
 import { useDocsGlobalContext } from '../docsGlobalContext.js'
+import StickyContent from './StickyContent.js'
+
+const getPadLeft = (depth: number) => {
+  switch (depth) {
+    case 1:
+      return 'pl-3'
+    case 2:
+      return 'pl-3'
+    case 3:
+      return 'pl-5'
+    case 4:
+      return 'pl-7'
+  }
+}
 
 interface TableOfContentsProps {
   headings?: DocHeading[]
@@ -22,9 +36,9 @@ export const TableOfContents = ({
   const effectiveTableOfContents = tableOfContentsProp
 
   return (
-    <aside className={cmMerge(effectiveTableOfContents ? 'w-64' : 'w-32', 'hidden shrink-0 xl:block')}>
+    <aside className={cmMerge(effectiveTableOfContents ? 'w-58' : 'w-32', 'hidden shrink-0 xl:block')}>
       <div className="sticky top-14">
-        <div className="relative h-[calc(100svh-14*var(--spacing))] overflow-y-auto overflow-x-hidden pt-10 pb-8">
+        <StickyContent className="pt-10 pb-8">
           {effectiveTableOfContents
             ? effectiveHeadings.length > 0 && (
                 <>
@@ -34,29 +48,31 @@ export const TableOfContents = ({
                   </p>
                   <nav aria-label="On this page" className="mb-12">
                     <ul>
-                      {effectiveHeadings.map((heading) => (
-                        <li key={heading.id}>
-                          <a
-                            href={`#${heading.id}`}
-                            aria-current={activeHeadingId === heading.id ? 'location' : undefined}
-                            onClick={() => setActiveHeadingId(heading.id)}
-                            className={cmMerge(
-                              'cursor-pointer block border-l-2 border-base-muted-light py-1.5 text-sm text-base-muted hover:border-primary-muted hover:text-base-content',
-                              heading.depth > 2 ? 'pl-6' : 'pl-4',
-                              activeHeadingId === heading.id ? 'border-primary text-base-content' : '',
-                            )}
-                          >
-                            {heading.title}
-                          </a>
-                        </li>
-                      ))}
+                      {effectiveHeadings.map((heading) => {
+                        return (
+                          <li key={heading.id}>
+                            <a
+                              href={`#${heading.id}`}
+                              aria-current={activeHeadingId === heading.id ? 'location' : undefined}
+                              onClick={() => setActiveHeadingId(heading.id)}
+                              className={cmMerge(
+                                'cursor-pointer block border-l-2 border-base-muted-light py-1.5 text-base-muted hover:border-primary-muted hover:text-base-content text-xs',
+                                getPadLeft(heading.depth),
+                                activeHeadingId === heading.id ? 'border-primary text-base-content' : '',
+                              )}
+                            >
+                              {heading.title}
+                            </a>
+                          </li>
+                        )
+                      })}
                     </ul>
                   </nav>
                 </>
               )
             : null}
           <Adbar partners={partners} />
-        </div>
+        </StickyContent>
       </div>
     </aside>
   )
